@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */; };
+		DAAEE15A1C9ABE1F00D53AEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE1591C9ABE1F00D53AEC /* ViewController.swift */; };
+		DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */; };
+		DAAEE1601C9ABE1F00D53AEC /* Kairos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE15E1C9ABE1F00D53AEC /* Kairos.xcdatamodeld */; };
+		DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE1611C9ABE1F00D53AEC /* Assets.xcassets */; };
+		DAAEE1651C9ABE1F00D53AEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE1631C9ABE1F00D53AEC /* LaunchScreen.storyboard */; };
+		DAAEE1701C9ABE1F00D53AEC /* KairosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE16F1C9ABE1F00D53AEC /* KairosTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DAAEE16C1C9ABE1F00D53AEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAAEE14C1C9ABE1F00D53AEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DAAEE1531C9ABE1F00D53AEC;
+			remoteInfo = Kairos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DAAEE1541C9ABE1F00D53AEC /* Kairos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kairos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DAAEE1591C9ABE1F00D53AEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DAAEE15C1C9ABE1F00D53AEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DAAEE15F1C9ABE1F00D53AEC /* Kairos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kairos.xcdatamodel; sourceTree = "<group>"; };
+		DAAEE1611C9ABE1F00D53AEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DAAEE1641C9ABE1F00D53AEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DAAEE1661C9ABE1F00D53AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAAEE16B1C9ABE1F00D53AEC /* KairosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KairosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAAEE16F1C9ABE1F00D53AEC /* KairosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KairosTests.swift; sourceTree = "<group>"; };
+		DAAEE1711C9ABE1F00D53AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DAAEE1511C9ABE1F00D53AEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAAEE1681C9ABE1F00D53AEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DAAEE14B1C9ABE1F00D53AEC = {
+			isa = PBXGroup;
+			children = (
+				DAAEE1561C9ABE1F00D53AEC /* Kairos */,
+				DAAEE16E1C9ABE1F00D53AEC /* KairosTests */,
+				DAAEE1551C9ABE1F00D53AEC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DAAEE1551C9ABE1F00D53AEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DAAEE1541C9ABE1F00D53AEC /* Kairos.app */,
+				DAAEE16B1C9ABE1F00D53AEC /* KairosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DAAEE1561C9ABE1F00D53AEC /* Kairos */ = {
+			isa = PBXGroup;
+			children = (
+				DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */,
+				DAAEE1591C9ABE1F00D53AEC /* ViewController.swift */,
+				DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */,
+				DAAEE1611C9ABE1F00D53AEC /* Assets.xcassets */,
+				DAAEE1631C9ABE1F00D53AEC /* LaunchScreen.storyboard */,
+				DAAEE1661C9ABE1F00D53AEC /* Info.plist */,
+				DAAEE15E1C9ABE1F00D53AEC /* Kairos.xcdatamodeld */,
+			);
+			path = Kairos;
+			sourceTree = "<group>";
+		};
+		DAAEE16E1C9ABE1F00D53AEC /* KairosTests */ = {
+			isa = PBXGroup;
+			children = (
+				DAAEE16F1C9ABE1F00D53AEC /* KairosTests.swift */,
+				DAAEE1711C9ABE1F00D53AEC /* Info.plist */,
+			);
+			path = KairosTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DAAEE1531C9ABE1F00D53AEC /* Kairos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAAEE1741C9ABE1F00D53AEC /* Build configuration list for PBXNativeTarget "Kairos" */;
+			buildPhases = (
+				DAAEE1501C9ABE1F00D53AEC /* Sources */,
+				DAAEE1511C9ABE1F00D53AEC /* Frameworks */,
+				DAAEE1521C9ABE1F00D53AEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Kairos;
+			productName = Kairos;
+			productReference = DAAEE1541C9ABE1F00D53AEC /* Kairos.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DAAEE16A1C9ABE1F00D53AEC /* KairosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAAEE1771C9ABE1F00D53AEC /* Build configuration list for PBXNativeTarget "KairosTests" */;
+			buildPhases = (
+				DAAEE1671C9ABE1F00D53AEC /* Sources */,
+				DAAEE1681C9ABE1F00D53AEC /* Frameworks */,
+				DAAEE1691C9ABE1F00D53AEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAAEE16D1C9ABE1F00D53AEC /* PBXTargetDependency */,
+			);
+			name = KairosTests;
+			productName = KairosTests;
+			productReference = DAAEE16B1C9ABE1F00D53AEC /* KairosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DAAEE14C1C9ABE1F00D53AEC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Kairos-app";
+				TargetAttributes = {
+					DAAEE1531C9ABE1F00D53AEC = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = TWPS85FDC4;
+					};
+					DAAEE16A1C9ABE1F00D53AEC = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = DAAEE1531C9ABE1F00D53AEC;
+					};
+				};
+			};
+			buildConfigurationList = DAAEE14F1C9ABE1F00D53AEC /* Build configuration list for PBXProject "Kairos" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DAAEE14B1C9ABE1F00D53AEC;
+			productRefGroup = DAAEE1551C9ABE1F00D53AEC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DAAEE1531C9ABE1F00D53AEC /* Kairos */,
+				DAAEE16A1C9ABE1F00D53AEC /* KairosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DAAEE1521C9ABE1F00D53AEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAAEE1651C9ABE1F00D53AEC /* LaunchScreen.storyboard in Resources */,
+				DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */,
+				DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAAEE1691C9ABE1F00D53AEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DAAEE1501C9ABE1F00D53AEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAAEE15A1C9ABE1F00D53AEC /* ViewController.swift in Sources */,
+				DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */,
+				DAAEE1601C9ABE1F00D53AEC /* Kairos.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAAEE1671C9ABE1F00D53AEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAAEE1701C9ABE1F00D53AEC /* KairosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DAAEE16D1C9ABE1F00D53AEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DAAEE1531C9ABE1F00D53AEC /* Kairos */;
+			targetProxy = DAAEE16C1C9ABE1F00D53AEC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAAEE15C1C9ABE1F00D53AEC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DAAEE1631C9ABE1F00D53AEC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAAEE1641C9ABE1F00D53AEC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DAAEE1721C9ABE1F00D53AEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DAAEE1731C9ABE1F00D53AEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DAAEE1751C9ABE1F00D53AEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Kairos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kairos-app.Kairos";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DAAEE1761C9ABE1F00D53AEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Kairos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kairos-app.Kairos";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DAAEE1781C9ABE1F00D53AEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = KairosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kairos-app.KairosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kairos.app/Kairos";
+			};
+			name = Debug;
+		};
+		DAAEE1791C9ABE1F00D53AEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = KairosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kairos-app.KairosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kairos.app/Kairos";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DAAEE14F1C9ABE1F00D53AEC /* Build configuration list for PBXProject "Kairos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAAEE1721C9ABE1F00D53AEC /* Debug */,
+				DAAEE1731C9ABE1F00D53AEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAAEE1741C9ABE1F00D53AEC /* Build configuration list for PBXNativeTarget "Kairos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAAEE1751C9ABE1F00D53AEC /* Debug */,
+				DAAEE1761C9ABE1F00D53AEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DAAEE1771C9ABE1F00D53AEC /* Build configuration list for PBXNativeTarget "KairosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAAEE1781C9ABE1F00D53AEC /* Debug */,
+				DAAEE1791C9ABE1F00D53AEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DAAEE15E1C9ABE1F00D53AEC /* Kairos.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DAAEE15F1C9ABE1F00D53AEC /* Kairos.xcdatamodel */,
+			);
+			currentVersion = DAAEE15F1C9ABE1F00D53AEC /* Kairos.xcdatamodel */;
+			path = Kairos.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DAAEE14C1C9ABE1F00D53AEC /* Project object */;
+}
