@@ -24,6 +24,19 @@ class DefinePasswordViewController: UIViewController {
         // Do any additional setup after loading the view.
         contentView.layer.cornerRadius = 20
         closeButton.layer.cornerRadius = 15
+        
+        addBlurEffect()
+    }
+    
+    func addBlurEffect() {
+        let blurEffect = UIBlurEffect(style: .Dark)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        self.view.addSubview(blurView)
+        
+        self.view.addSubview(contentView)
+        self.view.addSubview(closeButton)
     }
     
     override func didReceiveMemoryWarning() {
@@ -50,7 +63,7 @@ class DefinePasswordViewController: UIViewController {
         password = passwordTextField.text
         performSegueWithIdentifier("unwindToSignUpSegue", sender: self)
     }
-
+    
     /*
     // MARK: - Navigation
     

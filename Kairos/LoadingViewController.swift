@@ -12,11 +12,13 @@ class LoadingViewController: UIViewController {
     
     // MARK: - UI Properties
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var projectLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
+        projectLabel.adjustsFontSizeToFitWidth = true
     }
     
     override func didReceiveMemoryWarning() {

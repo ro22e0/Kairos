@@ -13,8 +13,7 @@ import SwiftyJSON
 class SignInViewController: UIViewController {
     
     // MARK: - UI Properties
-    
-    
+
     // MARK: - Class Properties
     var manager: Manager?
     

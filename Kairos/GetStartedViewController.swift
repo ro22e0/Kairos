@@ -10,10 +10,14 @@ import UIKit
 
 class GetStartedViewController: UIViewController {
 
+    // MARK: - UI Properties
+    @IBOutlet weak var sloganLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        sloganLabel.adjustsFontSizeToFitWidth = true
     }
 
     override func didReceiveMemoryWarning() {

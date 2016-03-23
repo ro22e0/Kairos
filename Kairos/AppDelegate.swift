@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import AlamofireNetworkActivityIndicator
 import FBSDKLoginKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
         ]
+
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         
         // Alamofire network manager
         NetworkActivityIndicatorManager.sharedManager.isEnabled = true
@@ -125,7 +130,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
 }
 
 extension AppDelegate: GIDSignInDelegate {

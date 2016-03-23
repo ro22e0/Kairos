@@ -20,9 +20,3 @@ enum LoginSDK: String {
     case Facebook = "Facebook"
     case Google = "Google"
 }
-
-extension UIViewController {
-    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-}

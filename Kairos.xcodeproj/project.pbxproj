@@ -20,6 +20,7 @@
 		DAAEE1601C9ABE1F00D53AEC /* Kairos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE15E1C9ABE1F00D53AEC /* Kairos.xcdatamodeld */; };
 		DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE1611C9ABE1F00D53AEC /* Assets.xcassets */; };
 		DAAEE1701C9ABE1F00D53AEC /* KairosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE16F1C9ABE1F00D53AEC /* KairosTests.swift */; };
+		DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC801811CA1F0330092A717 /* SpinnerManager.swift */; };
 		DAE097741C9DF0FA00D6B462 /* DefinePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		DAAEE16B1C9ABE1F00D53AEC /* KairosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KairosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAAEE16F1C9ABE1F00D53AEC /* KairosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KairosTests.swift; sourceTree = "<group>"; };
 		DAAEE1711C9ABE1F00D53AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAC801811CA1F0330092A717 /* SpinnerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerManager.swift; sourceTree = "<group>"; };
 		DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinePasswordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,6 +143,7 @@
 			children = (
 				DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */,
 				DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */,
+				DAC801811CA1F0330092A717 /* SpinnerManager.swift */,
 				DA3F3AC91C9AEA1B00E82FC6 /* Login */,
 				DAE51ED81C9B7E7800B44296 /* Main */,
 				DAAEE15E1C9ABE1F00D53AEC /* Kairos.xcdatamodeld */,
@@ -334,6 +337,7 @@
 				DA3F3ACB1C9AEA5200E82FC6 /* LoadingViewController.swift in Sources */,
 				DA3F3AD51C9B037600E82FC6 /* GetStartedViewController.swift in Sources */,
 				DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */,
+				DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
