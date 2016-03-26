@@ -36,7 +36,7 @@ class SignInViewController: UIViewController {
     }
     
     // MARK: - Methods
-    func SignInRequest() {
+    private func SignInRequest() {
         let manager = NetworkReachabilityManager(host: "www.apple.com")
 
         self.manager!.startRequestsImmediately = false

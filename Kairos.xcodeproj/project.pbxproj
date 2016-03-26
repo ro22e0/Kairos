@@ -14,6 +14,14 @@
 		DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3AD01C9B022400E82FC6 /* SignUpViewController.swift */; };
 		DA3F3AD31C9B022F00E82FC6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3AD21C9B022F00E82FC6 /* SignInViewController.swift */; };
 		DA3F3AD51C9B037600E82FC6 /* GetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3AD41C9B037600E82FC6 /* GetStartedViewController.swift */; };
+		DA5F471A1CA60BC600A37960 /* SearchUsersEmbeddedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5F47191CA60BC600A37960 /* SearchUsersEmbeddedTableViewController.swift */; };
+		DA612CB41CA472F90027D7FB /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA612CB31CA472F90027D7FB /* Profile.storyboard */; };
+		DA612CB81CA48B060027D7FB /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA612CB71CA48B060027D7FB /* FriendsViewController.swift */; };
+		DA668F381CA4A40400230912 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA668F361CA4A40400230912 /* FriendTableViewCell.swift */; };
+		DA668F391CA4A40400230912 /* FriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA668F371CA4A40400230912 /* FriendTableViewCell.xib */; };
+		DA668F3B1CA4AD7800230912 /* InvitationsEmbeddedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA668F3A1CA4AD7800230912 /* InvitationsEmbeddedTableViewController.swift */; };
+		DA668F3E1CA4AEA000230912 /* InvitationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA668F3C1CA4AEA000230912 /* InvitationTableViewCell.swift */; };
+		DA668F3F1CA4AEA000230912 /* InvitationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA668F3D1CA4AEA000230912 /* InvitationTableViewCell.xib */; };
 		DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */; };
 		DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */; };
 		DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */; };
@@ -21,7 +29,15 @@
 		DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE1611C9ABE1F00D53AEC /* Assets.xcassets */; };
 		DAAEE1701C9ABE1F00D53AEC /* KairosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE16F1C9ABE1F00D53AEC /* KairosTests.swift */; };
 		DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC801811CA1F0330092A717 /* SpinnerManager.swift */; };
+		DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC801841CA3334D0092A717 /* Menu.storyboard */; };
+		DAC801881CA346B70092A717 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC801871CA346B70092A717 /* Settings.storyboard */; };
+		DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC8018B1CA353AF0092A717 /* Board.storyboard */; };
+		DADD55E41CA60CE200C44D40 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD55E21CA60CE200C44D40 /* UserTableViewCell.swift */; };
+		DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */; };
 		DAE097741C9DF0FA00D6B462 /* DefinePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */; };
+		DAEE7CBB1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */; };
+		DAF66D2C1CA3EB3700B6062D /* Teams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF66D2B1CA3EB3700B6062D /* Teams.storyboard */; };
+		DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF66D301CA4028800B6062D /* MenuTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +60,14 @@
 		DA3F3AD01C9B022400E82FC6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		DA3F3AD21C9B022F00E82FC6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DA3F3AD41C9B037600E82FC6 /* GetStartedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStartedViewController.swift; sourceTree = "<group>"; };
+		DA5F47191CA60BC600A37960 /* SearchUsersEmbeddedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersEmbeddedTableViewController.swift; sourceTree = "<group>"; };
+		DA612CB31CA472F90027D7FB /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		DA612CB71CA48B060027D7FB /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		DA668F361CA4A40400230912 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		DA668F371CA4A40400230912 /* FriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendTableViewCell.xib; sourceTree = "<group>"; };
+		DA668F3A1CA4AD7800230912 /* InvitationsEmbeddedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationsEmbeddedTableViewController.swift; sourceTree = "<group>"; };
+		DA668F3C1CA4AEA000230912 /* InvitationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationTableViewCell.swift; sourceTree = "<group>"; };
+		DA668F3D1CA4AEA000230912 /* InvitationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitationTableViewCell.xib; sourceTree = "<group>"; };
 		DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAA816621C9C218900EF1560 /* Kairos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kairos-Bridging-Header.h"; sourceTree = "<group>"; };
 		DAAEE1541C9ABE1F00D53AEC /* Kairos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kairos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,7 +80,15 @@
 		DAAEE16F1C9ABE1F00D53AEC /* KairosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KairosTests.swift; sourceTree = "<group>"; };
 		DAAEE1711C9ABE1F00D53AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAC801811CA1F0330092A717 /* SpinnerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerManager.swift; sourceTree = "<group>"; };
+		DAC801841CA3334D0092A717 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
+		DAC801871CA346B70092A717 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		DAC8018B1CA353AF0092A717 /* Board.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Board.storyboard; sourceTree = "<group>"; };
+		DADD55E21CA60CE200C44D40 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinePasswordViewController.swift; sourceTree = "<group>"; };
+		DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsEmbeddedTableViewController.swift; sourceTree = "<group>"; };
+		DAF66D2B1CA3EB3700B6062D /* Teams.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Teams.storyboard; sourceTree = "<group>"; };
+		DAF66D301CA4028800B6062D /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +139,27 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		DA612CB51CA473060027D7FB /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DA612CB31CA472F90027D7FB /* Profile.storyboard */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		DA668F401CA4AEA600230912 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DA668F3C1CA4AEA000230912 /* InvitationTableViewCell.swift */,
+				DA668F3D1CA4AEA000230912 /* InvitationTableViewCell.xib */,
+				DA668F361CA4A40400230912 /* FriendTableViewCell.swift */,
+				DA668F371CA4A40400230912 /* FriendTableViewCell.xib */,
+				DADD55E21CA60CE200C44D40 /* UserTableViewCell.swift */,
+				DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		DAA8165B1C9C1E9800EF1560 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +197,11 @@
 				DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */,
 				DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */,
 				DAC801811CA1F0330092A717 /* SpinnerManager.swift */,
+				DA612CB51CA473060027D7FB /* Profile */,
+				DAF66D2D1CA3EC3800B6062D /* Teams */,
+				DAC8018D1CA353CA0092A717 /* Board */,
+				DAC801861CA346A60092A717 /* Settings */,
+				DAC801831CA333290092A717 /* Menu */,
 				DA3F3AC91C9AEA1B00E82FC6 /* Login */,
 				DAE51ED81C9B7E7800B44296 /* Main */,
 				DAAEE15E1C9ABE1F00D53AEC /* Kairos.xcdatamodeld */,
@@ -161,6 +219,31 @@
 			path = KairosTests;
 			sourceTree = "<group>";
 		};
+		DAC801831CA333290092A717 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				DAC801841CA3334D0092A717 /* Menu.storyboard */,
+				DAF66D301CA4028800B6062D /* MenuTableViewController.swift */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		DAC801861CA346A60092A717 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DAC801871CA346B70092A717 /* Settings.storyboard */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		DAC8018D1CA353CA0092A717 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				DAC8018B1CA353AF0092A717 /* Board.storyboard */,
+			);
+			name = Board;
+			sourceTree = "<group>";
+		};
 		DAE51ED81C9B7E7800B44296 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +251,19 @@
 				DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		DAF66D2D1CA3EC3800B6062D /* Teams */ = {
+			isa = PBXGroup;
+			children = (
+				DA668F401CA4AEA600230912 /* Cell */,
+				DAF66D2B1CA3EB3700B6062D /* Teams.storyboard */,
+				DA612CB71CA48B060027D7FB /* FriendsViewController.swift */,
+				DA668F3A1CA4AD7800230912 /* InvitationsEmbeddedTableViewController.swift */,
+				DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */,
+				DA5F47191CA60BC600A37960 /* SearchUsersEmbeddedTableViewController.swift */,
+			);
+			name = Teams;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +279,7 @@
 				DAAEE1521C9ABE1F00D53AEC /* Resources */,
 				D62DF5E524B602B93EF38A10 /* Embed Pods Frameworks */,
 				8421FC618494AD75E5ACBC5A /* Copy Pods Resources */,
+				DA5F47171CA5AC4C00A37960 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -260,10 +357,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA668F3F1CA4AEA000230912 /* InvitationTableViewCell.xib in Resources */,
 				DA3F3ACD1C9AF0D200E82FC6 /* Login.storyboard in Resources */,
+				DAF66D2C1CA3EB3700B6062D /* Teams.storyboard in Resources */,
+				DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */,
+				DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */,
+				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
 				DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */,
+				DAC801881CA346B70092A717 /* Settings.storyboard in Resources */,
+				DA612CB41CA472F90027D7FB /* Profile.storyboard in Resources */,
 				DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */,
 				DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */,
+				DA668F391CA4A40400230912 /* FriendTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +427,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kairos/Pods-Kairos-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DA5F47171CA5AC4C00A37960 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" ab6f32fef9d21dbe778918eb4bcc7b6647e58612 4591898d12697d6c5a850c4ee05b7dae93c6c936a21d7b8f14632de55c8fbd0d";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -331,13 +449,21 @@
 			files = (
 				DA3F3ACF1C9AFC2A00E82FC6 /* Common.swift in Sources */,
 				DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */,
+				DA5F471A1CA60BC600A37960 /* SearchUsersEmbeddedTableViewController.swift in Sources */,
+				DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */,
 				DAE097741C9DF0FA00D6B462 /* DefinePasswordViewController.swift in Sources */,
+				DA668F3B1CA4AD7800230912 /* InvitationsEmbeddedTableViewController.swift in Sources */,
 				DA3F3AD31C9B022F00E82FC6 /* SignInViewController.swift in Sources */,
 				DAAEE1601C9ABE1F00D53AEC /* Kairos.xcdatamodeld in Sources */,
+				DA612CB81CA48B060027D7FB /* FriendsViewController.swift in Sources */,
+				DA668F381CA4A40400230912 /* FriendTableViewCell.swift in Sources */,
 				DA3F3ACB1C9AEA5200E82FC6 /* LoadingViewController.swift in Sources */,
 				DA3F3AD51C9B037600E82FC6 /* GetStartedViewController.swift in Sources */,
 				DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */,
 				DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */,
+				DA668F3E1CA4AEA000230912 /* InvitationTableViewCell.swift in Sources */,
+				DADD55E41CA60CE200C44D40 /* UserTableViewCell.swift in Sources */,
+				DAEE7CBB1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

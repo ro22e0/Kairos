@@ -13,6 +13,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import SwiftSpinner
 import UITextField_Shake
+import JLToast
 
 class SignUpViewController: UIViewController {
     
@@ -33,7 +34,7 @@ class SignUpViewController: UIViewController {
         
         GIDSignIn.sharedInstance().uiDelegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleGoogleSignUp:", name:kUSER_GOOGLE_AUTH_NOTIFICATION, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignUpViewController.handleGoogleSignUp(_:)), name:kUSER_GOOGLE_AUTH_NOTIFICATION, object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -85,13 +86,22 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func SignUp(sender: UIButton) {
-        SpinnerManager.showWithAnimation("Processing...")
-                self.password.shake(10,              // 10 times
-                    withDelta: 5.0,  // 5 points wide
-                    speed: 0.03,     // 30ms per shake
-                    shakeDirection: ShakeDirection.Horizontal
-                )
-        SignUpRequest()
+        let storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
+        
+        if let viewController = storyboard.instantiateInitialViewController() {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            appDelegate.window?.rootViewController = viewController
+        }
+
+//        SpinnerManager.showWithAnimation("Processing...")
+//        self.password.shake(10,              // 10 times
+//            withDelta: 5.0,  // 5 points wide
+//            speed: 0.03,     // 30ms per shake
+//            shakeDirection: ShakeDirection.Horizontal
+//        )
+//        JLToast.makeText("Regarde le texte qui s'affiche en bas !!!", duration: JLToastDelay.LongDelay).show()
+//        SignUpRequest()
     }
     
     @IBAction func GoogleSignUp(sender: UIButton) {
@@ -119,7 +129,8 @@ class SignUpViewController: UIViewController {
     }
     
     // MARK: - Methods
-    func googleFetch(user: GIDGoogleUser, password: String, completion: () -> Void) {
+    private func googleFetch(user: GIDGoogleUser, password: String, completion: () -> Void) {
+        let manager = NetworkReachabilityManager(host: "www.apple.com")
         self.manager!.startRequestsImmediately = false
         
         let parameters = ["access_token": user.authentication.accessToken]
@@ -137,18 +148,17 @@ class SignUpViewController: UIViewController {
                 })
                 print(error)
             }
+            manager?.stopListening()
         }
         debugPrint(request)
         
-        networkManager(request)
+        networkManager(manager, request: request)
         request.resume()
-        SpinnerManager.delay(seconds: 7.0, completion: {
-            SpinnerManager.updateTitle("It's taking longer than expected...")
-        })
     }
     
-    func facebookFetch(result: FBSDKLoginManagerLoginResult, password: String, completion: () -> Void) {
-        networkManager(nil)
+    private func facebookFetch(result: FBSDKLoginManagerLoginResult, password: String, completion: () -> Void) {
+        let manager = NetworkReachabilityManager(host: "www.apple.com")
+        networkManager(manager, request: nil)
         
         let parameters = ["fields": "email,first_name,last_name"]
         let request = FBSDKGraphRequest(graphPath: "me", parameters: parameters)
@@ -165,10 +175,12 @@ class SignUpViewController: UIViewController {
                 })
                 print(error)
             }
+            manager?.stopListening()
         }
     }
     
-    func SignUpRequest() {
+    private func SignUpRequest() {
+        let manager = NetworkReachabilityManager(host: "www.apple.com")
         self.manager!.startRequestsImmediately = false
         
         SpinnerManager.updateTitle("Trying to create user account")
@@ -196,19 +208,15 @@ class SignUpViewController: UIViewController {
                 })
                 print(error)
             }
+            manager?.stopListening()
         }
         debugPrint(request)
         
-        networkManager(request)
+        networkManager(manager, request: request)
         request.resume()
-        SpinnerManager.delay(seconds: 7.0, completion: {
-            SpinnerManager.updateTitle("It's taking longer than expected...")
-        })
     }
     
-    func networkManager(request: Request?) {
-        let manager = NetworkReachabilityManager(host: "www.apple.com")
-        
+    func networkManager(manager: NetworkReachabilityManager?, request: Request?) {
         manager?.listener = { (status) in
             print("Network Status Changed: \(status)")
             switch status {
@@ -220,8 +228,7 @@ class SignUpViewController: UIViewController {
                 SpinnerManager.show("The Internet connection appears to be offline", subtitle: "Tap to hide", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
-                manager?.startListening()
-                request?.suspend()
+                request?.cancel()
             default:
                 break
             }
