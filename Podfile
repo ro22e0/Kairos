@@ -15,9 +15,9 @@ target 'Kairos' do
   pod 'SideMenu', '~> 1.0'
   pod 'XLPagerTabStrip', '~> 5.0'
   pod 'Crashlytics'
+  pod 'FSCalendar', '~> 2.0'
 end
 
 target 'KairosTests' do
 
 end
-

@@ -36,4 +36,14 @@ extension UIViewController {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.window?.rootViewController = segue.destinationViewController
     }
+    
+    func setRootVC(storyboard: String) {
+        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
+
+        if let viewController = storyboard.instantiateInitialViewController() {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            appDelegate.window?.rootViewController = viewController
+        }
+    }
 }

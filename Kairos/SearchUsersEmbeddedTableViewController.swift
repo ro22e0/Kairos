@@ -9,14 +9,16 @@
 import UIKit
 import XLPagerTabStrip
 
-class SearchUsersEmbeddedTableViewController: UITableViewController, UISearchBarDelegate {
-
+class SearchUsersEmbeddedTableViewController: UITableViewController {
+    
     // MARK: - Class Properties
     let cellIdentifier = "userCell"
     var itemInfo = IndicatorInfo(title: "View")
     
     var searchController: UISearchController!
     
+    // MARK: - Constructors
+
     init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         
@@ -27,6 +29,7 @@ class SearchUsersEmbeddedTableViewController: UITableViewController, UISearchBar
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,19 +43,21 @@ class SearchUsersEmbeddedTableViewController: UITableViewController, UISearchBar
         
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
+        self.searchController.delegate = self
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.searchBar.sizeToFit()
         self.searchController.searchBar.searchBarStyle = .Minimal
+        self.searchController.searchBar.delegate = self
         self.tableView.tableHeaderView = self.searchController.searchBar
         definesPresentationContext = false
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        
     }
-    
+
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -62,6 +67,12 @@ class SearchUsersEmbeddedTableViewController: UITableViewController, UISearchBar
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        
+        self.searchController.active = false
     }
     
     // MARK: - Table view data source
@@ -139,5 +150,18 @@ extension SearchUsersEmbeddedTableViewController: IndicatorInfoProvider {
 extension SearchUsersEmbeddedTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResultsForSearchController(searchController: UISearchController) {
+    }
+}
+
+extension SearchUsersEmbeddedTableViewController: UISearchControllerDelegate {
+    // MARK: - UISearchResultsUpdating Delegate
+    func didPresentSearchController(searchController: UISearchController) {
+        searchController.searchBar.showsCancelButton = false
+    }
+}
+
+extension SearchUsersEmbeddedTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        print(searchBar.text)
     }
 }

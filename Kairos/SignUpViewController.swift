@@ -18,7 +18,8 @@ import JLToast
 class SignUpViewController: UIViewController {
     
     // MARK: - UI Properties
-    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
     // MARK: - Class Properties
     var manager: Manager?
@@ -53,8 +54,10 @@ class SignUpViewController: UIViewController {
         
         if success {
             let user = userInfo["user"] as! GIDGoogleUser
-            userInfos = ["type": LoginSDK.Google.rawValue, "data": user]
-            performSegueWithIdentifier("kShowDefinePasswordSegue", sender: self)
+            SpinnerManager.showWithAnimation("Retrieving informations...")
+            googleFetch(user, completion: { () -> Void in
+                self.performSegueWithIdentifier("kShowDefinePasswordSegue", sender: self)
+            })
         } else {
             let error = userInfo["error"] as! NSError
             print(error.localizedDescription)
@@ -64,44 +67,14 @@ class SignUpViewController: UIViewController {
     // MARK: - Actions
     @IBAction func unwindSignUp(sender: UIStoryboardSegue) {
         if let sourceVC = sender.sourceViewController as? DefinePasswordViewController {
-            let type = userInfos!["type"] as! String
-            
-            switch type {
-            case LoginSDK.Facebook.rawValue:
-                SpinnerManager.showWithAnimation("Retrieving informations...")
-                let result = userInfos!["data"] as! FBSDKLoginManagerLoginResult
-                facebookFetch(result, password: sourceVC.password!, completion: { () -> Void in
-                    self.SignUpRequest()
-                })
-            case LoginSDK.Google.rawValue:
-                SpinnerManager.showWithAnimation("Retrieving informations...")
-                let user = userInfos!["data"] as! GIDGoogleUser
-                googleFetch(user, password: sourceVC.password!, completion: { () -> Void in
-                    self.SignUpRequest()
-                })
-            default:
-                break
-            }
+            userInfos!["password"] = sourceVC.password
+            SignUpRequest()
         }
     }
     
     @IBAction func SignUp(sender: UIButton) {
-        let storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
-        
-        if let viewController = storyboard.instantiateInitialViewController() {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            appDelegate.window?.rootViewController = viewController
-        }
-
-//        SpinnerManager.showWithAnimation("Processing...")
-//        self.password.shake(10,              // 10 times
-//            withDelta: 5.0,  // 5 points wide
-//            speed: 0.03,     // 30ms per shake
-//            shakeDirection: ShakeDirection.Horizontal
-//        )
-//        JLToast.makeText("Regarde le texte qui s'affiche en bas !!!", duration: JLToastDelay.LongDelay).show()
-//        SignUpRequest()
+        self.userInfos = ["email": emailTextField.text!, "password": passwordTextField.text!]
+        SignUpRequest()
     }
     
     @IBAction func GoogleSignUp(sender: UIButton) {
@@ -109,6 +82,12 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func FbSignUp(sender: UIButton) {
+        fbSignIn()
+    }
+    
+    // MARK: - Methods
+    
+    func fbSignIn() {
         let loginManager = FBSDKLoginManager()
         loginManager.loginBehavior = .SystemAccount
         
@@ -121,15 +100,17 @@ class SignUpViewController: UIViewController {
                 print(error.localizedDescription)
             } else if !result.isCancelled {
                 self.userInfos = ["type": LoginSDK.Facebook.rawValue, "data": result]
-                self.performSegueWithIdentifier("kShowDefinePasswordSegue", sender: self)
+                SpinnerManager.showWithAnimation("Retrieving informations...")
+                self.facebookFetch(result, completion: { () -> Void in
+                    self.performSegueWithIdentifier("kShowDefinePasswordSegue", sender: self)
+                })
             } else {
                 print("Cancelled")
             }
         }
     }
     
-    // MARK: - Methods
-    private func googleFetch(user: GIDGoogleUser, password: String, completion: () -> Void) {
+    private func googleFetch(user: GIDGoogleUser, completion: () -> Void) {
         let manager = NetworkReachabilityManager(host: "www.apple.com")
         self.manager!.startRequestsImmediately = false
         
@@ -139,8 +120,13 @@ class SignUpViewController: UIViewController {
             case .Success:
                 if let value = response.result.value {
                     let json = JSON(value)
-                    self.userInfos = ["first_name": json["given_name"].stringValue, "last_name": json["family_name"].stringValue, "email": json["email"].stringValue, "password" : password]
-                    completion()
+                    self.userInfos = ["first_name": json["given_name"].stringValue, "last_name": json["family_name"].stringValue, "email": json["email"].stringValue, "password": ""]
+                    SwiftSpinner.hide()
+                    if json["email"].stringValue != "" {
+                        completion()
+                    } else {
+                        GIDSignIn.sharedInstance().signIn()
+                    }
                 }
             case .Failure(let error):
                 SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
@@ -156,7 +142,7 @@ class SignUpViewController: UIViewController {
         request.resume()
     }
     
-    private func facebookFetch(result: FBSDKLoginManagerLoginResult, password: String, completion: () -> Void) {
+    private func facebookFetch(result: FBSDKLoginManagerLoginResult, completion: () -> Void) {
         let manager = NetworkReachabilityManager(host: "www.apple.com")
         networkManager(manager, request: nil)
         
@@ -166,8 +152,13 @@ class SignUpViewController: UIViewController {
             if error == nil {
                 if let value = result as? NSDictionary {
                     let json = JSON(value)
-                    self.userInfos = ["first_name": json["first_name"].stringValue, "last_name": json["last_name"].stringValue, "email": json["email"].stringValue, "password" : password]
-                    completion()
+                    self.userInfos = ["first_name": json["first_name"].stringValue, "last_name": json["last_name"].stringValue, "email": json["email"].stringValue, "password": ""]
+                    SwiftSpinner.hide()
+                    if json["email"].stringValue != "" {
+                        completion()
+                    } else {
+                        self.fbSignIn()
+                    }
                 }
             } else {
                 SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
@@ -183,9 +174,11 @@ class SignUpViewController: UIViewController {
         let manager = NetworkReachabilityManager(host: "www.apple.com")
         self.manager!.startRequestsImmediately = false
         
-        SpinnerManager.updateTitle("Trying to create user account")
+        SpinnerManager.showWithAnimation("Creating user account...")
         
-        let request = self.manager!.request(.GET, "https://demo1935961.mockable.io/hello").responseJSON { (response) in
+        let headers = ["content-type": "application/json"]
+        let parameters = ["email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
+        let request = self.manager!.request(.POST, "http://api.kairos-app.xyz/auth", parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
             print(response.request)  // original URL request
             print(response.response) // URL response
             print(response.data)     // server data
@@ -196,11 +189,19 @@ class SignUpViewController: UIViewController {
                 if let value = response.result.value {
                     let json = JSON(value)
                     print("JSON: \(json)")
-                    SpinnerManager.delay(seconds: 1.0, completion: {
-                        SpinnerManager.show("Completed", subtitle: "Tap to sign in", completion: { () -> () in
+                    switch response.response!.statusCode {
+                    case 200:
+                        SpinnerManager.delay(seconds: 1.0, completion: {
+                            SpinnerManager.show("Completed", subtitle: "Tap to sign in", completion: { () -> () in
+                                SwiftSpinner.hide()
+                                self.setRootVC(BoardStoryboardID)
+                            })
+                        })
+                    default:
+                        SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
                             SwiftSpinner.hide()
                         })
-                    })
+                    }
                 }
             case .Failure(let error):
                 SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
@@ -237,14 +238,14 @@ class SignUpViewController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }
 
 extension SignUpViewController: GIDSignInUIDelegate {
@@ -252,13 +253,13 @@ extension SignUpViewController: GIDSignInUIDelegate {
     
     // Present a view that prompts the user to sign in with Google
     func signIn(signIn: GIDSignIn!,
-        presentViewController viewController: UIViewController!) {
-            self.presentViewController(viewController, animated: true, completion: nil)
+                presentViewController viewController: UIViewController!) {
+        self.presentViewController(viewController, animated: true, completion: nil)
     }
     
     // Dismiss the "Sign in with Google" view
     func signIn(signIn: GIDSignIn!,
-        dismissViewController viewController: UIViewController!) {
-            self.dismissViewControllerAnimated(true, completion: nil)
+                dismissViewController viewController: UIViewController!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

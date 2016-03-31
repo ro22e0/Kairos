@@ -9,11 +9,14 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SwiftSpinner
 
 class SignInViewController: UIViewController {
     
     // MARK: - UI Properties
-
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     // MARK: - Class Properties
     var manager: Manager?
     
@@ -38,28 +41,42 @@ class SignInViewController: UIViewController {
     // MARK: - Methods
     private func SignInRequest() {
         let manager = NetworkReachabilityManager(host: "www.apple.com")
-
         self.manager!.startRequestsImmediately = false
-        let request = self.manager!.request(.GET, "https://demo1935961.mockable.io/hello").responseJSON { (response) in
+        
+        SpinnerManager.showWithAnimation("Connecting to Kairos...")
+        
+        let headers = ["content-type": "application/json"]
+        let parameters = ["email": emailTextField.text!, "password": passwordTextField.text!]
+        let request = self.manager!.request(.POST, "http://api.kairos-app.xyz/auth/sign_in", parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
             print(response.request)  // original URL request
             print(response.response) // URL response
             print(response.data)     // server data
             print(response.result)   // result of response serialization
-
             switch response.result {
             case .Success:
                 if let value = response.result.value {
                     let json = JSON(value)
                     print("JSON: \(json)")
+                    switch response.response!.statusCode {
+                    case 200:
+                        self.setRootVC(BoardStoryboardID)
+                    default:
+                        SpinnerManager.show("Failed to connect", subtitle: "Tap to hide", completion: { () -> () in
+                            SwiftSpinner.hide()
+                        })
+                    }
                 }
             case .Failure(let error):
+                SpinnerManager.show("Failed to connect", subtitle: "Tap to hide", completion: { () -> () in
+                    SwiftSpinner.hide()
+                })
                 print(error)
             }
         }
         debugPrint(request)
-
+        
         networkManager(manager!, request: request)
-
+        
         manager?.startListening()
         request.resume()
     }
@@ -80,14 +97,14 @@ class SignInViewController: UIViewController {
         }
     }
     
-        /*
-        // MARK: - Navigation
-        
-        // In a storyboard-based application, you will often want to do a little preparation before navigation
-        override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        }
-        */
-        
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

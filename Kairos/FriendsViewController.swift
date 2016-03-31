@@ -15,6 +15,8 @@ class FriendsViewController: ButtonBarPagerTabStripViewController {
     let blackCustomColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.8)
     let darkGreyCustomColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.6)
 
+    // MARK: - Methods
+
     override func viewDidLoad() {
         setButtonBar()
         super.viewDidLoad()
@@ -24,7 +26,6 @@ class FriendsViewController: ButtonBarPagerTabStripViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     func setButtonBar() {
         // change selected bar color

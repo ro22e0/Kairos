@@ -15,6 +15,8 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
     let cellIdentifier = "invitationCell"
     var itemInfo = IndicatorInfo(title: "View")
     
+    // MARK: - Constructors
+
     init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         
@@ -25,6 +27,8 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -17,6 +17,8 @@ class FriendsEmbeddedTableViewController: UITableViewController {
     
     var searchController: UISearchController!
 
+    // MARK: - Constructors
+
     init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         
@@ -48,6 +50,8 @@ class FriendsEmbeddedTableViewController: UITableViewController {
         definesPresentationContext = false
     }
     
+    // MARK: - Methods
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
