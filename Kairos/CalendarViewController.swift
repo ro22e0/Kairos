@@ -148,12 +148,12 @@ class CalendarViewController: UIViewController {
     
     func updateCurrentDate(date: NSDate) {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .LongStyle
+        dateFormatter.dateStyle = .FullStyle
         dateFormatter.timeStyle = .NoStyle
         dateFormatter.locale = calendarView.locale
         datePickerButton.setTitle(dateFormatter.stringFromDate(date), forState: .Normal)
     }
-    
+
     // MARK: - Actions
     @IBAction func pickDate(sender: AnyObject) {
         datePicker.setDate(calendarView.selectedDate, animated: false)

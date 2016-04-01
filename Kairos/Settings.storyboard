@@ -31,7 +31,27 @@
                     <view key="view" contentMode="scaleToFill" id="hpo-ze-zaA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nope sorry." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7r-ix-nAb">
+                                <rect key="frame" x="116" y="302" width="88" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What ? No settings ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFD-DF-L70">
+                                <rect key="frame" x="78" y="273" width="164" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="VFD-DF-L70" firstAttribute="centerY" secondItem="hpo-ze-zaA" secondAttribute="centerY" id="Ejc-fc-P3d"/>
+                            <constraint firstItem="x7r-ix-nAb" firstAttribute="centerX" secondItem="hpo-ze-zaA" secondAttribute="centerX" id="Qo0-xs-o81"/>
+                            <constraint firstItem="VFD-DF-L70" firstAttribute="centerX" secondItem="hpo-ze-zaA" secondAttribute="centerX" id="WIn-NS-hSv"/>
+                            <constraint firstItem="x7r-ix-nAb" firstAttribute="top" secondItem="VFD-DF-L70" secondAttribute="bottom" constant="8" id="a0l-uv-RhD"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Rp9-fU-Ey1">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="VS7-sy-9Vr">
@@ -43,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Afc-DM-iMw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="-44"/>
+            <point key="canvasLocation" x="473" y="-44"/>
         </scene>
     </scenes>
 </document>

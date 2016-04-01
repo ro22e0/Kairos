@@ -10,10 +10,11 @@ import Foundation
 import SideMenu
 
 let MainStoryboardID = "Main"
+let CalendarStoryboardID = "Calendar"
 let LoginStoryboardID = "Login"
 let BoardStoryboardID = "Board"
 let MenuStoryboardID = "Menu"
-let TeamsStoryboardID = "Teams"
+let FriendsStoryboardID = "Friends"
 let ProfileStoryboardID = "Profile"
 let SettingsStoryboardID = "Settings"
 

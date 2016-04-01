@@ -23,6 +23,7 @@
 		DA668F3E1CA4AEA000230912 /* InvitationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA668F3C1CA4AEA000230912 /* InvitationTableViewCell.swift */; };
 		DA668F3F1CA4AEA000230912 /* InvitationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA668F3D1CA4AEA000230912 /* InvitationTableViewCell.xib */; };
 		DA8358C71CAB18A400CC9B29 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */; };
+		DA851C961CAE99C50025E1D4 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA851C951CAE99C50025E1D4 /* Calendar.storyboard */; };
 		DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */; };
 		DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */; };
 		DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */; };
@@ -37,7 +38,7 @@
 		DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */; };
 		DAE097741C9DF0FA00D6B462 /* DefinePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */; };
 		DAEE7CBB1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */; };
-		DAF66D2C1CA3EB3700B6062D /* Teams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF66D2B1CA3EB3700B6062D /* Teams.storyboard */; };
+		DAF66D2C1CA3EB3700B6062D /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */; };
 		DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF66D301CA4028800B6062D /* MenuTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		DA668F3C1CA4AEA000230912 /* InvitationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationTableViewCell.swift; sourceTree = "<group>"; };
 		DA668F3D1CA4AEA000230912 /* InvitationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InvitationTableViewCell.xib; sourceTree = "<group>"; };
 		DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		DA851C951CAE99C50025E1D4 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAA816621C9C218900EF1560 /* Kairos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kairos-Bridging-Header.h"; sourceTree = "<group>"; };
 		DAAEE1541C9ABE1F00D53AEC /* Kairos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kairos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,7 +91,7 @@
 		DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinePasswordViewController.swift; sourceTree = "<group>"; };
 		DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsEmbeddedTableViewController.swift; sourceTree = "<group>"; };
-		DAF66D2B1CA3EB3700B6062D /* Teams.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Teams.storyboard; sourceTree = "<group>"; };
+		DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		DAF66D301CA4028800B6062D /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +164,15 @@
 			name = Cell;
 			sourceTree = "<group>";
 		};
+		DA851C941CAE998C0025E1D4 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				DA851C951CAE99C50025E1D4 /* Calendar.storyboard */,
+				DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
 		DAA8165B1C9C1E9800EF1560 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,7 +211,8 @@
 				DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */,
 				DAC801811CA1F0330092A717 /* SpinnerManager.swift */,
 				DA612CB51CA473060027D7FB /* Profile */,
-				DAF66D2D1CA3EC3800B6062D /* Teams */,
+				DA851C941CAE998C0025E1D4 /* Calendar */,
+				DAF66D2D1CA3EC3800B6062D /* Friends */,
 				DAC8018D1CA353CA0092A717 /* Board */,
 				DAC801861CA346A60092A717 /* Settings */,
 				DAC801831CA333290092A717 /* Menu */,
@@ -242,7 +254,6 @@
 			isa = PBXGroup;
 			children = (
 				DAC8018B1CA353AF0092A717 /* Board.storyboard */,
-				DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */,
 			);
 			name = Board;
 			sourceTree = "<group>";
@@ -256,17 +267,17 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		DAF66D2D1CA3EC3800B6062D /* Teams */ = {
+		DAF66D2D1CA3EC3800B6062D /* Friends */ = {
 			isa = PBXGroup;
 			children = (
 				DA668F401CA4AEA600230912 /* Cell */,
-				DAF66D2B1CA3EB3700B6062D /* Teams.storyboard */,
+				DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */,
 				DA612CB71CA48B060027D7FB /* FriendsViewController.swift */,
 				DA668F3A1CA4AD7800230912 /* InvitationsEmbeddedTableViewController.swift */,
 				DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */,
 				DA5F47191CA60BC600A37960 /* SearchUsersEmbeddedTableViewController.swift */,
 			);
-			name = Teams;
+			name = Friends;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,7 +373,7 @@
 			files = (
 				DA668F3F1CA4AEA000230912 /* InvitationTableViewCell.xib in Resources */,
 				DA3F3ACD1C9AF0D200E82FC6 /* Login.storyboard in Resources */,
-				DAF66D2C1CA3EB3700B6062D /* Teams.storyboard in Resources */,
+				DAF66D2C1CA3EB3700B6062D /* Friends.storyboard in Resources */,
 				DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */,
 				DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */,
 				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
@@ -371,6 +382,7 @@
 				DA612CB41CA472F90027D7FB /* Profile.storyboard in Resources */,
 				DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */,
 				DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */,
+				DA851C961CAE99C50025E1D4 /* Calendar.storyboard in Resources */,
 				DA668F391CA4A40400230912 /* FriendTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,7 +670,7 @@
 				DAAEE1731C9ABE1F00D53AEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		DAAEE1741C9ABE1F00D53AEC /* Build configuration list for PBXNativeTarget "Kairos" */ = {
 			isa = XCConfigurationList;
@@ -667,7 +679,7 @@
 				DAAEE1761C9ABE1F00D53AEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		DAAEE1771C9ABE1F00D53AEC /* Build configuration list for PBXNativeTarget "KairosTests" */ = {
 			isa = XCConfigurationList;
@@ -676,7 +688,7 @@
 				DAAEE1791C9ABE1F00D53AEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -11,7 +11,7 @@ import UIKit
 class MenuTableViewController: UITableViewController {
 
     // MARK: - Class Properties
-    let menus = [ProfileStoryboardID, BoardStoryboardID, TeamsStoryboardID, SettingsStoryboardID]
+    let menus = [ProfileStoryboardID, BoardStoryboardID, FriendsStoryboardID, CalendarStoryboardID, SettingsStoryboardID]
 
     override func viewDidLoad() {
         super.viewDidLoad()
