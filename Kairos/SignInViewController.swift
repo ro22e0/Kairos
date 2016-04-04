@@ -24,6 +24,8 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.navigationItem.backBarButtonItem?.title = ""
+
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         self.manager = Alamofire.Manager(configuration: configuration)
     }

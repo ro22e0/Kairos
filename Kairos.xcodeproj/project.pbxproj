@@ -37,6 +37,7 @@
 		DADD55E41CA60CE200C44D40 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD55E21CA60CE200C44D40 /* UserTableViewCell.swift */; };
 		DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */; };
 		DAE097741C9DF0FA00D6B462 /* DefinePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */; };
+		DAE380CE1CB2F5B3002DB874 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE380CD1CB2F5B3002DB874 /* EventTableViewCell.swift */; };
 		DAEE7CBB1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */; };
 		DAF66D2C1CA3EB3700B6062D /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */; };
 		DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF66D301CA4028800B6062D /* MenuTableViewController.swift */; };
@@ -90,6 +91,7 @@
 		DADD55E21CA60CE200C44D40 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinePasswordViewController.swift; sourceTree = "<group>"; };
+		DAE380CD1CB2F5B3002DB874 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsEmbeddedTableViewController.swift; sourceTree = "<group>"; };
 		DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		DAF66D301CA4028800B6062D /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		DA851C941CAE998C0025E1D4 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				DAE380CF1CB2F5BD002DB874 /* Cell */,
 				DA851C951CAE99C50025E1D4 /* Calendar.storyboard */,
 				DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */,
 			);
@@ -256,6 +259,14 @@
 				DAC8018B1CA353AF0092A717 /* Board.storyboard */,
 			);
 			name = Board;
+			sourceTree = "<group>";
+		};
+		DAE380CF1CB2F5BD002DB874 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DAE380CD1CB2F5B3002DB874 /* EventTableViewCell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		DAE51ED81C9B7E7800B44296 /* Main */ = {
@@ -474,6 +485,7 @@
 				DAAEE1601C9ABE1F00D53AEC /* Kairos.xcdatamodeld in Sources */,
 				DA612CB81CA48B060027D7FB /* FriendsViewController.swift in Sources */,
 				DA668F381CA4A40400230912 /* FriendTableViewCell.swift in Sources */,
+				DAE380CE1CB2F5B3002DB874 /* EventTableViewCell.swift in Sources */,
 				DA3F3ACB1C9AEA5200E82FC6 /* LoadingViewController.swift in Sources */,
 				DA3F3AD51C9B037600E82FC6 /* GetStartedViewController.swift in Sources */,
 				DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */,

@@ -153,7 +153,7 @@ class CalendarViewController: UIViewController {
         dateFormatter.locale = calendarView.locale
         datePickerButton.setTitle(dateFormatter.stringFromDate(date), forState: .Normal)
     }
-
+    
     // MARK: - Actions
     @IBAction func pickDate(sender: AnyObject) {
         datePicker.setDate(calendarView.selectedDate, animated: false)
@@ -191,13 +191,38 @@ class CalendarViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+}
+
+extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
+    // MARK: UITableViewDataSource
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = eventTableView.dequeueReusableCellWithIdentifier("eventCell") as! EventTableViewCell
+        
+        cell.startTimeLabel.text = "18:00"
+        cell.endTimeLabel.text = "20:00"
+        cell.colorView.backgroundColor = .blueColor()
+        cell.titleLabel.text = "Apple Special Event"
+        cell.locationLabel.text = "apple.com/apple-events/april-2016/"
+        
+        return cell
+    }
+
+    // MARK: UITableViewDelegate
 }
 
 extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
     
     // MARK: FSCalendarDataSource
-    
+
     func minimumDateForCalendar(calendar: FSCalendar) -> NSDate {
         return NSDate.distantPast()
     }
@@ -211,9 +236,12 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     }
     
     // MARK: FSCalendarDelegate
+
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
-        //        calendarView.selectDate(calendar.currentPage.fs_firstDayOfMonth)
-        //        updateCurrentDate(calendar.currentPage.fs_firstDayOfMonth)
+        if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.currentPage.fs_firstDayOfMonth, toCalendarUnit: .Month) {
+            calendarView.selectDate(calendar.currentPage.fs_firstDayOfMonth)
+            updateCurrentDate(calendar.currentPage.fs_firstDayOfMonth)
+        }
     }
     
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {

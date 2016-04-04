@@ -29,6 +29,8 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.navigationItem.backBarButtonItem?.title = ""
+        
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.timeoutIntervalForRequest = 15.0
         self.manager = Alamofire.Manager(configuration: configuration)

@@ -56,15 +56,15 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="BKF-Pf-PsI" kind="push" id="WRd-8l-Dyp"/>
+                                            <segue destination="BKF-Pf-PsI" kind="push" id="cqX-5u-hTR"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="x9j-2M-wnp">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="x9j-2M-wnp">
                                 <rect key="frame" x="20" y="168" width="280" height="233"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0Ne-do-tkd">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0Ne-do-tkd">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="93"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work Better." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maN-oz-Ufe">
@@ -73,7 +73,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Manage your team projects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGC-a0-4X6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage your team projects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGC-a0-4X6">
                                                 <rect key="frame" x="0.0" y="76" width="280" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
@@ -81,7 +81,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thg-tf-k33">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thg-tf-k33">
                                         <rect key="frame" x="20" y="193" width="240" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="rgi-Xy-O0U"/>
@@ -91,7 +91,7 @@
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="y9t-uh-Qvg" kind="push" id="x0n-l1-YBT"/>
+                                            <segue destination="y9t-uh-Qvg" kind="push" id="bdM-Pk-lNd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -261,15 +261,7 @@
                             <constraint firstItem="yya-pt-lij" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v95-aB-fBS" secondAttribute="bottom" constant="20" id="xCu-U5-jiC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Sign Up" id="xAm-Ep-nhO">
-                        <barButtonItem key="leftBarButtonItem" image="Back Chevron" id="uaY-wk-jik">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="back:" destination="y9t-uh-Qvg" id="dxc-Sp-KPN"/>
-                                <segue destination="gV5-5U-AKd" kind="unwind" identifier="unwindToGetStartedSegue" unwindAction="unwindGetStarted:" id="CNV-nV-oCZ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Sign Up" id="xAm-Ep-nhO"/>
                     <connections>
                         <outlet property="emailTextField" destination="JTA-us-5Lx" id="uq2-ho-bzE"/>
                         <outlet property="passwordTextField" destination="Z79-M1-gWS" id="Kmv-ND-d7n"/>
@@ -277,7 +269,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Or-jm-Rqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="gV5-5U-AKd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="579" y="105"/>
         </scene>
@@ -474,28 +465,18 @@
                             <constraint firstItem="LuB-Uh-0dW" firstAttribute="centerY" secondItem="4EJ-WG-5zJ" secondAttribute="centerY" id="scN-3h-plx"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Sign In" id="kjr-a6-sXx">
-                        <barButtonItem key="leftBarButtonItem" image="Back Chevron" id="yG6-Wx-1h5">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="back:" destination="BKF-Pf-PsI" id="vPz-tH-M29"/>
-                                <segue destination="GRG-DE-ty2" kind="unwind" identifier="unwindToGetStartedSegue" unwindAction="unwindGetStarted:" id="TbT-Ki-cy7"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Sign In" id="kjr-a6-sXx"/>
                     <connections>
                         <outlet property="emailTextField" destination="6eb-bJ-8J5" id="F1B-zb-1bQ"/>
                         <outlet property="passwordTextField" destination="hG9-fV-gcN" id="mg7-dd-xQj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ld9-Yv-sM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="GRG-DE-ty2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="579" y="732"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Back Chevron" width="13" height="21"/>
         <image name="Button Background" width="243" height="40"/>
         <image name="Button Background Facebook" width="243" height="40"/>
         <image name="Button Background Google" width="243" height="40"/>
