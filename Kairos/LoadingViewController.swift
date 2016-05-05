@@ -41,7 +41,7 @@ class LoadingViewController: UIViewController {
 
     // MARK: - Methods
     func checkStart() {
-        let storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
+        let storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
         
         if let viewController = storyboard.instantiateInitialViewController() {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

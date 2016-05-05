@@ -349,8 +349,8 @@
 		DAE51ED81C9B7E7800B44296 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				DA3F3ACA1C9AEA5200E82FC6 /* LoadingViewController.swift */,
 				DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */,
+				DA3F3ACA1C9AEA5200E82FC6 /* LoadingViewController.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
