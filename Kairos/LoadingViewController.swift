@@ -29,14 +29,14 @@ class LoadingViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
-            self.loadingActivityIndicator.startAnimating()
-            self.loadingActivityIndicator.alpha = 1.0
-            }) { (completed) -> Void in
-                if completed {
+//        UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+//            self.loadingActivityIndicator.startAnimating()
+//            self.loadingActivityIndicator.alpha = 1.0
+//            }) { (completed) -> Void in
+//                if completed {
                     self.checkStart()
-                }
-        }
+//                }
+//        }
     }
 
     // MARK: - Methods

@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let menuLeftNavigationController = storyboard.instantiateViewControllerWithIdentifier("LeftMenuNavigationController") as? UISideMenuNavigationController
         SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
         menuLeftNavigationController!.leftSide = true
-        
+
 //        SideMenuManager.menuPresentMode = .ViewSlideOut
 //        SideMenuManager.menuAllowPushOfSameClassTwice = true
 //        SideMenuManager.menuAllowPopIfPossible = false

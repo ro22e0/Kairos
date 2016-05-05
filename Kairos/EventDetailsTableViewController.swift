@@ -1,34 +1,18 @@
 //
-//  InvitationsEmbeddedTableViewController.swift
+//  EventDetailsTableViewController.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 25/03/2016.
+//  Created by Ronaël Bajazet on 16/04/2016.
 //  Copyright © 2016 Kairos-app. All rights reserved.
 //
 
 import UIKit
-import XLPagerTabStrip
 
-class InvitationsEmbeddedTableViewController: UITableViewController {
+class EventDetailsTableViewController: UITableViewController {
     
     // MARK: - Class Properties
-    let cellIdentifier = "invitationCell"
-    var itemInfo = IndicatorInfo(title: "View")
-
-    // MARK: - Constructors
-
-    init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
-        self.itemInfo = itemInfo
-        
-        super.init(style: style)
-    }
+    var event: Event?
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Methods
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,14 +21,9 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.navigationController?.navigationBar.translucent = false
-        tableView.registerNib(UINib(nibName: "InvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
-        tableView.allowsSelection = false
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
+        
+        tableView.estimatedRowHeight = 135
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,21 +34,36 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 3
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! InvitationTableViewCell
         
-        cell.nameLabel.text = "Invitation"
-
-        return cell
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCellWithIdentifier("kEventInfosCell", forIndexPath: indexPath) as! EventInfosTableViewCell
+            cell.titleLabel.text = event?.title
+            cell.locationTextView.autoresizingMask = [.FlexibleTopMargin, .FlexibleBottomMargin]
+            cell.locationTextView.text = event?.location
+            cell.startDateLabel.text = "24/12/2016 18:00"
+            cell.endDateLabel.text = "24/12/2016 20:00"
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCellWithIdentifier("kEventCalendarCell", forIndexPath: indexPath) as! EventCalendarTableViewCell
+            cell.calendarLabel.text = "Work"
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCellWithIdentifier("kEventDescriptionCell", forIndexPath: indexPath) as! EventDescriptionTableViewCell
+            cell.descriptionLabel.text = event?.notes
+            return cell
+        default:
+            let cell = UITableViewCell()
+            return cell
+        }
     }
     
     /*
@@ -107,20 +101,22 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
      }
      */
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-}
-
-extension InvitationsEmbeddedTableViewController: IndicatorInfoProvider {
-    // MARK: - IndicatorInfoProvider
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return itemInfo
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "ShowEditEventSegue" {
+            let destVC = segue.destinationViewController as! EventTableViewController
+            destVC.event = event
+        }
+    }
+    
+    @IBAction func unwindToEventDetails(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as? EventTableViewController, event = sourceViewController.event {
+            self.event = event
+        }
     }
 }

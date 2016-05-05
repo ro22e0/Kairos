@@ -195,6 +195,20 @@ class SignUpViewController: UIViewController {
                     case 200:
                         SpinnerManager.delay(seconds: 1.0, completion: {
                             SpinnerManager.show("Completed", subtitle: "Tap to sign in", completion: { () -> () in
+                                if let plist = Plist(name: "User-Info") {
+                                    let dict = plist.getMutablePlistFile()!
+                                    dict["access-token"] = response.response?.allHeaderFields["access-token"]
+                                    dict["client"] = response.response?.allHeaderFields["client"]
+                                    dict["uid"] = response.response?.allHeaderFields["uid"]
+                                    dict["id"] = json["data"]["id"].stringValue
+                                    do {
+                                        try plist.addValuesToPlistFile(dict)
+                                    } catch {
+                                        print(error)
+                                    }
+                                } else {
+                                    print("Unable to get Plist")
+                                }
                                 SwiftSpinner.hide()
                                 self.setRootVC(BoardStoryboardID)
                             })

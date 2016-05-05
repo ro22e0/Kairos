@@ -16,6 +16,8 @@ target 'Kairos' do
   pod 'XLPagerTabStrip', '~> 5.0'
   pod 'Crashlytics'
   pod 'FSCalendar', '~> 2.0'
+  pod 'SwiftRecord'
+  pod 'DatePickerCell'
 end
 
 target 'KairosTests' do

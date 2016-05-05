@@ -1,17 +1,16 @@
 //
-//  FriendTableViewCell.swift
+//  EventLocationTableViewCell.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 24/03/2016.
+//  Created by Ronaël Bajazet on 05/05/2016.
 //  Copyright © 2016 Kairos-app. All rights reserved.
 //
 
 import UIKit
 
-class FriendTableViewCell: UITableViewCell {
+class EventLocationTableViewCell: BaseEventTableViewCell {
 
-    @IBOutlet weak var profilePictureImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var locationTextField: UITextField!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,5 +22,10 @@ class FriendTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
+    override func configure(event: Event) {
+        super.configure(event)
+        
+        locationTextField.text = event.location
+    }
 }

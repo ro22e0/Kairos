@@ -1,17 +1,19 @@
 //
-//  FriendTableViewCell.swift
+//  EventInfosTableViewCell.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 24/03/2016.
+//  Created by Ronaël Bajazet on 16/04/2016.
 //  Copyright © 2016 Kairos-app. All rights reserved.
 //
 
 import UIKit
 
-class FriendTableViewCell: UITableViewCell {
+class EventInfosTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var profilePictureImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var locationTextView: UITextView!
+    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var endDateLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,5 +25,5 @@ class FriendTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

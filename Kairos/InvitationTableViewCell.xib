@@ -1,18 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="invitationCell" id="KGk-i7-Jjw" customClass="InvitationTableViewCell" customModule="Kairos" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5DV-kJ-XlA">
+                        <rect key="frame" x="8" y="8" width="48.5" height="48.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="5DV-kJ-XlA" secondAttribute="height" multiplier="1:1" id="FTM-Td-tcK"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-7L-BbW">
+                        <rect key="frame" x="174" y="17" width="49" height="30"/>
+                        <state key="normal" title="Accept"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtl-13-Yfy">
+                        <rect key="frame" x="248" y="17" width="52" height="30"/>
+                        <state key="normal" title="Decline"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7V2-8X-ORX">
+                        <rect key="frame" x="64" y="22" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="5DV-kJ-XlA" secondAttribute="bottom" constant="8" id="4V4-VC-2Ng"/>
+                    <constraint firstItem="7V2-8X-ORX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9jT-Wh-EQo"/>
+                    <constraint firstItem="5DV-kJ-XlA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Cl1-cb-gOk"/>
+                    <constraint firstItem="vtl-13-Yfy" firstAttribute="leading" secondItem="npQ-7L-BbW" secondAttribute="trailing" constant="25" id="JJH-uz-kRR"/>
+                    <constraint firstItem="vtl-13-Yfy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KtJ-2z-ib1"/>
+                    <constraint firstItem="5DV-kJ-XlA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="bol-xM-a76"/>
+                    <constraint firstItem="7V2-8X-ORX" firstAttribute="leading" secondItem="5DV-kJ-XlA" secondAttribute="trailing" constant="8" id="eqC-sT-0i8"/>
+                    <constraint firstAttribute="trailing" secondItem="vtl-13-Yfy" secondAttribute="trailing" constant="20" id="nZ7-NV-cyy"/>
+                    <constraint firstItem="npQ-7L-BbW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ocp-cA-1ze"/>
+                    <constraint firstItem="npQ-7L-BbW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7V2-8X-ORX" secondAttribute="trailing" constant="8" id="omv-wH-Z5r"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="nameLabel" destination="7V2-8X-ORX" id="5yZ-7J-Faq"/>
+                <outlet property="profilePictureImageView" destination="5DV-kJ-XlA" id="pbi-S5-BI3"/>
+            </connections>
+            <point key="canvasLocation" x="219" y="459.5"/>
         </tableViewCell>
     </objects>
 </document>
