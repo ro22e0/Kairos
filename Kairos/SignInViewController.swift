@@ -25,9 +25,9 @@ class SignInViewController: UIViewController {
         
         emailTextField.text = "rona@mail.com"
         passwordTextField.text = "qwerty123"
-
+        
         self.navigationItem.backBarButtonItem?.title = ""
-
+        
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         self.manager = Alamofire.Manager(configuration: configuration)
     }
@@ -44,14 +44,10 @@ class SignInViewController: UIViewController {
     
     // MARK: - Methods
     private func SignInRequest() {
-        let manager = NetworkReachabilityManager(host: "www.apple.com")
-        self.manager!.startRequestsImmediately = false
-        
-        SpinnerManager.showWithAnimation("Connecting to Kairos...")
-        
-        let headers = ["content-type": "application/json"]
         let parameters = ["email": emailTextField.text!, "password": passwordTextField.text!]
-        let request = self.manager!.request(.POST, "http://api.kairos-app.xyz/auth/sign_in", parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
+        
+        Router.needToken = false
+        RouterWrapper.sharedInstance.request(.Authenticate(parameters)) { (response) in
             print(response.request)  // original URL request
             print(response.response) // URL response
             print(response.data)     // server data
@@ -63,20 +59,16 @@ class SignInViewController: UIViewController {
                     print("JSON: \(json)")
                     switch response.response!.statusCode {
                     case 200:
-                        if let plist = Plist(name: "User-Info") {
-                            let dict = plist.getMutablePlistFile()!
-                            dict["access-token"] = response.response?.allHeaderFields["access-token"]
-                            dict["client"] = response.response?.allHeaderFields["client"]
-                            dict["uid"] = response.response?.allHeaderFields["uid"]
-                            dict["id"] = json["data"]["id"].stringValue
-                            do {
-                                try plist.addValuesToPlistFile(dict)
-                            } catch {
-                                print(error)
-                            }
-                        } else {
-                            print("Unable to get Plist")
-                        }
+
+                        let accessToken = response.response?.allHeaderFields["access-token"] as! String
+                        let client  = response.response?.allHeaderFields["client"] as! String
+                        let uid = response.response?.allHeaderFields["uid"] as! String
+                        let id = json["data"]["id"].intValue
+                        let email = json["data"]["email"].stringValue
+                        OwnerManager.sharedInstance.newOwner(uid, client: client, accessToken: accessToken)
+                        OwnerManager.sharedInstance.owner?.id = id
+                        OwnerManager.sharedInstance.owner?.email = email
+
                         self.setRootVC(BoardStoryboardID)
                     default:
                         SpinnerManager.show("Failed to connect", subtitle: "Tap to hide", completion: { () -> () in
@@ -91,12 +83,6 @@ class SignInViewController: UIViewController {
                 print(error)
             }
         }
-        debugPrint(request)
-        
-        networkManager(manager!, request: request)
-        
-        manager?.startListening()
-        request.resume()
     }
     
     func networkManager(manager: NetworkReachabilityManager, request: Request) {

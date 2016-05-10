@@ -12,9 +12,9 @@ import SideMenu
 
 private let font = UIFont.systemFontOfSize(20, weight: UIFontWeightThin)
 
-class SpinnerManager {
+struct SpinnerManager {
 
-    class func delay(seconds seconds: Double, completion: ()->()) {
+    static func delay(seconds seconds: Double, completion: ()->()) {
         let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(Double(NSEC_PER_SEC) * seconds))
         
         dispatch_after(popTime, dispatch_get_main_queue()) {
@@ -22,17 +22,17 @@ class SpinnerManager {
         }
     }
 
-    class func showWithAnimation(title: String) {
+    static func showWithAnimation(title: String) {
         SwiftSpinner.setTitleFont(font)
         SwiftSpinner.show(title)
     }
     
-    class func show(title: String, subtitle: String, completion: ()->()) {
+    static func show(title: String, subtitle: String, completion: ()->()) {
         SwiftSpinner.setTitleFont(font)
         SwiftSpinner.show(title, animated: false).addTapHandler({ completion() }, subtitle: subtitle)
     }
     
-    class func updateTitle(title: String) {
+    static func updateTitle(title: String) {
         SwiftSpinner.sharedInstance.title = title
     }
 }

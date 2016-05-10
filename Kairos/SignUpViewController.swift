@@ -173,14 +173,10 @@ class SignUpViewController: UIViewController {
     }
     
     private func SignUpRequest() {
-        let manager = NetworkReachabilityManager(host: "www.apple.com")
-        self.manager!.startRequestsImmediately = false
-        
-        SpinnerManager.showWithAnimation("Creating user account...")
-        
-        let headers = ["content-type": "application/json"]
         let parameters = ["email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
-        let request = self.manager!.request(.POST, "http://api.kairos-app.xyz/auth", parameters: parameters, encoding: .JSON, headers: headers).responseJSON { (response) in
+        
+        Router.needToken = false
+        RouterWrapper.sharedInstance.request(.CreateUser(parameters)) { (response) in
             print(response.request)  // original URL request
             print(response.response) // URL response
             print(response.data)     // server data
@@ -195,20 +191,16 @@ class SignUpViewController: UIViewController {
                     case 200:
                         SpinnerManager.delay(seconds: 1.0, completion: {
                             SpinnerManager.show("Completed", subtitle: "Tap to sign in", completion: { () -> () in
-                                if let plist = Plist(name: "User-Info") {
-                                    let dict = plist.getMutablePlistFile()!
-                                    dict["access-token"] = response.response?.allHeaderFields["access-token"]
-                                    dict["client"] = response.response?.allHeaderFields["client"]
-                                    dict["uid"] = response.response?.allHeaderFields["uid"]
-                                    dict["id"] = json["data"]["id"].stringValue
-                                    do {
-                                        try plist.addValuesToPlistFile(dict)
-                                    } catch {
-                                        print(error)
-                                    }
-                                } else {
-                                    print("Unable to get Plist")
-                                }
+                                
+                                let accessToken = response.response?.allHeaderFields["access-token"] as! String
+                                let client  = response.response?.allHeaderFields["client"] as! String
+                                let uid = response.response?.allHeaderFields["uid"] as! String
+                                let id = json["data"]["id"].intValue
+                                let email = json["data"]["email"].stringValue
+                                OwnerManager.sharedInstance.newOwner(uid, client: client, accessToken: accessToken)
+                                OwnerManager.sharedInstance.owner?.id = id
+                                OwnerManager.sharedInstance.owner?.email = email
+                                
                                 SwiftSpinner.hide()
                                 self.setRootVC(BoardStoryboardID)
                             })
@@ -225,12 +217,7 @@ class SignUpViewController: UIViewController {
                 })
                 print(error)
             }
-            manager?.stopListening()
         }
-        debugPrint(request)
-        
-        networkManager(manager, request: request)
-        request.resume()
     }
     
     func networkManager(manager: NetworkReachabilityManager?, request: Request?) {

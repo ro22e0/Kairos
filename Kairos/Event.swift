@@ -13,11 +13,12 @@ import CoreData
 class Event: NSManagedObject {
 
     // MARK: - CoreDataProperties
+    
     @NSManaged var endDate: NSDate?
     @NSManaged var location: String?
     @NSManaged var notes: String?
     @NSManaged var startDate: NSDate?
     @NSManaged var title: String?
+    @NSManaged var id: NSNumber?
     @NSManaged var calendar: Calendar?
-
 }

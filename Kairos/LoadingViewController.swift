@@ -19,6 +19,11 @@ class LoadingViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         projectLabel.adjustsFontSizeToFitWidth = true
+        
+        Router.needToken = true
+        RouterWrapper.sharedInstance.request(.Authenticate([:])) { (response) in
+            print(response)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,7 +46,7 @@ class LoadingViewController: UIViewController {
 
     // MARK: - Methods
     func checkStart() {
-        let storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
+        let storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
         
         if let viewController = storyboard.instantiateInitialViewController() {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

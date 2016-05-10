@@ -13,6 +13,9 @@ import CoreData
 class Calendar: NSManagedObject {
 
     // MARK: - CoreDataProperties
+    
     @NSManaged var name: String?
+    @NSManaged var id: NSNumber?
     @NSManaged var events: NSSet?
+    @NSManaged var owner: Owner?
 }

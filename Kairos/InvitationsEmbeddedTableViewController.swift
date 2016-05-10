@@ -12,13 +12,19 @@ import XLPagerTabStrip
 class InvitationsEmbeddedTableViewController: UITableViewController {
     
     // MARK: - Class Properties
-    let cellIdentifier = "invitationCell"
+    let requestCellID = "invitationCell"
+    let pendingCellID = "sentInvitationCell"
     var itemInfo = IndicatorInfo(title: "View")
-
+    
+//    var requestedFriends: [Friend]?
+    var pendingFriends: [Friend]?
+    
     // MARK: - Constructors
-
+    
     init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
+        pendingFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Pending)
+ //       requestedFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Requested)
         
         super.init(style: style)
     }
@@ -28,7 +34,7 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
     }
     
     // MARK: - Methods
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,10 +44,11 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.navigationController?.navigationBar.translucent = false
-        tableView.registerNib(UINib(nibName: "InvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
+        tableView.registerNib(UINib(nibName: "InvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: requestCellID)
+        tableView.registerNib(UINib(nibName: "SentInvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: pendingCellID)
         tableView.allowsSelection = false
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
@@ -55,20 +62,29 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        if section == 0 {
+            return pendingFriends!.count
+        }
+        return 0 //requestedFriends!.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! InvitationTableViewCell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(requestCellID, forIndexPath: indexPath) as! InvitationTableViewCell
+            
+            cell.nameLabel.text = "" //requestedFriends![indexPath.row].name
+            
+            return cell
+        }
         
-        cell.nameLabel.text = "Invitation"
-
+        let cell = tableView.dequeueReusableCellWithIdentifier(pendingCellID, forIndexPath: indexPath) as! SentInvitationTableViewCell
+        
+        cell.nameLabel.text = pendingFriends![indexPath.row].name
+        
         return cell
     }
     

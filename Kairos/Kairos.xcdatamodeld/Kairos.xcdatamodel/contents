@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
     <entity name="Calendar" representedClassName=".Calendar" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 32" indexed="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="calendar" inverseEntity="Event" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="calendars" inverseEntity="Owner" syncable="YES"/>
     </entity>
     <entity name="Event" representedClassName=".Event" syncable="YES">
         <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="calendar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Calendar" inverseName="events" inverseEntity="Calendar" syncable="YES"/>
     </entity>
+    <entity name="Friend" representedClassName=".Friend" parentEntity="User" syncable="YES">
+        <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="friends" inverseEntity="Owner" syncable="YES"/>
+    </entity>
+    <entity name="Owner" representedClassName=".Owner" parentEntity="User" syncable="YES">
+        <attribute name="accessToken" attributeType="String" syncable="YES"/>
+        <attribute name="client" attributeType="String" syncable="YES"/>
+        <attribute name="uid" attributeType="String" syncable="YES"/>
+        <relationship name="calendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="owner" inverseEntity="Calendar" syncable="YES"/>
+        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Friend" inverseName="owner" inverseEntity="Friend" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Calendar" positionX="-63" positionY="-18" width="128" height="75"/>
-        <element name="Event" positionX="-54" positionY="-9" width="128" height="135"/>
+        <element name="Calendar" positionX="-2772" positionY="-1458" width="128" height="103"/>
+        <element name="Event" positionX="-2565" positionY="-1489" width="128" height="148"/>
+        <element name="User" positionX="-2682" positionY="-1843" width="128" height="133"/>
+        <element name="Owner" positionX="-2801" positionY="-1629" width="128" height="118"/>
+        <element name="Friend" positionX="-2592" positionY="-1633" width="126" height="73"/>
     </elements>
 </model>
