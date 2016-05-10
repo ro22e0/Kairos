@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import FBSDKLoginKit
+import FBSDKCoreKit
 import SwiftyJSON
 import SwiftSpinner
 
@@ -29,7 +31,12 @@ class SignInViewController: UIViewController {
         self.navigationItem.backBarButtonItem?.title = ""
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.timeoutIntervalForRequest = 15.0
         self.manager = Alamofire.Manager(configuration: configuration)
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignInViewController.handleGoogleSignIn(_:)), name:kUSER_GOOGLE_AUTH_NOTIFICATION, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,12 +44,61 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Notifications methods
+    @objc func handleGoogleSignIn(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let success = userInfo["success"] as! Bool
+        
+        if success {
+            let user = userInfo["user"] as! GIDGoogleUser
+            googleSignIn(user)
+        } else {
+            let error = userInfo["error"] as! NSError
+            print(error.localizedDescription)
+        }
+    }
+    
     // MARK: - Actions
     @IBAction func SignIn(sender: UIButton) {
         SignInRequest()
     }
     
+    @IBAction func GoogleSignIn(sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    @IBAction func FbSignIn(sender: UIButton) {
+        fbSignIn()
+    }
+    
     // MARK: - Methods
+    func fbSignIn() {
+        let loginManager = FBSDKLoginManager()
+        loginManager.loginBehavior = .SystemAccount
+        
+        let permissions = ["public_profile", "email"]
+        loginManager.logInWithReadPermissions(permissions, fromViewController: self) { (result, error) -> Void in
+            if error != nil {
+                SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
+                    SwiftSpinner.hide()
+                })
+                print(error.localizedDescription)
+            } else if !result.isCancelled {
+                print(FBSDKAccessToken.currentAccessToken().tokenString)
+                print(FBSDKAccessToken.currentAccessToken().debugDescription)
+            } else {
+                print("Cancelled")
+            }
+        }
+    }
+    
+    private func googleSignIn(user: GIDGoogleUser) {
+        let manager = NetworkReachabilityManager(host: "www.apple.com")
+        self.manager!.startRequestsImmediately = false
+        
+        print(user.authentication.idToken)
+    }
+    
     private func SignInRequest() {
         let parameters = ["email": emailTextField.text!, "password": passwordTextField.text!]
         
@@ -85,8 +141,8 @@ class SignInViewController: UIViewController {
         }
     }
     
-    func networkManager(manager: NetworkReachabilityManager, request: Request) {
-        manager.listener = { (status) in
+    func networkManager(manager: NetworkReachabilityManager?, request: Request) {
+        manager!.listener = { (status) in
             print("Network Status Changed: \(status)")
             switch status {
             case .Reachable(.WWAN):
@@ -94,7 +150,7 @@ class SignInViewController: UIViewController {
             case .Reachable(.EthernetOrWiFi):
                 break
             case .NotReachable:
-                manager.startListening()
+                manager!.startListening()
             default:
                 break
             }
@@ -112,3 +168,20 @@ class SignInViewController: UIViewController {
      */
     
 }
+
+extension SignInViewController: GIDSignInUIDelegate {
+    // MARK: - GIDSignInUIDelegate
+    
+    // Present a view that prompts the user to sign in with Google
+    func signIn(signIn: GIDSignIn!,
+                presentViewController viewController: UIViewController!) {
+        self.presentViewController(viewController, animated: true, completion: nil)
+    }
+    
+    // Dismiss the "Sign in with Google" view
+    func signIn(signIn: GIDSignIn!,
+                dismissViewController viewController: UIViewController!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
