@@ -255,12 +255,12 @@
 			children = (
 				DA668F3C1CA4AEA000230912 /* InvitationTableViewCell.swift */,
 				DA668F3D1CA4AEA000230912 /* InvitationTableViewCell.xib */,
+				DA68532E1CE25D6700B839F6 /* SentInvitationTableViewCell.swift */,
+				DA68532F1CE25D6700B839F6 /* SentInvitationTableViewCell.xib */,
 				DA668F361CA4A40400230912 /* FriendTableViewCell.swift */,
 				DA668F371CA4A40400230912 /* FriendTableViewCell.xib */,
 				DADD55E21CA60CE200C44D40 /* UserTableViewCell.swift */,
 				DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */,
-				DA68532E1CE25D6700B839F6 /* SentInvitationTableViewCell.swift */,
-				DA68532F1CE25D6700B839F6 /* SentInvitationTableViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -313,9 +313,7 @@
 			children = (
 				DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */,
 				DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */,
-				DA6853321CE25E2400B839F6 /* OwnerManager.swift */,
-				DAC801811CA1F0330092A717 /* SpinnerManager.swift */,
-				DA6853471CE2707600B839F6 /* RouterWrapper.swift */,
+				DABC13AC1CE2984900CE7B6C /* Manager */,
 				DA496AEF1CC92F16003DD41B /* Model */,
 				DA496AEE1CC92F08003DD41B /* Storyboards */,
 				DAA8165B1C9C1E9800EF1560 /* Supporting Files */,
@@ -331,6 +329,16 @@
 			);
 			path = KairosTests;
 			sourceTree = SOURCE_ROOT;
+		};
+		DABC13AC1CE2984900CE7B6C /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DAC801811CA1F0330092A717 /* SpinnerManager.swift */,
+				DA6853321CE25E2400B839F6 /* OwnerManager.swift */,
+				DA6853471CE2707600B839F6 /* RouterWrapper.swift */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
 		};
 		DAC801831CA333290092A717 /* Menu */ = {
 			isa = PBXGroup;

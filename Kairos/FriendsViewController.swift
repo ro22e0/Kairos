@@ -26,7 +26,7 @@ class FriendsViewController: ButtonBarPagerTabStripViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func setButtonBar() {
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .whiteColor()
