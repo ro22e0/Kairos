@@ -45,6 +45,13 @@
 		DA6853431CE25E5E00B839F6 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68533C1CE25E5E00B839F6 /* Friend.swift */; };
 		DA6853461CE260C200B839F6 /* Kairos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA6853441CE260C200B839F6 /* Kairos.xcdatamodeld */; };
 		DA6853481CE2707600B839F6 /* RouterWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6853471CE2707600B839F6 /* RouterWrapper.swift */; };
+		DA7912F91CEFCBF800661753 /* FriendActionPopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */; };
+		DA7912FA1CEFCBF800661753 /* FriendActionPopoverTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7912F81CEFCBF800661753 /* FriendActionPopoverTableViewController.xib */; };
+		DA7912FD1CEFCDA100661753 /* BlockUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7912FB1CEFCDA100661753 /* BlockUserTableViewCell.swift */; };
+		DA7912FE1CEFCDA100661753 /* BlockUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */; };
+		DA7913031CEFCF6E00661753 /* UnfriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */; };
+		DA7913041CEFCF6E00661753 /* UnfriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */; };
+		DA8326301CE3CCFF00C09F31 /* DataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83262F1CE3CCFF00C09F31 /* DataSync.swift */; };
 		DA8358C71CAB18A400CC9B29 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */; };
 		DA851C961CAE99C50025E1D4 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA851C951CAE99C50025E1D4 /* Calendar.storyboard */; };
 		DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */; };
@@ -116,6 +123,13 @@
 		DA68533C1CE25E5E00B839F6 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		DA6853451CE260C200B839F6 /* Kairos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kairos.xcdatamodel; sourceTree = "<group>"; };
 		DA6853471CE2707600B839F6 /* RouterWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterWrapper.swift; sourceTree = "<group>"; };
+		DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendActionPopoverTableViewController.swift; sourceTree = "<group>"; };
+		DA7912F81CEFCBF800661753 /* FriendActionPopoverTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendActionPopoverTableViewController.xib; sourceTree = "<group>"; };
+		DA7912FB1CEFCDA100661753 /* BlockUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockUserTableViewCell.swift; sourceTree = "<group>"; };
+		DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlockUserTableViewCell.xib; sourceTree = "<group>"; };
+		DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfriendTableViewCell.swift; sourceTree = "<group>"; };
+		DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnfriendTableViewCell.xib; sourceTree = "<group>"; };
+		DA83262F1CE3CCFF00C09F31 /* DataSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSync.swift; sourceTree = "<group>"; };
 		DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		DA851C951CAE99C50025E1D4 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -261,6 +275,10 @@
 				DA668F371CA4A40400230912 /* FriendTableViewCell.xib */,
 				DADD55E21CA60CE200C44D40 /* UserTableViewCell.swift */,
 				DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */,
+				DA7912FB1CEFCDA100661753 /* BlockUserTableViewCell.swift */,
+				DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */,
+				DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */,
+				DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -336,6 +354,7 @@
 				DAC801811CA1F0330092A717 /* SpinnerManager.swift */,
 				DA6853321CE25E2400B839F6 /* OwnerManager.swift */,
 				DA6853471CE2707600B839F6 /* RouterWrapper.swift */,
+				DA83262F1CE3CCFF00C09F31 /* DataSync.swift */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -393,6 +412,8 @@
 				DA668F3A1CA4AD7800230912 /* InvitationsEmbeddedTableViewController.swift */,
 				DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */,
 				DA5F47191CA60BC600A37960 /* SearchUsersEmbeddedTableViewController.swift */,
+				DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */,
+				DA7912F81CEFCBF800661753 /* FriendActionPopoverTableViewController.xib */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -491,13 +512,16 @@
 				DA668F3F1CA4AEA000230912 /* InvitationTableViewCell.xib in Resources */,
 				DA3F3ACD1C9AF0D200E82FC6 /* Login.storyboard in Resources */,
 				DAF66D2C1CA3EB3700B6062D /* Friends.storyboard in Resources */,
+				DA7912FA1CEFCBF800661753 /* FriendActionPopoverTableViewController.xib in Resources */,
 				DA68533D1CE25E5E00B839F6 /* User-Info.plist in Resources */,
 				DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */,
+				DA7913041CEFCF6E00661753 /* UnfriendTableViewCell.xib in Resources */,
 				DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */,
 				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
 				DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */,
 				DAC801881CA346B70092A717 /* Settings.storyboard in Resources */,
 				DA612CB41CA472F90027D7FB /* Profile.storyboard in Resources */,
+				DA7912FE1CEFCDA100661753 /* BlockUserTableViewCell.xib in Resources */,
 				DA6853311CE25D6700B839F6 /* SentInvitationTableViewCell.xib in Resources */,
 				DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */,
 				DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */,
@@ -585,12 +609,15 @@
 				DA3F3ACF1C9AFC2A00E82FC6 /* Common.swift in Sources */,
 				DA52AAE31CD7EC5900464096 /* EventTableViewController.swift in Sources */,
 				DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */,
+				DA7912FD1CEFCDA100661753 /* BlockUserTableViewCell.swift in Sources */,
+				DA7913031CEFCF6E00661753 /* UnfriendTableViewCell.swift in Sources */,
 				DA5F471A1CA60BC600A37960 /* SearchUsersEmbeddedTableViewController.swift in Sources */,
 				DA6853301CE25D6700B839F6 /* SentInvitationTableViewCell.swift in Sources */,
 				DA18745D1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift in Sources */,
 				DA6853331CE25E2400B839F6 /* OwnerManager.swift in Sources */,
 				DA3603C71CC26DA000A89B5A /* EventDetailsTableViewController.swift in Sources */,
 				DA6853461CE260C200B839F6 /* Kairos.xcdatamodeld in Sources */,
+				DA7912F91CEFCBF800661753 /* FriendActionPopoverTableViewController.swift in Sources */,
 				DA68533F1CE25E5E00B839F6 /* Event.swift in Sources */,
 				DA18745F1CDB78A9008E7C38 /* EventNotesTableViewCell.swift in Sources */,
 				DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */,
@@ -598,6 +625,7 @@
 				DA668F3B1CA4AD7800230912 /* InvitationsEmbeddedTableViewController.swift in Sources */,
 				DA6853431CE25E5E00B839F6 /* Friend.swift in Sources */,
 				DA1874611CDB8029008E7C38 /* BaseEventTableViewCell.swift in Sources */,
+				DA8326301CE3CCFF00C09F31 /* DataSync.swift in Sources */,
 				DA8358C71CAB18A400CC9B29 /* CalendarViewController.swift in Sources */,
 				DA3603C31CC26C4700A89B5A /* EventCalendarTableViewCell.swift in Sources */,
 				DA68533E1CE25E5E00B839F6 /* Plist.swift in Sources */,

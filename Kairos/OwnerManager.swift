@@ -7,20 +7,30 @@
 //
 
 import Foundation
+import CoreData
 
 class OwnerManager {
     // MARK: Singleton
     static let sharedInstance = OwnerManager()
     private init() {
-        self.owner = Owner.findOrCreate([:])  as? Owner
+        self.owner = Owner.findOrCreate([:]) as? Owner
     }
 
     private(set) var owner: Owner?
 
-    func newOwner(uid: String, client: String, accessToken: String) {
+    func setCredentials(response: NSHTTPURLResponse) {
+        print("lol")
+        let accessToken = response.allHeaderFields["access-token"] as! String
+        let client  = response.allHeaderFields["client"] as! String
+        let uid = response.allHeaderFields["uid"] as! String
         owner?.uid = uid
         owner?.client = client
         owner?.accessToken = accessToken
+        print("setCredentials")
+        print(OwnerManager.sharedInstance.owner!.accessToken)
+        print(OwnerManager.sharedInstance.owner!.client)
+        print(OwnerManager.sharedInstance.owner!.uid)
+        print("END---setCredentials")
     }
 
     func getFriends() -> [Friend] {
@@ -30,11 +40,26 @@ class OwnerManager {
     }
 
     func getFriends(withStatus status: FriendStatus) -> [Friend] {
-        print(self.owner)
-        print(status.hashValue)
-        let predicate = NSPredicate(format: "owner == %@ AND status == %@", self.owner!, status.hashValue)
-        let friends = Friend.query(predicate) as! [Friend]
+        //let predicate = NSPredicate(format: "owner == %@ AND status == %@", self.owner!, status.hashValue)
+        let properties = ["owner": self.owner! as NSManagedObject, "status": status.hashValue]
+        let friends = Friend.query(properties) as! [Friend]
 
         return friends
+    }
+    
+    func getUsers() -> [User] {
+        let user = User.all() as! [User]
+
+        return user
+    }
+    
+    func getUsers(withName name: String) -> [User] {
+        let namePred = NSPredicate(format: "name contains[c] %@", name)
+        let nicknamePred = NSPredicate(format: "nickname contains[c] %@", name)
+        let emailPred = NSPredicate(format: "email contains[c] %@", name)
+        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
+
+        let user = Friend.query(compoundPred) as! [User]
+        return user
     }
 }

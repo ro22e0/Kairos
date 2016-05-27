@@ -17,10 +17,14 @@ class SearchUsersEmbeddedTableViewController: UITableViewController {
     
     var searchController: UISearchController!
     
+    var users: [User]
+    
     // MARK: - Constructors
 
     init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
+        
+        users = OwnerManager.sharedInstance.getUsers()
         
         super.init(style: style)
     }
@@ -40,7 +44,7 @@ class SearchUsersEmbeddedTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         tableView.allowsSelection = false
-        
+
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.delegate = self
@@ -78,19 +82,19 @@ class SearchUsersEmbeddedTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        return users.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UserTableViewCell
-        
-        cell.nameLabel.text = "User"
+
+        cell.nameLabel.text = users[indexPath.row].name
+        cell.tag = Int(users[indexPath.row].id!)
+
         return cell
     }
     

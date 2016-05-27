@@ -16,15 +16,15 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
     let pendingCellID = "sentInvitationCell"
     var itemInfo = IndicatorInfo(title: "View")
     
-//    var requestedFriends: [Friend]?
-    var pendingFriends: [Friend]?
+    var requestedFriends: [Friend]
+    var pendingFriends: [Friend]
     
     // MARK: - Constructors
     
     init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         pendingFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Pending)
- //       requestedFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Requested)
+        requestedFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Requested)
         
         super.init(style: style)
     }
@@ -67,24 +67,26 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return pendingFriends!.count
+            return pendingFriends.count
         }
-        return 0 //requestedFriends!.count
+        return requestedFriends.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(requestCellID, forIndexPath: indexPath) as! InvitationTableViewCell
             
-            cell.nameLabel.text = "" //requestedFriends![indexPath.row].name
+            cell.nameLabel.text = requestedFriends[indexPath.row].name
+            cell.tag = Int(requestedFriends[indexPath.row].id!)
             
             return cell
         }
-        
+
         let cell = tableView.dequeueReusableCellWithIdentifier(pendingCellID, forIndexPath: indexPath) as! SentInvitationTableViewCell
         
-        cell.nameLabel.text = pendingFriends![indexPath.row].name
-        
+        cell.nameLabel.text = pendingFriends[indexPath.row].name
+        cell.tag = Int(pendingFriends[indexPath.row].id!)
+
         return cell
     }
     

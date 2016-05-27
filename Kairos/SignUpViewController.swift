@@ -192,12 +192,9 @@ class SignUpViewController: UIViewController {
                         SpinnerManager.delay(seconds: 1.0, completion: {
                             SpinnerManager.show("Completed", subtitle: "Tap to sign in", completion: { () -> () in
                                 
-                                let accessToken = response.response?.allHeaderFields["access-token"] as! String
-                                let client  = response.response?.allHeaderFields["client"] as! String
-                                let uid = response.response?.allHeaderFields["uid"] as! String
                                 let id = json["data"]["id"].intValue
                                 let email = json["data"]["email"].stringValue
-                                OwnerManager.sharedInstance.newOwner(uid, client: client, accessToken: accessToken)
+                                OwnerManager.sharedInstance.setCredentials(response.response!)
                                 OwnerManager.sharedInstance.owner?.id = id
                                 OwnerManager.sharedInstance.owner?.email = email
                                 

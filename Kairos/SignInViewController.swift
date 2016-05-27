@@ -60,12 +60,9 @@ class SignInViewController: UIViewController {
                     switch response.response!.statusCode {
                     case 200:
                         
-                        let accessToken = response.response?.allHeaderFields["access-token"] as! String
-                        let client  = response.response?.allHeaderFields["client"] as! String
-                        let uid = response.response?.allHeaderFields["uid"] as! String
                         let id = json["data"]["id"].intValue
                         let email = json["data"]["email"].stringValue
-                        OwnerManager.sharedInstance.newOwner(uid, client: client, accessToken: accessToken)
+                        OwnerManager.sharedInstance.setCredentials(response.response!)
                         OwnerManager.sharedInstance.owner?.id = id
                         OwnerManager.sharedInstance.owner?.email = email
                         

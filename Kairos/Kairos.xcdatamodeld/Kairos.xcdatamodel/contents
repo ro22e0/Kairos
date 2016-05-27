@@ -29,16 +29,16 @@
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imageUrl" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Calendar" positionX="-2772" positionY="-1458" width="128" height="103"/>
         <element name="Event" positionX="-2565" positionY="-1489" width="128" height="148"/>
-        <element name="User" positionX="-2682" positionY="-1843" width="128" height="133"/>
-        <element name="Owner" positionX="-2801" positionY="-1629" width="128" height="118"/>
         <element name="Friend" positionX="-2592" positionY="-1633" width="126" height="73"/>
+        <element name="Owner" positionX="-2817" positionY="-1638" width="128" height="118"/>
+        <element name="User" positionX="-2682" positionY="-1843" width="128" height="133"/>
     </elements>
 </model>

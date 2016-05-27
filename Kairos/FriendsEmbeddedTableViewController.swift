@@ -17,11 +17,15 @@ class FriendsEmbeddedTableViewController: UITableViewController {
     
     var searchController: UISearchController!
 
+    var friends: [Friend]
+
     // MARK: - Constructors
 
     init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
         self.itemInfo = itemInfo
         
+        friends = OwnerManager.sharedInstance.getFriends(withStatus: .Accepted)
+
         super.init(style: style)
     }
     
@@ -71,19 +75,19 @@ class FriendsEmbeddedTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        return friends.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! FriendTableViewCell
-        
-        cell.nameLabel.text = "Friend"
+
+        cell.nameLabel.text = friends[indexPath.row].name
+        cell.tag = Int(friends[indexPath.row].id!)
+
         return cell
     }
     

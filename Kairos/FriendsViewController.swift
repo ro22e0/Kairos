@@ -14,19 +14,21 @@ class FriendsViewController: ButtonBarPagerTabStripViewController {
     // MARK: - Class Properties
     let blackCustomColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.8)
     let darkGreyCustomColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 0.6)
-
+    
     // MARK: - Methods
-
     override func viewDidLoad() {
+        DataSync.fetchUsers()
+        DataSync.fetchFriends()
+
         setButtonBar()
         super.viewDidLoad()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func setButtonBar() {
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .whiteColor()
@@ -46,17 +48,17 @@ class FriendsViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = self?.blackCustomColor
         }
     }
-
+    
     
     // MARK: - PagerTabStripDataSource
     override func viewControllersForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let friendsTableVC = FriendsEmbeddedTableViewController(style: .Plain, itemInfo: "Friends")
-        let invitationsTableVC = InvitationsEmbeddedTableViewController(style: .Plain, itemInfo: "Invitations")
-        let usersTableVC = SearchUsersEmbeddedTableViewController(style: .Plain, itemInfo: "Rechercher")
-
+        let invitationsTableVC = InvitationsEmbeddedTableViewController(style: .Plain, itemInfo: "Requests")
+        let usersTableVC = SearchUsersEmbeddedTableViewController(style: .Plain, itemInfo: "Search")
+        
         return [invitationsTableVC, friendsTableVC, usersTableVC]
     }
-
+    
     /*
      // MARK: - Navigation
      

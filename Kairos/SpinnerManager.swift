@@ -9,6 +9,7 @@
 import Foundation
 import SwiftSpinner
 import SideMenu
+import Whisper
 
 private let font = UIFont.systemFontOfSize(20, weight: UIFontWeightThin)
 
@@ -34,5 +35,17 @@ struct SpinnerManager {
     
     static func updateTitle(title: String) {
         SwiftSpinner.sharedInstance.title = title
+    }
+    
+    static func showWhistle(title: String, success: Bool) {
+        var murmur = Murmur(title: title)
+
+        if success {
+            murmur.backgroundColor = .cyanColor()
+        } else {
+            murmur.backgroundColor = .redColor()
+        }
+
+        Whistle(murmur, action: .Show(1.5))
     }
 }

@@ -19,11 +19,6 @@ class LoadingViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         projectLabel.adjustsFontSizeToFitWidth = true
-        
-        Router.needToken = true
-        RouterWrapper.sharedInstance.request(.Authenticate([:])) { (response) in
-            print(response)
-        }
     }
     
     override func didReceiveMemoryWarning() {

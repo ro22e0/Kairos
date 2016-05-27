@@ -8,6 +8,7 @@
 
 import Foundation
 import SideMenu
+import CoreData
 
 let MainStoryboardID = "Main"
 let CalendarStoryboardID = "Calendar"
@@ -26,10 +27,10 @@ enum LoginSDK: String {
 }
 
 enum FriendStatus: String {
-    case Pending = "pending_friends"
-    case Requested = "requested_friends"
-    case Blocked = "blocked_friends"
-    case Accepted = "friends"
+    case Pending
+    case Requested
+    case Blocked
+    case Accepted
 }
 
 extension UIViewController {
@@ -50,5 +51,10 @@ extension UIViewController {
             
             appDelegate.window?.rootViewController = viewController
         }
+    }
+}
+
+extension UITableViewCell {
+    func selected() {
     }
 }

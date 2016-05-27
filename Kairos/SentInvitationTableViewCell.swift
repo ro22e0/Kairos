@@ -23,5 +23,9 @@ class SentInvitationTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
+    @IBAction func cancel(sender: UIButton) {
+        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+        print(friend.name)
+    }
 }

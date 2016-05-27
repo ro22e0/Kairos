@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // Override point for customization after application launch.NS
         
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont.systemFontOfSize(20, weight: UIFontWeightLight)

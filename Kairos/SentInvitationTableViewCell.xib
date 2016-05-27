@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -21,8 +21,11 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8l-6y-Hfi">
-                        <rect key="frame" x="264" y="17" width="48" height="30"/>
+                        <rect key="frame" x="252" y="17" width="48" height="30"/>
                         <state key="normal" title="Cancel"/>
+                        <connections>
+                            <action selector="cancel:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cEE-w5-MmD"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZT-te-71c">
                         <rect key="frame" x="64" y="22" width="42" height="21"/>
@@ -37,7 +40,7 @@
                     <constraint firstItem="gZT-te-71c" firstAttribute="leading" secondItem="JwI-dx-NeK" secondAttribute="trailing" constant="8" id="Svd-Ua-geS"/>
                     <constraint firstItem="JwI-dx-NeK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="X77-ph-bvt"/>
                     <constraint firstItem="gZT-te-71c" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XzW-wa-MIW"/>
-                    <constraint firstAttribute="trailing" secondItem="F8l-6y-Hfi" secondAttribute="trailing" constant="8" id="il9-du-s9T"/>
+                    <constraint firstAttribute="trailing" secondItem="F8l-6y-Hfi" secondAttribute="trailing" constant="20" id="il9-du-s9T"/>
                     <constraint firstItem="JwI-dx-NeK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="lyr-vp-ffH"/>
                 </constraints>
             </tableViewCellContentView>

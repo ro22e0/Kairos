@@ -17,7 +17,7 @@ class User: NSManagedObject {
     @NSManaged var id: NSNumber?
     @NSManaged var name: String?
     @NSManaged var nickname: String?
-    @NSManaged var imageUrl: NSData?
+    @NSManaged var imageUrl: String?
     @NSManaged var email: String?
-    @NSManaged var image: String?
+    @NSManaged var image: NSData?
 }

@@ -18,8 +18,8 @@ target 'Kairos' do
   pod 'FSCalendar', '~> 2.0'
   pod 'SwiftRecord'
   pod 'DatePickerCell'
+  pod 'Whisper'
 end
 
 target 'KairosTests' do
-
 end
