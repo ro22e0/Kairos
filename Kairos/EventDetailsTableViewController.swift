@@ -21,7 +21,7 @@ class EventDetailsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+    
         tableView.estimatedRowHeight = 135
         tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -49,12 +49,12 @@ class EventDetailsTableViewController: UITableViewController {
             cell.titleLabel.text = event?.title
             cell.locationTextView.autoresizingMask = [.FlexibleTopMargin, .FlexibleBottomMargin]
             cell.locationTextView.text = event?.location
-            cell.startDateLabel.text = "24/12/2016 18:00"
-            cell.endDateLabel.text = "24/12/2016 20:00"
+            cell.startDateLabel.text = event?.startDate?.description
+            cell.endDateLabel.text = event?.startDate?.description
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("kEventCalendarCell", forIndexPath: indexPath) as! EventCalendarTableViewCell
-            cell.calendarLabel.text = "Work"
+            cell.calendarLabel.text = event?.calendar?.name ?? ""
             return cell
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier("kEventDescriptionCell", forIndexPath: indexPath) as! EventDescriptionTableViewCell
@@ -101,6 +101,10 @@ class EventDetailsTableViewController: UITableViewController {
      }
      */
     
+    @IBAction func deleteEvent(sender: UIButton) {
+        event?.delete()
+    }
+
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

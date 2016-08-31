@@ -14,6 +14,7 @@
 		DA18745D1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18745C1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift */; };
 		DA18745F1CDB78A9008E7C38 /* EventNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18745E1CDB78A9008E7C38 /* EventNotesTableViewCell.swift */; };
 		DA1874611CDB8029008E7C38 /* BaseEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1874601CDB8029008E7C38 /* BaseEventTableViewCell.swift */; };
+		DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */; };
 		DA3603C11CC26C3300A89B5A /* EventInfosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C01CC26C3300A89B5A /* EventInfosTableViewCell.swift */; };
 		DA3603C31CC26C4700A89B5A /* EventCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C21CC26C4700A89B5A /* EventCalendarTableViewCell.swift */; };
 		DA3603C51CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C41CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift */; };
@@ -53,6 +54,7 @@
 		DA7913041CEFCF6E00661753 /* UnfriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */; };
 		DA8326301CE3CCFF00C09F31 /* DataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83262F1CE3CCFF00C09F31 /* DataSync.swift */; };
 		DA8358C71CAB18A400CC9B29 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */; };
+		DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA847C291D14077300ED2750 /* Project.storyboard */; };
 		DA851C961CAE99C50025E1D4 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA851C951CAE99C50025E1D4 /* Calendar.storyboard */; };
 		DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */; };
 		DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */; };
@@ -92,6 +94,7 @@
 		DA18745C1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventEndDateTableViewCell.swift; sourceTree = "<group>"; };
 		DA18745E1CDB78A9008E7C38 /* EventNotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventNotesTableViewCell.swift; sourceTree = "<group>"; };
 		DA1874601CDB8029008E7C38 /* BaseEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseEventTableViewCell.swift; sourceTree = "<group>"; };
+		DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCalendarTableViewController.swift; sourceTree = "<group>"; };
 		DA3603C01CC26C3300A89B5A /* EventInfosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfosTableViewCell.swift; sourceTree = "<group>"; };
 		DA3603C21CC26C4700A89B5A /* EventCalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		DA3603C41CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDescriptionTableViewCell.swift; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnfriendTableViewCell.xib; sourceTree = "<group>"; };
 		DA83262F1CE3CCFF00C09F31 /* DataSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSync.swift; sourceTree = "<group>"; };
 		DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		DA847C291D14077300ED2750 /* Project.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Project.storyboard; sourceTree = "<group>"; };
 		DA851C951CAE99C50025E1D4 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAA816621C9C218900EF1560 /* Kairos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kairos-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -194,7 +198,6 @@
 		DA3F3AC91C9AEA1B00E82FC6 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				DA3F3ACC1C9AF0D200E82FC6 /* Login.storyboard */,
 				DA3F3AD01C9B022400E82FC6 /* SignUpViewController.swift */,
 				DA3F3AD21C9B022F00E82FC6 /* SignInViewController.swift */,
 				DA3F3AD41C9B037600E82FC6 /* GetStartedViewController.swift */,
@@ -206,14 +209,15 @@
 		DA496AEE1CC92F08003DD41B /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				DA612CB51CA473060027D7FB /* Profile */,
-				DA851C941CAE998C0025E1D4 /* Calendar */,
-				DAF66D2D1CA3EC3800B6062D /* Friends */,
-				DAC8018D1CA353CA0092A717 /* Board */,
-				DAC801861CA346A60092A717 /* Settings */,
-				DAC801831CA333290092A717 /* Menu */,
-				DA3F3AC91C9AEA1B00E82FC6 /* Login */,
-				DAE51ED81C9B7E7800B44296 /* Main */,
+				DA847C291D14077300ED2750 /* Project.storyboard */,
+				DA612CB31CA472F90027D7FB /* Profile.storyboard */,
+				DA851C951CAE99C50025E1D4 /* Calendar.storyboard */,
+				DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */,
+				DAC8018B1CA353AF0092A717 /* Board.storyboard */,
+				DAC801871CA346B70092A717 /* Settings.storyboard */,
+				DAC801841CA3334D0092A717 /* Menu.storyboard */,
+				DA3F3ACC1C9AF0D200E82FC6 /* Login.storyboard */,
+				DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -252,19 +256,69 @@
 				DA18745C1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift */,
 				DA18745E1CDB78A9008E7C38 /* EventNotesTableViewCell.swift */,
 				DA1874601CDB8029008E7C38 /* BaseEventTableViewCell.swift */,
+				DAE380CD1CB2F5B3002DB874 /* EventTableViewCell.swift */,
 			);
 			name = Event;
+			sourceTree = "<group>";
+		};
+		DA58DA861D6CDB2600387A26 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		DA58DA871D6CE3C900387A26 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				DA52AAE51CD7F82500464096 /* Event */,
+				DA52AAE41CD7ECA100464096 /* Details */,
+			);
+			name = Calendar;
 			sourceTree = "<group>";
 		};
 		DA612CB51CA473060027D7FB /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DA612CB31CA472F90027D7FB /* Profile.storyboard */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
 		};
-		DA668F401CA4AEA600230912 /* Cell */ = {
+		DA81BBD71D4A2DBF00C2C349 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DA847C281D14075400ED2750 /* Project */,
+				DA612CB51CA473060027D7FB /* Profile */,
+				DA851C941CAE998C0025E1D4 /* Calendar */,
+				DAF66D2D1CA3EC3800B6062D /* Friends */,
+				DAC8018D1CA353CA0092A717 /* Board */,
+				DAC801861CA346A60092A717 /* Settings */,
+				DAC801831CA333290092A717 /* Menu */,
+				DA3F3AC91C9AEA1B00E82FC6 /* Login */,
+				DAE51ED81C9B7E7800B44296 /* Main */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DA81BBD81D4A2DE000C2C349 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DA81BBD91D4A2DEE00C2C349 /* Cells */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		DA81BBD91D4A2DEE00C2C349 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DA58DA871D6CE3C900387A26 /* Calendar */,
+				DA81BBDA1D4A2DFD00C2C349 /* Friends */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		DA81BBDA1D4A2DFD00C2C349 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
 				DA668F3C1CA4AEA000230912 /* InvitationTableViewCell.swift */,
@@ -280,17 +334,23 @@
 				DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */,
 				DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */,
 			);
-			name = Cell;
+			name = Friends;
+			sourceTree = "<group>";
+		};
+		DA847C281D14075400ED2750 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Project;
 			sourceTree = "<group>";
 		};
 		DA851C941CAE998C0025E1D4 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				DAE380CF1CB2F5BD002DB874 /* Cell */,
-				DA851C951CAE99C50025E1D4 /* Calendar.storyboard */,
 				DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */,
 				DA3603C61CC26DA000A89B5A /* EventDetailsTableViewController.swift */,
 				DA52AAE21CD7EC5900464096 /* EventTableViewController.swift */,
+				DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -329,11 +389,13 @@
 		DAAEE1561C9ABE1F00D53AEC /* Kairos */ = {
 			isa = PBXGroup;
 			children = (
-				DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */,
-				DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */,
+				DA58DA861D6CDB2600387A26 /* Common */,
 				DABC13AC1CE2984900CE7B6C /* Manager */,
 				DA496AEF1CC92F16003DD41B /* Model */,
+				DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */,
 				DA496AEE1CC92F08003DD41B /* Storyboards */,
+				DA81BBD71D4A2DBF00C2C349 /* ViewControllers */,
+				DA81BBD81D4A2DE000C2C349 /* Views */,
 				DAA8165B1C9C1E9800EF1560 /* Supporting Files */,
 			);
 			path = Kairos;
@@ -362,7 +424,6 @@
 		DAC801831CA333290092A717 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				DAC801841CA3334D0092A717 /* Menu.storyboard */,
 				DAF66D301CA4028800B6062D /* MenuTableViewController.swift */,
 			);
 			name = Menu;
@@ -371,7 +432,6 @@
 		DAC801861CA346A60092A717 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				DAC801871CA346B70092A717 /* Settings.storyboard */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -379,25 +439,13 @@
 		DAC8018D1CA353CA0092A717 /* Board */ = {
 			isa = PBXGroup;
 			children = (
-				DAC8018B1CA353AF0092A717 /* Board.storyboard */,
 			);
 			name = Board;
-			sourceTree = "<group>";
-		};
-		DAE380CF1CB2F5BD002DB874 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				DA52AAE51CD7F82500464096 /* Event */,
-				DA52AAE41CD7ECA100464096 /* Details */,
-				DAE380CD1CB2F5B3002DB874 /* EventTableViewCell.swift */,
-			);
-			name = Cell;
 			sourceTree = "<group>";
 		};
 		DAE51ED81C9B7E7800B44296 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */,
 				DA3F3ACA1C9AEA5200E82FC6 /* LoadingViewController.swift */,
 			);
 			name = Main;
@@ -406,8 +454,6 @@
 		DAF66D2D1CA3EC3800B6062D /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				DA668F401CA4AEA600230912 /* Cell */,
-				DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */,
 				DA612CB71CA48B060027D7FB /* FriendsViewController.swift */,
 				DA668F3A1CA4AD7800230912 /* InvitationsEmbeddedTableViewController.swift */,
 				DAEE7CBA1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift */,
@@ -517,6 +563,7 @@
 				DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */,
 				DA7913041CEFCF6E00661753 /* UnfriendTableViewCell.xib in Resources */,
 				DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */,
+				DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */,
 				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
 				DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */,
 				DAC801881CA346B70092A717 /* Settings.storyboard in Resources */,
@@ -648,6 +695,7 @@
 				DA6853411CE25E5E00B839F6 /* User.swift in Sources */,
 				DA18745B1CDB73AF008E7C38 /* EventStartDateTableViewCell.swift in Sources */,
 				DAEE7CBB1CA49A580019C8D4 /* FriendsEmbeddedTableViewController.swift in Sources */,
+				DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */,
 				DA6853401CE25E5E00B839F6 /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -194,9 +194,13 @@ class SignUpViewController: UIViewController {
                                 
                                 let id = json["data"]["id"].intValue
                                 let email = json["data"]["email"].stringValue
+                                OwnerManager.sharedInstance.newOwner(json["data"]["uid"].stringValue)                                
                                 OwnerManager.sharedInstance.setCredentials(response.response!)
                                 OwnerManager.sharedInstance.owner?.id = id
                                 OwnerManager.sharedInstance.owner?.email = email
+                                
+                                let defautls = NSUserDefaults.standardUserDefaults()
+                                defautls.setValue(true, forKey: userLoginKeyConstant)
                                 
                                 SwiftSpinner.hide()
                                 self.setRootVC(BoardStoryboardID)

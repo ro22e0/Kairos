@@ -43,6 +43,10 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        print("pendingFriends: ", pendingFriends.count)
+        print("requestedFriends: ", requestedFriends.count)
+
         self.navigationController?.navigationBar.translucent = false
         tableView.registerNib(UINib(nibName: "InvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: requestCellID)
         tableView.registerNib(UINib(nibName: "SentInvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: pendingCellID)
@@ -51,6 +55,10 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        pendingFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Pending)
+        requestedFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Requested)
+        
         tableView.reloadData()
     }
     
@@ -67,9 +75,9 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return pendingFriends.count
+            return requestedFriends.count
         }
-        return requestedFriends.count
+        return pendingFriends.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -81,12 +89,12 @@ class InvitationsEmbeddedTableViewController: UITableViewController {
             
             return cell
         }
-
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(pendingCellID, forIndexPath: indexPath) as! SentInvitationTableViewCell
         
         cell.nameLabel.text = pendingFriends[indexPath.row].name
         cell.tag = Int(pendingFriends[indexPath.row].id!)
-
+        
         return cell
     }
     

@@ -41,9 +41,13 @@ class FriendsEmbeddedTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        friends = OwnerManager.sharedInstance.getFriends(withStatus: .Accepted)
+        print(friends.count)
+
         tableView.registerNib(UINib(nibName: "FriendTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         tableView.allowsSelection = false
-        
+
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false

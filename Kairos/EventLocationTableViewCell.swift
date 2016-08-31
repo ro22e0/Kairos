@@ -28,4 +28,12 @@ class EventLocationTableViewCell: BaseEventTableViewCell {
         
         locationTextField.text = event.location
     }
+    
+    override func updateEvent(notification: NSNotification) {
+        super.updateEvent(notification)
+        
+        let event = notification.userInfo!["event"] as! Event
+        
+        event.location = locationTextField.text
+    }
 }

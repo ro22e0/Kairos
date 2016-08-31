@@ -15,6 +15,7 @@ import JLToast
 import SideMenu
 import Fabric
 import Crashlytics
+import SwiftRecord
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,30 +28,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
         ]
-
+        
         // SideMenu
         let storyboard = UIStoryboard(name: MenuStoryboardID, bundle: nil)
         let menuLeftNavigationController = storyboard.instantiateViewControllerWithIdentifier("LeftMenuNavigationController") as? UISideMenuNavigationController
         SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
         menuLeftNavigationController!.leftSide = true
-
-//        SideMenuManager.menuPresentMode = .ViewSlideOut
-//        SideMenuManager.menuAllowPushOfSameClassTwice = true
-//        SideMenuManager.menuAllowPopIfPossible = false
-//        SideMenuManager.menuWidth = max(round(min(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height) * 0.75), 240)
-//        SideMenuManager.menuPresentMode = .MenuSlideIn
-//        SideMenuManager.menuAnimationPresentDuration = 0.35
-//        SideMenuManager.menuAnimationDismissDuration = 0.35
-//        SideMenuManager.menuAnimationFadeStrength = 0.5
-//        SideMenuManager.menuAnimationShrinkStrength = 0.90
+        
+        //        SideMenuManager.menuPresentMode = .ViewSlideOut
+        //        SideMenuManager.menuAllowPushOfSameClassTwice = true
+        //        SideMenuManager.menuAllowPopIfPossible = false
+        //        SideMenuManager.menuWidth = max(round(min(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height) * 0.75), 240)
+        //        SideMenuManager.menuPresentMode = .MenuSlideIn
+        //        SideMenuManager.menuAnimationPresentDuration = 0.35
+        //        SideMenuManager.menuAnimationDismissDuration = 0.35
+        //        SideMenuManager.menuAnimationFadeStrength = 0.5
+        //        SideMenuManager.menuAnimationShrinkStrength = 0.90
         SideMenuManager.menuAnimationBackgroundColor = nil
-//        SideMenuManager.menuShadowOpacity = 0.5
-//        SideMenuManager.menuShadowColor = UIColor.darkGrayColor()
-//        SideMenuManager.menuShadowRadius = 10
-//        SideMenuManager.menuParallaxStrength = 1
-//        SideMenuManager.menuFadeStatusBar = true
-//        SideMenuManager.menuBlurEffectStyle = .Dark // Note: if you want cells in a UITableViewController menu to look good, make them a subclass of UITableViewVibrantCell!
-
+        //        SideMenuManager.menuShadowOpacity = 0.5
+        //        SideMenuManager.menuShadowColor = UIColor.darkGrayColor()
+        //        SideMenuManager.menuShadowRadius = 10
+        //        SideMenuManager.menuParallaxStrength = 1
+        //        SideMenuManager.menuFadeStatusBar = true
+        //        SideMenuManager.menuBlurEffectStyle = .Dark // Note: if you want cells in a UITableViewController menu to look good, make them a subclass of UITableViewVibrantCell!
+        
+        SwiftRecord.generateRelationships = true
+        
         // Fabric
         Fabric.with([Crashlytics.self])
         
@@ -62,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // JLToast
         JLToastView.setDefaultValue(13, forAttributeName: JLToastViewCornerRadiusAttributeName, userInterfaceIdiom: .Unspecified)
         JLToastView.setDefaultValue(UIFont.systemFontOfSize(12, weight: UIFontWeightLight), forAttributeName: JLToastViewFontAttributeName, userInterfaceIdiom: .Unspecified)
-
+        
         // Alamofire network manager
         NetworkActivityIndicatorManager.sharedManager.isEnabled = true
         
@@ -169,45 +172,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: GIDSignInDelegate {
     func application(application: UIApplication,
-        openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-            if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication, annotation: annotation) {
-                return true
-            } else if FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) {
-                return true
-            }
-            return false
+                     openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: sourceApplication, annotation: annotation) {
+            return true
+        } else if FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation) {
+            return true
+        }
+        return false
     }
     
     func application(application: UIApplication,
-        openURL url: NSURL, options: [String: AnyObject]) -> Bool {
-            if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?, annotation: options[UIApplicationOpenURLOptionsAnnotationKey]) {
-                return true
-            } else if FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?, annotation: options[UIApplicationOpenURLOptionsAnnotationKey]) {
-                return true
-            }
-            return false
+                     openURL url: NSURL, options: [String: AnyObject]) -> Bool {
+        if GIDSignIn.sharedInstance().handleURL(url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?, annotation: options[UIApplicationOpenURLOptionsAnnotationKey]) {
+            return true
+        } else if FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String?, annotation: options[UIApplicationOpenURLOptionsAnnotationKey]) {
+            return true
+        }
+        return false
     }
     
     // MARK: - GIDSignInDelegate
     func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!,
-        withError error: NSError!) {
-            if (error == nil) {
-                // Perform any operations on signed in user here.
-                NSNotificationCenter.defaultCenter().postNotificationName(kUSER_GOOGLE_AUTH_NOTIFICATION, object: nil, userInfo:["success": true, "user": user])
-            } else {
-                NSNotificationCenter.defaultCenter().postNotificationName(kUSER_GOOGLE_AUTH_NOTIFICATION, object: nil, userInfo:["success": false, "error": error])
-            }
+                withError error: NSError!) {
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            NSNotificationCenter.defaultCenter().postNotificationName(kUSER_GOOGLE_AUTH_NOTIFICATION, object: nil, userInfo:["success": true, "user": user])
+        } else {
+            NSNotificationCenter.defaultCenter().postNotificationName(kUSER_GOOGLE_AUTH_NOTIFICATION, object: nil, userInfo:["success": false, "error": error])
+        }
     }
     
     func signIn(signIn: GIDSignIn!, didDisconnectWithUser user:GIDGoogleUser!,
-        withError error: NSError!) {
-            // Perform any operations when the user disconnects from app here.
-            // [START_EXCLUDE]
-            NSNotificationCenter.defaultCenter().postNotificationName(
-                "ToggleAuthUINotification",
-                object: nil,
-                userInfo: ["statusText": "User has disconnected."])
-            // [END_EXCLUDE]
+                withError error: NSError!) {
+        // Perform any operations when the user disconnects from app here.
+        // [START_EXCLUDE]
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            "ToggleAuthUINotification",
+            object: nil,
+            userInfo: ["statusText": "User has disconnected."])
+        // [END_EXCLUDE]
     }
 }
 

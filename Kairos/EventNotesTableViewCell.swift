@@ -33,6 +33,14 @@ class EventNotesTableViewCell: BaseEventTableViewCell, UITextViewDelegate {
         notesTextView.textColor = UIColor.blackColor()
         notesTextView.text = event.notes
     }
+    
+    override func updateEvent(notification: NSNotification) {
+        super.updateEvent(notification)
+        
+        let event = notification.userInfo!["event"] as! Event
+        
+        event.notes = notesTextView.text
+    }
 
     // MARK: UITextViewDelegate
 

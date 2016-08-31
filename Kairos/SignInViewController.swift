@@ -16,7 +16,7 @@ class SignInViewController: UIViewController {
     // MARK: - UI Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
+
     // MARK: - Class Properties
     var manager: Manager?
     
@@ -62,10 +62,12 @@ class SignInViewController: UIViewController {
                         
                         let id = json["data"]["id"].intValue
                         let email = json["data"]["email"].stringValue
+                        OwnerManager.sharedInstance.newOwner(json["data"]["uid"].stringValue)
                         OwnerManager.sharedInstance.setCredentials(response.response!)
                         OwnerManager.sharedInstance.owner?.id = id
                         OwnerManager.sharedInstance.owner?.email = email
-                        
+                        let defautls = NSUserDefaults.standardUserDefaults()
+                        defautls.setValue(true, forKey: userLoginKeyConstant)
                         self.setRootVC(BoardStoryboardID)
                     default:
                         SpinnerManager.show("Failed to connect", subtitle: "Tap to hide", completion: { () -> () in

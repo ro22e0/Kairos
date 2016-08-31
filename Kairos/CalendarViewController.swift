@@ -24,22 +24,25 @@ class CalendarViewController: UIViewController {
     @IBOutlet var navigationBarBottomHeightConstraint: NSLayoutConstraint!
     @IBOutlet var navigationBarTopHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var datePicker: UIDatePicker!
-
+    
     // MARK: - Class Properties
     let weekButtonItem = UIBarButtonItem(title: "Week", style: .Plain, target: nil, action: #selector(CalendarViewController.modeWeek(_:)))
     let monthButtonItem = UIBarButtonItem(title: "Month", style: .Plain, target: nil, action: #selector(CalendarViewController.modeMonth(_:)))
     
-    var event: Event!
-
+    var events = [Event]()
+    
     // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Fetch update
+        DataSync.fetchCalendars()
+        
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(CalendarViewController.swiped(_:)))
         swipeDown.direction = .Down
         self.dateNavigationBar.addGestureRecognizer(swipeDown)
         self.view.addGestureRecognizer(swipeDown)
-
+        
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(CalendarViewController.swiped(_:)))
         swipeUp.direction = .Up
         self.dateNavigationBar.addGestureRecognizer(swipeUp)
@@ -52,12 +55,12 @@ class CalendarViewController: UIViewController {
         calendarView.appearance.caseOptions = [.HeaderUsesUpperCase, .WeekdayUsesSingleUpperCase]
         calendarView.appearance.headerMinimumDissolvedAlpha = 0.0
         calendarView.locale = NSLocale.currentLocale()
+        calendarView.calendar.timeZone = NSTimeZone.systemTimeZone()
         
         calendarView.selectDate(calendarView.today)
         updateCurrentDate(calendarView.today)
         
-        let propeties = ["title":"Apple Special Event", "location":"apple.com/apple-events/april-2016/", "notes":"New products !", "startDate":NSDate(), "endDate": NSDate()]
-        event = Event.findOrCreate(propeties) as! Event
+        let _ = ["title":"Apple Special Event", "location":"apple.com/apple-events/april-2016/", "notes":"New products !", "startDate":NSDate(), "endDate": NSDate()]
     }
     
     override func didReceiveMemoryWarning() {
@@ -109,6 +112,8 @@ class CalendarViewController: UIViewController {
                 self.dateNavigationItem.rightBarButtonItem = self.weekButtonItem
             }
         }
+        self.events = OwnerManager.sharedInstance.getEvents(forDate: calendarView.selectedDate)
+        self.eventTableView.reloadData()
     }
     
     func pickerUp() {
@@ -162,7 +167,7 @@ class CalendarViewController: UIViewController {
     // MARK: - Actions
     @IBAction func pickDate(sender: AnyObject) {
         datePicker.setDate(calendarView.selectedDate, animated: false)
-        pickerUp()
+        self.pickerUp()
     }
     
     @IBAction func updateSelectedDate(sender: AnyObject) {
@@ -187,19 +192,21 @@ class CalendarViewController: UIViewController {
         self.dateNavigationItem.rightBarButtonItem = weekButtonItem
     }
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
         if segue.identifier == "ShowEventDetails" {
             if let destVC = segue.destinationViewController as? EventDetailsTableViewController {
-                destVC.event = event
+                if let indexPath = sender as? NSIndexPath {
+                    destVC.event = events[indexPath.row]
+                }
             }
         }
     }
-
+    
     @IBAction func unwindToCalendar(sender: UIStoryboardSegue) {
         self.eventTableView.reloadData()
     }
@@ -213,32 +220,35 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return events.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = eventTableView.dequeueReusableCellWithIdentifier("eventCell") as! EventTableViewCell
-
-        cell.startTimeLabel.text = "18:00"
-        cell.endTimeLabel.text = "20:00"
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "HH:mm"
+        
+        cell.startTimeLabel.text = formatter.stringFromDate(events[indexPath.row].startDate!)
+        cell.endTimeLabel.text = formatter.stringFromDate(events[indexPath.row].endDate!)
         cell.colorView.backgroundColor = .blueColor()
-        cell.titleLabel.text = event.title
-        cell.locationLabel.text = event.location
+        cell.titleLabel.text = events[indexPath.row].title
+        cell.locationLabel.text = events[indexPath.row].location
         
         return cell
     }
-
+    
     // MARK: UITableViewDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("ShowEventDetails", sender: self)
+        self.performSegueWithIdentifier("ShowEventDetails", sender: indexPath)
     }
 }
 
 extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
     
     // MARK: FSCalendarDataSource
-
+    
     func minimumDateForCalendar(calendar: FSCalendar) -> NSDate {
         return NSDate.distantPast()
     }
@@ -252,7 +262,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     }
     
     // MARK: FSCalendarDelegate
-
+    
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
         if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.currentPage.fs_firstDayOfMonth, toCalendarUnit: .Month) {
             calendarView.selectDate(calendar.currentPage.fs_firstDayOfMonth)
@@ -261,6 +271,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     }
     
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
+        print("selected date: ", date)
         updateCurrentDate(date)
         eventUp()
     }

@@ -1,4 +1,4 @@
-//
+
 //  OwnerManager.swift
 //  Kairos
 //
@@ -13,11 +13,11 @@ class OwnerManager {
     // MARK: Singleton
     static let sharedInstance = OwnerManager()
     private init() {
-        self.owner = Owner.findOrCreate([:]) as? Owner
+        self.owner = Owner.all().first as? Owner
     }
-
+    
     private(set) var owner: Owner?
-
+    
     func setCredentials(response: NSHTTPURLResponse) {
         print("lol")
         let accessToken = response.allHeaderFields["access-token"] as! String
@@ -32,25 +32,41 @@ class OwnerManager {
         print(OwnerManager.sharedInstance.owner!.uid)
         print("END---setCredentials")
     }
-
+    
+    func newOwner(uid: String) {
+        var owner: Owner? = Owner.find("uid == %@", args: uid) as? Owner
+        
+        if owner == nil {
+            Event.deleteAll()
+            Calendar.deleteAll()
+            User.deleteAll()
+            Owner.deleteAll()
+            Friend.deleteAll()
+            owner = Owner.create() as? Owner
+            self.owner = owner
+        } else {
+            self.owner = owner
+        }
+    }
+    
     func getFriends() -> [Friend] {
         let friends = Friend.query("owner == %@", args: self.owner!) as! [Friend]
-
+        
         return friends
     }
-
+    
     func getFriends(withStatus status: FriendStatus) -> [Friend] {
         //let predicate = NSPredicate(format: "owner == %@ AND status == %@", self.owner!, status.hashValue)
         let properties = ["owner": self.owner! as NSManagedObject, "status": status.hashValue]
         let friends = Friend.query(properties) as! [Friend]
-
+        
         return friends
     }
     
     func getUsers() -> [User] {
-        let user = User.all() as! [User]
-
-        return user
+        let users = User.all() as! [User]
+        
+        return users
     }
     
     func getUsers(withName name: String) -> [User] {
@@ -58,8 +74,36 @@ class OwnerManager {
         let nicknamePred = NSPredicate(format: "nickname contains[c] %@", name)
         let emailPred = NSPredicate(format: "email contains[c] %@", name)
         let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
-
+        
         let user = Friend.query(compoundPred) as! [User]
         return user
+    }
+    
+    func getCalendars() -> [Calendar] {
+        let calendars = Calendar.all() as! [Calendar]
+        
+        return calendars
+    }
+    
+    func getEvents() -> [Event] {
+        let events = Event.all() as! [Event]
+        
+        print(events)
+        
+        return events
+    }
+    
+    func getEvents(forDate date: NSDate) -> [Event] {
+        let events = self.getEvents()
+        var rEvents = [Event]()
+        
+        for e in events {
+            if e.startDate?.compare(date) == .OrderedDescending && e.endDate?.compare(date) == .OrderedAscending {
+                rEvents.append(e)
+            }
+        }
+
+        print(events)
+        return rEvents
     }
 }

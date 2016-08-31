@@ -28,4 +28,12 @@ class EventTitleTableViewCell: BaseEventTableViewCell {
         
         titleTextField.text = event.title
     }
+    
+    override func updateEvent(notification: NSNotification) {
+        super.updateEvent(notification)
+        
+        let event = notification.userInfo!["event"] as! Event
+        
+        event.title = titleTextField.text
+    }
 }

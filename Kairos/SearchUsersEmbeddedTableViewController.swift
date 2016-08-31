@@ -25,6 +25,7 @@ class SearchUsersEmbeddedTableViewController: UITableViewController {
         self.itemInfo = itemInfo
         
         users = OwnerManager.sharedInstance.getUsers()
+        print("OK LES USERS : ", users.count)
         
         super.init(style: style)
     }
@@ -42,6 +43,9 @@ class SearchUsersEmbeddedTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        users = OwnerManager.sharedInstance.getUsers()
+
         tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         tableView.allowsSelection = false
 
@@ -92,7 +96,7 @@ class SearchUsersEmbeddedTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UserTableViewCell
 
-        cell.nameLabel.text = users[indexPath.row].name
+        cell.nameLabel.text = users[indexPath.row].name ?? "No name"
         cell.tag = Int(users[indexPath.row].id!)
 
         return cell

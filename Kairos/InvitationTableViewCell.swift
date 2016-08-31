@@ -26,28 +26,52 @@ class InvitationTableViewCell: UITableViewCell {
     
     @IBAction func accept(sender: UIButton) {
         let friend = Friend.find("id == %@", args: self.tag) as! Friend
-
+        
         let parameters = ["accepted_friends": [["user_id": friend.id!]]]
         RouterWrapper.sharedInstance.request(.AcceptFriend(parameters)) { (response) in
+            print(response.response)
+            print(response.request)
             switch response.result {
             case .Success:
-                friend.status = FriendStatus.Accepted.hashValue
-                SpinnerManager.showWhistle("kFriendInviteAccept", success: true)
+                switch response.response!.statusCode {
+                case 200...203:
+                    SpinnerManager.showWhistle("kFriendInviteAccept", success: true)
+                    friend.status = FriendStatus.Accepted.hashValue
+                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                    break;
+                default:
+                    SpinnerManager.showWhistle("kFail", success: false)
+                    break;
+                }
+                
             case .Failure(let error):
                 SpinnerManager.showWhistle("kFail", success: false)
                 print(error.localizedDescription)
             }
         }
     }
-
+    
     @IBAction func decline(sender: UIButton) {
         let friend = Friend.find("id == %@", args: self.tag) as! Friend
-
+        
         let parameters = ["declined_friends": [["user_id": friend.id!]]]
         RouterWrapper.sharedInstance.request(.AcceptFriend(parameters)) { (response) in
+            
+            
+            print(response.response)
+            print(response.request)
             switch response.result {
             case .Success:
-                friend.status = FriendStatus.Accepted.hashValue
+                switch response.response!.statusCode {
+                case 200...203:
+                    SpinnerManager.showWhistle("kFriendInviteAccept", success: true)
+                    friend.delete()
+                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                    break;
+                default:
+                    SpinnerManager.showWhistle("kFail", success: false)
+                    break;
+                }
             case .Failure(let error):
                 SpinnerManager.showWhistle("kFail", success: false)
                 print(error.localizedDescription)

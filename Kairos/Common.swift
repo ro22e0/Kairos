@@ -21,6 +21,10 @@ let SettingsStoryboardID = "Settings"
 
 let kUSER_GOOGLE_AUTH_NOTIFICATION = "kUserGoogleAuth"
 
+let kEventWillSaveNotification = "EventWillSave"
+
+let userLoginKeyConstant = "userLoginKey"
+
 enum LoginSDK: String {
     case Facebook = "Facebook"
     case Google = "Google"

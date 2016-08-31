@@ -16,7 +16,7 @@ class LoadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         projectLabel.adjustsFontSizeToFitWidth = true
     }
@@ -29,19 +29,29 @@ class LoadingViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-//        UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
-//            self.loadingActivityIndicator.startAnimating()
-//            self.loadingActivityIndicator.alpha = 1.0
-//            }) { (completed) -> Void in
-//                if completed {
-                    self.checkStart()
-//                }
-//        }
+        //        UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+        //            self.loadingActivityIndicator.startAnimating()
+        //            self.loadingActivityIndicator.alpha = 1.0
+        //            }) { (completed) -> Void in
+        //                if completed {
+        self.checkStart()
+        //                }
+        //        }
     }
-
+    
     // MARK: - Methods
     func checkStart() {
-        let storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
+        var storyboard: UIStoryboard
+        
+                let defautls = NSUserDefaults.standardUserDefaults()
+                if let userHasLogged = defautls.valueForKey(userLoginKeyConstant) as? Bool {
+                    storyboard = userHasLogged ? UIStoryboard(name: BoardStoryboardID, bundle: nil) : UIStoryboard(name: LoginStoryboardID, bundle: nil)
+        
+                } else {
+                    storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
+                }
+        
+//        storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
         
         if let viewController = storyboard.instantiateInitialViewController() {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -51,13 +61,13 @@ class LoadingViewController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
 }
