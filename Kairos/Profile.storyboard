@@ -1,7 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="erj-fE-Ehd">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="jFz-7G-jfL">
+            <objects>
+                <navigationController id="erj-fE-Ehd" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="L4d-NQ-Bf9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="FAk-2Q-Ycm" kind="relationship" relationship="rootViewController" id="UL2-gW-hkX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wap-cL-ZNp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-93" y="226"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="cVR-OO-hP4">
+            <objects>
+                <viewController id="FAk-2Q-Ycm" customClass="ProfileViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W1Q-u6-s4Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rmz-df-O47"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="89U-5x-LGC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVi-tK-NOa">
+                                <rect key="frame" x="279" y="90" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piw-Ul-40U">
+                                <rect key="frame" x="282.5" y="119" width="35.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="piw-Ul-40U" firstAttribute="top" secondItem="TVi-tK-NOa" secondAttribute="bottom" constant="8" id="KCG-8j-gBm"/>
+                            <constraint firstItem="TVi-tK-NOa" firstAttribute="top" secondItem="W1Q-u6-s4Z" secondAttribute="bottom" constant="70" id="rIv-2R-f6n"/>
+                            <constraint firstItem="TVi-tK-NOa" firstAttribute="centerX" secondItem="89U-5x-LGC" secondAttribute="centerX" id="rWW-XC-Ugt"/>
+                            <constraint firstItem="piw-Ul-40U" firstAttribute="centerX" secondItem="89U-5x-LGC" secondAttribute="centerX" id="tOT-ml-MBC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FLP-ku-6vU">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="RqU-rw-G8w">
+                            <connections>
+                                <action selector="menu" destination="FAk-2Q-Ycm" id="1CU-MO-Ebg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="emailLabel" destination="piw-Ul-40U" id="8vf-mZ-m7E"/>
+                        <outlet property="nameLabel" destination="TVi-tK-NOa" id="QtM-Iw-G26"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ghc-u8-g69" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="659" y="226"/>
+        </scene>
+    </scenes>
 </document>

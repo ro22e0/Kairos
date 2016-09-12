@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Automatic">
     <entity name="Calendar" representedClassName=".Calendar" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 32" indexed="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="calendar" inverseEntity="Event" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IUser" syncable="YES"/>
@@ -36,7 +36,7 @@
     </entity>
     <entity name="User" representedClassName=".User" parentEntity="IUser" syncable="YES"/>
     <elements>
-        <element name="Calendar" positionX="-2772" positionY="-1458" width="128" height="103"/>
+        <element name="Calendar" positionX="-2772" positionY="-1458" width="128" height="105"/>
         <element name="Event" positionX="-2565" positionY="-1489" width="128" height="148"/>
         <element name="Friend" positionX="-2628" positionY="-1602" width="126" height="73"/>
         <element name="IUser" positionX="-2630" positionY="-1818" width="128" height="133"/>

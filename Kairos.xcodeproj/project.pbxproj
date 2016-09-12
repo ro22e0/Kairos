@@ -14,6 +14,10 @@
 		DA18745D1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18745C1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift */; };
 		DA18745F1CDB78A9008E7C38 /* EventNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18745E1CDB78A9008E7C38 /* EventNotesTableViewCell.swift */; };
 		DA1874611CDB8029008E7C38 /* BaseEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1874601CDB8029008E7C38 /* BaseEventTableViewCell.swift */; };
+		DA1D4BE11D84111C00B11AD1 /* CalendarFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */; };
+		DA1D4BE31D841F7E00B11AD1 /* CalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */; };
+		DA1E11FF1D78440E0068207F /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E11FE1D78440E0068207F /* SignOutViewController.swift */; };
+		DA1E12011D784AC90068207F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E12001D784AC90068207F /* ProfileViewController.swift */; };
 		DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */; };
 		DA3603C11CC26C3300A89B5A /* EventInfosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C01CC26C3300A89B5A /* EventInfosTableViewCell.swift */; };
 		DA3603C31CC26C4700A89B5A /* EventCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C21CC26C4700A89B5A /* EventCalendarTableViewCell.swift */; };
@@ -94,6 +98,10 @@
 		DA18745C1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventEndDateTableViewCell.swift; sourceTree = "<group>"; };
 		DA18745E1CDB78A9008E7C38 /* EventNotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventNotesTableViewCell.swift; sourceTree = "<group>"; };
 		DA1874601CDB8029008E7C38 /* BaseEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseEventTableViewCell.swift; sourceTree = "<group>"; };
+		DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarFilterTableViewController.swift; sourceTree = "<group>"; };
+		DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewController.swift; sourceTree = "<group>"; };
+		DA1E11FE1D78440E0068207F /* SignOutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
+		DA1E12001D784AC90068207F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCalendarTableViewController.swift; sourceTree = "<group>"; };
 		DA3603C01CC26C3300A89B5A /* EventInfosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfosTableViewCell.swift; sourceTree = "<group>"; };
 		DA3603C21CC26C4700A89B5A /* EventCalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCalendarTableViewCell.swift; sourceTree = "<group>"; };
@@ -202,6 +210,7 @@
 				DA3F3AD21C9B022F00E82FC6 /* SignInViewController.swift */,
 				DA3F3AD41C9B037600E82FC6 /* GetStartedViewController.swift */,
 				DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */,
+				DA1E11FE1D78440E0068207F /* SignOutViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -272,6 +281,7 @@
 		DA58DA871D6CE3C900387A26 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				DA624AAD1D81518E001473EA /* Calendar */,
 				DA52AAE51CD7F82500464096 /* Event */,
 				DA52AAE41CD7ECA100464096 /* Details */,
 			);
@@ -281,8 +291,16 @@
 		DA612CB51CA473060027D7FB /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DA1E12001D784AC90068207F /* ProfileViewController.swift */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		DA624AAD1D81518E001473EA /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Calendar;
 			sourceTree = "<group>";
 		};
 		DA81BBD71D4A2DBF00C2C349 /* ViewControllers */ = {
@@ -351,6 +369,8 @@
 				DA3603C61CC26DA000A89B5A /* EventDetailsTableViewController.swift */,
 				DA52AAE21CD7EC5900464096 /* EventTableViewController.swift */,
 				DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */,
+				DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */,
+				DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -675,6 +695,8 @@
 				DA8326301CE3CCFF00C09F31 /* DataSync.swift in Sources */,
 				DA8358C71CAB18A400CC9B29 /* CalendarViewController.swift in Sources */,
 				DA3603C31CC26C4700A89B5A /* EventCalendarTableViewCell.swift in Sources */,
+				DA1E11FF1D78440E0068207F /* SignOutViewController.swift in Sources */,
+				DA1D4BE31D841F7E00B11AD1 /* CalendarTableViewController.swift in Sources */,
 				DA68533E1CE25E5E00B839F6 /* Plist.swift in Sources */,
 				DA1874591CDB738B008E7C38 /* EventLocationTableViewCell.swift in Sources */,
 				DA3F3AD31C9B022F00E82FC6 /* SignInViewController.swift in Sources */,
@@ -682,6 +704,7 @@
 				DA3603C11CC26C3300A89B5A /* EventInfosTableViewCell.swift in Sources */,
 				DA612CB81CA48B060027D7FB /* FriendsViewController.swift in Sources */,
 				DA668F381CA4A40400230912 /* FriendTableViewCell.swift in Sources */,
+				DA1D4BE11D84111C00B11AD1 /* CalendarFilterTableViewController.swift in Sources */,
 				DA3603C51CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift in Sources */,
 				DAE380CE1CB2F5B3002DB874 /* EventTableViewCell.swift in Sources */,
 				DA3F3ACB1C9AEA5200E82FC6 /* LoadingViewController.swift in Sources */,
@@ -690,6 +713,7 @@
 				DA6853481CE2707600B839F6 /* RouterWrapper.swift in Sources */,
 				DA6853421CE25E5E00B839F6 /* Owner.swift in Sources */,
 				DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */,
+				DA1E12011D784AC90068207F /* ProfileViewController.swift in Sources */,
 				DA668F3E1CA4AEA000230912 /* InvitationTableViewCell.swift in Sources */,
 				DADD55E41CA60CE200C44D40 /* UserTableViewCell.swift in Sources */,
 				DA6853411CE25E5E00B839F6 /* User.swift in Sources */,

@@ -21,7 +21,7 @@ class EventDetailsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    
+        
         tableView.estimatedRowHeight = 135
         tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -49,8 +49,7 @@ class EventDetailsTableViewController: UITableViewController {
             cell.titleLabel.text = event?.title
             cell.locationTextView.autoresizingMask = [.FlexibleTopMargin, .FlexibleBottomMargin]
             cell.locationTextView.text = event?.location
-            cell.startDateLabel.text = event?.startDate?.description
-            cell.endDateLabel.text = event?.startDate?.description
+            fillDates(cell)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier("kEventCalendarCell", forIndexPath: indexPath) as! EventCalendarTableViewCell
@@ -64,6 +63,21 @@ class EventDetailsTableViewController: UITableViewController {
             let cell = UITableViewCell()
             return cell
         }
+    }
+    
+    private func fillDates(cell: EventInfosTableViewCell) {
+        if event!.startDate!.isEqualToDate(event!.endDate!) == true {
+            print("fidsvsdfgkdflkgdfm")
+        } else {
+            print("nooooooooooooo")
+        }
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .FullStyle
+        dateFormatter.timeStyle = .ShortStyle
+
+        
+        cell.startDateLabel.text = dateFormatter.stringFromDate(event!.startDate!)
+        cell.endDateLabel.text = dateFormatter.stringFromDate(event!.endDate!)
     }
     
     /*
@@ -102,9 +116,33 @@ class EventDetailsTableViewController: UITableViewController {
      */
     
     @IBAction func deleteEvent(sender: UIButton) {
+        
+        let parameters: [String: AnyObject] = ["id": self.event!.id!]
+        
+        RouterWrapper.sharedInstance.request(.DeleteEvent(parameters)) { (response) in
+            print(response.response)
+            print(response.request)
+            switch response.result {
+            case .Success:
+                switch response.response!.statusCode {
+                case 200...203:
+                    SpinnerManager.showWhistle("kEventDeleted", success: true)
+                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                    self.event?.delete()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    break;
+                default:
+                    SpinnerManager.showWhistle("kFail", success: false)
+                    break;
+                }
+            case .Failure(let error):
+                SpinnerManager.showWhistle("kFail", success: false)
+                print(error.localizedDescription)
+            }
+        }
         event?.delete()
     }
-
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

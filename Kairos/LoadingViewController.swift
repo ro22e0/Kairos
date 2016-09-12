@@ -41,18 +41,14 @@ class LoadingViewController: UIViewController {
     
     // MARK: - Methods
     func checkStart() {
-        var storyboard: UIStoryboard
-        
-                let defautls = NSUserDefaults.standardUserDefaults()
-                if let userHasLogged = defautls.valueForKey(userLoginKeyConstant) as? Bool {
-                    storyboard = userHasLogged ? UIStoryboard(name: BoardStoryboardID, bundle: nil) : UIStoryboard(name: LoginStoryboardID, bundle: nil)
-        
-                } else {
-                    storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
-                }
-        
-//        storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
-        
+//        var storyboard: UIStoryboard
+//        let defautls = NSUserDefaults.standardUserDefaults()
+//        if let userHasLogged = defautls.valueForKey(userLoginKeyConstant) as? Bool {
+//            storyboard = userHasLogged ? UIStoryboard(name: BoardStoryboardID, bundle: nil) : UIStoryboard(name: LoginStoryboardID, bundle: nil)
+//        } else {
+//            storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
+//        }
+               let storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
         if let viewController = storyboard.instantiateInitialViewController() {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
@@ -69,5 +65,4 @@ class LoadingViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
 }

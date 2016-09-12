@@ -28,7 +28,7 @@ public enum Router: URLRequestConvertible {
      
      - returns: A `String` baseURL.
      */
-    static let baseURL = "http://kairos-app.rhyhimmn2m.eu-west-1.elasticbeanstalk.com/api/v1" // "http://kairos-app.xyz" "http://demo1935961.mockable.io" "http://kairos-app.bitnamiapp.com"
+    static let baseURL = "http://10.38.166.4:3000/api/v1" // "http://kairos-app.rhyhimmn2m.eu-west-1.elasticbeanstalk.com/api/v1" "http://demo1935961.mockable.io" "http://kairos-app.bitnamiapp.com"
     
     /**
      Determine if the request need credentials in headers.
@@ -36,6 +36,8 @@ public enum Router: URLRequestConvertible {
      - returns: A boolean `true` or `false`.
      */
     static var needToken: Bool = true
+    
+    case Logout
     
     /// Create a new user.
     case CreateUser([String: AnyObject])
@@ -97,7 +99,7 @@ public enum Router: URLRequestConvertible {
             return .GET
         case .AcceptFriend, .DeclineFriend, .UpdateEvent, .UpdateCalendar:
             return .PUT
-        case .RemoveFriend, .DeleteEvent, .DeleteCalendar:
+        case .RemoveFriend, .DeleteEvent, .DeleteCalendar, .Logout:
             return .DELETE
         }
     }
@@ -133,6 +135,8 @@ public enum Router: URLRequestConvertible {
             return "/calendars/\(parameters["id"])"
         case .DeleteCalendar(let parameters):
             return "/calendars/\(parameters["id"])"
+        case .Logout:
+            return "/auth/sign_out"
         }
     }
     
@@ -174,7 +178,7 @@ public enum Router: URLRequestConvertible {
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .RemoveFriend(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .DeleteEvent, .GetCalendars, .GetCalendar, .DeleteCalendar:
+        case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .DeleteEvent, .GetCalendars, .GetCalendar, .DeleteCalendar, .Logout:
             return mutableURLRequest
         case .CreateEvent(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0

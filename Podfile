@@ -19,6 +19,7 @@ target 'Kairos' do
   pod 'SwiftRecord'
   pod 'DatePickerCell'
   pod 'Whisper'
+  pod 'DropDown', '~> 1.0'
 end
 
 target 'KairosTests' do

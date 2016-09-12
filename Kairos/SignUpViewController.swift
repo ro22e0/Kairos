@@ -174,14 +174,14 @@ class SignUpViewController: UIViewController {
     
     private func SignUpRequest() {
         let parameters = ["email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
-        
+
         Router.needToken = false
         RouterWrapper.sharedInstance.request(.CreateUser(parameters)) { (response) in
             print(response.request)  // original URL request
             print(response.response) // URL response
             print(response.data)     // server data
             print(response.result)   // result of response serialization
-            
+
             switch response.result {
             case .Success:
                 if let value = response.result.value {
@@ -191,7 +191,7 @@ class SignUpViewController: UIViewController {
                     case 200:
                         SpinnerManager.delay(seconds: 1.0, completion: {
                             SpinnerManager.show("Completed", subtitle: "Tap to sign in", completion: { () -> () in
-                                
+
                                 let id = json["data"]["id"].intValue
                                 let email = json["data"]["email"].stringValue
                                 OwnerManager.sharedInstance.newOwner(json["data"]["uid"].stringValue)                                

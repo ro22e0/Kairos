@@ -35,11 +35,11 @@ class EventNotesTableViewCell: BaseEventTableViewCell, UITextViewDelegate {
     }
     
     override func updateEvent(notification: NSNotification) {
-        super.updateEvent(notification)
-        
         let event = notification.userInfo!["event"] as! Event
         
         event.notes = notesTextView.text
+
+        super.updateEvent(notification)
     }
 
     // MARK: UITextViewDelegate

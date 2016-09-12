@@ -31,15 +31,16 @@ class EventEndDateTableViewCell: BaseEventTableViewCell {
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .MediumStyle
         dateFormatter.locale = NSLocale.currentLocale()
+        self.leftLabel.text = "End Date"
         self.date = event.endDate!
     }
     
     override func updateEvent(notification: NSNotification) {
-        super.updateEvent(notification)
-        
         let event = notification.userInfo!["event"] as! Event
         
         event.endDate = self.date
+        
+        super.updateEvent(notification)
     }
     
     /**

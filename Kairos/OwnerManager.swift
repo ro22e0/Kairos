@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import FSCalendar
 
 class OwnerManager {
     // MARK: Singleton
@@ -95,15 +96,17 @@ class OwnerManager {
     
     func getEvents(forDate date: NSDate) -> [Event] {
         let events = self.getEvents()
-        var rEvents = [Event]()
+        var fEvents = [Event]()
         
         for e in events {
-            if e.startDate?.compare(date) == .OrderedDescending && e.endDate?.compare(date) == .OrderedAscending {
-                rEvents.append(e)
+            let dateStart = FSCalendar().dateByIgnoringTimeComponentsOfDate(e.startDate!)
+            let dateEnd = FSCalendar().dateByIgnoringTimeComponentsOfDate(e.endDate!)
+
+            if (dateStart.compare(date) == .OrderedAscending || dateStart.compare(FSCalendar().dateByIgnoringTimeComponentsOfDate(date)) == .OrderedSame) && (dateEnd.compare(date) == .OrderedDescending || dateEnd.compare(FSCalendar().dateByIgnoringTimeComponentsOfDate(date)) == .OrderedSame) {
+                fEvents.append(e)
             }
         }
 
-        print(events)
-        return rEvents
+        return fEvents
     }
 }

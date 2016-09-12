@@ -8,6 +8,7 @@
 
 import UIKit
 import DatePickerCell
+import FSCalendar
 
 private enum eventCell {
     case Title
@@ -25,7 +26,9 @@ class EventTableViewController: UITableViewController {
     @IBOutlet weak var eventStartDateCell: EventStartDateTableViewCell!
     @IBOutlet weak var eventEndDateCell: EventEndDateTableViewCell!
     @IBOutlet weak var eventCalendarCell: EventCalendarTableViewCell!
+    @IBOutlet weak var eventInviteesCell: UITableViewCell!
     @IBOutlet weak var eventNotesCell: EventNotesTableViewCell!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var event: Event?
     
@@ -39,18 +42,15 @@ class EventTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         //        eventStartDateCell = EventStartDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
         //        eventEndDateCell = EventEndDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
-        
+
         print(eventStartDateCell)
         print(eventEndDateCell)
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         if let event = event {
+            self.saveButton.title = "Update"
             eventTitleCell.configure(event)
             eventLocationCell.configure(event)
             eventCalendarCell.configure(event)
@@ -58,10 +58,19 @@ class EventTableViewController: UITableViewController {
             eventEndDateCell.configure(event)
             eventNotesCell.configure(event)
         } else {
+            self.saveButton.title = "Save"
             event = Event.create() as? Event
             event?.startDate = NSDate()
             event?.endDate = NSDate()
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().postNotificationName(kEventWillSaveNotification, object: nil, userInfo:["event": event!])
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,35 +78,55 @@ class EventTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.tableView.superview!.endEditing(true)
+    }
+    
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 4
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 {
-            return 2
-        }
+//        if section == 1 {
+//            return 2
+//        }
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        
         if indexPath.section == 1 {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = .MediumStyle
-            dateFormatter.timeStyle = .MediumStyle
-            dateFormatter.locale = NSLocale.currentLocale()
             
+        }
+        switch indexPath.section {
+        case 0:
             if indexPath.row == 0 {
-                eventStartDateCell.rightLabel.text = dateFormatter.stringFromDate(event!.startDate!)
-                eventStartDateCell.leftLabel.text = "Start Date"
+                eventTitleCell.configure(event!)
+                return eventTitleCell
+            }
+            eventLocationCell.configure(event!)
+            return eventLocationCell
+        case 1:
+            if indexPath.row == 0 {
+                eventStartDateCell.configure(event!)
                 return eventStartDateCell
             }
-            eventEndDateCell.leftLabel.text = "End Date"
-            eventEndDateCell.rightLabel.text = dateFormatter.stringFromDate(event!.endDate!)
+            eventEndDateCell.configure(event!)
             return eventEndDateCell
+        case 2:
+            if indexPath.row == 0 {
+                eventCalendarCell.configure(event!)
+                return eventCalendarCell
+            }
+            return eventInviteesCell
+                   case 3:
+            eventNotesCell.configure(event!)
+            return eventNotesCell
+        default:
+            return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         }
-        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -115,6 +144,8 @@ class EventTableViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        NSNotificationCenter.defaultCenter().postNotificationName(kEventWillSaveNotification, object: nil, userInfo:["event": event!])
+        
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             if let eventStartDateCell = cell as? EventStartDateTableViewCell {
@@ -133,7 +164,7 @@ class EventTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
@@ -143,13 +174,97 @@ class EventTableViewController: UITableViewController {
             destVC.event = event
         }
     }
+    
+    private func createEvent() {
 
-    @IBAction func cancel(sender: UIBarButtonItem) {
-        let isPresentingInAddEventMode = presentingViewController is UINavigationController
+        let parameters: [String: AnyObject] = [
+            "calendar_id": self.event!.calendar!.id!,
+            "title": self.event!.title!,
+            "description": self.event!.notes!,
+            "location": self.event!.location!,
+            "date_start": FSCalendar().stringFromDate(self.event!.startDate!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_end": FSCalendar().stringFromDate(self.event!.endDate!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "users": [[:]]]
         
+        print(self.event!.startDate!)
+        print(self.event!.endDate!)
+        RouterWrapper.sharedInstance.request(.CreateEvent(parameters)) { (response) in
+            print(response.response)
+            print(response.request)
+            switch response.result {
+            case .Success:
+                switch response.response!.statusCode {
+                case 200...203:
+                    SpinnerManager.showWhistle("kEventCreated", success: true)
+                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                    break;
+                default:
+                    SpinnerManager.showWhistle("kFail", success: false)
+                    break;
+                }
+            case .Failure(let error):
+                SpinnerManager.showWhistle("kFail", success: false)
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    private func updateEvent() {
+        let parameters: [String: AnyObject] = [
+            "id": self.event!.id!,
+            "calendar_id": self.event!.calendar!.id!,
+            "title": self.event!.title!,
+            "description": self.event!.notes!,
+            "location": self.event!.location!,
+            "date_start": FSCalendar().stringFromDate(self.event!.startDate!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_end": FSCalendar().stringFromDate(self.event!.endDate!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "users": [[:]]]
+
+        print(self.event!.startDate!)
+        print(self.event!.endDate!)
+        RouterWrapper.sharedInstance.request(.CreateEvent(parameters)) { (response) in
+            print(response.response)
+            print(response.request)
+            switch response.result {
+            case .Success:
+                switch response.response!.statusCode {
+                case 200...203:
+                    SpinnerManager.showWhistle("kEventCreated", success: true)
+                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                    break;
+                default:
+                    SpinnerManager.showWhistle("kFail", success: false)
+                    break;
+                }
+            case .Failure(let error):
+                SpinnerManager.showWhistle("kFail", success: false)
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    private func checkEventDetails() -> Bool {
+        var success = event?.title != nil
+        success = success && event?.location != nil
+        success = success && event?.startDate != nil
+        success = success && event?.endDate != nil
+        if event?.startDate != nil && event?.endDate != nil {
+            success = success && (event!.startDate!.compare(event!.endDate!) == .OrderedAscending || event!.startDate!.compare(event!.endDate!) == .OrderedSame)
+        }
+        success = success && event?.notes != nil
+        
+        return success
+    }
+    
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        let isPresentingInAddEventMode = self.parentViewController is UINavigationController
+
         if isPresentingInAddEventMode {
-            dismissViewControllerAnimated(true, completion: nil)
             event?.delete()
+            Event.save()
+            dismissViewControllerAnimated(true, completion: nil)
         } else {
             let changedValues = event!.changedValuesForCurrentEvent()
             for (key, value) in changedValues {
@@ -158,13 +273,23 @@ class EventTableViewController: UITableViewController {
             navigationController!.popViewControllerAnimated(true)
         }
     }
-
+    
     @IBAction func saveEvent(sender: UIBarButtonItem) {
         NSNotificationCenter.defaultCenter().postNotificationName(kEventWillSaveNotification, object: nil, userInfo:["event": event!])
         
-        event?.save()
-        print(event)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        let isPresentingInAddEventMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddEventMode {
+//            if checkEventDetails() {
+//                createEvent()
+//            }
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+//            if checkEventDetails() {
+//                updateEvent()
+//            }
+            navigationController!.popViewControllerAnimated(true)
+        }
     }
     
     @IBAction func unwindToEvent(sender: UIStoryboardSegue) {

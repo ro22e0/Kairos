@@ -160,6 +160,7 @@ struct DataSync {
             calendar.name = c["name"].stringValue
             print(calendar.id)
             print(calendar.name)
+            calendar.save()
         }
     }
     
@@ -215,13 +216,17 @@ struct DataSync {
             let dateEnd = dateFormatter.dateFromString(e["date_end"].stringValue)
             let calendar = Calendar.find("id == %@", args: e["calendar_id"].stringValue) as? Calendar
             
-            let event = Event.findOrCreate(["id": e["id"].object]) as! Event
+            print(e["calendar_id"].stringValue)
+            print(e["id"].stringValue)
+
+            let event = Event.findOrCreate(["id": e["id"].stringValue]) as! Event
             
             event.title = e["title"].stringValue
             event.startDate = dateStart
             event.endDate = dateEnd
             event.location = e["location"].stringValue
             event.notes = e["description"].stringValue
+            print(Calendar.all().first)
             event.calendar = calendar!
         }
     }

@@ -17,8 +17,8 @@ class FriendsViewController: ButtonBarPagerTabStripViewController {
     
     // MARK: - Methods
     override func viewDidLoad() {
-        DataSync.fetchFriends()
-        DataSync.fetchUsers()
+//        DataSync.fetchFriends()
+//        DataSync.fetchUsers()
 
         setButtonBar()
         super.viewDidLoad()

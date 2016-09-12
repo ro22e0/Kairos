@@ -96,7 +96,7 @@ class SearchUsersEmbeddedTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UserTableViewCell
 
-        cell.nameLabel.text = users[indexPath.row].name ?? "No name"
+        cell.nameLabel.text = users[indexPath.row].name == "" ? "No name" : users[indexPath.row].name
         cell.tag = Int(users[indexPath.row].id!)
 
         return cell

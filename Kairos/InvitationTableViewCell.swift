@@ -56,8 +56,7 @@ class InvitationTableViewCell: UITableViewCell {
         
         let parameters = ["declined_friends": [["user_id": friend.id!]]]
         RouterWrapper.sharedInstance.request(.AcceptFriend(parameters)) { (response) in
-            
-            
+
             print(response.response)
             print(response.request)
             switch response.result {

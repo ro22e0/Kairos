@@ -29,6 +29,8 @@ class BaseEventTableViewCell: UITableViewCell {
     }
     
     @objc func updateEvent(notification: NSNotification) {
-        
+        let event = notification.userInfo!["event"] as! Event
+
+        event.save()
     }
 }
