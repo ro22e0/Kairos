@@ -66,7 +66,7 @@ class EventDetailsTableViewController: UITableViewController {
     }
     
     private func fillDates(cell: EventInfosTableViewCell) {
-        if event!.startDate!.isEqualToDate(event!.endDate!) == true {
+        if event!.dateStart!.isEqualToDate(event!.dateEnd!) == true {
             print("fidsvsdfgkdflkgdfm")
         } else {
             print("nooooooooooooo")
@@ -76,8 +76,8 @@ class EventDetailsTableViewController: UITableViewController {
         dateFormatter.timeStyle = .ShortStyle
 
         
-        cell.startDateLabel.text = dateFormatter.stringFromDate(event!.startDate!)
-        cell.endDateLabel.text = dateFormatter.stringFromDate(event!.endDate!)
+        cell.startDateLabel.text = dateFormatter.stringFromDate(event!.dateStart!)
+        cell.endDateLabel.text = dateFormatter.stringFromDate(event!.dateEnd!)
     }
     
     /*

@@ -33,21 +33,10 @@ class OwnerManager {
         print(OwnerManager.sharedInstance.owner!.uid)
         print("END---setCredentials")
     }
-    
-    func newOwner(uid: String) {
-        var owner: Owner? = Owner.find("uid == %@", args: uid) as? Owner
-        
-        if owner == nil {
-            Event.deleteAll()
-            Calendar.deleteAll()
-            User.deleteAll()
-            Owner.deleteAll()
-            Friend.deleteAll()
-            owner = Owner.create() as? Owner
-            self.owner = owner
-        } else {
-            self.owner = owner
-        }
+
+    func newOwner(owner: Owner) {
+//        DataSync.deleteAll()
+        self.owner = owner
     }
     
     func getFriends() -> [Friend] {
@@ -66,7 +55,7 @@ class OwnerManager {
     
     func getUsers() -> [User] {
         let users = User.all() as! [User]
-        
+
         return users
     }
     
@@ -99,14 +88,14 @@ class OwnerManager {
         var fEvents = [Event]()
         
         for e in events {
-            let dateStart = FSCalendar().dateByIgnoringTimeComponentsOfDate(e.startDate!)
-            let dateEnd = FSCalendar().dateByIgnoringTimeComponentsOfDate(e.endDate!)
-
+            let dateStart = FSCalendar().dateByIgnoringTimeComponentsOfDate(e.dateStart!)
+            let dateEnd = FSCalendar().dateByIgnoringTimeComponentsOfDate(e.dateEnd!)
+            
             if (dateStart.compare(date) == .OrderedAscending || dateStart.compare(FSCalendar().dateByIgnoringTimeComponentsOfDate(date)) == .OrderedSame) && (dateEnd.compare(date) == .OrderedDescending || dateEnd.compare(FSCalendar().dateByIgnoringTimeComponentsOfDate(date)) == .OrderedSame) {
                 fEvents.append(e)
             }
         }
-
+        
         return fEvents
     }
 }

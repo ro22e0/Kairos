@@ -20,14 +20,14 @@ class BaseEventTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    
+
     func configure(event: Event) {
-        NSNotificationCenter.defaultCenter().addObserver(self,
-                                                         selector: #selector(BaseEventTableViewCell.updateEvent(_:)),
-                                                         name:kEventWillSaveNotification,
-                                                         object: nil)
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: #selector(BaseEventTableViewCell.updateEvent(_:)),
+                         name:kEventWillSaveNotification,
+                         object: nil)
     }
-    
+
     @objc func updateEvent(notification: NSNotification) {
         let event = notification.userInfo!["event"] as! Event
 

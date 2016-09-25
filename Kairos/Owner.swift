@@ -14,9 +14,9 @@ class Owner: User {
 
     // MARK: - CoreDataProperties
  
-    @NSManaged var uid: String?
-    @NSManaged var client: String?
     @NSManaged var accessToken: String?
-    @NSManaged var calendars: NSSet?
+    @NSManaged var client: String?
+    @NSManaged var provider: String?
+    @NSManaged var uid: String?
     @NSManaged var friends: NSSet?
 }

@@ -9,8 +9,39 @@
 import Foundation
 import SwiftyJSON
 import SwiftRecord
+import Sync
+import DATAStack
+import DATAFilter
 
 struct DataSync {
+    
+    static func dataStack() -> DATAStack {
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        return delegate.dataStack
+    }
+    
+    static func sync(entity entityName: String, data: [[String: AnyObject]], completion: ((NSError?) -> Void), withDelete: Bool = false) {
+        let ops: DATAFilter.Operation = withDelete ? [.Insert, .Update, .Delete] : [.Insert, .Update]
+        Sync.changes(data, inEntityNamed: entityName, dataStack: self.dataStack(), operations: ops, completion: completion)
+    }
+    
+    private static func transformJson(json: JSON) -> [[String: AnyObject]] {
+        var data = [[String: AnyObject]]()
+        
+        for elem in json.array! {
+            if let dict = elem.dictionaryObject {
+                data.append(dict)
+            }
+        }
+        return data
+    }
+    
+    static func deleteAll() {
+        Event.deleteAll()
+        Calendar.deleteAll()
+        Friend.deleteAll()
+    }
     
     // MARK: - Friends
     
@@ -36,7 +67,7 @@ struct DataSync {
             friend.name = f["name"].stringValue
             friend.nickname = f["nickname"].stringValue
             friend.email = f["email"].stringValue
-            friend.imageUrl = f["image"].stringValue
+            friend.image = f["image"].stringValue
             friend.owner = OwnerManager.sharedInstance.owner
         }
         print(Friend.count())
@@ -54,22 +85,31 @@ struct DataSync {
                     
                     print(json)
                     
-                    let accepted = json["friends"].arrayValue
-                    let blocked = json["blocked_friends"].arrayValue
-                    let requested = json["requested_friends"].arrayValue
-                    let pending = json["pending_friends"].arrayValue
-                    
-                    let friends = accepted + blocked + requested + pending
-                    self.deleteFriends(friends)
-                    self.syncFriends(accepted, status: .Accepted)
-                    self.syncFriends(blocked, status: .Blocked)
-                    self.syncFriends(requested, status: .Requested)
-                    self.syncFriends(pending, status: .Pending)
+                    //                    var accepted = json["friends"]
+                    //                    print(accepted)
+                    //                    var requested = json["requested_friends"]
+                    //                    print(requested)
+                    //                    var pending = json["pending_friends"].dictionaryObject
+                    //                    print(pending)
+                    //                    accepted!["status"] = FriendStatus.Accepted.hashValue
+                    //                    requested!["status"] = FriendStatus.Requested.hashValue
+                    //                    pending!["status"] = FriendStatus.Pending.hashValue
+                    //
+                    //                    self.sync(entity: "Friend", data: [accepted!], completion: { error in
+                    //                        print(NSDate(), "done")
+                    //                    })
+                    //                    self.sync(entity: "Friend", data: [requested!], completion: { error in
+                    //                        print(NSDate(), "done")
+                    //                    })
+                    //                    self.sync(entity: "Friend", data: pending!, completion: { error in
+                    //                        print(NSDate(), "done")
+                    //                    })
                 }
             case .Failure(let error):
                 print(error)
             }
             print(NSDate(), "done")
+            print(Friend.all().count)
         }
     }
     
@@ -98,13 +138,11 @@ struct DataSync {
             print("Owner id : ", Owner.find("id == %@", args: u["id"].stringValue))
             
             if Owner.find("id == %@", args: u["id"].stringValue) == nil && Friend.find("id == %@", args: u["id"].stringValue) == nil {
-                
                 let user = User.findOrCreate(["id": u["id"].object]) as! User
-                
                 user.name = u["name"].stringValue
                 user.nickname = u["nickname"].stringValue
                 user.email = u["email"].stringValue
-                user.imageUrl = u["image"].stringValue
+                user.image = u["image"].stringValue
             }
         }
     }
@@ -126,13 +164,15 @@ struct DataSync {
                 if let value = response.result.value {
                     let json = JSON(value)
                     
-                    self.deleteUsers(json.arrayValue)
-                    self.syncUsers(json.arrayValue)
+                    let data = self.transformJson(json)
+                    
+                    self.sync(entity: "User", data: data, completion: { error in
+                        print(NSDate(), "done")
+                    })
                 }
             case .Failure(let error):
                 print(error)
             }
-            print(NSDate(), "done")
         }
     }
     
@@ -164,6 +204,20 @@ struct DataSync {
         }
     }
     
+    private static func deleteObject(data: [JSON], query: (AnyObject, AnyObject...) -> [NSManagedObject]) {
+        let ids = NSMutableArray()
+        
+        for elem in data {
+            ids.addObject(elem["id"].object)
+        }
+        
+        let predicate = NSPredicate(format: "NOT (id IN %@)", ids)
+        let deletedObjects = query(predicate)
+        for o in deletedObjects {
+            o.delete()
+        }
+    }
+    
     static func fetchCalendars() {
         Router.needToken = true
         
@@ -177,19 +231,32 @@ struct DataSync {
             case .Success:
                 OwnerManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
-                    print("fetch calendar")
                     let json = JSON(value)
                     
-                    print(json.arrayValue)
+                    print(json)
                     
-                    self.deleteCalendars(json.arrayValue)
-                    self.syncCalendars(json.arrayValue)
+                    deleteObject(json.array!, query: Calendar.query)
+                    
+                    let completion: ((NSError?) -> Void) = { error in
+                        print(NSDate(), "done")
+                        
+                        for c in json.array! {
+                            var data = [[String : AnyObject]]()
+                            data += c["refused_users"].object as! [[String : AnyObject]]
+                            data += c["participating_users"].object as! [[String : AnyObject]]
+                            data += c["invited_users"].object as! [[String : AnyObject]]
+                            data += c["owners"].object as! [[String : AnyObject]]
+                            
+                            self.sync(entity: "User", data: data, completion: { error in
+                                print(NSDate(), "done")
+                            })
+                        }
+                    }
+                    self.sync(entity: "Calendar", data: json.object as! [[String : AnyObject]], completion: completion, withDelete: true)
                 }
             case .Failure(let error):
                 print(error)
             }
-            print(NSDate(), "done")
-            self.fetchEvents()
         }
     }
     
@@ -218,12 +285,12 @@ struct DataSync {
             
             print(e["calendar_id"].stringValue)
             print(e["id"].stringValue)
-
+            
             let event = Event.findOrCreate(["id": e["id"].stringValue]) as! Event
             
             event.title = e["title"].stringValue
-            event.startDate = dateStart
-            event.endDate = dateEnd
+            event.dateStart = dateStart
+            event.dateEnd = dateEnd
             event.location = e["location"].stringValue
             event.notes = e["description"].stringValue
             print(Calendar.all().first)
@@ -242,15 +309,16 @@ struct DataSync {
             print(response.response) // URL response
             switch response.result {
             case .Success:
+                
                 OwnerManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
-                    print("fetch events")
                     let json = JSON(value)
                     
                     print(json)
                     
-                    self.deleteEvents(json.arrayValue)
-                    self.syncEvents(json.arrayValue)
+                    self.sync(entity: "Event", data: json.object as! [[String : AnyObject]], completion: { error in
+                        print(NSDate(), "done")
+                    })
                 }
             case .Failure(let error):
                 print(error)

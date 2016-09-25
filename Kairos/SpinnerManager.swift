@@ -28,7 +28,7 @@ struct SpinnerManager {
         SwiftSpinner.show(title)
     }
     
-    static func show(title: String, subtitle: String, completion: ()->()) {
+    static func showSpinner(title: String, subtitle: String, completion: ()->()) {
         SwiftSpinner.setTitleFont(font)
         SwiftSpinner.show(title, animated: false).addTapHandler({ completion() }, subtitle: subtitle)
     }
@@ -46,6 +46,6 @@ struct SpinnerManager {
             murmur.backgroundColor = .redColor()
         }
 
-        Whistle(murmur, action: .Show(1.5))
+        show(whistle: murmur, action: .Show(1.5))
     }
 }

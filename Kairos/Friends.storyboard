@@ -1,101 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="npi-ly-do9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3SN-Wk-4fd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Find Friends-->
-        <scene sceneID="9dB-7Z-deb">
+        <!--Navigation Controller-->
+        <scene sceneID="gAi-4L-biS">
             <objects>
-                <viewController id="g8w-Dg-AKJ" customClass="FriendsViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1Lc-Tc-qlD"/>
-                        <viewControllerLayoutGuide type="bottom" id="3xP-WH-o9X"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="LCZ-SH-QQm">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVx-FO-IX4">
-                                <rect key="frame" x="0.0" y="40" width="600" height="447"/>
-                            </scrollView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KXy-UX-lec" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="hj3-61-0N9"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GYF-Fg-apz">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="tVx-FO-IX4" secondAttribute="trailing" id="IuG-KN-ygy"/>
-                            <constraint firstItem="KXy-UX-lec" firstAttribute="leading" secondItem="LCZ-SH-QQm" secondAttribute="leading" id="V1q-8w-3zx"/>
-                            <constraint firstItem="tVx-FO-IX4" firstAttribute="top" secondItem="KXy-UX-lec" secondAttribute="bottom" id="Z35-wK-zPF"/>
-                            <constraint firstItem="3xP-WH-o9X" firstAttribute="top" secondItem="tVx-FO-IX4" secondAttribute="bottom" id="fQ4-ys-LTd"/>
-                            <constraint firstItem="KXy-UX-lec" firstAttribute="top" secondItem="1Lc-Tc-qlD" secondAttribute="bottom" id="iOq-NN-3tE"/>
-                            <constraint firstItem="tVx-FO-IX4" firstAttribute="leading" secondItem="LCZ-SH-QQm" secondAttribute="leading" id="sP8-nL-p2d"/>
-                            <constraint firstAttribute="trailing" secondItem="KXy-UX-lec" secondAttribute="trailing" id="sal-2Y-2Oh"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Find Friends" id="A8x-tB-djF">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="z9N-bS-Iy6">
-                            <connections>
-                                <action selector="menu" destination="g8w-Dg-AKJ" id="iYw-Bd-jFA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="buttonBarView" destination="KXy-UX-lec" id="yOD-41-7eM"/>
-                        <outlet property="containerView" destination="tVx-FO-IX4" id="Gcj-i0-ahH"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x3s-fN-Z8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2632.5" y="132.04225352112675"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="aYI-wS-zQT">
-            <objects>
-                <tabBarController id="npi-ly-do9" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="fFa-gc-Ngp"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="h14-ko-pk4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="NQb-Lf-Iyo" kind="relationship" relationship="viewControllers" id="YY0-vR-gIe"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n65-2S-TTq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="997.5" y="132.04225352112675"/>
-        </scene>
-        <!--Friends-->
-        <scene sceneID="fNK-9m-ueD">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NQb-Lf-Iyo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friends" id="G1C-SQ-1OA"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="E7d-vP-lcI">
+                <navigationController storyboardIdentifier="FriendsRequestsTableViewController" id="iDa-TV-wZV" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WP7-GN-De1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="g8w-Dg-AKJ" kind="relationship" relationship="rootViewController" id="6aO-Iq-1kE"/>
+                        <segue destination="RiF-hG-gkT" kind="relationship" relationship="rootViewController" id="Zsd-hu-x4s"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8JF-pj-8eA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KAf-JA-d9o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1813.125" y="132.04225352112675"/>
+            <point key="canvasLocation" x="1835" y="-290"/>
+        </scene>
+        <!--Friends Requests Table View Controller-->
+        <scene sceneID="gZr-r6-zyg">
+            <objects>
+                <tableViewController id="RiF-hG-gkT" customClass="FriendsRequestsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Y6S-HI-H7f">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="RiF-hG-gkT" id="0nl-KQ-7Jv"/>
+                            <outlet property="delegate" destination="RiF-hG-gkT" id="KQG-CB-ipQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="9lS-YE-StW">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="gGz-qQ-Zzb">
+                            <connections>
+                                <action selector="done:" destination="RiF-hG-gkT" id="Dp1-nM-7LN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r3g-7h-Hlp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2541" y="-290"/>
+        </scene>
+        <!--Friends Table View Controller-->
+        <scene sceneID="gLf-jc-lfo">
+            <objects>
+                <tableViewController id="3SN-Wk-4fd" customClass="FriendsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="o9d-T2-swz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="3SN-Wk-4fd" id="lEP-CF-e6c"/>
+                            <outlet property="delegate" destination="3SN-Wk-4fd" id="qa9-sI-M5I"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="isL-BK-ddl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2541" y="409"/>
         </scene>
     </scenes>
 </document>

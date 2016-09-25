@@ -96,7 +96,7 @@ class SignUpViewController: UIViewController {
         let permissions = ["public_profile", "email"]
         loginManager.logInWithReadPermissions(permissions, fromViewController: self) { (result, error) -> Void in
             if error != nil {
-                SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
+                SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 print(error.localizedDescription)
@@ -131,7 +131,7 @@ class SignUpViewController: UIViewController {
                     }
                 }
             case .Failure(let error):
-                SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
+                SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 print(error)
@@ -163,7 +163,7 @@ class SignUpViewController: UIViewController {
                     }
                 }
             } else {
-                SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
+                SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 print(error)
@@ -174,14 +174,14 @@ class SignUpViewController: UIViewController {
     
     private func SignUpRequest() {
         let parameters = ["email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
-
+        
         Router.needToken = false
         RouterWrapper.sharedInstance.request(.CreateUser(parameters)) { (response) in
             print(response.request)  // original URL request
             print(response.response) // URL response
             print(response.data)     // server data
             print(response.result)   // result of response serialization
-
+            
             switch response.result {
             case .Success:
                 if let value = response.result.value {
@@ -190,37 +190,33 @@ class SignUpViewController: UIViewController {
                     switch response.response!.statusCode {
                     case 200:
                         SpinnerManager.delay(seconds: 1.0, completion: {
-                            SpinnerManager.show("Completed", subtitle: "Tap to sign in", completion: { () -> () in
-
-                                let id = json["data"]["id"].intValue
-                                let email = json["data"]["email"].stringValue
-                                OwnerManager.sharedInstance.newOwner(json["data"]["uid"].stringValue)                                
-                                OwnerManager.sharedInstance.setCredentials(response.response!)
-                                OwnerManager.sharedInstance.owner?.id = id
-                                OwnerManager.sharedInstance.owner?.email = email
-                                
-                                let defautls = NSUserDefaults.standardUserDefaults()
-                                defautls.setValue(true, forKey: userLoginKeyConstant)
-                                
-                                SwiftSpinner.hide()
-                                self.setRootVC(BoardStoryboardID)
+                            SpinnerManager.showSpinner("Completed", subtitle: "Tap to sign in", completion: { () -> () in
+                                DataSync.sync(entity: "Owner", data: [json["data"].dictionaryObject!], completion: { error in
+                                    let owner = Owner.all().first as! Owner
+                                    OwnerManager.sharedInstance.newOwner(owner)
+                                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                                    let defautls = NSUserDefaults.standardUserDefaults()
+                                    defautls.setValue(true, forKey: userLoginKeyConstant)
+                                    SwiftSpinner.hide()
+                                    self.setRootVC(BoardStoryboardID)
+                                })
                             })
                         })
                     default:
-                        SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
+                        SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                             SwiftSpinner.hide()
                         })
                     }
                 }
             case .Failure(let error):
-                SpinnerManager.show("The operation can't be completed", subtitle: "Tap to hide", completion: { () -> () in
+                SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 print(error)
             }
         }
     }
-
+    
     func networkManager(manager: NetworkReachabilityManager?, request: Request?) {
         manager?.listener = { (status) in
             print("Network Status Changed: \(status)")
@@ -230,7 +226,7 @@ class SignUpViewController: UIViewController {
             case .Reachable(.EthernetOrWiFi):
                 request?.resume()
             case .NotReachable:
-                SpinnerManager.show("The Internet connection appears to be offline", subtitle: "Tap to hide", completion: { () -> () in
+                SpinnerManager.showSpinner("The Internet connection appears to be offline", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 request?.cancel()

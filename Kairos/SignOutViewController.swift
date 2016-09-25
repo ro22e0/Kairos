@@ -9,14 +9,14 @@
 import UIKit
 
 class SignOutViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-     self.logout()
+        self.logout()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -24,25 +24,14 @@ class SignOutViewController: UIViewController {
     
     private func logout() {
         Router.needToken = true
-        
         RouterWrapper.sharedInstance.request(.Logout) { (response) in
-            
             switch response.result {
             case .Success:
                 switch response.response!.statusCode {
                 case 200...203:
                     let defautls = NSUserDefaults.standardUserDefaults()
                     defautls.setValue(false, forKey: userLoginKeyConstant)
-                    
                     self.setRootVC(LoginStoryboardID)
-                    //                    let storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
-                    //
-                    //                    if let viewController = storyboard.instantiateInitialViewController() {
-                    //                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    //
-                    //                        appDelegate.window?.rootViewController = viewController
-                    //                    }
-                    
                     break;
                 default:
                     SpinnerManager.showWhistle("kFail", success: false)
@@ -55,15 +44,15 @@ class SignOutViewController: UIViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

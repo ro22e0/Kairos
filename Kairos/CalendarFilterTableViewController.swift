@@ -9,9 +9,8 @@
 import UIKit
 
 class CalendarFilterTableViewController: UITableViewController {
-
-    @IBOutlet weak var doneButton: UIBarButtonItem!
-    @IBOutlet weak var addButton: UIBarButtonItem!
+    
+    var calendars = [Calendar]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +20,7 @@ class CalendarFilterTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.addButton.width = 0.01
+        self.calendars = Calendar.all() as! [Calendar]
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,18 +35,16 @@ class CalendarFilterTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.calendars.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("calendarCell", forIndexPath: indexPath)
 
-        // Configure the cell...
+        cell.textLabel?.text = calendars[indexPath.row].name
 
         return cell
     }
-    */
 
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -90,18 +87,21 @@ class CalendarFilterTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "editCalendarSegue" {
+            let destVC = segue.destinationViewController as! CalendarTableViewController
+            destVC.calendar = nil
+        }
     }
-    */
 
     // MARK: - Actions
-    @IBAction func editMode(sender: UIBarButtonItem) {
-        self.tableView.setEditing(true, animated: true)
+    @IBAction func done(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }

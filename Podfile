@@ -10,16 +10,16 @@ target 'Kairos' do
   pod 'FBSDKLoginKit', '~> 4.10'
   pod 'SwiftSpinner', '~> 0.8'
   pod 'UITextField+Shake', '~> 1.1'
-  pod 'IQKeyboardManagerSwift'
+  pod 'IQKeyboardManagerSwift', '~> 3.x'
   pod 'JLToast', '~> 1.3'
-  pod 'SideMenu', '~> 1.0'
+  pod 'SideMenu', '~> 1.x'
   pod 'XLPagerTabStrip', '~> 5.0'
   pod 'Crashlytics'
   pod 'FSCalendar', '~> 2.0'
   pod 'SwiftRecord'
   pod 'DatePickerCell'
   pod 'Whisper'
-  pod 'DropDown', '~> 1.0'
+  pod 'Sync', '~> 1.x'
 end
 
 target 'KairosTests' do

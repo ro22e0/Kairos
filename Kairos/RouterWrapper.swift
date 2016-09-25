@@ -28,7 +28,7 @@ public enum Router: URLRequestConvertible {
      
      - returns: A `String` baseURL.
      */
-    static let baseURL = "http://10.38.166.4:3000/api/v1" // "http://kairos-app.rhyhimmn2m.eu-west-1.elasticbeanstalk.com/api/v1" "http://demo1935961.mockable.io" "http://kairos-app.bitnamiapp.com"
+    static let baseURL = "https://kairos-api-ro22e0.c9users.io/api/v1"
     
     /**
      Determine if the request need credentials in headers.

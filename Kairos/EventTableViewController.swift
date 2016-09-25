@@ -60,8 +60,8 @@ class EventTableViewController: UITableViewController {
         } else {
             self.saveButton.title = "Save"
             event = Event.create() as? Event
-            event?.startDate = NSDate()
-            event?.endDate = NSDate()
+            event?.dateStart = NSDate()
+            event?.dateEnd = NSDate()
         }
     }
     
@@ -95,11 +95,7 @@ class EventTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        
-        if indexPath.section == 1 {
-            
-        }
+
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
@@ -182,12 +178,12 @@ class EventTableViewController: UITableViewController {
             "title": self.event!.title!,
             "description": self.event!.notes!,
             "location": self.event!.location!,
-            "date_start": FSCalendar().stringFromDate(self.event!.startDate!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
-            "date_end": FSCalendar().stringFromDate(self.event!.endDate!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_start": FSCalendar().stringFromDate(self.event!.dateStart!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_end": FSCalendar().stringFromDate(self.event!.dateEnd!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "users": [[:]]]
         
-        print(self.event!.startDate!)
-        print(self.event!.endDate!)
+        print(self.event!.dateStart!)
+        print(self.event!.dateEnd!)
         RouterWrapper.sharedInstance.request(.CreateEvent(parameters)) { (response) in
             print(response.response)
             print(response.request)
@@ -217,12 +213,12 @@ class EventTableViewController: UITableViewController {
             "title": self.event!.title!,
             "description": self.event!.notes!,
             "location": self.event!.location!,
-            "date_start": FSCalendar().stringFromDate(self.event!.startDate!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
-            "date_end": FSCalendar().stringFromDate(self.event!.endDate!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_start": FSCalendar().stringFromDate(self.event!.dateStart!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_end": FSCalendar().stringFromDate(self.event!.dateEnd!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "users": [[:]]]
 
-        print(self.event!.startDate!)
-        print(self.event!.endDate!)
+        print(self.event!.dateStart!)
+        print(self.event!.dateEnd!)
         RouterWrapper.sharedInstance.request(.CreateEvent(parameters)) { (response) in
             print(response.response)
             print(response.request)
@@ -248,10 +244,10 @@ class EventTableViewController: UITableViewController {
     private func checkEventDetails() -> Bool {
         var success = event?.title != nil
         success = success && event?.location != nil
-        success = success && event?.startDate != nil
-        success = success && event?.endDate != nil
-        if event?.startDate != nil && event?.endDate != nil {
-            success = success && (event!.startDate!.compare(event!.endDate!) == .OrderedAscending || event!.startDate!.compare(event!.endDate!) == .OrderedSame)
+        success = success && event?.dateStart != nil
+        success = success && event?.dateEnd != nil
+        if event?.dateStart != nil && event?.dateEnd != nil {
+            success = success && (event!.dateStart!.compare(event!.dateEnd!) == .OrderedAscending || event!.dateStart!.compare(event!.dateEnd!) == .OrderedSame)
         }
         success = success && event?.notes != nil
         
@@ -263,7 +259,6 @@ class EventTableViewController: UITableViewController {
 
         if isPresentingInAddEventMode {
             event?.delete()
-            Event.save()
             dismissViewControllerAnimated(true, completion: nil)
         } else {
             let changedValues = event!.changedValuesForCurrentEvent()
@@ -273,7 +268,7 @@ class EventTableViewController: UITableViewController {
             navigationController!.popViewControllerAnimated(true)
         }
     }
-    
+
     @IBAction func saveEvent(sender: UIBarButtonItem) {
         NSNotificationCenter.defaultCenter().postNotificationName(kEventWillSaveNotification, object: nil, userInfo:["event": event!])
         

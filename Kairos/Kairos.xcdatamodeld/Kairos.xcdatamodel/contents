@@ -1,46 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Automatic">
     <entity name="Calendar" representedClassName=".Calendar" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" syncable="YES">
+            <userInfo>
+                <entry key="hyper.isPrimaryKey" value="true"/>
+            </userInfo>
+        </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="calendarUsers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserCalendar" inverseName="calendar" inverseEntity="UserCalendar" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="calendar" inverseEntity="Event" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IUser" syncable="YES"/>
     </entity>
     <entity name="Event" representedClassName=".Event" syncable="YES">
-        <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateEnd" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateStart" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" syncable="YES">
+            <userInfo>
+                <entry key="hyper.isPrimaryKey" value="true"/>
+            </userInfo>
+        </attribute>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="hyper.remoteKey" value="description"/>
+            </userInfo>
+        </attribute>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="calendar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Calendar" inverseName="events" inverseEntity="Calendar" syncable="YES"/>
+        <relationship name="eventUsers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEvent" inverseName="event" inverseEntity="UserEvent" syncable="YES"/>
     </entity>
-    <entity name="Friend" representedClassName=".Friend" parentEntity="IUser" syncable="YES">
+    <entity name="Friend" representedClassName=".Friend" parentEntity="User" syncable="YES">
         <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="friends" inverseEntity="Owner" syncable="YES"/>
     </entity>
-    <entity name="IUser" representedClassName=".User" isAbstract="YES" syncable="YES">
-        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="imageUrl" optional="YES" attributeType="String" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="Owner" representedClassName=".Owner" parentEntity="IUser" syncable="YES">
-        <attribute name="accessToken" attributeType="String" syncable="YES"/>
-        <attribute name="client" attributeType="String" syncable="YES"/>
-        <attribute name="uid" attributeType="String" syncable="YES"/>
-        <relationship name="calendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" syncable="YES"/>
+    <entity name="Owner" representedClassName=".Owner" parentEntity="User" syncable="YES">
+        <attribute name="accessToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="client" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="provider" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Friend" inverseName="owner" inverseEntity="Friend" syncable="YES"/>
     </entity>
-    <entity name="User" representedClassName=".User" parentEntity="IUser" syncable="YES"/>
+    <entity name="User" representedClassName=".User" syncable="YES">
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" syncable="YES">
+            <userInfo>
+                <entry key="hyper.isPrimaryKey" value="true"/>
+            </userInfo>
+        </attribute>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="job" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="promotion" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="school" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="userCalendars" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserCalendar" inverseName="user" inverseEntity="UserCalendar" syncable="YES"/>
+        <relationship name="userEvents" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEvent" inverseName="user" inverseEntity="UserEvent" syncable="YES"/>
+    </entity>
+    <entity name="UserCalendar" representedClassName=".UserCalendar" syncable="YES">
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="calendar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Calendar" inverseName="calendarUsers" inverseEntity="Calendar" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userCalendars" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="UserEvent" representedClassName=".UserEvent" syncable="YES">
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="eventUsers" inverseEntity="Event" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userEvents" inverseEntity="User" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Calendar" positionX="-2772" positionY="-1458" width="128" height="105"/>
-        <element name="Event" positionX="-2565" positionY="-1489" width="128" height="148"/>
-        <element name="Friend" positionX="-2628" positionY="-1602" width="126" height="73"/>
-        <element name="IUser" positionX="-2630" positionY="-1818" width="128" height="133"/>
-        <element name="Owner" positionX="-2835" positionY="-1638" width="128" height="118"/>
-        <element name="User" positionX="-2450" positionY="-1600" width="128" height="43"/>
+        <element name="Calendar" positionX="-14024" positionY="-2794" width="128" height="103"/>
+        <element name="Event" positionX="-14087" positionY="-2574" width="128" height="193"/>
+        <element name="Friend" positionX="-14886" positionY="-2772" width="126" height="73"/>
+        <element name="User" positionX="-14555" positionY="-2863" width="128" height="253"/>
+        <element name="Owner" positionX="-14555" positionY="-2548" width="128" height="118"/>
+        <element name="UserCalendar" positionX="-14312" positionY="-2790" width="128" height="88"/>
+        <element name="UserEvent" positionX="-14312" positionY="-2538" width="128" height="88"/>
     </elements>
 </model>

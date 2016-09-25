@@ -22,6 +22,7 @@ let SettingsStoryboardID = "Settings"
 let kUSER_GOOGLE_AUTH_NOTIFICATION = "kUserGoogleAuth"
 
 let kEventWillSaveNotification = "EventWillSave"
+let kCalendarWillSaveNotification = "CalendarWillSave"
 
 let userLoginKeyConstant = "userLoginKey"
 
@@ -45,6 +46,12 @@ extension UIViewController {
     @IBAction func showStoryboard(segue: UIStoryboardSegue) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.window?.rootViewController = segue.destinationViewController
+    }
+    
+    func viewController(fromStoryboard storyboard: String, viewController name: String) -> UIViewController {
+        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
+        
+        return storyboard.instantiateViewControllerWithIdentifier(name)
     }
     
     func setRootVC(storyboard: String) {

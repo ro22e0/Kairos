@@ -19,7 +19,6 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var calendarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventTableView: UITableView!
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var calendarViewButton: UIButton!
     
     // MARK: - Class Properties
     var events = [Event]()
@@ -27,12 +26,12 @@ class CalendarViewController: UIViewController {
     // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Fetch update
 //        DataSync.fetchCalendars()
         
         // Do any additional setup after loading the view.
-        calendarView.scrollDirection = .Vertical
+        calendarView.scrollDirection = .Horizontal
         calendarView.placeholderType = .FillHeadTail
         calendarView.clipsToBounds = true
         calendarView.appearance.caseOptions = [.HeaderUsesUpperCase, .WeekdayUsesSingleUpperCase]
@@ -40,7 +39,7 @@ class CalendarViewController: UIViewController {
         //        calendarView.locale = NSLocale.currentLocale()
         //        calendarView.calendar.timeZone = NSTimeZone.systemTimeZone()
         
-        calendarView.selectDate(calendarView.today)
+        calendarView.selectDate(calendarView.today!)
         
         let _ = ["title":"Apple Special Event", "location":"apple.com/apple-events/april-2016/", "notes":"New products !", "startDate":NSDate(), "endDate": NSDate()]
     }
@@ -53,32 +52,18 @@ class CalendarViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-
+    
     // MARK: - Actions
 
-    @IBAction func changeCalendarView(sender: UIButton) {
-        if self.calendarView.scope == .Week {
-            self.modeMonth()
-        } else {
-            self.modeWeek()
-        }
-    }
-
-    @IBAction func pickDate(sender: AnyObject) {
-        datePicker.setDate(calendarView.selectedDate, animated: false)
-    }
-  
     @IBAction func setTodaySelected(sender: AnyObject) {
-        calendarView.selectDate(calendarView.today)
+        calendarView.selectDate(calendarView.today!)
     }
     
     func modeWeek() {
-        self.calendarViewButton.setTitle("Weekly view", forState: .Normal)
         calendarView.setScope(.Week, animated: true)
     }
     
     func modeMonth() {
-        self.calendarViewButton.setTitle("Monthly view", forState: .Normal)
         calendarView.setScope(.Month, animated: true)
     }
     
@@ -119,8 +104,8 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "HH:mm"
         
-        cell.startTimeLabel.text = formatter.stringFromDate(events[indexPath.row].startDate!)
-        cell.endTimeLabel.text = formatter.stringFromDate(events[indexPath.row].endDate!)
+        cell.startTimeLabel.text = formatter.stringFromDate(events[indexPath.row].dateStart!)
+        cell.endTimeLabel.text = formatter.stringFromDate(events[indexPath.row].dateEnd!)
         cell.colorView.backgroundColor = .blueColor()
         cell.titleLabel.text = events[indexPath.row].title
         cell.locationLabel.text = events[indexPath.row].location
@@ -129,7 +114,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     // MARK: UITableViewDelegate
-    
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ShowEventDetails", sender: indexPath)
     }
@@ -149,11 +134,11 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     
     func calendar(calendar: FSCalendar, numberOfEventsForDate date: NSDate) -> Int {
         return 0
-            //OwnerManager.sharedInstance.getEvents(forDate: date).count
+        //OwnerManager.sharedInstance.getEvents(forDate: date).count
     }
     
     // MARK: FSCalendarDelegate
-    
+
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
         if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.beginingOfMonthOfDate(calendar.currentPage), toCalendarUnit: .Month) {
             calendarView.selectDate(calendar.beginingOfMonthOfDate(calendar.currentPage))
@@ -170,7 +155,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
         self.calendarHeightConstraint.constant = bounds.height
         self.view.layoutIfNeeded()
     }
-    
+
     // MARK: FSCalendarDelegateAppearance
     func calendar(calendar: FSCalendar, appearance: FSCalendarAppearance, eventColorsForDate date: NSDate) -> [AnyObject]? {
         return []

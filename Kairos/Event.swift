@@ -14,11 +14,14 @@ class Event: NSManagedObject {
 
     // MARK: - CoreDataProperties
     
-    @NSManaged var endDate: NSDate?
+    @NSManaged var createdAt: NSDate?
+    @NSManaged var dateEnd: NSDate?
+    @NSManaged var dateStart: NSDate?
+    @NSManaged var id: NSNumber?
     @NSManaged var location: String?
     @NSManaged var notes: String?
-    @NSManaged var startDate: NSDate?
     @NSManaged var title: String?
-    @NSManaged var id: NSNumber?
+    @NSManaged var updatedAt: NSDate?
     @NSManaged var calendar: Calendar?
+    @NSManaged var eventUsers: UserEvent?
 }

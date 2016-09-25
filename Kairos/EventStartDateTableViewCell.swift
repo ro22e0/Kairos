@@ -26,17 +26,17 @@ class EventStartDateTableViewCell: BaseEventTableViewCell {
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .ShortStyle
         dateFormatter.locale = NSLocale.currentLocale()
-        self.date = event.startDate!
+        self.date = event.dateStart!
         self.leftLabel.text = "Start Date"
-//        self.datePicker.date = event.startDate!
-//        self.datePicker.setDate(event.startDate!, animated: true)
-        // rightLabel.text = dateFormatter.stringFromDate(event.startDate!)
+//        self.datePicker.date = event.dateStart!
+//        self.datePicker.setDate(event.dateStart!, animated: true)
+        // rightLabel.text = dateFormatter.stringFromDate(event.dateStart!)
     }
     
     override func updateEvent(notification: NSNotification) {        
         let event = notification.userInfo!["event"] as! Event
         
-        event.startDate = self.date
+        event.dateStart = self.date
         super.updateEvent(notification)
     }
     

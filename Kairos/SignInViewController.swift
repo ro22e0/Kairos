@@ -16,7 +16,7 @@ class SignInViewController: UIViewController {
     // MARK: - UI Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    
     // MARK: - Class Properties
     var manager: Manager?
     
@@ -59,24 +59,22 @@ class SignInViewController: UIViewController {
                     print("JSON: \(json)")
                     switch response.response!.statusCode {
                     case 200:
-                        
-                        let id = json["data"]["id"].intValue
-                        let email = json["data"]["email"].stringValue
-                        OwnerManager.sharedInstance.newOwner(json["data"]["uid"].stringValue)
-                        OwnerManager.sharedInstance.setCredentials(response.response!)
-                        OwnerManager.sharedInstance.owner?.id = id
-                        OwnerManager.sharedInstance.owner?.email = email
-                        let defautls = NSUserDefaults.standardUserDefaults()
-                        defautls.setValue(true, forKey: userLoginKeyConstant)
-                        self.setRootVC(BoardStoryboardID)
+                        DataSync.sync(entity: "Owner", data: [json["data"].dictionaryObject!], completion: { error in
+                            let owner = Owner.all().first as! Owner
+                            OwnerManager.sharedInstance.newOwner(owner)
+                            OwnerManager.sharedInstance.setCredentials(response.response!)
+                            let defautls = NSUserDefaults.standardUserDefaults()
+                            defautls.setValue(true, forKey: userLoginKeyConstant)
+                            self.setRootVC(BoardStoryboardID)
+                        })
                     default:
-                        SpinnerManager.show("Failed to connect", subtitle: "Tap to hide", completion: { () -> () in
+                        SpinnerManager.showSpinner("Failed to connect", subtitle: "Tap to dismiss", completion: { () -> () in
                             SwiftSpinner.hide()
                         })
                     }
                 }
             case .Failure(let error):
-                SpinnerManager.show("Failed to connect", subtitle: "Tap to hide", completion: { () -> () in
+                SpinnerManager.showSpinner("Failed to connect", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 print(error)
