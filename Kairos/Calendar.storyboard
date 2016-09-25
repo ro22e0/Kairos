@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cKT-8n-BsX">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="cKT-8n-BsX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -437,204 +437,6 @@
         <scene sceneID="tZw-vE-83r">
             <objects>
                 <tableViewController id="RhJ-j0-Fyx" customClass="EventTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ANL-wM-xsD">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <sections>
-                            <tableViewSection id="7Uy-cb-eTf">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="hTG-tp-C1Z" customClass="EventTitleTableViewCell" customModule="Kairos" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hTG-tp-C1Z" id="uJU-tp-ykS">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i7K-Wu-aEN">
-                                                    <rect key="frame" x="12" y="0.0" width="588" height="43.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="i7K-Wu-aEN" secondAttribute="trailing" id="4Cq-J9-vWq"/>
-                                                <constraint firstItem="i7K-Wu-aEN" firstAttribute="leading" secondItem="uJU-tp-ykS" secondAttribute="leading" constant="12" id="sJT-yT-3nN"/>
-                                                <constraint firstItem="i7K-Wu-aEN" firstAttribute="height" secondItem="uJU-tp-ykS" secondAttribute="height" id="sxp-TM-xed"/>
-                                                <constraint firstItem="i7K-Wu-aEN" firstAttribute="centerY" secondItem="uJU-tp-ykS" secondAttribute="centerY" id="tSo-pe-a3A"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="titleTextField" destination="i7K-Wu-aEN" id="Oz5-xU-8Pw"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="6nS-Mc-751" customClass="EventLocationTableViewCell" customModule="Kairos" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="143" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6nS-Mc-751" id="g8v-Ne-Z9Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cVB-z5-mNA">
-                                                    <rect key="frame" x="12" y="0.0" width="588" height="43.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="cVB-z5-mNA" firstAttribute="leading" secondItem="g8v-Ne-Z9Y" secondAttribute="leading" constant="12" id="4Uv-zo-AsN"/>
-                                                <constraint firstItem="cVB-z5-mNA" firstAttribute="centerY" secondItem="g8v-Ne-Z9Y" secondAttribute="centerY" id="O8G-cC-Nx0"/>
-                                                <constraint firstAttribute="trailing" secondItem="cVB-z5-mNA" secondAttribute="trailing" id="QG2-Vx-iAD"/>
-                                                <constraint firstItem="cVB-z5-mNA" firstAttribute="height" secondItem="g8v-Ne-Z9Y" secondAttribute="height" id="lUU-yH-vnf"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="locationTextField" destination="cVB-z5-mNA" id="SZX-pz-8B5"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="MPx-jK-bI3">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bRb-lq-hmn" customClass="EventStartDateTableViewCell" customModule="Kairos" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="223" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bRb-lq-hmn" id="dqU-3L-OCY">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Ime-uu-fDf" customClass="EventEndDateTableViewCell" customModule="Kairos" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="267" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ime-uu-fDf" id="smx-2B-Emb">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="lwl-3A-7qX">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="43" id="AAG-kV-r28" customClass="EventCalendarTableViewCell" customModule="Kairos" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="347" width="600" height="43"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AAG-kV-r28" id="oGI-jg-MCv">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="42.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0C-iA-gfi">
-                                                    <rect key="frame" x="499" y="16.5" width="10" height="10"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="P0C-iA-gfi" secondAttribute="height" multiplier="1:1" id="fFK-wA-cON"/>
-                                                        <constraint firstAttribute="width" constant="10" id="qOw-aM-aaI"/>
-                                                    </constraints>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lN8-uh-gFr">
-                                                    <rect key="frame" x="12" y="8" width="69" height="26.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jy7-vP-COv">
-                                                    <rect key="frame" x="517" y="11" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="Jy7-vP-COv" secondAttribute="trailing" constant="8" id="4Sf-lY-JoJ"/>
-                                                <constraint firstAttribute="bottom" secondItem="lN8-uh-gFr" secondAttribute="bottom" constant="8" id="J5W-XZ-4j4"/>
-                                                <constraint firstItem="Jy7-vP-COv" firstAttribute="leading" secondItem="P0C-iA-gfi" secondAttribute="trailing" constant="8" id="KEf-vE-8ci"/>
-                                                <constraint firstItem="lN8-uh-gFr" firstAttribute="top" secondItem="oGI-jg-MCv" secondAttribute="top" constant="8" id="SJb-e7-9c1"/>
-                                                <constraint firstItem="P0C-iA-gfi" firstAttribute="centerY" secondItem="oGI-jg-MCv" secondAttribute="centerY" id="Te7-8j-y95"/>
-                                                <constraint firstItem="lN8-uh-gFr" firstAttribute="leading" secondItem="oGI-jg-MCv" secondAttribute="leading" constant="12" id="dA5-gi-7KO"/>
-                                                <constraint firstItem="lN8-uh-gFr" firstAttribute="centerY" secondItem="oGI-jg-MCv" secondAttribute="centerY" id="jAC-7S-xq8"/>
-                                                <constraint firstItem="Jy7-vP-COv" firstAttribute="centerY" secondItem="oGI-jg-MCv" secondAttribute="centerY" id="szL-fX-YRo"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="calendarLabel" destination="Jy7-vP-COv" id="kWn-Sc-omn"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="43" id="Ed5-67-cli">
-                                        <rect key="frame" x="0.0" y="390" width="600" height="43"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ed5-67-cli" id="OYx-uR-4b6">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="42.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="53L-hi-g8r">
-                                                    <rect key="frame" x="500" y="16.5" width="10" height="10"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="10" id="NeK-B5-mWh"/>
-                                                        <constraint firstAttribute="width" secondItem="53L-hi-g8r" secondAttribute="height" multiplier="1:1" id="qPe-jL-KZA"/>
-                                                    </constraints>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invitees" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vI2-XQ-ohH">
-                                                    <rect key="frame" x="12" y="8" width="59" height="26.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="None" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ko-ea-EAy">
-                                                    <rect key="frame" x="518" y="11" width="41" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="3Ko-ea-EAy" firstAttribute="centerY" secondItem="OYx-uR-4b6" secondAttribute="centerY" id="6Z3-9b-wLV"/>
-                                                <constraint firstItem="53L-hi-g8r" firstAttribute="centerY" secondItem="OYx-uR-4b6" secondAttribute="centerY" id="96I-WG-gLU"/>
-                                                <constraint firstItem="vI2-XQ-ohH" firstAttribute="leading" secondItem="OYx-uR-4b6" secondAttribute="leading" constant="12" id="IvL-9v-rfH"/>
-                                                <constraint firstAttribute="bottom" secondItem="vI2-XQ-ohH" secondAttribute="bottom" constant="8" id="Iyc-GI-2WW"/>
-                                                <constraint firstItem="3Ko-ea-EAy" firstAttribute="leading" secondItem="53L-hi-g8r" secondAttribute="trailing" constant="8" id="KUM-MP-N0w"/>
-                                                <constraint firstAttribute="trailing" secondItem="3Ko-ea-EAy" secondAttribute="trailing" constant="8" id="LdC-4Z-f1K"/>
-                                                <constraint firstItem="vI2-XQ-ohH" firstAttribute="centerY" secondItem="OYx-uR-4b6" secondAttribute="centerY" id="Q6G-WT-Z0k"/>
-                                                <constraint firstItem="vI2-XQ-ohH" firstAttribute="top" secondItem="OYx-uR-4b6" secondAttribute="top" constant="8" id="cmz-ct-agY"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="wgn-jP-6BE" kind="show" id="ztW-LA-nro"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="35J-Pk-GiY">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="137" id="M6Z-Q7-uSW" customClass="EventNotesTableViewCell" customModule="Kairos" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="469" width="600" height="137"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M6Z-Q7-uSW" id="AQR-JW-16z">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="136.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="09C-RF-eJO">
-                                                    <rect key="frame" x="8" y="1" width="592" height="135.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="09C-RF-eJO" firstAttribute="top" secondItem="AQR-JW-16z" secondAttribute="top" constant="1" id="94x-b6-Edn"/>
-                                                <constraint firstAttribute="bottom" secondItem="09C-RF-eJO" secondAttribute="bottom" id="D2q-fD-0q5"/>
-                                                <constraint firstItem="09C-RF-eJO" firstAttribute="leading" secondItem="AQR-JW-16z" secondAttribute="leading" constant="8" id="Epb-pf-qQ0"/>
-                                                <constraint firstAttribute="trailing" secondItem="09C-RF-eJO" secondAttribute="trailing" id="HAr-kO-4uQ"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="notesTextView" destination="09C-RF-eJO" id="hy0-jF-OEB"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                    </tableView>
                     <navigationItem key="navigationItem" id="kJG-52-fIq">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="dF4-og-Cnd">
                             <connections>
@@ -648,17 +450,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="eventCalendarCell" destination="AAG-kV-r28" id="3FG-HL-zsk"/>
-                        <outlet property="eventEndDateCell" destination="Ime-uu-fDf" id="3t0-J1-fIR"/>
-                        <outlet property="eventInviteesCell" destination="Ed5-67-cli" id="wXm-cQ-RgG"/>
-                        <outlet property="eventLocationCell" destination="6nS-Mc-751" id="QPr-OR-nma"/>
-                        <outlet property="eventNotesCell" destination="M6Z-Q7-uSW" id="jH6-eK-nlf"/>
-                        <outlet property="eventStartDateCell" destination="bRb-lq-hmn" id="R6V-Od-fAt"/>
-                        <outlet property="eventTitleCell" destination="hTG-tp-C1Z" id="PbR-zp-ewr"/>
                         <outlet property="saveButton" destination="DeB-tn-S81" id="6E7-pA-Urc"/>
                         <segue destination="COa-Qr-BV6" kind="unwind" identifier="" unwindAction="unwindToCalendar:" id="8xP-qJ-AqZ"/>
                         <segue destination="COa-Qr-BV6" kind="unwind" identifier="" unwindAction="unwindToEventDetails:" id="akn-zI-mVb"/>
-                        <segue destination="5ZJ-O1-P82" kind="show" identifier="showEventCalendarVC" id="Sib-3T-hdq"/>
+                        <segue destination="5ZJ-O1-P82" kind="show" identifier="showEventCalendar" id="Sib-3T-hdq"/>
+                        <segue destination="wgn-jP-6BE" kind="show" identifier="showEventInvitees" id="TSB-V7-vn4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1n-6l-elu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -785,7 +581,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="K7P-V3-zE0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Section-1" id="ocN-qU-CMb">
                                 <cells>

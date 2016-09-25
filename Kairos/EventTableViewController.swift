@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import DatePickerCell
 import FSCalendar
+import Former
 
 private enum eventCell {
     case Title
@@ -19,17 +19,11 @@ private enum eventCell {
     case Description
 }
 
-class EventTableViewController: UITableViewController {
+class EventTableViewController: FormViewController {
     
-    @IBOutlet weak var eventTitleCell: EventTitleTableViewCell!
-    @IBOutlet weak var eventLocationCell: EventLocationTableViewCell!
-    @IBOutlet weak var eventStartDateCell: EventStartDateTableViewCell!
-    @IBOutlet weak var eventEndDateCell: EventEndDateTableViewCell!
-    @IBOutlet weak var eventCalendarCell: EventCalendarTableViewCell!
-    @IBOutlet weak var eventInviteesCell: UITableViewCell!
-    @IBOutlet weak var eventNotesCell: EventNotesTableViewCell!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    var rows = [RowFormer]()
     var event: Event?
     
     override func viewDidLoad() {
@@ -42,21 +36,11 @@ class EventTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         //        eventStartDateCell = EventStartDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
         //        eventEndDateCell = EventEndDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
-
-        print(eventStartDateCell)
-        print(eventEndDateCell)
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 44
+        self.configure()
         
         if let event = event {
             self.saveButton.title = "Update"
-            eventTitleCell.configure(event)
-            eventLocationCell.configure(event)
-            eventCalendarCell.configure(event)
-            eventStartDateCell.configure(event)
-            eventEndDateCell.configure(event)
-            eventNotesCell.configure(event)
         } else {
             self.saveButton.title = "Save"
             event = Event.create() as? Event
@@ -81,84 +65,165 @@ class EventTableViewController: UITableViewController {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.tableView.superview!.endEditing(true)
     }
-    
-    // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
-    }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 1 {
-//            return 2
-//        }
-        return super.tableView(tableView, numberOfRowsInSection: section)
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
-        switch indexPath.section {
-        case 0:
-            if indexPath.row == 0 {
-                eventTitleCell.configure(event!)
-                return eventTitleCell
-            }
-            eventLocationCell.configure(event!)
-            return eventLocationCell
-        case 1:
-            if indexPath.row == 0 {
-                eventStartDateCell.configure(event!)
-                return eventStartDateCell
-            }
-            eventEndDateCell.configure(event!)
-            return eventEndDateCell
-        case 2:
-            if indexPath.row == 0 {
-                eventCalendarCell.configure(event!)
-                return eventCalendarCell
-            }
-            return eventInviteesCell
-                   case 3:
-            eventNotesCell.configure(event!)
-            return eventNotesCell
-        default:
-            return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
-        }
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            if let eventStartDateCell = cell as? EventStartDateTableViewCell {
-                return eventStartDateCell.datePickerHeight()
-            }
-            if let eventEndDateCell = cell as? EventEndDateTableViewCell {
-                return eventEndDateCell.datePickerHeight()
-            }
-        }
-        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-    }
-    
-    // MARK: - Table view delegate
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSNotificationCenter.defaultCenter().postNotificationName(kEventWillSaveNotification, object: nil, userInfo:["event": event!])
+    private func configure() {
+        title = "Add Event"
+        tableView.contentInset.top = 10
+        tableView.contentInset.bottom = 30
+        tableView.contentOffset.y = -10
         
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            if let eventStartDateCell = cell as? EventStartDateTableViewCell {
-                print("yoloyoloyoloyolo")
-                eventStartDateCell.selectedInTableView(tableView)
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            }
-            if let eventEndDateCell = cell as? EventEndDateTableViewCell {
-                eventEndDateCell.selectedInTableView(tableView)
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            }
-            if cell is EventCalendarTableViewCell {
-                self.performSegueWithIdentifier("showEventCalendarVC", sender: self)
+        // Create RowFomers
+        
+        let titleRow = TextFieldRowFormer<FormTextFieldCell>() {
+            $0.textField.textColor = .formerColor()
+            $0.textField.font = .systemFontOfSize(15)
+            }.configure {
+                $0.placeholder = "Event title"
+        }
+        rows.append(titleRow)
+        
+        let locationRow = TextFieldRowFormer<FormTextFieldCell>() {
+            $0.textField.textColor = .formerColor()
+            $0.textField.font = .systemFontOfSize(15)
+            }.configure {
+                $0.placeholder = "Location"
+        }
+        rows.append(locationRow)
+        
+        let allDayRow = SwitchRowFormer<FormSwitchCell>() {
+            $0.titleLabel.text = "All-day"
+            $0.titleLabel.textColor = .formerColor()
+            $0.titleLabel.font = .boldSystemFontOfSize(15)
+            $0.switchButton.onTintColor = .formerSubColor()
+        }
+        rows.append(allDayRow)
+        
+        let startRow = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
+            $0.titleLabel.text = "Start date"
+            $0.titleLabel.textColor = .formerColor()
+            $0.titleLabel.font = .boldSystemFontOfSize(15)
+            $0.displayLabel.textColor = .formerSubColor()
+            $0.displayLabel.font = .systemFontOfSize(15)
+            }.inlineCellSetup {
+                $0.datePicker.datePickerMode = .DateAndTime
+            }.displayTextFromDate(String.mediumDateShortTime)
+        rows.append(startRow)
+
+        let endRow = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
+            $0.titleLabel.text = "End date"
+            $0.titleLabel.textColor = .formerColor()
+            $0.titleLabel.font = .boldSystemFontOfSize(15)
+            $0.displayLabel.textColor = .formerSubColor()
+            $0.displayLabel.font = .systemFontOfSize(15)
+            }.inlineCellSetup {
+                $0.datePicker.datePickerMode = .DateAndTime
+            }.displayTextFromDate(String.mediumDateShortTime)
+        rows.append(endRow)
+        
+        let urlRow = TextFieldRowFormer<FormTextFieldCell>() {
+            $0.textField.textColor = .formerSubColor()
+            $0.textField.font = .systemFontOfSize(15)
+            }.configure {
+                $0.placeholder = "URL"
+        }
+        rows.append(urlRow)
+        
+        let calendarRow = LabelRowFormer<FormLabelCell>() {
+            $0.formTextLabel()?.textColor = .formerColor()
+            $0.formTextLabel()?.font = .boldSystemFontOfSize(15)
+            $0.formSubTextLabel()?.textColor = .formerSubColor()
+            $0.formSubTextLabel()?.font = .systemFontOfSize(15)
+            }.configure {
+                $0.text = "Calendar"
+                $0.cell.accessoryType = .DisclosureIndicator
+                $0.subText = "None"
+            }.onSelected { _ in
+                self.performSegueWithIdentifier("showEventCalendar", sender: self)
+        }
+        rows.append(calendarRow)
+        
+        let inviteesRow = LabelRowFormer<FormLabelCell>() {
+            $0.formTextLabel()?.textColor = .formerColor()
+            $0.formTextLabel()?.font = .boldSystemFontOfSize(15)
+            $0.formSubTextLabel()?.textColor = .formerSubColor()
+            $0.formSubTextLabel()?.font = .systemFontOfSize(15)
+            }.configure {
+                $0.text = "Invitees"
+                $0.cell.accessoryType = .DisclosureIndicator
+                $0.subText = "None"
+            }.onSelected { _ in
+                self.performSegueWithIdentifier("showEventInvitees", sender: self)
+        }
+        rows.append(inviteesRow)
+        
+        let noteRow = TextViewRowFormer<FormTextViewCell>() {
+            $0.textView.textColor = .formerSubColor()
+            $0.textView.font = .systemFontOfSize(15)
+            }.configure {
+                $0.placeholder = "Note"
+                $0.rowHeight = 150
+        }
+        rows.append(noteRow)
+        
+        endRow.onDateChanged { date in
+            if startRow.date.compare(date) == .OrderedDescending {
+                startRow.update {
+                    $0.date = date
+                }
+            } else {
             }
         }
+        startRow.onDateChanged { date in
+            if endRow.date.compare(date) == .OrderedAscending {
+                endRow.update {
+                    $0.date = date
+                }
+            } else {
+                
+            }
+        }
+        allDayRow.onSwitchChanged { on in
+            startRow.update {
+                $0.displayTextFromDate(
+                    on ? String.mediumDateNoTime : String.mediumDateShortTime
+                )
+            }
+            startRow.inlineCellUpdate {
+                $0.datePicker.datePickerMode = on ? .Date : .DateAndTime
+            }
+            endRow.update {
+                $0.displayTextFromDate(
+                    on ? String.mediumDateNoTime : String.mediumDateShortTime
+                )
+            }
+            endRow.inlineCellUpdate {
+                $0.datePicker.datePickerMode = on ? .Date : .DateAndTime
+            }
+        }
+        
+        // Create Headers
+        
+        let createHeader: (() -> ViewFormer) = {
+            return CustomViewFormer<FormHeaderFooterView>()
+                .configure {
+                    $0.viewHeight = 20
+            }
+        }
+        
+        // Create SectionFormers
+        
+        let titleSection = SectionFormer(rowFormer: titleRow, locationRow)
+            .set(headerViewFormer: createHeader())
+        let dateSection = SectionFormer(rowFormer: allDayRow, startRow, endRow)
+            .set(headerViewFormer: createHeader())
+        let inviteSection = SectionFormer(rowFormer: calendarRow, inviteesRow)
+            .set(headerViewFormer: createHeader())
+        let noteSection = SectionFormer(rowFormer: urlRow, noteRow)
+            .set(headerViewFormer: createHeader())
+        
+        former.append(sectionFormer: titleSection, dateSection, inviteSection, noteSection)
     }
-    
+
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -172,7 +237,7 @@ class EventTableViewController: UITableViewController {
     }
     
     private func createEvent() {
-
+        
         let parameters: [String: AnyObject] = [
             "calendar_id": self.event!.calendar!.id!,
             "title": self.event!.title!,
@@ -216,7 +281,7 @@ class EventTableViewController: UITableViewController {
             "date_start": FSCalendar().stringFromDate(self.event!.dateStart!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "date_end": FSCalendar().stringFromDate(self.event!.dateEnd!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "users": [[:]]]
-
+        
         print(self.event!.dateStart!)
         print(self.event!.dateEnd!)
         RouterWrapper.sharedInstance.request(.CreateEvent(parameters)) { (response) in
@@ -256,7 +321,7 @@ class EventTableViewController: UITableViewController {
     
     @IBAction func cancel(sender: UIBarButtonItem) {
         let isPresentingInAddEventMode = self.parentViewController is UINavigationController
-
+        
         if isPresentingInAddEventMode {
             event?.delete()
             dismissViewControllerAnimated(true, completion: nil)
@@ -268,21 +333,21 @@ class EventTableViewController: UITableViewController {
             navigationController!.popViewControllerAnimated(true)
         }
     }
-
+    
     @IBAction func saveEvent(sender: UIBarButtonItem) {
         NSNotificationCenter.defaultCenter().postNotificationName(kEventWillSaveNotification, object: nil, userInfo:["event": event!])
         
         let isPresentingInAddEventMode = presentingViewController is UINavigationController
         
         if isPresentingInAddEventMode {
-//            if checkEventDetails() {
-//                createEvent()
-//            }
+            //            if checkEventDetails() {
+            //                createEvent()
+            //            }
             dismissViewControllerAnimated(true, completion: nil)
         } else {
-//            if checkEventDetails() {
-//                updateEvent()
-//            }
+            //            if checkEventDetails() {
+            //                updateEvent()
+            //            }
             navigationController!.popViewControllerAnimated(true)
         }
     }

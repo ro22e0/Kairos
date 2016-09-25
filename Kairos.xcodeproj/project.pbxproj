@@ -78,6 +78,7 @@
 		DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC801841CA3334D0092A717 /* Menu.storyboard */; };
 		DAC801881CA346B70092A717 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC801871CA346B70092A717 /* Settings.storyboard */; };
 		DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC8018B1CA353AF0092A717 /* Board.storyboard */; };
+		DAD51B941D982CF000A20376 /* Extentions+Former.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD51B931D982CF000A20376 /* Extentions+Former.swift */; };
 		DADD55E41CA60CE200C44D40 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADD55E21CA60CE200C44D40 /* UserTableViewCell.swift */; };
 		DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */; };
 		DADF545B1D932C5100D0E092 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADF545A1D932C5100D0E092 /* ProfileTableViewController.swift */; };
@@ -179,6 +180,7 @@
 		DAC801841CA3334D0092A717 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		DAC801871CA346B70092A717 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		DAC8018B1CA353AF0092A717 /* Board.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Board.storyboard; sourceTree = "<group>"; };
+		DAD51B931D982CF000A20376 /* Extentions+Former.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extentions+Former.swift"; sourceTree = "<group>"; };
 		DADD55E21CA60CE200C44D40 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		DADF545A1D932C5100D0E092 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */,
+				DAD51B931D982CF000A20376 /* Extentions+Former.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -790,6 +793,7 @@
 				DA8CA94E1D8CA295007E40FF /* UserEvent.swift in Sources */,
 				DA3F3AD31C9B022F00E82FC6 /* SignInViewController.swift in Sources */,
 				DA8CA94B1D8CA295007E40FF /* UserCalendar.swift in Sources */,
+				DAD51B941D982CF000A20376 /* Extentions+Former.swift in Sources */,
 				DA1874571CDB7375008E7C38 /* EventTitleTableViewCell.swift in Sources */,
 				DADF545B1D932C5100D0E092 /* ProfileTableViewController.swift in Sources */,
 				DA3603C11CC26C3300A89B5A /* EventInfosTableViewCell.swift in Sources */,

@@ -20,6 +20,7 @@ target 'Kairos' do
   pod 'DatePickerCell'
   pod 'Whisper'
   pod 'Sync', '~> 1.x'
+  pod 'Former', '~> 1.4'
 end
 
 target 'KairosTests' do
