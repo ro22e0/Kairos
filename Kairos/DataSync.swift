@@ -26,7 +26,7 @@ struct DataSync {
         Sync.changes(data, inEntityNamed: entityName, dataStack: self.dataStack(), operations: ops, completion: completion)
     }
     
-    private static func transformJson(json: JSON) -> [[String: AnyObject]] {
+    static func transformJson(json: JSON) -> [[String: AnyObject]] {
         var data = [[String: AnyObject]]()
         
         for elem in json.array! {
@@ -72,47 +72,7 @@ struct DataSync {
         }
         print(Friend.count())
     }
-    
-    static func fetchFriends() {
-        Router.needToken = true
-        RouterWrapper.sharedInstance.request(.GetFriends) { (response) in
-            print(response.response) // URL response
-            switch response.result {
-            case .Success:
-                OwnerManager.sharedInstance.setCredentials(response.response!)
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    
-                    print(json)
-                    
-                    //                    var accepted = json["friends"]
-                    //                    print(accepted)
-                    //                    var requested = json["requested_friends"]
-                    //                    print(requested)
-                    //                    var pending = json["pending_friends"].dictionaryObject
-                    //                    print(pending)
-                    //                    accepted!["status"] = FriendStatus.Accepted.hashValue
-                    //                    requested!["status"] = FriendStatus.Requested.hashValue
-                    //                    pending!["status"] = FriendStatus.Pending.hashValue
-                    //
-                    //                    self.sync(entity: "Friend", data: [accepted!], completion: { error in
-                    //                        print(NSDate(), "done")
-                    //                    })
-                    //                    self.sync(entity: "Friend", data: [requested!], completion: { error in
-                    //                        print(NSDate(), "done")
-                    //                    })
-                    //                    self.sync(entity: "Friend", data: pending!, completion: { error in
-                    //                        print(NSDate(), "done")
-                    //                    })
-                }
-            case .Failure(let error):
-                print(error)
-            }
-            print(NSDate(), "done")
-            print(Friend.all().count)
-        }
-    }
-    
+
     // MARK: - Users
     
     private static func deleteUsers(users: [JSON]) {

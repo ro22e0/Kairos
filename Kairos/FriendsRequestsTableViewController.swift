@@ -8,9 +8,10 @@
 
 import UIKit
 import XLPagerTabStrip
+import DZNEmptyDataSet
 
 class FriendsRequestsTableViewController: UITableViewController {
-
+    
     // MARK: - Class Properties
     let requestCellID = "invitationCell"
     let pendingCellID = "sentInvitationCell"
@@ -18,7 +19,7 @@ class FriendsRequestsTableViewController: UITableViewController {
 
     var requestedFriends = [Friend]()
     var pendingFriends = [Friend]()
-
+    
     // MARK: - Methods
     
     override func viewDidLoad() {
@@ -29,6 +30,7 @@ class FriendsRequestsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.tableView.tableFooterView = UIView()
         
         print("pendingFriends: ", pendingFriends.count)
         print("requestedFriends: ", requestedFriends.count)
@@ -128,7 +130,18 @@ class FriendsRequestsTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
+
     @IBAction func done(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+extension FriendsRequestsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No requests")
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "When you have friends requests, you'll see them here.")
     }
 }

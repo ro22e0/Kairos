@@ -1,5 +1,5 @@
 //
-//  SearchUsersEmbeddedTableViewController.swift
+//  SearchFriendsTableViewController.swift
 //  Kairos
 //
 //  Created by Ronaël Bajazet on 26/03/2016.
@@ -9,41 +9,30 @@
 import UIKit
 import XLPagerTabStrip
 
-class SearchUsersEmbeddedTableViewController: UITableViewController {
+class SearchFriendsTableViewController: UITableViewController {
     
     // MARK: - Class Properties
     let cellIdentifier = "userCell"
     var itemInfo = IndicatorInfo(title: "View")
     
     var searchController: UISearchController!
-    
-    var users: [User]
-    
-    // MARK: - Constructors
 
-    init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
-        self.itemInfo = itemInfo
-        
-        users = OwnerManager.sharedInstance.getUsers()
-        print("OK LES USERS : ", users.count)
-        
-        super.init(style: style)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var users = [User]()
     
     // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        users = OwnerManager.sharedInstance.getUsers()
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 66
         users = OwnerManager.sharedInstance.getUsers()
 
         tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
@@ -57,7 +46,9 @@ class SearchUsersEmbeddedTableViewController: UITableViewController {
         self.searchController.searchBar.sizeToFit()
         self.searchController.searchBar.searchBarStyle = .Minimal
         self.searchController.searchBar.delegate = self
-        self.tableView.tableHeaderView = self.searchController.searchBar
+        self.searchController.searchBar.showsCancelButton = false
+        self.navigationItem.titleView
+            = self.searchController.searchBar
         definesPresentationContext = false
     }
     
@@ -146,29 +137,25 @@ class SearchUsersEmbeddedTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
-}
-
-extension SearchUsersEmbeddedTableViewController: IndicatorInfoProvider {
-    // MARK: - IndicatorInfoProvider
-    func indicatorInfoForPagerTabStrip(pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return itemInfo
+    @IBAction func done(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
-extension SearchUsersEmbeddedTableViewController: UISearchResultsUpdating {
+extension SearchFriendsTableViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResultsForSearchController(searchController: UISearchController) {
     }
 }
 
-extension SearchUsersEmbeddedTableViewController: UISearchControllerDelegate {
+extension SearchFriendsTableViewController: UISearchControllerDelegate {
     // MARK: - UISearchResultsUpdating Delegate
     func didPresentSearchController(searchController: UISearchController) {
-        searchController.searchBar.showsCancelButton = false
+//        searchController.searchBar.showsCancelButton = false
     }
 }
 
-extension SearchUsersEmbeddedTableViewController: UISearchBarDelegate {
+extension SearchFriendsTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print(searchBar.text)
     }

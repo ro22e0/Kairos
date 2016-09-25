@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import DZNEmptyDataSet
 
 class FriendsTableViewController: UITableViewController {
     
@@ -25,6 +26,8 @@ class FriendsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.tableView.tableFooterView = UIView()
         
         friends = OwnerManager.sharedInstance.getFriends(withStatus: .Accepted)
         print(friends.count)
@@ -114,4 +117,10 @@ class FriendsTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
+}
+
+extension FriendsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No friends to show.")
+    }
 }

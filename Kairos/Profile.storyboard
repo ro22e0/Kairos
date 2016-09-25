@@ -137,6 +137,13 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWZ-wL-h2W">
+                                                    <rect key="frame" x="483" y="7" width="30" height="30"/>
+                                                    <state key="normal" title="Add"/>
+                                                    <connections>
+                                                        <segue destination="BFT-gC-5iz" kind="custom" customClass="ModalSearchSegue" customModule="Kairos" customModuleProvider="target" id="l1E-Ja-ZpV"/>
+                                                    </connections>
+                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2H-na-6Ub">
                                                     <rect key="frame" x="521" y="7" width="71" height="30"/>
                                                     <state key="normal" title="Invitations"/>
@@ -148,7 +155,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="d2H-na-6Ub" secondAttribute="trailing" constant="8" id="09L-FR-c9V"/>
+                                                <constraint firstItem="fWZ-wL-h2W" firstAttribute="centerY" secondItem="ziZ-fz-yvP" secondAttribute="centerY" id="LRJ-Hq-uBc"/>
                                                 <constraint firstItem="d2H-na-6Ub" firstAttribute="centerY" secondItem="ziZ-fz-yvP" secondAttribute="centerY" id="MiY-KH-wdk"/>
+                                                <constraint firstItem="d2H-na-6Ub" firstAttribute="leading" secondItem="fWZ-wL-h2W" secondAttribute="trailing" constant="8" id="OsK-P9-4Hl"/>
                                                 <constraint firstItem="AqH-cS-3To" firstAttribute="centerY" secondItem="ziZ-fz-yvP" secondAttribute="centerY" id="QMi-be-bZp"/>
                                                 <constraint firstItem="AqH-cS-3To" firstAttribute="leading" secondItem="qu9-1w-KmF" secondAttribute="trailing" constant="8" id="Vq4-JX-LrT"/>
                                                 <constraint firstItem="qu9-1w-KmF" firstAttribute="centerY" secondItem="ziZ-fz-yvP" secondAttribute="centerY" id="jn3-jv-GOa"/>
@@ -282,6 +291,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m5c-4v-kJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1829" y="-21"/>
+        </scene>
+        <!--SearchFriendsTableViewController-->
+        <scene sceneID="yD9-3d-BDe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Friends" referencedIdentifier="SearchFriendsTableViewController" id="BFT-gC-5iz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z0j-u6-6kI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1910.5" y="-143"/>
         </scene>
         <!--CalendarFilterTableViewController-->
         <scene sceneID="u8Y-1U-CDb">

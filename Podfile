@@ -21,6 +21,7 @@ target 'Kairos' do
   pod 'Whisper'
   pod 'Sync', '~> 1.x'
   pod 'Former', '~> 1.4'
+  pod 'DZNEmptyDataSet', '~> 1.8'
 end
 
 target 'KairosTests' do

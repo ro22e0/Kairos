@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -14,27 +14,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="65.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Io6-eD-4N7">
-                        <rect key="frame" x="8" y="8" width="49.5" height="49.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="Io6-eD-4N7" secondAttribute="height" multiplier="1:1" id="Vfb-gU-ZGr"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baH-dk-f1u">
-                        <rect key="frame" x="65" y="22" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="baH-dk-f1u">
+                        <rect key="frame" x="65" y="22" width="190" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yvy-n7-sVa">
-                        <rect key="frame" x="263" y="17.5" width="37" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yvy-n7-sVa">
+                        <rect key="frame" x="263" y="17" width="37" height="30"/>
                         <state key="normal" title="Invite"/>
                         <connections>
                             <action selector="invite:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oxe-2R-Xyl"/>
                         </connections>
                     </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Io6-eD-4N7">
+                        <rect key="frame" x="8" y="8" width="49.5" height="49.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Io6-eD-4N7" secondAttribute="height" multiplier="1:1" id="Vfb-gU-ZGr"/>
+                            <constraint firstAttribute="height" constant="49" id="v7m-NH-jK1"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Yvy-n7-sVa" firstAttribute="leading" secondItem="baH-dk-f1u" secondAttribute="trailing" constant="8" id="33J-j4-cdW"/>
                     <constraint firstItem="baH-dk-f1u" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="39R-MS-UCR"/>
                     <constraint firstItem="Yvy-n7-sVa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="BNy-C7-nsl"/>
                     <constraint firstAttribute="trailing" secondItem="Yvy-n7-sVa" secondAttribute="trailing" constant="20" id="HBf-Mr-mx6"/>

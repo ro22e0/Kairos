@@ -20,7 +20,7 @@
             </objects>
             <point key="canvasLocation" x="1835" y="-290"/>
         </scene>
-        <!--Friends Requests Table View Controller-->
+        <!--Empty Data Set Delegate-->
         <scene sceneID="gZr-r6-zyg">
             <objects>
                 <tableViewController id="RiF-hG-gkT" customClass="FriendsRequestsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,6 +31,8 @@
                         <connections>
                             <outlet property="dataSource" destination="RiF-hG-gkT" id="0nl-KQ-7Jv"/>
                             <outlet property="delegate" destination="RiF-hG-gkT" id="KQG-CB-ipQ"/>
+                            <outlet property="emptyDataSetDelegate" destination="RiF-hG-gkT" id="CB9-w9-wc1"/>
+                            <outlet property="emptyDataSetSource" destination="RiF-hG-gkT" id="nqQ-sA-sd8"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="9lS-YE-StW">
@@ -45,7 +47,7 @@
             </objects>
             <point key="canvasLocation" x="2541" y="-290"/>
         </scene>
-        <!--Friends Table View Controller-->
+        <!--Empty Data Set Delegate-->
         <scene sceneID="gLf-jc-lfo">
             <objects>
                 <tableViewController id="3SN-Wk-4fd" customClass="FriendsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
@@ -56,12 +58,58 @@
                         <connections>
                             <outlet property="dataSource" destination="3SN-Wk-4fd" id="lEP-CF-e6c"/>
                             <outlet property="delegate" destination="3SN-Wk-4fd" id="qa9-sI-M5I"/>
+                            <outlet property="emptyDataSetDelegate" destination="3SN-Wk-4fd" id="zQp-Z4-Myx"/>
+                            <outlet property="emptyDataSetSource" destination="3SN-Wk-4fd" id="ORM-sS-RCq"/>
                         </connections>
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="isL-BK-ddl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2541" y="409"/>
+        </scene>
+        <!--Search Friends Table View Controller-->
+        <scene sceneID="6gH-gN-0sW">
+            <objects>
+                <tableViewController id="Uhw-4Q-aJQ" customClass="SearchFriendsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="N9Y-dx-111">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="65" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Uhw-4Q-aJQ" id="hYR-tH-OPj"/>
+                            <outlet property="delegate" destination="Uhw-4Q-aJQ" id="nao-pG-X3f"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="56q-P6-4F2">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="B3B-gP-Asa">
+                            <connections>
+                                <action selector="done:" destination="Uhw-4Q-aJQ" id="dQm-qd-q51"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hdf-pM-tbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3353" y="1107"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iEa-C2-5je">
+            <objects>
+                <navigationController storyboardIdentifier="SearchFriendsTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="0tU-hL-e8K" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DUg-18-Yp6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Uhw-4Q-aJQ" kind="relationship" relationship="rootViewController" id="ieK-GP-2nl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uvv-Is-AID" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2541" y="1107"/>
         </scene>
     </scenes>
 </document>
