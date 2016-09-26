@@ -148,7 +148,6 @@
                                                     <rect key="frame" x="521" y="7" width="71" height="30"/>
                                                     <state key="normal" title="Invitations"/>
                                                     <connections>
-                                                        <action selector="friendsRequests:" destination="Qcl-xq-Ig0" eventType="touchUpInside" id="qqN-x8-c7h"/>
                                                         <segue destination="IzP-AX-F1T" kind="presentation" id="T4d-yr-JTO"/>
                                                     </connections>
                                                 </button>
@@ -192,9 +191,6 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9w-fH-8Uu">
                                                     <rect key="frame" x="521" y="7" width="71" height="30"/>
                                                     <state key="normal" title="Invitations"/>
-                                                    <connections>
-                                                        <action selector="calendarsRequests:" destination="Qcl-xq-Ig0" eventType="touchUpInside" id="ZnE-FP-R7Y"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

@@ -89,14 +89,6 @@ class ProfileTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    @IBAction func friendsRequests(sender: UIButton) {
-//        let nvc = self.viewController(fromStoryboard: FriendsStoryboardID, viewController: "FriendsRequestsTableViewController")
-//
-//        self.presentViewController(nvc, animated: true, completion: nil)
-    }
-    
-    @IBAction func calendarsRequests(sender: UIButton) {
-    }
 
     @IBAction func signOut(sender: UIButton) {
         Router.needToken = true
@@ -105,19 +97,17 @@ class ProfileTableViewController: UITableViewController {
             case .Success:
                 switch response.response!.statusCode {
                 case 200...203:
-                    let defautls = NSUserDefaults.standardUserDefaults()
-                    defautls.setValue(false, forKey: userLoginKeyConstant)
-                    self.setRootVC(LoginStoryboardID)
-                    break;
+                    SpinnerManager.showWhistle("kSuccess", success: false)
                 default:
                     SpinnerManager.showWhistle("kFail", success: false)
-                    break;
                 }
             case .Failure(let error):
                 SpinnerManager.showWhistle("kFail", success: false)
                 print(error.localizedDescription)
             }
-            self.dismissViewControllerAnimated(true, completion: nil)
+            let defautls = NSUserDefaults.standardUserDefaults()
+            defautls.setValue(false, forKey: userLoginKeyConstant)
+            self.setRootVC(LoginStoryboardID)
         }
     }
     

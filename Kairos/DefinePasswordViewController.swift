@@ -14,6 +14,7 @@ class DefinePasswordViewController: UIViewController {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordConfirmationTextField: UITextField!
     
     // MARK: - Class Properties
     var password: String?

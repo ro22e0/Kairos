@@ -20,6 +20,7 @@ class SignUpViewController: UIViewController {
     // MARK: - UI Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordConfirmationTextField: UITextField!
     
     // MARK: - Class Properties
     var manager: Manager?
@@ -198,7 +199,7 @@ class SignUpViewController: UIViewController {
                                     let defautls = NSUserDefaults.standardUserDefaults()
                                     defautls.setValue(true, forKey: userLoginKeyConstant)
                                     SwiftSpinner.hide()
-                                    self.setRootVC(BoardStoryboardID)
+                                    self.performSegueWithIdentifier("showSignUpSuccessful", sender: self)
                                 })
                             })
                         })
@@ -250,7 +251,7 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: GIDSignInUIDelegate {
     // MARK: - GIDSignInUIDelegate
-    
+
     // Present a view that prompts the user to sign in with Google
     func signIn(signIn: GIDSignIn!,
                 presentViewController viewController: UIViewController!) {
