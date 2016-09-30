@@ -93,7 +93,8 @@ class CalendarEditTableViewController: UITableViewController {
     */
 
     @IBAction func done(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
+//        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }

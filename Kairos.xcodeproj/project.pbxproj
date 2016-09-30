@@ -65,6 +65,8 @@
 		DA7912FE1CEFCDA100661753 /* BlockUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */; };
 		DA7913031CEFCF6E00661753 /* UnfriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */; };
 		DA7913041CEFCF6E00661753 /* UnfriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */; };
+		DA799DF71D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA799DF51D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift */; };
+		DA799DF81D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA799DF61D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib */; };
 		DA8326301CE3CCFF00C09F31 /* DataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83262F1CE3CCFF00C09F31 /* DataSync.swift */; };
 		DA8358C71CAB18A400CC9B29 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */; };
 		DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA847C291D14077300ED2750 /* Project.storyboard */; };
@@ -165,6 +167,8 @@
 		DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlockUserTableViewCell.xib; sourceTree = "<group>"; };
 		DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfriendTableViewCell.swift; sourceTree = "<group>"; };
 		DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnfriendTableViewCell.xib; sourceTree = "<group>"; };
+		DA799DF51D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImagePickerTableViewCell.swift; sourceTree = "<group>"; };
+		DA799DF61D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileImagePickerTableViewCell.xib; sourceTree = "<group>"; };
 		DA83262F1CE3CCFF00C09F31 /* DataSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataSync.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA847C291D14077300ED2750 /* Project.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Project.storyboard; sourceTree = "<group>"; };
@@ -348,6 +352,15 @@
 			name = Calendar;
 			sourceTree = "<group>";
 		};
+		DA799DF01D9D0E4F003C27CE /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DA799DF51D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift */,
+				DA799DF61D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		DA81BBD71D4A2DBF00C2C349 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +388,7 @@
 		DA81BBD91D4A2DEE00C2C349 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				DA799DF01D9D0E4F003C27CE /* Profile */,
 				DA58DA871D6CE3C900387A26 /* Calendar */,
 				DA81BBDA1D4A2DFD00C2C349 /* Friends */,
 			);
@@ -640,6 +654,7 @@
 				DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */,
 				DAC801881CA346B70092A717 /* Settings.storyboard in Resources */,
 				DA612CB41CA472F90027D7FB /* Profile.storyboard in Resources */,
+				DA799DF81D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib in Resources */,
 				DA7912FE1CEFCDA100661753 /* BlockUserTableViewCell.xib in Resources */,
 				DA6853311CE25D6700B839F6 /* SentInvitationTableViewCell.xib in Resources */,
 				DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */,
@@ -813,6 +828,7 @@
 				DA1D4BE11D84111C00B11AD1 /* CalendarFilterTableViewController.swift in Sources */,
 				DA3603C51CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift in Sources */,
 				DAE380CE1CB2F5B3002DB874 /* EventTableViewCell.swift in Sources */,
+				DA799DF71D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift in Sources */,
 				DA3F3ACB1C9AEA5200E82FC6 /* LoadingViewController.swift in Sources */,
 				DA3F3AD51C9B037600E82FC6 /* GetStartedViewController.swift in Sources */,
 				DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */,

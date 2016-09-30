@@ -1,4 +1,3 @@
-
 //  OwnerManager.swift
 //  Kairos
 //

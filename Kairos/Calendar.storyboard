@@ -616,7 +616,11 @@
                                 <segue destination="cyy-F8-0v6" kind="show" id="yJf-RJ-MT8"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="uoi-9g-LXM"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="uoi-9g-LXM">
+                            <connections>
+                                <action selector="done:" destination="iW3-81-7DK" id="C03-4V-3FA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kau-79-igA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -820,6 +824,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="biZ-Ui-IUl"/>
         <segue reference="Jbv-4C-T54"/>
-        <segue reference="8s3-BA-jFe"/>
+        <segue reference="5b3-l3-aEB"/>
     </inferredMetricsTieBreakers>
 </document>

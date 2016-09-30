@@ -50,13 +50,13 @@ extension UIViewController {
     
     func viewController(fromStoryboard storyboard: String, viewController name: String) -> UIViewController {
         let storyboard = UIStoryboard(name: storyboard, bundle: nil)
-        
+
         return storyboard.instantiateViewControllerWithIdentifier(name)
     }
     
     func setRootVC(storyboard: String) {
         let storyboard = UIStoryboard(name: storyboard, bundle: nil)
-        
+
         if let viewController = storyboard.instantiateInitialViewController() {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
@@ -67,5 +67,11 @@ extension UIViewController {
 
 extension UITableViewCell {
     func selected() {
+    }
+}
+
+extension UIImageView {
+    func round() {
+        self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2
     }
 }

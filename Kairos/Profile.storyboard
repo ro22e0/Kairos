@@ -322,11 +322,11 @@
             </objects>
             <point key="canvasLocation" x="2090" y="345"/>
         </scene>
-        <!--Profile-->
+        <!--Navigation Controller-->
         <scene sceneID="GQc-HK-438">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5jY-WH-Z9n" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="Jla-bb-7Jo"/>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="Jla-bb-7Jo" userLabel="More"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TGA-zh-iXk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

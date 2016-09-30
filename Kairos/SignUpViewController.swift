@@ -18,6 +18,7 @@ import JLToast
 class SignUpViewController: UIViewController {
     
     // MARK: - UI Properties
+    @IBOutlet weak var fullnameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordConfirmationTextField: UITextField!
@@ -76,7 +77,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func SignUp(sender: UIButton) {
-        self.userInfos = ["email": emailTextField.text!, "password": passwordTextField.text!]
+        self.userInfos = ["name": fullnameTextField.text!, "email": emailTextField.text!, "password": passwordTextField.text!]
         SignUpRequest()
     }
     
@@ -123,7 +124,7 @@ class SignUpViewController: UIViewController {
             case .Success:
                 if let value = response.result.value {
                     let json = JSON(value)
-                    self.userInfos = ["first_name": json["given_name"].stringValue, "last_name": json["family_name"].stringValue, "email": json["email"].stringValue, "password": ""]
+                    self.userInfos = ["name": json["given_name"].stringValue + json["family_name"].stringValue, "email": json["email"].stringValue, "password": ""]
                     SwiftSpinner.hide()
                     if json["email"].stringValue != "" {
                         completion()
@@ -155,7 +156,7 @@ class SignUpViewController: UIViewController {
             if error == nil {
                 if let value = result as? NSDictionary {
                     let json = JSON(value)
-                    self.userInfos = ["first_name": json["first_name"].stringValue, "last_name": json["last_name"].stringValue, "email": json["email"].stringValue, "password": ""]
+                    self.userInfos = ["name": json["first_name"].stringValue + json["last_name"].stringValue, "email": json["email"].stringValue, "password": ""]
                     SwiftSpinner.hide()
                     if json["email"].stringValue != "" {
                         completion()
@@ -174,7 +175,7 @@ class SignUpViewController: UIViewController {
     }
     
     private func SignUpRequest() {
-        let parameters = ["email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
+        let parameters = ["name": userInfos!["name"]!,"email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
         
         Router.needToken = false
         RouterWrapper.sharedInstance.request(.CreateUser(parameters)) { (response) in
