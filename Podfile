@@ -12,7 +12,7 @@ target 'Kairos' do
   pod 'UITextField+Shake', '~> 1.1'
   pod 'IQKeyboardManagerSwift', '~> 3.x'
   pod 'JLToast', '~> 1.3'
-  pod 'SideMenu', '~> 1.x'
+  pod 'SideMenu', '~> 1.2.0'
   pod 'XLPagerTabStrip', '~> 5.0'
   pod 'Crashlytics'
   pod 'FSCalendar', '~> 2.0'
@@ -20,7 +20,7 @@ target 'Kairos' do
   pod 'DatePickerCell'
   pod 'Whisper'
   pod 'Sync', '~> 1.x'
-  pod 'Former', '~> 1.4'
+  pod 'Former', '~> 1.4.0'
   pod 'DZNEmptyDataSet', '~> 1.8'
 end
 

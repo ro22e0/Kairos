@@ -25,7 +25,6 @@
                                     <constraint firstAttribute="height" constant="300" id="j9r-Rk-jEY"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsFontSizeToFitContentSize" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="firstWeekday">
                                         <integer key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
@@ -36,6 +35,22 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
                                         <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="todaySelectionColor">
+                                        <color key="value" red="0.77704340219497681" green="0.20171797275543213" blue="0.16494762897491455" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsScopeHandle" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsSelection" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="scrollEnabled" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderType">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="weekdayHeight">
+                                        <real key="value" value="18"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="headerHeight">
+                                        <real key="value" value="35"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsMultipleSelection" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="C7H-Na-etI" id="WXu-Vz-dGK"/>
@@ -43,7 +58,7 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NB2-Xo-SyD">
-                                <rect key="frame" x="0.0" y="376" width="600" height="175"/>
+                                <rect key="frame" x="0.0" y="364" width="600" height="187"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" rowHeight="55" id="wy3-Ev-pNk" customClass="EventTableViewCell" customModule="Kairos" customModuleProvider="target">
@@ -117,7 +132,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NB2-Xo-SyD" firstAttribute="leading" secondItem="hB5-jT-gYm" secondAttribute="leading" id="3y1-c3-weT"/>
-                            <constraint firstItem="NB2-Xo-SyD" firstAttribute="top" secondItem="HhK-T1-Cm2" secondAttribute="bottom" constant="12" id="7Kz-QW-RCz"/>
+                            <constraint firstItem="NB2-Xo-SyD" firstAttribute="top" secondItem="HhK-T1-Cm2" secondAttribute="bottom" id="7Kz-QW-RCz"/>
                             <constraint firstItem="HhK-T1-Cm2" firstAttribute="top" secondItem="Y4w-sF-rl1" secondAttribute="bottom" id="Q8G-m0-Y2U"/>
                             <constraint firstAttribute="trailing" secondItem="NB2-Xo-SyD" secondAttribute="trailing" id="jEU-D4-Ddn"/>
                             <constraint firstItem="HhK-T1-Cm2" firstAttribute="centerX" secondItem="hB5-jT-gYm" secondAttribute="centerX" id="lIt-w1-xPc"/>
@@ -211,8 +226,8 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 5 paticipants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1f-n4-4Xu">
-                                                    <rect key="frame" x="504.5" y="97" width="87.5" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 5 participants" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1f-n4-4Xu">
+                                                    <rect key="frame" x="499" y="97" width="93" height="17"/>
                                                     <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -822,8 +837,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="biZ-Ui-IUl"/>
         <segue reference="Jbv-4C-T54"/>
+        <segue reference="biZ-Ui-IUl"/>
         <segue reference="5b3-l3-aEB"/>
     </inferredMetricsTieBreakers>
 </document>

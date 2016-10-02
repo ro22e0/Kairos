@@ -176,45 +176,12 @@ class SignUpViewController: UIViewController {
     
     private func SignUpRequest() {
         let parameters = ["name": userInfos!["name"]!,"email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
-        
-        Router.needToken = false
-        RouterWrapper.sharedInstance.request(.CreateUser(parameters)) { (response) in
-            print(response.request)  // original URL request
-            print(response.response) // URL response
-            print(response.data)     // server data
-            print(response.result)   // result of response serialization
-            
-            switch response.result {
+
+        UserManager.sharedInstance.signUp(parameters) { (status) in
+            switch status {
             case .Success:
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    print("JSON: \(json)")
-                    switch response.response!.statusCode {
-                    case 200:
-                        SpinnerManager.delay(seconds: 1.0, completion: {
-                            SpinnerManager.showSpinner("Completed", subtitle: "Tap to sign in", completion: { () -> () in
-                                DataSync.sync(entity: "Owner", data: [json["data"].dictionaryObject!], completion: { error in
-                                    let owner = Owner.all().first as! Owner
-                                    OwnerManager.sharedInstance.newOwner(owner)
-                                    OwnerManager.sharedInstance.setCredentials(response.response!)
-                                    let defautls = NSUserDefaults.standardUserDefaults()
-                                    defautls.setValue(true, forKey: userLoginKeyConstant)
-                                    SwiftSpinner.hide()
-                                    self.performSegueWithIdentifier("showSignUpSuccessful", sender: self)
-                                })
-                            })
-                        })
-                    default:
-                        SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
-                            SwiftSpinner.hide()
-                        })
-                    }
-                }
-            case .Failure(let error):
-                SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
-                    SwiftSpinner.hide()
-                })
-                print(error)
+                self.performSegueWithIdentifier("showCompleteProfile", sender: self)
+            case .Error: break
             }
         }
     }

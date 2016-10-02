@@ -44,8 +44,8 @@ class FriendsRequestsTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        pendingFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Pending)
-        requestedFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Requested)
+//        pendingFriends = UserManager.sharedInstance.getFriends(withStatus: .Pending)
+//        requestedFriends = UserManager.sharedInstance.getFriends(withStatus: .Requested)
         
         tableView.reloadData()
     }

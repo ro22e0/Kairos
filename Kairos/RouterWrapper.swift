@@ -42,6 +42,9 @@ public enum Router: URLRequestConvertible {
     /// Create a new user.
     case CreateUser([String: AnyObject])
     
+    /// Update user.
+    case UpdateUser([String: AnyObject])
+    
     /// Get users.
     case GetUsers
     
@@ -97,7 +100,7 @@ public enum Router: URLRequestConvertible {
             return .POST
         case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .GetCalendars, .GetCalendar:
             return .GET
-        case .AcceptFriend, .DeclineFriend, .UpdateEvent, .UpdateCalendar:
+        case .UpdateUser, .AcceptFriend, .DeclineFriend, .UpdateEvent, .UpdateCalendar:
             return .PUT
         case .RemoveFriend, .DeleteEvent, .DeleteCalendar, .Logout:
             return .DELETE
@@ -119,6 +122,8 @@ public enum Router: URLRequestConvertible {
             return "/friends"
         case .GetUsers:
             return "/users"
+        case .UpdateUser(let parameters):
+            return "/users/\(parameters["id"])"
         case .CreateEvent, .GetEvents:
             return "/events"
         case .UpdateEvent(let parameters):
@@ -151,20 +156,22 @@ public enum Router: URLRequestConvertible {
         let URL = NSURL(string: Router.baseURL)!
         let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
         mutableURLRequest.HTTPMethod = method.rawValue
-        
+
         print(Router.needToken)
         
         if Router.needToken {
-            print(OwnerManager.sharedInstance.owner!.accessToken)
-            print(OwnerManager.sharedInstance.owner!.client)
-            print(OwnerManager.sharedInstance.owner!.uid)
-            mutableURLRequest.setValue(OwnerManager.sharedInstance.owner!.accessToken, forHTTPHeaderField: "access-token")
-            mutableURLRequest.setValue(OwnerManager.sharedInstance.owner!.client, forHTTPHeaderField: "client")
-            mutableURLRequest.setValue(OwnerManager.sharedInstance.owner!.uid, forHTTPHeaderField: "uid")
+            print(UserManager.sharedInstance.current.accessToken)
+            print(UserManager.sharedInstance.current.client)
+            print(UserManager.sharedInstance.current.uid)
+            mutableURLRequest.setValue(UserManager.sharedInstance.current.accessToken, forHTTPHeaderField: "access-token")
+            mutableURLRequest.setValue(UserManager.sharedInstance.current.client, forHTTPHeaderField: "client")
+            mutableURLRequest.setValue(UserManager.sharedInstance.current.uid, forHTTPHeaderField: "uid")
         }
         
         switch self {
         case .CreateUser(let parameters):
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
+        case .UpdateUser(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .Authenticate(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
@@ -207,7 +214,7 @@ class RouterWrapper: NSObject, NSURLSessionTaskDelegate {
     static let sharedInstance = RouterWrapper()
     
     private override init() {}
-    
+
     /**
      Initialize the manager use by Alamofire.
 

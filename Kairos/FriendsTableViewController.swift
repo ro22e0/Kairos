@@ -29,7 +29,7 @@ class FriendsTableViewController: UITableViewController {
         
         self.tableView.tableFooterView = UIView()
         
-        friends = OwnerManager.sharedInstance.getFriends(withStatus: .Accepted)
+//        friends = UserManager.sharedInstance.getFriends(withStatus: .Accepted)
         print(friends.count)
 
         tableView.registerNib(UINib(nibName: "FriendTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)

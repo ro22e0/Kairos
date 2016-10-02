@@ -37,7 +37,7 @@ class UserTableViewCell: UITableViewCell {
                 case 200...203:
                     SpinnerManager.showWhistle("kFriendInviteSent", success: true)
                     user.delete()
-                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                    UserManager.sharedInstance.setCredentials(response.response!)
                     break;
                 default:
                     SpinnerManager.showWhistle("kFail", success: false)

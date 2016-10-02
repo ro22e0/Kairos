@@ -84,6 +84,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thg-tf-k33">
                                         <rect key="frame" x="160" y="193" width="240" height="40"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="A9P-Nh-g27"/>
                                             <constraint firstAttribute="width" constant="240" id="rgi-Xy-O0U"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="18"/>
@@ -175,7 +176,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7od-tw-X1G">
-                                        <rect key="frame" x="139" y="192" width="243" height="40"/>
+                                        <rect key="frame" x="138.5" y="192" width="243" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="kCM-ab-RZS"/>
                                         </constraints>
@@ -208,12 +209,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="I29-dV-X3l">
-                                <rect key="frame" x="53" y="471" width="494" height="35"/>
+                                <rect key="frame" x="53" y="471" width="494" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5AF-6D-UKa">
-                                        <rect key="frame" x="0.0" y="0.0" width="243" height="35"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="243" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="uWO-cg-nZO"/>
+                                            <constraint firstAttribute="height" constant="40" id="uWO-cg-nZO"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Facebook" backgroundImage="Button Background Facebook"/>
@@ -222,7 +223,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF7-MD-V4L">
-                                        <rect key="frame" x="251" y="0.0" width="243" height="35"/>
+                                        <rect key="frame" x="251" y="0.0" width="243" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Google" backgroundImage="Button Background Google"/>
                                         <connections>
@@ -261,7 +262,7 @@
                         <outlet property="passwordConfirmationTextField" destination="JfA-0V-KHI" id="OPo-U2-Gt0"/>
                         <outlet property="passwordTextField" destination="Z79-M1-gWS" id="Kmv-ND-d7n"/>
                         <segue destination="dvp-py-pNh" kind="presentation" identifier="kShowDefinePasswordSegue" modalTransitionStyle="crossDissolve" id="SFV-x2-vXQ"/>
-                        <segue destination="DMo-hO-X6i" kind="presentation" identifier="showSignUpSuccessful" id="SxF-aZ-E22"/>
+                        <segue destination="DMo-hO-X6i" kind="presentation" identifier="showCompleteProfile" id="SxF-aZ-E22"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Or-jm-Rqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -482,10 +483,10 @@
             </objects>
             <point key="canvasLocation" x="1085.625" y="773.23943661971828"/>
         </scene>
-        <!--Add Profile Infos View Controller-->
+        <!--Complete Profile View Controller-->
         <scene sceneID="Xvt-Ne-4Rv">
             <objects>
-                <viewController id="0Db-NV-ZiB" customClass="AddProfileInfosViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0Db-NV-ZiB" customClass="CompleteProfileViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ebf-5S-7Xe"/>
                         <viewControllerLayoutGuide type="bottom" id="Vtc-po-c0h"/>
@@ -532,23 +533,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iWg-RM-CyH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2520" y="534"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="uWe-UN-VW0">
-            <objects>
-                <viewController id="rv6-Xz-PSj" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="geE-a5-5ZA"/>
-                        <viewControllerLayoutGuide type="bottom" id="Oxm-Qn-rxI"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5uP-f2-poC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="owR-j6-W2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lxU-gH-30a">

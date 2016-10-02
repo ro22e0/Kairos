@@ -1,25 +1,19 @@
 //
-//  ProfileViewController.swift
+//  ChangePasswordViewController.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 01/09/2016.
+//  Created by Ronaël Bajazet on 01/10/2016.
 //  Copyright © 2016 Kairos-app. All rights reserved.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
+class ChangePasswordViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        nameLabel.text = OwnerManager.sharedInstance.owner?.name ?? "No name"
-        emailLabel.text = OwnerManager.sharedInstance.owner?.email
-        print(emailLabel.text)
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,4 +32,7 @@ class ProfileViewController: UIViewController {
     }
     */
 
+    @IBAction func cancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

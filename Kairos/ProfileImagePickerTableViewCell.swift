@@ -9,7 +9,7 @@
 import UIKit
 import Former
 
-class ProfileImagePickerTableViewCell: UITableViewCell,  LabelFormableRow {
+class ProfileImagePickerTableViewCell: UITableViewCell, LabelFormableRow {
 
     @IBOutlet weak var imageProfileView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

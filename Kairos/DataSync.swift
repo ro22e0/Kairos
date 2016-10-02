@@ -62,13 +62,13 @@ struct DataSync {
     private static func syncFriends(friends: [JSON], status: FriendStatus) {
         for f in friends {
             let friend = Friend.findOrCreate(["id": f["id"].object]) as! Friend
-            
+    
             friend.status = status.hashValue
             friend.name = f["name"].stringValue
             friend.nickname = f["nickname"].stringValue
             friend.email = f["email"].stringValue
             friend.image = f["image"].stringValue
-            friend.owner = OwnerManager.sharedInstance.owner
+            friend.owner = UserManager.sharedInstance.current
         }
         print(Friend.count())
     }
@@ -111,16 +111,16 @@ struct DataSync {
         Router.needToken = true
         
         print("fetchUsers")
-        print(OwnerManager.sharedInstance.owner!.accessToken)
-        print(OwnerManager.sharedInstance.owner!.client)
-        print(OwnerManager.sharedInstance.owner!.uid)
+        print(UserManager.sharedInstance.current.accessToken)
+        print(UserManager.sharedInstance.current.client)
+        print(UserManager.sharedInstance.current.uid)
         print("END---fetchUsers")
         
         RouterWrapper.sharedInstance.request(.GetUsers) { (response) in
             print(response.response) // URL response
             switch response.result {
             case .Success:
-                OwnerManager.sharedInstance.setCredentials(response.response!)
+                UserManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
                     
@@ -181,15 +181,15 @@ struct DataSync {
     static func fetchCalendars() {
         Router.needToken = true
         
-        print(OwnerManager.sharedInstance.owner!.accessToken)
-        print(OwnerManager.sharedInstance.owner!.client)
-        print(OwnerManager.sharedInstance.owner!.uid)
+        print(UserManager.sharedInstance.current.accessToken)
+        print(UserManager.sharedInstance.current.client)
+        print(UserManager.sharedInstance.current.uid)
         
         RouterWrapper.sharedInstance.request(.GetCalendars) { (response) in
             print(response.response) // URL response
             switch response.result {
             case .Success:
-                OwnerManager.sharedInstance.setCredentials(response.response!)
+                UserManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
                     
@@ -261,16 +261,16 @@ struct DataSync {
     static func fetchEvents() {
         Router.needToken = true
         
-        print(OwnerManager.sharedInstance.owner!.accessToken)
-        print(OwnerManager.sharedInstance.owner!.client)
-        print(OwnerManager.sharedInstance.owner!.uid)
+        print(UserManager.sharedInstance.current.accessToken)
+        print(UserManager.sharedInstance.current.client)
+        print(UserManager.sharedInstance.current.uid)
         
         RouterWrapper.sharedInstance.request(.GetEvents) { (response) in
             print(response.response) // URL response
             switch response.result {
             case .Success:
                 
-                OwnerManager.sharedInstance.setCredentials(response.response!)
+                UserManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
                     

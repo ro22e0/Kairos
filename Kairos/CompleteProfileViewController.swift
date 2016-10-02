@@ -1,5 +1,5 @@
 //
-//  AddProfileInfosViewController.swift
+//  CompleteProfileViewController.swift
 //  Kairos
 //
 //  Created by Ronaël Bajazet on 26/09/2016.
@@ -8,17 +8,20 @@
 
 import UIKit
 import Former
+import SwiftRecord
 
-class AddProfileInfosViewController: FormViewController {
+class CompleteProfileViewController: FormViewController {
     
     @IBOutlet weak var profileTableView: UITableView!
     
+    var user: Owner!
     var rows = [RowFormer]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.user = UserManager.sharedInstance.current
         configure()
     }
     
@@ -29,10 +32,10 @@ class AddProfileInfosViewController: FormViewController {
     
     private func configure() {
         former = Former(tableView: self.profileTableView)
-        
+
         title = "Complete your profile"
-        //        tableView.contentInset.top = 40
-        //        tableView.contentInset.bottom = 40
+                tableView.contentInset.top = 40
+                tableView.contentInset.bottom = 40
         
         // Create RowFomers
         
@@ -46,74 +49,78 @@ class AddProfileInfosViewController: FormViewController {
         }
         self.rows.append(imageRow)
         
-        let fullnameRow = TextFieldRowFormer<FormTextFieldCell>() {
+        let fullnameRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Fullname"
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
-            }
+            }.configure {
+                $0.text = user.name
+            }.onTextChanged { (text) in
+                self.user.name = text
+        }
         self.rows.append(fullnameRow)
         
-        let nicknameRow = TextFieldRowFormer<FormTextFieldCell>() {
+        let nicknameRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Nickname"
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
-            }
+            }.onTextChanged { (text) in
+                self.user.nickname = text
+        }
         self.rows.append(nicknameRow)
         
-        let emailRow = TextFieldRowFormer<FormTextFieldCell>() {
-            $0.titleLabel.text = "Email"
-            $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
-            $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
-            $0.textField.enabled = false
-            }
-//            .configure {
-//                $0.enabled = false
-//        }
-        self.rows.append(emailRow)
-        
-        let schoolRow = TextFieldRowFormer<FormTextFieldCell>() {
+        let schoolRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "School"
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
-            }
+            }.onTextChanged { (text) in
+                self.user.school = text
+        }
         rows.append(schoolRow)
         
-        let promotionRow = TextFieldRowFormer<FormTextFieldCell>() {
+        let promotionRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Promotion"
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
+            }.onTextChanged { (text) in
+                self.user.promotion = text
         }
         rows.append(promotionRow)
         
-        let locationRow = TextFieldRowFormer<FormTextFieldCell>() {
+        let locationRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Location"
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
-            }
+            }.onTextChanged { (text) in
+                self.user.location = text
+        }
         rows.append(locationRow)
         
-        let companyRow = TextFieldRowFormer<FormTextFieldCell>() {
+        let companyRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Company"
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
-
+            
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
-            }
+            }.onTextChanged { (text) in
+                self.user.company = text
+        }
         rows.append(companyRow)
         
-        let jobRow = TextFieldRowFormer<FormTextFieldCell>() {
+        let jobRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Job"
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
-
+            
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
-            }
+            }.onTextChanged { (text) in
+                self.user.job = text
+        }
         rows.append(jobRow)
         
         // Create Headers
@@ -131,19 +138,38 @@ class AddProfileInfosViewController: FormViewController {
         let imageSection = SectionFormer(rowFormer: imageRow)
             .set(headerViewFormer: createHeader("Profile Image"))
         
-        let aboutSection = SectionFormer(rowFormer: fullnameRow, nicknameRow, emailRow)
+        let aboutSection = SectionFormer(rowFormer: fullnameRow, nicknameRow)
             .set(headerViewFormer: createHeader("About"))
-    
+        
         let moreSection = SectionFormer(rowFormer: schoolRow, promotionRow, locationRow, companyRow, jobRow)
             .set(headerViewFormer: createHeader("More Informations"))
-    
+        
         former.append(sectionFormer: imageSection, aboutSection, moreSection)
     }
-
+    
     @IBAction func done(sender: AnyObject) {
+        let parameters = user.dictionaryWithValuesForKeys(["id", "name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
+        UserManager.sharedInstance.update(parameters) { (status) in
+            switch status {
+            case .Success:
+                print("yeah")
+                self.user.save()
+                self.setRootVC(BoardStoryboardID)
+            case .Error(let error):
+                print(error)
+            }
+        }
     }
-
+    
     @IBAction func skip(sender: AnyObject) {
+        let changedValues = user.committedValuesForKeys(["name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
+        for (key, value) in changedValues {
+            if value is NSNull {
+                user.setValue(nil, forKey: key)
+            } else {
+                user.setValue(value, forKey: key)
+            }
+        }
         self.setRootVC(BoardStoryboardID)
     }
     /*

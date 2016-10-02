@@ -8,16 +8,19 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 
 class RequestManager {
     
-    class func fetchFriends() {
+    static let sharedInstance = RequestManager()
+
+    func fetchFriends() {
         Router.needToken = true
         RouterWrapper.sharedInstance.request(.GetFriends) { (response) in
             print(response.response) // URL response
             switch response.result {
             case .Success:
-                OwnerManager.sharedInstance.setCredentials(response.response!)
+                UserManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
                     
@@ -60,21 +63,21 @@ class RequestManager {
             print(Friend.all().count)
         }
     }
-    
-    class func fetchUsers() {
+
+    func fetchUsers() {
         Router.needToken = true
         
         print("fetchUsers")
-        print(OwnerManager.sharedInstance.owner!.accessToken)
-        print(OwnerManager.sharedInstance.owner!.client)
-        print(OwnerManager.sharedInstance.owner!.uid)
+        print(UserManager.sharedInstance.current.accessToken)
+        print(UserManager.sharedInstance.current.client)
+        print(UserManager.sharedInstance.current.uid)
         print("END---fetchUsers")
         
         RouterWrapper.sharedInstance.request(.GetUsers) { (response) in
             print(response.response) // URL response
             switch response.result {
             case .Success:
-                OwnerManager.sharedInstance.setCredentials(response.response!)
+                UserManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
 
@@ -89,5 +92,4 @@ class RequestManager {
             }
         }
     }
-
 }

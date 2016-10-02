@@ -16,7 +16,8 @@ class ProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
+        self.configure()
+                // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -28,6 +29,14 @@ class ProfileTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func configure() {
+        self.profileImage.round()
+        self.profileImage.backgroundColor = .whiteColor()
+
+        let user = UserManager.sharedInstance.current
+        self.nameLabel.text = user.name
     }
     
     // MARK: - Table view data source
@@ -97,7 +106,7 @@ class ProfileTableViewController: UITableViewController {
             case .Success:
                 switch response.response!.statusCode {
                 case 200...203:
-                    SpinnerManager.showWhistle("kSuccess", success: false)
+                    SpinnerManager.showWhistle("kSuccess", success: true)
                 default:
                     SpinnerManager.showWhistle("kFail", success: false)
                 }

@@ -23,7 +23,7 @@ class SearchFriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        users = OwnerManager.sharedInstance.getUsers()
+//        users = UserManager.sharedInstance.getUsers()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -33,7 +33,7 @@ class SearchFriendsTableViewController: UITableViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 66
-        users = OwnerManager.sharedInstance.getUsers()
+//        users = UserManager.sharedInstance.getUsers()
 
         tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
         tableView.allowsSelection = false

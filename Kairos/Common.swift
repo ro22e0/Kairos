@@ -9,6 +9,7 @@
 import Foundation
 import SideMenu
 import CoreData
+import SwiftyJSON
 
 let MainStoryboardID = "Main"
 let CalendarStoryboardID = "Calendar"
@@ -36,6 +37,11 @@ enum FriendStatus: String {
     case Requested
     case Blocked
     case Accepted
+}
+
+enum CustomStatus {
+    case Success
+    case Error(String)
 }
 
 extension UIViewController {
@@ -70,7 +76,7 @@ extension UITableViewCell {
     }
 }
 
-extension UIImageView {
+extension UIView {
     func round() {
         self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2
     }
