@@ -21,7 +21,7 @@
 		DA1D4BE11D84111C00B11AD1 /* CalendarFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */; };
 		DA1D4BE31D841F7E00B11AD1 /* CalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */; };
 		DA1E11FF1D78440E0068207F /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E11FE1D78440E0068207F /* SignOutViewController.swift */; };
-		DA1E12011D784AC90068207F /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E12001D784AC90068207F /* UpdateProfileViewController.swift */; };
+		DA1E12011D784AC90068207F /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E12001D784AC90068207F /* EditProfileViewController.swift */; };
 		DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */; };
 		DA31B7741D9514D9004D5E81 /* CalendarEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA31B7731D9514D9004D5E81 /* CalendarEditTableViewController.swift */; };
 		DA3603C11CC26C3300A89B5A /* EventInfosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C01CC26C3300A89B5A /* EventInfosTableViewCell.swift */; };
@@ -74,6 +74,7 @@
 		DA851C961CAE99C50025E1D4 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA851C951CAE99C50025E1D4 /* Calendar.storyboard */; };
 		DA8CA94B1D8CA295007E40FF /* UserCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8CA9421D8CA295007E40FF /* UserCalendar.swift */; };
 		DA8CA94E1D8CA295007E40FF /* UserEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8CA9451D8CA295007E40FF /* UserEvent.swift */; };
+		DAA2D4791DA3079700D5E6A7 /* AddFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2D4781DA3079700D5E6A7 /* AddFriendsTableViewController.swift */; };
 		DAA6B6B71D99CAD600D68016 /* CompleteProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA6B6B61D99CAD600D68016 /* CompleteProfileViewController.swift */; };
 		DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */; };
 		DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */; };
@@ -129,7 +130,7 @@
 		DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarFilterTableViewController.swift; sourceTree = "<group>"; };
 		DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewController.swift; sourceTree = "<group>"; };
 		DA1E11FE1D78440E0068207F /* SignOutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
-		DA1E12001D784AC90068207F /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
+		DA1E12001D784AC90068207F /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCalendarTableViewController.swift; sourceTree = "<group>"; };
 		DA31B7731D9514D9004D5E81 /* CalendarEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEditTableViewController.swift; sourceTree = "<group>"; };
 		DA3603C01CC26C3300A89B5A /* EventInfosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EventInfosTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -182,6 +183,7 @@
 		DA851C951CAE99C50025E1D4 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		DA8CA9421D8CA295007E40FF /* UserCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCalendar.swift; sourceTree = "<group>"; };
 		DA8CA9451D8CA295007E40FF /* UserEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEvent.swift; sourceTree = "<group>"; };
+		DAA2D4781DA3079700D5E6A7 /* AddFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewController.swift; sourceTree = "<group>"; };
 		DAA6B6B61D99CAD600D68016 /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteProfileViewController.swift; sourceTree = "<group>"; };
 		DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DAA816621C9C218900EF1560 /* Kairos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kairos-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -346,7 +348,7 @@
 		DA612CB51CA473060027D7FB /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DA1E12001D784AC90068207F /* UpdateProfileViewController.swift */,
+				DA1E12001D784AC90068207F /* EditProfileViewController.swift */,
 				DADF545A1D932C5100D0E092 /* ProfileTableViewController.swift */,
 				DADC45DB1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift */,
 				DADC45DD1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift */,
@@ -557,6 +559,7 @@
 				DA668F3A1CA4AD7800230912 /* FriendsRequestsTableViewController.swift */,
 				DAEE7CBA1CA49A580019C8D4 /* FriendsTableViewController.swift */,
 				DA5F47191CA60BC600A37960 /* SearchFriendsTableViewController.swift */,
+				DAA2D4781DA3079700D5E6A7 /* AddFriendsTableViewController.swift */,
 				DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */,
 				DA7912F81CEFCBF800661753 /* FriendActionPopoverTableViewController.xib */,
 			);
@@ -813,6 +816,7 @@
 				DA5F471A1CA60BC600A37960 /* SearchFriendsTableViewController.swift in Sources */,
 				DA11A9F81D9872D400218FF3 /* ModalSearchSegue.swift in Sources */,
 				DA6853301CE25D6700B839F6 /* SentInvitationTableViewCell.swift in Sources */,
+				DAA2D4791DA3079700D5E6A7 /* AddFriendsTableViewController.swift in Sources */,
 				DA18745D1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift in Sources */,
 				DA6853331CE25E2400B839F6 /* UserManager.swift in Sources */,
 				DA3603C71CC26DA000A89B5A /* EventDetailsTableViewController.swift in Sources */,
@@ -858,7 +862,7 @@
 				DA6853481CE2707600B839F6 /* RouterWrapper.swift in Sources */,
 				DA6853421CE25E5E00B839F6 /* Owner.swift in Sources */,
 				DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */,
-				DA1E12011D784AC90068207F /* UpdateProfileViewController.swift in Sources */,
+				DA1E12011D784AC90068207F /* EditProfileViewController.swift in Sources */,
 				DA668F3E1CA4AEA000230912 /* InvitationTableViewCell.swift in Sources */,
 				DADD55E41CA60CE200C44D40 /* UserTableViewCell.swift in Sources */,
 				DA6853411CE25E5E00B839F6 /* User.swift in Sources */,

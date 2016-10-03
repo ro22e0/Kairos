@@ -22,6 +22,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordConfirmationTextField: UITextField!
+    @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var googleButton: UIButton!
     
     // MARK: - Class Properties
     var manager: Manager?
@@ -31,6 +33,9 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.facebookButton.round()
+        self.googleButton.round()
+        
         self.navigationItem.backBarButtonItem?.title = ""
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()

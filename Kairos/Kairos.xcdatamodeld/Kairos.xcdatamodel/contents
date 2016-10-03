@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="16A323" minimumToolsVersion="Automatic">
     <entity name="Calendar" representedClassName=".Calendar" syncable="YES">
         <attribute name="id" attributeType="Integer 32" syncable="YES">
             <userInfo>
@@ -51,6 +51,7 @@
             </userInfo>
         </attribute>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="job" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -75,8 +76,8 @@
         <element name="Calendar" positionX="-14024" positionY="-2794" width="128" height="103"/>
         <element name="Event" positionX="-14087" positionY="-2574" width="128" height="193"/>
         <element name="Friend" positionX="-14886" positionY="-2772" width="126" height="73"/>
-        <element name="User" positionX="-14555" positionY="-2863" width="128" height="253"/>
         <element name="Owner" positionX="-14555" positionY="-2548" width="128" height="118"/>
+        <element name="User" positionX="-14555" positionY="-2863" width="128" height="270"/>
         <element name="UserCalendar" positionX="-14312" positionY="-2790" width="128" height="88"/>
         <element name="UserEvent" positionX="-14312" positionY="-2538" width="128" height="88"/>
     </elements>

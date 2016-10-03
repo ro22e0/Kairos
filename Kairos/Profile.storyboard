@@ -141,7 +141,7 @@
                                                     <rect key="frame" x="483" y="7" width="30" height="30"/>
                                                     <state key="normal" title="Add"/>
                                                     <connections>
-                                                        <segue destination="BFT-gC-5iz" kind="custom" customClass="ModalSearchSegue" customModule="Kairos" customModuleProvider="target" id="l1E-Ja-ZpV"/>
+                                                        <segue destination="BFT-gC-5iz" kind="presentation" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="l1E-Ja-ZpV"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2H-na-6Ub">
@@ -261,7 +261,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="CvR-B0-75G">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="EU0-sc-pXm">
                                 <cells>
@@ -275,7 +275,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cange email address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFS-uT-HE1">
                                                     <rect key="frame" x="8" y="11" width="160" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -298,7 +298,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7BZ-sO-H3k">
                                                     <rect key="frame" x="8" y="11" width="138" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -480,13 +480,13 @@
             </objects>
             <point key="canvasLocation" x="1829" y="-21"/>
         </scene>
-        <!--SearchFriendsTableViewController-->
+        <!--AddFriendsTableViewController-->
         <scene sceneID="yD9-3d-BDe">
             <objects>
-                <viewControllerPlaceholder storyboardName="Friends" referencedIdentifier="SearchFriendsTableViewController" id="BFT-gC-5iz" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Friends" referencedIdentifier="AddFriendsTableViewController" id="BFT-gC-5iz" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z0j-u6-6kI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1910.5" y="-143"/>
+            <point key="canvasLocation" x="1901.5" y="-143"/>
         </scene>
         <!--CalendarFilterTableViewController-->
         <scene sceneID="u8Y-1U-CDb">
@@ -499,7 +499,7 @@
         <!--General-->
         <scene sceneID="Jhi-To-JVs">
             <objects>
-                <viewController id="JGO-Sq-HKR" userLabel="General" customClass="UpdateProfileViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JGO-Sq-HKR" userLabel="General" customClass="EditProfileViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2ZN-Cq-3pf"/>
                         <viewControllerLayoutGuide type="bottom" id="ejy-xA-Cq2"/>
@@ -509,6 +509,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="EfT-XR-5Wd">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="guP-0w-hMv">
+                            <connections>
+                                <action selector="cancel:" destination="JGO-Sq-HKR" id="ugh-Zk-b4t"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="VBE-hj-KIw">
+                            <connections>
+                                <action selector="done:" destination="JGO-Sq-HKR" id="IkK-qy-MGU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Now-jG-m2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

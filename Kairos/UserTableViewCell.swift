@@ -16,6 +16,7 @@ class UserTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.profilePictureImageView.round()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
@@ -23,10 +24,10 @@ class UserTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    
+
     @IBAction func invite(sender: UIButton) {
         let user = User.find("id == %@", args: self.tag) as! User
-        
+
         let parameters = ["friends": [["user_id": user.id!]]]
         RouterWrapper.sharedInstance.request(.InviteFriend(parameters)) { (response) in
             print(response.response)

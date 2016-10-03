@@ -135,15 +135,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="yya-pt-lij">
-                                <rect key="frame" x="276" y="84" width="48" height="70"/>
+                                <rect key="frame" x="267.5" y="84" width="65" height="94"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="128" id="3m4-3J-p2m"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="89" id="FAB-kb-Lit"/>
                                     <constraint firstAttribute="width" secondItem="yya-pt-lij" secondAttribute="height" multiplier="89:128" id="hs5-r2-aoI"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR CONTINUE WITH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpZ-0U-fAH">
+                                <rect key="frame" x="238" y="467" width="124" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="Mhb-MN-AlG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7od-tw-X1G">
+                                <rect key="frame" x="179" y="407" width="243" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kCM-ab-RZS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <state key="normal" title="Sign Up" backgroundImage="Button Background">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="SignUp:" destination="y9t-uh-Qvg" eventType="touchUpInside" id="yiW-aZ-qkV"/>
+                                </connections>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oYs-Uz-fc3">
-                                <rect key="frame" x="40" y="184" width="520" height="232"/>
+                                <rect key="frame" x="40" y="208" width="520" height="184"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fullname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JTA-us-5Lx">
                                         <rect key="frame" x="0.0" y="0.0" width="520" height="40"/>
@@ -175,19 +197,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7od-tw-X1G">
-                                        <rect key="frame" x="138.5" y="192" width="243" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="kCM-ab-RZS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <state key="normal" title="SIGNUP NOW !" backgroundImage="Button Background">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="SignUp:" destination="y9t-uh-Qvg" eventType="touchUpInside" id="yiW-aZ-qkV"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Z79-M1-gWS" firstAttribute="width" secondItem="JTA-us-5Lx" secondAttribute="width" id="7op-be-L1c"/>
@@ -199,33 +208,27 @@
                                     <constraint firstItem="x3H-Tn-tYW" firstAttribute="height" secondItem="JTA-us-5Lx" secondAttribute="height" id="xIw-k9-qYw"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR CONTINUE WITH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpZ-0U-fAH">
-                                <rect key="frame" x="238" y="436" width="124" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="Mhb-MN-AlG"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="I29-dV-X3l">
-                                <rect key="frame" x="53" y="471" width="494" height="40"/>
+                                <rect key="frame" x="256" y="502" width="88" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5AF-6D-UKa">
-                                        <rect key="frame" x="0.0" y="0.0" width="243" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <color key="backgroundColor" red="0.23357817530632019" green="0.34701001644134521" blue="0.5960078239440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" secondItem="5AF-6D-UKa" secondAttribute="height" multiplier="1:1" id="nwb-Wh-DEw"/>
                                             <constraint firstAttribute="height" constant="40" id="uWO-cg-nZO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Facebook" backgroundImage="Button Background Facebook"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="F"/>
                                         <connections>
                                             <action selector="FbSignUp:" destination="y9t-uh-Qvg" eventType="touchUpInside" id="0Qf-8a-uPa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zF7-MD-V4L">
-                                        <rect key="frame" x="251" y="0.0" width="243" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="Google" backgroundImage="Button Background Google"/>
+                                        <rect key="frame" x="48" y="0.0" width="40" height="40"/>
+                                        <color key="backgroundColor" red="0.82818955183029175" green="0.2822708785533905" blue="0.20922556519508362" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <state key="normal" title="G"/>
                                         <connections>
                                             <action selector="GoogleSignUp:" destination="y9t-uh-Qvg" eventType="touchUpInside" id="oZH-DN-hUB"/>
                                         </connections>
@@ -242,13 +245,15 @@
                             <constraint firstItem="oYs-Uz-fc3" firstAttribute="centerX" secondItem="8uh-v4-tlb" secondAttribute="centerX" id="2FU-vd-bcm"/>
                             <constraint firstItem="jpZ-0U-fAH" firstAttribute="centerX" secondItem="8uh-v4-tlb" secondAttribute="centerX" id="9yh-ly-c9v"/>
                             <constraint firstItem="I29-dV-X3l" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8uh-v4-tlb" secondAttribute="leading" constant="8" id="Mpa-fb-bqJ"/>
+                            <constraint firstItem="7od-tw-X1G" firstAttribute="centerX" secondItem="8uh-v4-tlb" secondAttribute="centerX" id="NO5-cu-cjp"/>
                             <constraint firstItem="oYs-Uz-fc3" firstAttribute="top" secondItem="yya-pt-lij" secondAttribute="bottom" constant="30" id="RYB-Ro-Yyg"/>
                             <constraint firstItem="oYs-Uz-fc3" firstAttribute="leading" secondItem="8uh-v4-tlb" secondAttribute="leading" constant="40" id="UKt-rO-3Jl"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="I29-dV-X3l" secondAttribute="trailing" constant="8" id="V8l-fx-csS"/>
                             <constraint firstItem="I29-dV-X3l" firstAttribute="top" secondItem="jpZ-0U-fAH" secondAttribute="bottom" constant="20" id="Ygb-hJ-BIw"/>
                             <constraint firstItem="yya-pt-lij" firstAttribute="centerX" secondItem="8uh-v4-tlb" secondAttribute="centerX" id="daO-wm-icH"/>
+                            <constraint firstItem="jpZ-0U-fAH" firstAttribute="top" secondItem="7od-tw-X1G" secondAttribute="bottom" constant="20" id="fXZ-Na-GiJ"/>
                             <constraint firstAttribute="trailing" secondItem="oYs-Uz-fc3" secondAttribute="trailing" constant="40" id="fxW-Pb-HdZ"/>
-                            <constraint firstItem="jpZ-0U-fAH" firstAttribute="top" secondItem="oYs-Uz-fc3" secondAttribute="bottom" constant="20" id="nte-7P-6fw"/>
+                            <constraint firstItem="7od-tw-X1G" firstAttribute="top" secondItem="oYs-Uz-fc3" secondAttribute="bottom" constant="15" id="hrO-yd-fRY"/>
                             <constraint firstItem="0Le-Wt-2SH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="I29-dV-X3l" secondAttribute="bottom" constant="12" id="oAa-U5-K4C"/>
                             <constraint firstItem="oYs-Uz-fc3" firstAttribute="centerY" secondItem="8uh-v4-tlb" secondAttribute="centerY" id="qA1-a6-7H5"/>
                             <constraint firstItem="I29-dV-X3l" firstAttribute="centerX" secondItem="8uh-v4-tlb" secondAttribute="centerX" id="rBE-Cr-Qdl"/>
@@ -258,7 +263,9 @@
                     <navigationItem key="navigationItem" title="Sign Up" id="xAm-Ep-nhO"/>
                     <connections>
                         <outlet property="emailTextField" destination="x3H-Tn-tYW" id="w4R-eP-mFy"/>
+                        <outlet property="facebookButton" destination="5AF-6D-UKa" id="cvl-rB-kT8"/>
                         <outlet property="fullnameTextField" destination="JTA-us-5Lx" id="OoB-SJ-8Yr"/>
+                        <outlet property="googleButton" destination="zF7-MD-V4L" id="2BH-SX-H5h"/>
                         <outlet property="passwordConfirmationTextField" destination="JfA-0V-KHI" id="OPo-U2-Gt0"/>
                         <outlet property="passwordTextField" destination="Z79-M1-gWS" id="Kmv-ND-d7n"/>
                         <segue destination="dvp-py-pNh" kind="presentation" identifier="kShowDefinePasswordSegue" modalTransitionStyle="crossDissolve" id="SFV-x2-vXQ"/>
@@ -267,7 +274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Or-jm-Rqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1085.625" y="110.91549295774647"/>
+            <point key="canvasLocation" x="1085" y="110"/>
         </scene>
         <!--Define Password View Controller-->
         <scene sceneID="xWH-7G-brF">
@@ -330,7 +337,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="ZEb-cA-r7L"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="18"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                 <state key="normal" title="Done" backgroundImage="Button Background">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -555,8 +562,6 @@
     </scenes>
     <resources>
         <image name="Button Background" width="243" height="40"/>
-        <image name="Button Background Facebook" width="243" height="40"/>
-        <image name="Button Background Google" width="243" height="40"/>
         <image name="Close" width="25" height="25"/>
         <image name="Logo" width="81" height="105"/>
     </resources>

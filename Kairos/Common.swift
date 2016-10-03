@@ -10,6 +10,7 @@ import Foundation
 import SideMenu
 import CoreData
 import SwiftyJSON
+import UIKit
 
 let MainStoryboardID = "Main"
 let CalendarStoryboardID = "Calendar"
@@ -79,5 +80,12 @@ extension UITableViewCell {
 extension UIView {
     func round() {
         self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2
+        self.clipsToBounds = true
+        
+    }
+
+    func addBorder(color: CGColor) {
+        self.layer.borderWidth = 3.0
+        self.layer.borderColor = color
     }
 }

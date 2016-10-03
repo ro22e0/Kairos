@@ -13,12 +13,13 @@ import CoreData
 class User: NSManagedObject {
 
     // MARK: - CoreDataProperties
-    
+
     @NSManaged var company: String?
     @NSManaged var createdAt: NSDate?
     @NSManaged var email: String?
     @NSManaged var id: NSNumber?
     @NSManaged var image: String?
+    @NSManaged var imageData: NSData?
     @NSManaged var job: String?
     @NSManaged var location: String?
     @NSManaged var name: String?

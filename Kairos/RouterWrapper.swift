@@ -28,7 +28,7 @@ public enum Router: URLRequestConvertible {
      
      - returns: A `String` baseURL.
      */
-    static let baseURL = "http://kairos-api-ro22e0.c9users.io/api/v1"
+    static let baseURL = "https://kairos-api-ro22e0.c9users.io/api/v1"
     
     /**
      Determine if the request need credentials in headers.
@@ -37,7 +37,7 @@ public enum Router: URLRequestConvertible {
      */
     static var needToken: Bool = true
     
-    case Logout
+    case SignOut
     
     /// Create a new user.
     case CreateUser([String: AnyObject])
@@ -102,7 +102,7 @@ public enum Router: URLRequestConvertible {
             return .GET
         case .UpdateUser, .AcceptFriend, .DeclineFriend, .UpdateEvent, .UpdateCalendar:
             return .PUT
-        case .RemoveFriend, .DeleteEvent, .DeleteCalendar, .Logout:
+        case .RemoveFriend, .DeleteEvent, .DeleteCalendar, .SignOut:
             return .DELETE
         }
     }
@@ -140,7 +140,7 @@ public enum Router: URLRequestConvertible {
             return "/calendars/\(parameters["id"])"
         case .DeleteCalendar(let parameters):
             return "/calendars/\(parameters["id"])"
-        case .Logout:
+        case .SignOut:
             return "/auth/sign_out"
         }
     }
@@ -185,7 +185,7 @@ public enum Router: URLRequestConvertible {
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .RemoveFriend(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .DeleteEvent, .GetCalendars, .GetCalendar, .DeleteCalendar, .Logout:
+        case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .DeleteEvent, .GetCalendars, .GetCalendar, .DeleteCalendar, .SignOut:
             return mutableURLRequest
         case .CreateEvent(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
@@ -226,7 +226,7 @@ class RouterWrapper: NSObject, NSURLSessionTaskDelegate {
         
         return Alamofire.Manager(configuration: config)
     }()
-    
+
     /**
      Creates a request for the specified URL request.
      

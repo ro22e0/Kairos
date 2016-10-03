@@ -13,17 +13,19 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    var user: Owner!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.user = UserManager.sharedInstance.current
         self.configure()
-                // Uncomment the following line to preserve selection between presentations
+        // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-//        RequestManager.fetchFriends()
-//        RequestManager.fetchUsers()
+        //        RequestManager.fetchFriends()
+        //        RequestManager.fetchUsers()
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,11 +34,14 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func configure() {
+        if self.user.imageData != nil {
+            self.profileImage.image = UIImage(data: self.user.imageData!)
+        } else {
+            self.profileImage.backgroundColor = .whiteColor()
+        }
         self.profileImage.round()
-        self.profileImage.backgroundColor = .whiteColor()
-
-        let user = UserManager.sharedInstance.current
-        self.nameLabel.text = user.name
+        self.profileImage.addBorder(UIColor.whiteColor().CGColor)
+        self.nameLabel.text = self.user.name
     }
     
     // MARK: - Table view data source
@@ -61,7 +66,7 @@ class ProfileTableViewController: UITableViewController {
      return true
      }
      */
-
+    
     /*
      // Override to support editing the table view.
      override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -98,25 +103,10 @@ class ProfileTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
-
+    
     @IBAction func signOut(sender: UIButton) {
-        Router.needToken = true
-        RouterWrapper.sharedInstance.request(.Logout) { (response) in
-            switch response.result {
-            case .Success:
-                switch response.response!.statusCode {
-                case 200...203:
-                    SpinnerManager.showWhistle("kSuccess", success: true)
-                default:
-                    SpinnerManager.showWhistle("kFail", success: false)
-                }
-            case .Failure(let error):
-                SpinnerManager.showWhistle("kFail", success: false)
-                print(error.localizedDescription)
-            }
-            let defautls = NSUserDefaults.standardUserDefaults()
-            defautls.setValue(false, forKey: userLoginKeyConstant)
-            self.setRootVC(LoginStoryboardID)
+        UserManager.sharedInstance.signOut() { (status) in
+            self.setRootVC(MainStoryboardID)
         }
     }
     

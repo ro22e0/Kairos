@@ -123,9 +123,8 @@ struct DataSync {
                 UserManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
-                    
                     let data = self.transformJson(json)
-                    
+
                     self.sync(entity: "User", data: data, completion: { error in
                         print(NSDate(), "done")
                     })

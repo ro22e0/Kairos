@@ -63,33 +63,4 @@ class RequestManager {
             print(Friend.all().count)
         }
     }
-
-    func fetchUsers() {
-        Router.needToken = true
-        
-        print("fetchUsers")
-        print(UserManager.sharedInstance.current.accessToken)
-        print(UserManager.sharedInstance.current.client)
-        print(UserManager.sharedInstance.current.uid)
-        print("END---fetchUsers")
-        
-        RouterWrapper.sharedInstance.request(.GetUsers) { (response) in
-            print(response.response) // URL response
-            switch response.result {
-            case .Success:
-                UserManager.sharedInstance.setCredentials(response.response!)
-                if let value = response.result.value {
-                    let json = JSON(value)
-
-                    let data = DataSync.transformJson(json)
-
-                    DataSync.sync(entity: "User", data: data, completion: { error in
-                        print(NSDate(), "done")
-                    })
-                }
-            case .Failure(let error):
-                print(error)
-            }
-        }
-    }
 }

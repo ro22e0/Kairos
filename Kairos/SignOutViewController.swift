@@ -23,26 +23,6 @@ class SignOutViewController: UIViewController {
     }
     
     private func logout() {
-        Router.needToken = true
-        RouterWrapper.sharedInstance.request(.Logout) { (response) in
-            switch response.result {
-            case .Success:
-                switch response.response!.statusCode {
-                case 200...203:
-                    let defautls = NSUserDefaults.standardUserDefaults()
-                    defautls.setValue(false, forKey: userLoginKeyConstant)
-                    self.setRootVC(LoginStoryboardID)
-                    break;
-                default:
-                    SpinnerManager.showWhistle("kFail", success: false)
-                    break;
-                }
-            case .Failure(let error):
-                SpinnerManager.showWhistle("kFail", success: false)
-                print(error.localizedDescription)
-            }
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
     }
     
     /*

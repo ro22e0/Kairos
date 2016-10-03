@@ -27,8 +27,8 @@
                             <action selector="invite:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oxe-2R-Xyl"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Io6-eD-4N7">
-                        <rect key="frame" x="8" y="8" width="49.5" height="49.5"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Io6-eD-4N7">
+                        <rect key="frame" x="8" y="7" width="49.5" height="49.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Io6-eD-4N7" secondAttribute="height" multiplier="1:1" id="Vfb-gU-ZGr"/>
                             <constraint firstAttribute="height" constant="49" id="v7m-NH-jK1"/>
@@ -50,7 +50,7 @@
                 <outlet property="nameLabel" destination="baH-dk-f1u" id="ZMC-qp-7Do"/>
                 <outlet property="profilePictureImageView" destination="Io6-eD-4N7" id="DYa-tw-y1y"/>
             </connections>
-            <point key="canvasLocation" x="177" y="432"/>
+            <point key="canvasLocation" x="305" y="381"/>
         </tableViewCell>
     </objects>
 </document>

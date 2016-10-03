@@ -1,28 +1,25 @@
 //
-//  CompleteProfileViewController.swift
+//  EditProfileViewController.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 26/09/2016.
+//  Created by Ronaël Bajazet on 01/09/2016.
 //  Copyright © 2016 Kairos-app. All rights reserved.
 //
 
 import UIKit
 import Former
-import SwiftRecord
 
-class CompleteProfileViewController: FormViewController {
+class EditProfileViewController: FormViewController {
     
-    @IBOutlet weak var profileTableView: UITableView!
-    
-    var user: Owner!
     var rows = [RowFormer]()
+    var user: Owner!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         self.user = UserManager.sharedInstance.current
-        configure()
+        self.configure()
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,9 +28,6 @@ class CompleteProfileViewController: FormViewController {
     }
     
     private func configure() {
-        former = Former(tableView: self.profileTableView)
-        
-        title = "Complete your profile"
         tableView.contentInset.top = 40
         tableView.contentInset.bottom = 40
         
@@ -41,6 +35,10 @@ class CompleteProfileViewController: FormViewController {
         
         let imageRow = LabelRowFormer<ProfileImagePickerTableViewCell>(instantiateType: .Nib(nibName: "ProfileImagePickerTableViewCell")) {
             $0.imageProfileView.image = nil
+            if self.user.imageData != nil {
+                $0.imageProfileView.image = UIImage(data: self.user.imageData!)
+                $0.imageProfileView.round()
+            }
             }.configure {
                 $0.text = "Choose profile image from library"
                 $0.rowHeight = 55
@@ -67,6 +65,8 @@ class CompleteProfileViewController: FormViewController {
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
+            }.configure {
+                $0.text = user.nickname
             }.onTextChanged { (text) in
                 self.user.nickname = text
         }
@@ -77,6 +77,8 @@ class CompleteProfileViewController: FormViewController {
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
+            }.configure {
+                $0.text = user.school
             }.onTextChanged { (text) in
                 self.user.school = text
         }
@@ -87,6 +89,8 @@ class CompleteProfileViewController: FormViewController {
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
+            }.configure {
+                $0.text = user.promotion
             }.onTextChanged { (text) in
                 self.user.promotion = text
         }
@@ -97,6 +101,8 @@ class CompleteProfileViewController: FormViewController {
             $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
+            }.configure {
+                $0.text = user.location
             }.onTextChanged { (text) in
                 self.user.location = text
         }
@@ -108,6 +114,8 @@ class CompleteProfileViewController: FormViewController {
             
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
+            }.configure {
+                $0.text = user.company
             }.onTextChanged { (text) in
                 self.user.company = text
         }
@@ -119,6 +127,8 @@ class CompleteProfileViewController: FormViewController {
             
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
+            }.configure {
+                $0.text = user.job
             }.onTextChanged { (text) in
                 self.user.job = text
         }
@@ -155,32 +165,7 @@ class CompleteProfileViewController: FormViewController {
         picker.allowsEditing = false
         presentViewController(picker, animated: true, completion: nil)
     }
-    
-    @IBAction func done(sender: AnyObject) {
-        let parameters = user.dictionaryWithValuesForKeys(["id", "name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
-        UserManager.sharedInstance.update(parameters) { (status) in
-            switch status {
-            case .Success:
-                print("yeah")
-                self.user.save()
-                self.setRootVC(BoardStoryboardID)
-            case .Error(let error):
-                print(error)
-            }
-        }
-    }
-    
-    @IBAction func skip(sender: AnyObject) {
-        let changedValues = user.committedValuesForKeys(["name", "nickname", "image", "imageData", "email", "school", "promotion", "location", "company", "job"])
-        for (key, value) in changedValues {
-            if value is NSNull {
-                user.setValue(nil, forKey: key)
-            } else {
-                user.setValue(value, forKey: key)
-            }
-        }
-        self.setRootVC(BoardStoryboardID)
-    }
+
     /*
      // MARK: - Navigation
      
@@ -191,9 +176,34 @@ class CompleteProfileViewController: FormViewController {
      }
      */
     
+    @IBAction func done(sender: AnyObject) {
+        let parameters = user.dictionaryWithValuesForKeys(["id", "name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
+        UserManager.sharedInstance.update(parameters) { (status) in
+            switch status {
+            case .Success:
+                print("yeah")
+                self.user.save()
+                self.navigationController?.popViewControllerAnimated(true)
+            case .Error(let error):
+                print(error)
+            }
+        }
+    }
+
+    @IBAction func cancel(sender: AnyObject) {
+        let changedValues = user.committedValuesForKeys(["name", "nickname", "image", "imageData", "email", "school", "promotion", "location", "company", "job"])
+        for (key, value) in changedValues {
+            if value is NSNull {
+                user.setValue(nil, forKey: key)
+            } else {
+                user.setValue(value, forKey: key)
+            }
+        }
+        self.navigationController?.popViewControllerAnimated(true)
+    }
 }
 
-extension CompleteProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismissViewControllerAnimated(true, completion: nil)
         user.imageData = UIImageJPEGRepresentation(image, 1)

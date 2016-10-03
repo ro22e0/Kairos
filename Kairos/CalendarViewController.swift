@@ -9,6 +9,7 @@
 import UIKit
 import FSCalendar
 import SwiftRecord
+import DZNEmptyDataSet
 
 private let SWIPE_ANIMATION_DURATION = 0.3
 
@@ -159,5 +160,11 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     // MARK: FSCalendarDelegateAppearance
     func calendar(calendar: FSCalendar, appearance: FSCalendarAppearance, eventColorsForDate date: NSDate) -> [AnyObject]? {
         return []
+    }
+}
+
+extension CalendarViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No Events")
     }
 }

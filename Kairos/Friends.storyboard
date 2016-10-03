@@ -67,10 +67,10 @@
             </objects>
             <point key="canvasLocation" x="2541" y="409"/>
         </scene>
-        <!--Search Friends Table View Controller-->
+        <!--Add Friends Table View Controller-->
         <scene sceneID="6gH-gN-0sW">
             <objects>
-                <tableViewController id="Uhw-4Q-aJQ" customClass="SearchFriendsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Uhw-4Q-aJQ" customClass="AddFriendsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="N9Y-dx-111">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,13 +81,7 @@
                             <outlet property="delegate" destination="Uhw-4Q-aJQ" id="nao-pG-X3f"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="56q-P6-4F2">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="B3B-gP-Asa">
-                            <connections>
-                                <action selector="done:" destination="Uhw-4Q-aJQ" id="dQm-qd-q51"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="56q-P6-4F2"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdf-pM-tbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -96,7 +90,8 @@
         <!--Navigation Controller-->
         <scene sceneID="iEa-C2-5je">
             <objects>
-                <navigationController storyboardIdentifier="SearchFriendsTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="0tU-hL-e8K" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uvv-Is-AID" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="AddFriendsTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="0tU-hL-e8K" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DUg-18-Yp6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -107,7 +102,6 @@
                         <segue destination="Uhw-4Q-aJQ" kind="relationship" relationship="rootViewController" id="ieK-GP-2nl"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uvv-Is-AID" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2541" y="1107"/>
         </scene>

@@ -21,27 +21,6 @@ class UserManager {
         return Owner.all().first as! Owner
     }
     
-    func update(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        Router.needToken = true
-        RouterWrapper.sharedInstance.request(.UpdateUser(parameters)) { (response) in
-            switch response.result {
-            case .Success:
-                if let value = response.result.value {
-                    let _ = JSON(value)
-                    switch response.response!.statusCode {
-                    case 200:
-                        self.setCredentials(response.response!)
-                        completionHandler(.Success)
-                    default:
-                        completionHandler(.Error("Fail to connect"))
-                    }
-                }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
-            }
-        }
-    }
-    
     func signIn(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
         Router.needToken = false
         RouterWrapper.sharedInstance.request(.Authenticate(parameters)) { (response) in
@@ -93,6 +72,46 @@ class UserManager {
         }
     }
     
+    func signOut(completionHandler: (CustomStatus) -> Void) {
+        Router.needToken = true
+        RouterWrapper.sharedInstance.request(.SignOut) { (response) in
+            let defautls = NSUserDefaults.standardUserDefaults()
+            defautls.setValue(false, forKey: userLoginKeyConstant)
+            switch response.result {
+            case .Success:
+                switch response.response!.statusCode {
+                case 200...203:
+                    completionHandler(.Success)
+                default:
+                    completionHandler(.Error("kFail"))
+                }
+            case .Failure(let error):
+                completionHandler(.Error(error.localizedDescription))
+            }
+        }
+    }
+    
+    func update(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
+        Router.needToken = true
+        RouterWrapper.sharedInstance.request(.UpdateUser(parameters)) { (response) in
+            switch response.result {
+            case .Success:
+                if let value = response.result.value {
+                    let _ = JSON(value)
+                    switch response.response!.statusCode {
+                    case 200:
+                        self.setCredentials(response.response!)
+                        completionHandler(.Success)
+                    default:
+                        completionHandler(.Error("Fail to connect"))
+                    }
+                }
+            case .Failure(let error):
+                completionHandler(.Error(error.localizedDescription))
+            }
+        }
+    }
+    
     func setCredentials(response: NSHTTPURLResponse) {
         current.accessToken = response.allHeaderFields["access-token"] as? String
         current.client  = response.allHeaderFields["client"] as? String
@@ -106,13 +125,17 @@ class UserManager {
     }
     
     func all(filtered text: String) -> [User] {
-        let namePred = NSPredicate(format: "name contains[c] %@", text)
-        let nicknamePred = NSPredicate(format: "nickname contains[c] %@", text)
-        let emailPred = NSPredicate(format: "email contains[c] %@", text)
+        let namePred = NSPredicate(format: "name contains[c] %@ AND SELF != %@", text, self.current)
+        let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@", text, self.current)
+        let emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@", text, self.current)
         let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
         
-        let user = Friend.query(compoundPred) as! [User]
+        let user = User.query(compoundPred) as! [User]
         return user
+    }
+    
+    func fetch() {
+        DataSync.fetchUsers()
     }
     
     func getCalendars() -> [Calendar] {
