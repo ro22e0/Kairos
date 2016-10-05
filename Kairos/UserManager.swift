@@ -129,21 +129,30 @@ class UserManager {
         let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@", text, self.current)
         let emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@", text, self.current)
         let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
-        
+
         let user = User.query(compoundPred) as! [User]
         return user
     }
-    
-    func fetch() {
-        DataSync.fetchUsers()
+
+    func fetch(handler: (() -> Void)? = nil) {
+        DataSync.fetchUsers { (status) in
+            switch status {
+            case .Success:
+                if handler != nil {
+                    handler!()
+                }
+            case .Error(let error):
+                print(error)
+            }
+        }
     }
-    
+
     func getCalendars() -> [Calendar] {
         let calendars = Calendar.all() as! [Calendar]
-        
+
         return calendars
     }
-    
+
     func getEvents() -> [Event] {
         let events = Event.all() as! [Event]
         

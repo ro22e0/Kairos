@@ -62,7 +62,7 @@ struct DataSync {
     private static func syncFriends(friends: [JSON], status: FriendStatus) {
         for f in friends {
             let friend = Friend.findOrCreate(["id": f["id"].object]) as! Friend
-    
+            
             friend.status = status.hashValue
             friend.name = f["name"].stringValue
             friend.nickname = f["nickname"].stringValue
@@ -72,7 +72,66 @@ struct DataSync {
         }
         print(Friend.count())
     }
-
+    
+    static func fetchFriends(completionHandler: (CustomStatus) -> Void) {
+        Router.needToken = true
+        RouterWrapper.sharedInstance.request(.GetFriends) { (response) in
+            print(response.response) // URL response
+            switch response.result {
+            case .Success:
+                UserManager.sharedInstance.setCredentials(response.response!)
+                switch response.response!.statusCode {
+                case 200...203:
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        
+                        print(json)
+                        
+                        let friendsArray = json["friends"].arrayValue + json["friend_requests"].array! + json["pending_requests"].array!
+                        let friends = DataSync.transformJson(JSON(friendsArray))
+                        print(friends)
+//                        
+//                        let requested = DataSync.transformJson()
+//                        print(requested)
+//                        
+//                        let pending = DataSync.transformJson()
+//                        print(requested)
+                        
+                        for var f in friends {
+                            f["status"] = FriendStatus.Accepted.hashValue
+                            f["owner"] = UserManager.sharedInstance.current
+                        }
+//                        for var f in requested {
+//                            f["status"] = FriendStatus.Requested.hashValue
+//                            f["owner"] = UserManager.sharedInstance.current
+//                        }
+//                        for var f in pending {
+//                            f["status"] = FriendStatus.Pending.hashValue
+//                            f["owner"] = UserManager.sharedInstance.current
+//                        }
+                        
+                        DataSync.sync(entity: "Friend", data: friends, completion: { error in
+                            print(NSDate(), "done")
+                            completionHandler(.Success)
+                        })
+//                        DataSync.sync(entity: "Friend", data: requested, completion: { error in
+//                            print(NSDate(), "done")
+//                            completionHandler(.Success)
+//                        })
+//                        DataSync.sync(entity: "Friend", data: pending, completion: { error in
+//                            print(NSDate(), "done")
+//                            completionHandler(.Success)
+//                        })
+                    }
+                default:
+                    completionHandler(CustomStatus.Error("error"))
+                }
+            case .Failure(let error):
+                completionHandler(.Error(error.localizedDescription))
+            }
+        }
+    }
+    
     // MARK: - Users
     
     private static func deleteUsers(users: [JSON]) {
@@ -107,7 +166,7 @@ struct DataSync {
         }
     }
     
-    static func fetchUsers() {
+    static func fetchUsers(completionHandler: (CustomStatus) -> Void) {
         Router.needToken = true
         
         print("fetchUsers")
@@ -121,15 +180,20 @@ struct DataSync {
             switch response.result {
             case .Success:
                 UserManager.sharedInstance.setCredentials(response.response!)
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    let data = self.transformJson(json)
-
-                    self.sync(entity: "User", data: data, completion: { error in
-                        print(NSDate(), "done")
-                    })
+                switch response.response!.statusCode {
+                case 200...203:
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        let data = self.transformJson(json)
+                        self.sync(entity: "User", data: data, completion: { error in
+                            completionHandler(CustomStatus.Success)
+                        })
+                    }
+                default:
+                    completionHandler(CustomStatus.Error("error"))
                 }
             case .Failure(let error):
+                completionHandler(CustomStatus.Error(error.localizedDescription))
                 print(error)
             }
         }

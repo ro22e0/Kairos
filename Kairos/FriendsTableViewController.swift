@@ -13,9 +13,6 @@ import DZNEmptyDataSet
 class FriendsTableViewController: UITableViewController {
     
     // MARK: - Class Properties
-    let cellIdentifier = "friendCell"
-    var itemInfo = IndicatorInfo(title: "View")
-
     var friends = [Friend]()
 
     override func viewDidLoad() {
@@ -26,18 +23,20 @@ class FriendsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        self.tableView.tableFooterView = UIView()
-        
-//        friends = UserManager.sharedInstance.getFriends(withStatus: .Accepted)
-        print(friends.count)
-
-        tableView.registerNib(UINib(nibName: "FriendTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
-        tableView.allowsSelection = false
-
-        definesPresentationContext = false
+        FriendManager.sharedInstance.fetch { 
+            self.friends = FriendManager.sharedInstance.friends()
+            self.tableView.reloadData()
+        }
     }
-    
+
+    func configure() {
+        tableView.tableFooterView = UIView()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 66
+        tableView.registerNib(UINib(nibName: "FriendTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "friendCell")
+        tableView.allowsSelection = false
+    }
+
     // MARK: - Methods
 
     override func viewWillAppear(animated: Bool) {
@@ -65,7 +64,7 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! FriendTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell", forIndexPath: indexPath) as! FriendTableViewCell
 
         cell.nameLabel.text = friends[indexPath.row].name
         cell.tag = Int(friends[indexPath.row].id!)

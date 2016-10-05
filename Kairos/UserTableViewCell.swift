@@ -24,30 +24,18 @@ class UserTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-
+    
     @IBAction func invite(sender: UIButton) {
         let user = User.find("id == %@", args: self.tag) as! User
+        let parameters = ["user_id": user.id!]
 
-        let parameters = ["friends": [["user_id": user.id!]]]
-        RouterWrapper.sharedInstance.request(.InviteFriend(parameters)) { (response) in
-            print(response.response)
-            print(response.request)
-            switch response.result {
+        FriendManager.sharedInstance.invite(parameters) { (status) in
+            switch status {
             case .Success:
-                switch response.response!.statusCode {
-                case 200...203:
-                    SpinnerManager.showWhistle("kFriendInviteSent", success: true)
-                    user.delete()
-                    UserManager.sharedInstance.setCredentials(response.response!)
-                    break;
-                default:
-                    SpinnerManager.showWhistle("kFail", success: false)
-                    break;
-                }
-
-            case .Failure(let error):
-                SpinnerManager.showWhistle("kFail", success: false)
-                print(error.localizedDescription)
+                SpinnerManager.showWhistle("kFriendSuccess")
+            case .Error(let error):
+                SpinnerManager.showWhistle("kFriendError", success: false)
+                print(error)
             }
         }
     }

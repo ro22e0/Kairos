@@ -18,7 +18,7 @@ class AddFriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         UserManager.sharedInstance.fetch()
         configureSearchController()
         configure()
@@ -28,7 +28,7 @@ class AddFriendsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         searchController.active = true
@@ -36,20 +36,27 @@ class AddFriendsTableViewController: UITableViewController {
             self.searchController.searchBar.becomeFirstResponder()
         })
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func configure() {
+        self.tableView.tableFooterView = UIView()
+
+        let blurEffect = UIBlurEffect(style: .Light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        self.tableView.backgroundView = blurEffectView
+
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 66
         tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "userCell")
         tableView.allowsSelection = false
-        
     }
-    
+
     func configureSearchController() {
         // Initialize and perform a minimum configuration to the search controller.
         searchController = UISearchController(searchResultsController: nil)
@@ -80,8 +87,13 @@ class AddFriendsTableViewController: UITableViewController {
         
         // Configure the cell...
         cell.nameLabel.text = users[indexPath.row].name
+        cell.tag = Int(users[indexPath.row].id!)
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.0
     }
     
     /*
@@ -132,17 +144,17 @@ class AddFriendsTableViewController: UITableViewController {
 }
 
 extension AddFriendsTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
-    
+
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         shouldShowSearchResults = true
         tableView.reloadData()
     }
-    
+
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         shouldShowSearchResults = false
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if shouldShowSearchResults {
             let searchString = searchController.searchBar.text

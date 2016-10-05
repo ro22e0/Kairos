@@ -34,10 +34,9 @@ enum LoginSDK: String {
 }
 
 enum FriendStatus: String {
-    case Pending
-    case Requested
-    case Blocked
-    case Accepted
+    case Pending = "pending"
+    case Requested = "requested"
+    case Accepted = "accepted"
 }
 
 enum CustomStatus {

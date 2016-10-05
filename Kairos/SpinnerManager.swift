@@ -37,7 +37,7 @@ struct SpinnerManager {
         SwiftSpinner.sharedInstance.title = title
     }
     
-    static func showWhistle(title: String, success: Bool) {
+    static func showWhistle(title: String, success: Bool = true) {
         var murmur = Murmur(title: title)
 
         if success {

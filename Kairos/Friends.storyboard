@@ -62,6 +62,7 @@
                             <outlet property="emptyDataSetSource" destination="3SN-Wk-4fd" id="ORM-sS-RCq"/>
                         </connections>
                     </tableView>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="isL-BK-ddl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -85,12 +86,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdf-pM-tbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3353" y="1107"/>
+            <point key="canvasLocation" x="2541" y="1107"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iEa-C2-5je">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uvv-Is-AID" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="AddFriendsTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="0tU-hL-e8K" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DUg-18-Yp6">
@@ -102,8 +102,9 @@
                         <segue destination="Uhw-4Q-aJQ" kind="relationship" relationship="rootViewController" id="ieK-GP-2nl"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uvv-Is-AID" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2541" y="1107"/>
+            <point key="canvasLocation" x="1729" y="1107"/>
         </scene>
     </scenes>
 </document>
