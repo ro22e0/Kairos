@@ -27,6 +27,7 @@ class User: NSManagedObject {
     @NSManaged var promotion: String?
     @NSManaged var school: String?
     @NSManaged var updatedAt: NSDate?
+    @NSManaged var mutualFriends: NSSet?
     @NSManaged var userCalendars: UserCalendar?
-    @NSManaged var userEvents: NSManagedObject?
+    @NSManaged var userEvents: UserEvent?
 }

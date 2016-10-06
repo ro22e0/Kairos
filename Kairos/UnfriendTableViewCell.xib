@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -14,15 +14,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJf-ti-GwU">
-                        <rect key="frame" x="8" y="11" width="42" height="21"/>
+                        <rect key="frame" x="139" y="11" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DJf-ti-GwU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="YUQ-MK-YjE"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DJf-ti-GwU" secondAttribute="trailing" constant="8" id="2jx-B9-RHX"/>
+                    <constraint firstItem="DJf-ti-GwU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="GRz-4n-mZ8"/>
                     <constraint firstItem="DJf-ti-GwU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Yz9-G5-Rg3"/>
+                    <constraint firstItem="DJf-ti-GwU" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="w1e-ga-QxN"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

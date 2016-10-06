@@ -26,7 +26,10 @@ let kUSER_GOOGLE_AUTH_NOTIFICATION = "kUserGoogleAuth"
 let kEventWillSaveNotification = "EventWillSave"
 let kCalendarWillSaveNotification = "CalendarWillSave"
 
-let userLoginKeyConstant = "userLoginKey"
+let userLoginKey = "userLoginKey"
+let userTokenKey = "userTokenKey"
+let userClientKey = "userClientKey"
+let userUIDKey = "userUIDKey"
 
 enum LoginSDK: String {
     case Facebook = "Facebook"

@@ -16,7 +16,6 @@ class UserTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.profilePictureImageView.round()
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

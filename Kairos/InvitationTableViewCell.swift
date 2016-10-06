@@ -37,7 +37,7 @@ class InvitationTableViewCell: UITableViewCell {
                 switch response.response!.statusCode {
                 case 200...203:
                     SpinnerManager.showWhistle("kFriendInviteAccept", success: true)
-                    friend.status = FriendStatus.Accepted.hashValue
+                    friend.status = FriendStatus.Accepted.rawValue
                     UserManager.sharedInstance.setCredentials(response.response!)
                     break;
                 default:

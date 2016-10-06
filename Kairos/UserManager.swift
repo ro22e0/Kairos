@@ -32,7 +32,7 @@ class UserManager {
                     case 200:
                         DataSync.sync(entity: "Owner", data: [json["data"].dictionaryObject!], completion: { error in
                             let defautls = NSUserDefaults.standardUserDefaults()
-                            defautls.setValue(true, forKey: userLoginKeyConstant)
+                            defautls.setValue(true, forKey: userLoginKey)
                             self.setCredentials(response.response!)
                             completionHandler(.Success)
                             }, withDelete: true)
@@ -58,7 +58,7 @@ class UserManager {
                     case 200:
                         DataSync.sync(entity: "Owner", data: [json["data"].dictionaryObject!], completion: { error in
                             let defautls = NSUserDefaults.standardUserDefaults()
-                            defautls.setValue(true, forKey: userLoginKeyConstant)
+                            defautls.setValue(true, forKey: userLoginKey)
                             self.setCredentials(response.response!)
                             completionHandler(.Success)
                             }, withDelete: true)
@@ -76,7 +76,7 @@ class UserManager {
         Router.needToken = true
         RouterWrapper.sharedInstance.request(.SignOut) { (response) in
             let defautls = NSUserDefaults.standardUserDefaults()
-            defautls.setValue(false, forKey: userLoginKeyConstant)
+            defautls.setValue(false, forKey: userLoginKey)
             switch response.result {
             case .Success:
                 switch response.response!.statusCode {
@@ -113,11 +113,21 @@ class UserManager {
     }
     
     func setCredentials(response: NSHTTPURLResponse) {
-        current.accessToken = response.allHeaderFields["access-token"] as? String
-        current.client  = response.allHeaderFields["client"] as? String
-        current.uid = response.allHeaderFields["uid"] as? String
+        let defautls = NSUserDefaults.standardUserDefaults()
+        defautls.setValue(response.allHeaderFields["access-token"] as? String, forKey: userTokenKey)
+        defautls.setValue(response.allHeaderFields["client"] as? String, forKey: userClientKey)
+        defautls.setValue(response.allHeaderFields["uid"] as? String, forKey: userUIDKey)
     }
     
+    func getCredentials() -> [String: String] {
+        let defautls = NSUserDefaults.standardUserDefaults()
+        let token = defautls.valueForKey(userTokenKey) as? String
+        let client = defautls.valueForKey(userClientKey) as? String
+        let uid = defautls.valueForKey(userUIDKey) as? String
+
+        return ["access-token": token!, "client": client!, "uid": uid!]
+    }
+
     func all() -> [User] {
         let users = User.all() as! [User]
         

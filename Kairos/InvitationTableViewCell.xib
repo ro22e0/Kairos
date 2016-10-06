@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -14,19 +14,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5DV-kJ-XlA">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="5DV-kJ-XlA">
                         <rect key="frame" x="8" y="8" width="48.5" height="48.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="5DV-kJ-XlA" secondAttribute="height" multiplier="1:1" id="FTM-Td-tcK"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-7L-BbW">
-                        <rect key="frame" x="174" y="17" width="49" height="30"/>
-                        <state key="normal" title="Accept"/>
-                        <connections>
-                            <action selector="accept:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="q5I-FC-Q8c"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtl-13-Yfy">
                         <rect key="frame" x="248" y="17" width="52" height="30"/>
                         <state key="normal" title="Decline"/>
@@ -40,6 +33,13 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npQ-7L-BbW">
+                        <rect key="frame" x="174" y="17" width="49" height="30"/>
+                        <state key="normal" title="Accept"/>
+                        <connections>
+                            <action selector="accept:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="q5I-FC-Q8c"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="5DV-kJ-XlA" secondAttribute="bottom" constant="8" id="4V4-VC-2Ng"/>
@@ -54,6 +54,7 @@
                     <constraint firstItem="npQ-7L-BbW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7V2-8X-ORX" secondAttribute="trailing" constant="8" id="omv-wH-Z5r"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="65" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="nameLabel" destination="7V2-8X-ORX" id="5yZ-7J-Faq"/>
                 <outlet property="profilePictureImageView" destination="5DV-kJ-XlA" id="pbi-S5-BI3"/>
@@ -61,4 +62,7 @@
             <point key="canvasLocation" x="219" y="459.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="profile placeholder" width="75" height="75"/>
+    </resources>
 </document>

@@ -52,7 +52,7 @@ class AddFriendsTableViewController: UITableViewController {
         self.tableView.backgroundView = blurEffectView
 
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 66
+        tableView.estimatedRowHeight = 65
         tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "userCell")
         tableView.allowsSelection = false
     }

@@ -17,13 +17,13 @@ class FriendManager {
     
     func all() -> [Friend] {
         let friends = Friend.query("owner == %@", args: UserManager.sharedInstance.current) as! [Friend]
-        
+
         return friends
     }
-    
+
     func friends(withStatus status: FriendStatus = .Accepted) -> [Friend] {
         //let predicate = NSPredicate(format: "owner == %@ AND status == %@", self.current, status.hashValue)
-        let properties = ["owner": UserManager.sharedInstance.current as NSManagedObject, "status": status.hashValue]
+        let properties = ["owner": UserManager.sharedInstance.current as NSManagedObject, "status": status.rawValue]
         let friends = Friend.query(properties) as! [Friend]
         
         return friends

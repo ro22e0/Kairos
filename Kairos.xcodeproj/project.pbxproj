@@ -10,6 +10,7 @@
 		01F6BF2D442DBB5D0DA2A7E1 /* Pods_Kairos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C48A9B6F70D6FD5B0F52CF /* Pods_Kairos.framework */; };
 		7EC8C50412FB335B18CC9ED4 /* Pods_KairosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079B844B84C39AB6C294AC82 /* Pods_KairosTests.framework */; };
 		DA0019061D9FEDEC00CA11F5 /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0019051D9FEDEC00CA11F5 /* FriendManager.swift */; };
+		DA0A75E11DA68242001881D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA0A75E01DA68242001881D0 /* Assets.xcassets */; };
 		DA11A9F61D986A6700218FF3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA11A9F51D986A6700218FF3 /* RequestManager.swift */; };
 		DA11A9F81D9872D400218FF3 /* ModalSearchSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */; };
 		DA1874571CDB7375008E7C38 /* EventTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1874561CDB7375008E7C38 /* EventTitleTableViewCell.swift */; };
@@ -60,7 +61,6 @@
 		DA6853461CE260C200B839F6 /* Kairos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA6853441CE260C200B839F6 /* Kairos.xcdatamodeld */; };
 		DA6853481CE2707600B839F6 /* RouterWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6853471CE2707600B839F6 /* RouterWrapper.swift */; };
 		DA7912F91CEFCBF800661753 /* FriendActionPopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */; };
-		DA7912FA1CEFCBF800661753 /* FriendActionPopoverTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7912F81CEFCBF800661753 /* FriendActionPopoverTableViewController.xib */; };
 		DA7912FD1CEFCDA100661753 /* BlockUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7912FB1CEFCDA100661753 /* BlockUserTableViewCell.swift */; };
 		DA7912FE1CEFCDA100661753 /* BlockUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */; };
 		DA7913031CEFCF6E00661753 /* UnfriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */; };
@@ -78,7 +78,6 @@
 		DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */; };
 		DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */; };
 		DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */; };
-		DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE1611C9ABE1F00D53AEC /* Assets.xcassets */; };
 		DAAEE1701C9ABE1F00D53AEC /* KairosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE16F1C9ABE1F00D53AEC /* KairosTests.swift */; };
 		DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC801811CA1F0330092A717 /* SpinnerManager.swift */; };
 		DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC801841CA3334D0092A717 /* Menu.storyboard */; };
@@ -118,6 +117,7 @@
 		478919BFCC2BBB3FC57340F6 /* Pods-Kairos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kairos.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kairos/Pods-Kairos.release.xcconfig"; sourceTree = "<group>"; };
 		CA9F71EE2164C082689D74FB /* Pods-KairosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KairosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KairosTests/Pods-KairosTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA0019051D9FEDEC00CA11F5 /* FriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
+		DA0A75E01DA68242001881D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA11A9F51D986A6700218FF3 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalSearchSegue.swift; sourceTree = "<group>"; };
 		DA1874561CDB7375008E7C38 /* EventTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -168,7 +168,6 @@
 		DA6853451CE260C200B839F6 /* Kairos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kairos.xcdatamodel; sourceTree = "<group>"; };
 		DA6853471CE2707600B839F6 /* RouterWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterWrapper.swift; sourceTree = "<group>"; };
 		DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendActionPopoverTableViewController.swift; sourceTree = "<group>"; };
-		DA7912F81CEFCBF800661753 /* FriendActionPopoverTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendActionPopoverTableViewController.xib; sourceTree = "<group>"; };
 		DA7912FB1CEFCDA100661753 /* BlockUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockUserTableViewCell.swift; sourceTree = "<group>"; };
 		DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlockUserTableViewCell.xib; sourceTree = "<group>"; };
 		DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfriendTableViewCell.swift; sourceTree = "<group>"; };
@@ -188,7 +187,6 @@
 		DAAEE1541C9ABE1F00D53AEC /* Kairos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kairos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAAEE15C1C9ABE1F00D53AEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DAAEE1611C9ABE1F00D53AEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DAAEE1661C9ABE1F00D53AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAAEE16B1C9ABE1F00D53AEC /* KairosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KairosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAAEE16F1C9ABE1F00D53AEC /* KairosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KairosTests.swift; sourceTree = "<group>"; };
@@ -456,8 +454,8 @@
 		DAA8165B1C9C1E9800EF1560 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DA0A75E01DA68242001881D0 /* Assets.xcassets */,
 				DAA8165F1C9C207C00EF1560 /* GoogleService-Info.plist */,
-				DAAEE1611C9ABE1F00D53AEC /* Assets.xcassets */,
 				DAAEE1661C9ABE1F00D53AEC /* Info.plist */,
 				DAA816621C9C218900EF1560 /* Kairos-Bridging-Header.h */,
 			);
@@ -558,7 +556,6 @@
 				DAEE7CBA1CA49A580019C8D4 /* FriendsTableViewController.swift */,
 				DAA2D4781DA3079700D5E6A7 /* AddFriendsTableViewController.swift */,
 				DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */,
-				DA7912F81CEFCBF800661753 /* FriendActionPopoverTableViewController.xib */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -661,9 +658,9 @@
 			files = (
 				DAECFECE1DA0578C00D3F724 /* CustomTextFieldTableViewCell.xib in Resources */,
 				DA668F3F1CA4AEA000230912 /* InvitationTableViewCell.xib in Resources */,
+				DA0A75E11DA68242001881D0 /* Assets.xcassets in Resources */,
 				DA3F3ACD1C9AF0D200E82FC6 /* Login.storyboard in Resources */,
 				DAF66D2C1CA3EB3700B6062D /* Friends.storyboard in Resources */,
-				DA7912FA1CEFCBF800661753 /* FriendActionPopoverTableViewController.xib in Resources */,
 				DA68533D1CE25E5E00B839F6 /* User-Info.plist in Resources */,
 				DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */,
 				DA7913041CEFCF6E00661753 /* UnfriendTableViewCell.xib in Resources */,
@@ -676,7 +673,6 @@
 				DA799DF81D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib in Resources */,
 				DA7912FE1CEFCDA100661753 /* BlockUserTableViewCell.xib in Resources */,
 				DA6853311CE25D6700B839F6 /* SentInvitationTableViewCell.xib in Resources */,
-				DAAEE1621C9ABE1F00D53AEC /* Assets.xcassets in Resources */,
 				DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */,
 				DA5CDDE21D8ACF5000B406A1 /* CollaboratorTableViewCell.xib in Resources */,
 				DA851C961CAE99C50025E1D4 /* Calendar.storyboard in Resources */,

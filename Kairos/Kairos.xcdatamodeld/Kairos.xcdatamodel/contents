@@ -31,14 +31,14 @@
         <relationship name="eventUsers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEvent" inverseName="event" inverseEntity="UserEvent" syncable="YES"/>
     </entity>
     <entity name="Friend" representedClassName=".Friend" parentEntity="User" syncable="YES">
-        <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="friends" inverseEntity="Owner" syncable="YES"/>
+        <attribute name="status" attributeType="String" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="friends" inverseEntity="Owner" syncable="YES">
+            <userInfo>
+                <entry key="hyper.remoteKey" value="owner"/>
+            </userInfo>
+        </relationship>
     </entity>
     <entity name="Owner" representedClassName=".Owner" parentEntity="User" syncable="YES">
-        <attribute name="accessToken" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="client" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="provider" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Friend" inverseName="owner" inverseEntity="Friend" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
@@ -59,7 +59,7 @@
         <attribute name="promotion" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="school" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="mutualFriends" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="User" inverseName="mutualFriends" inverseEntity="User" syncable="YES"/>
+        <relationship name="mutualFriends" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="User" inverseName="mutualFriends" inverseEntity="User" syncable="YES"/>
         <relationship name="userCalendars" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserCalendar" inverseName="user" inverseEntity="UserCalendar" syncable="YES"/>
         <relationship name="userEvents" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEvent" inverseName="user" inverseEntity="UserEvent" syncable="YES"/>
     </entity>
@@ -77,7 +77,7 @@
         <element name="Calendar" positionX="-14024" positionY="-2794" width="128" height="103"/>
         <element name="Event" positionX="-14087" positionY="-2574" width="128" height="193"/>
         <element name="Friend" positionX="-14886" positionY="-2763" width="126" height="73"/>
-        <element name="Owner" positionX="-14555" positionY="-2548" width="128" height="118"/>
+        <element name="Owner" positionX="-14555" positionY="-2548" width="128" height="60"/>
         <element name="User" positionX="-14555" positionY="-2863" width="128" height="283"/>
         <element name="UserCalendar" positionX="-14312" positionY="-2790" width="128" height="88"/>
         <element name="UserEvent" positionX="-14312" positionY="-2538" width="128" height="88"/>

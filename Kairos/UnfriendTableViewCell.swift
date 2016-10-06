@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Former
 
-class UnfriendTableViewCell: UITableViewCell {
+class UnfriendTableViewCell: UITableViewCell, LabelFormableRow {
 
     @IBOutlet weak var titleLabel: UILabel!
 
@@ -23,6 +24,16 @@ class UnfriendTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
  
+    func formTextLabel() -> UILabel? {
+        return titleLabel
+    }
+    
+    func formSubTextLabel() -> UILabel? {
+        return nil
+    }
+    
+    func updateWithRowFormer(rowFormer: RowFormer) {}
+    
     override func selected() {
         let friend = Friend.find("id == %@", args: self.tag) as! Friend
 

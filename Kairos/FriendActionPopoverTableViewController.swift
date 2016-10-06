@@ -7,11 +7,9 @@
 //
 
 import UIKit
+import Former
 
-class FriendActionPopoverTableViewController: UITableViewController {
-    
-    private let blockFriendCellID = "blockUserCell"
-    private let unFriendCellID = "unfriendCell"
+class FriendActionPopoverTableViewController: FormViewController {
     
     var friend: Friend?
     
@@ -23,10 +21,7 @@ class FriendActionPopoverTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
-        tableView.registerNib(UINib(nibName: "BlockUserTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: blockFriendCellID)
-        tableView.registerNib(UINib(nibName: "UnfriendTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: unFriendCellID)
-        tableView.allowsSelection = true
+        configure()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,75 +29,24 @@ class FriendActionPopoverTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    private func configure() {
+//        title = "Complete your profile"
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
+//        former = Former(tableView: UITableView())
+        // Create RowFomers
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(blockFriendCellID, forIndexPath: indexPath) as! BlockUserTableViewCell
-            
-            cell.titleLabel.text = "Block" + " " + friend!.name!
-            cell.tag = Int(friend!.id!)
-            
-            return cell
+        let remove = LabelRowFormer<UnfriendTableViewCell>(instantiateType: .Nib(nibName: "UnfriendTableViewCell")) {
+            $0.titleLabel.textColor = .formerColor()
+            $0.titleLabel.font = .boldSystemFontOfSize(15)
+        }.configure {
+            $0.text = "Unfriend" + " " + self.friend!.name!
+            $0.rowHeight = 44
         }
-
-        let cell = tableView.dequeueReusableCellWithIdentifier(unFriendCellID, forIndexPath: indexPath) as! UnfriendTableViewCell
         
-        cell.titleLabel.text = "Unfriend" + " " + friend!.name!
-        cell.tag = Int(friend!.id!)
-
-        return cell
-    }
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-
-        cell?.selected()
+        let section = SectionFormer(rowFormer: remove)
+        former.append(sectionFormer: section)
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     /*
     // MARK: - Navigation
 

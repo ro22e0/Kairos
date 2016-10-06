@@ -22,7 +22,7 @@ struct DataSync {
     }
     
     static func sync(entity entityName: String, data: [[String: AnyObject]], completion: ((NSError?) -> Void), withDelete: Bool = false) {
-        let ops: DATAFilter.Operation = withDelete ? [.Insert, .Update, .Delete] : [.Insert, .Update]
+        let ops: DATAFilter.Operation = withDelete ? [.All] : [.Insert, .Update]
         Sync.changes(data, inEntityNamed: entityName, dataStack: self.dataStack(), operations: ops, completion: completion)
     }
     
@@ -63,7 +63,7 @@ struct DataSync {
         for f in friends {
             let friend = Friend.findOrCreate(["id": f["id"].object]) as! Friend
             
-            friend.status = status.hashValue
+            friend.status = status.rawValue
             friend.name = f["name"].stringValue
             friend.nickname = f["nickname"].stringValue
             friend.email = f["email"].stringValue
@@ -88,19 +88,20 @@ struct DataSync {
                         print(json)
                         
                         let friendsArray = json["friends"].arrayValue + json["friend_requests"].array! + json["pending_requests"].array!
-                        let friends = DataSync.transformJson(JSON(friendsArray))
-                        print(friends)
-//                        
+                        let data = DataSync.transformJson(JSON(friendsArray))
+                        print(data)
+                        var friends = [[String : AnyObject]]()
+//
 //                        let requested = DataSync.transformJson()
 //                        print(requested)
 //                        
 //                        let pending = DataSync.transformJson()
 //                        print(requested)
-                        
-                        for var f in friends {
-                            f["status"] = FriendStatus.Accepted.hashValue
-                            f["owner"] = UserManager.sharedInstance.current
+                        for var f in data {
+                            f["owner"] = UserManager.sharedInstance.current.id
+                            friends.append(f)
                         }
+                        
 //                        for var f in requested {
 //                            f["status"] = FriendStatus.Requested.hashValue
 //                            f["owner"] = UserManager.sharedInstance.current
@@ -109,9 +110,9 @@ struct DataSync {
 //                            f["status"] = FriendStatus.Pending.hashValue
 //                            f["owner"] = UserManager.sharedInstance.current
 //                        }
-                        
+
                         DataSync.sync(entity: "Friend", data: friends, completion: { error in
-                            print(NSDate(), "done")
+                            print(NSDate(), "done", true)
                             completionHandler(.Success)
                         })
 //                        DataSync.sync(entity: "Friend", data: requested, completion: { error in

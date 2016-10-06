@@ -68,6 +68,24 @@
             </objects>
             <point key="canvasLocation" x="2541" y="409"/>
         </scene>
+        <!--Friend Action Popover Table View Controller-->
+        <scene sceneID="fcZ-Vl-PKL">
+            <objects>
+                <viewController storyboardIdentifier="FriendActionPopoverTableViewController" id="F1W-IF-cY2" customClass="FriendActionPopoverTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ep7-br-T7L"/>
+                        <viewControllerLayoutGuide type="bottom" id="zE6-ha-9kh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PvQ-3V-KL7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MxX-et-qmz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3257" y="409"/>
+        </scene>
         <!--Add Friends Table View Controller-->
         <scene sceneID="6gH-gN-0sW">
             <objects>

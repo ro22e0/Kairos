@@ -170,12 +170,10 @@ public enum Router: URLRequestConvertible {
         print(Router.needToken)
         
         if Router.needToken {
-            print(UserManager.sharedInstance.current.accessToken)
-            print(UserManager.sharedInstance.current.client)
-            print(UserManager.sharedInstance.current.uid)
-            mutableURLRequest.setValue(UserManager.sharedInstance.current.accessToken, forHTTPHeaderField: "access-token")
-            mutableURLRequest.setValue(UserManager.sharedInstance.current.client, forHTTPHeaderField: "client")
-            mutableURLRequest.setValue(UserManager.sharedInstance.current.uid, forHTTPHeaderField: "uid")
+            let credentials = UserManager.sharedInstance.getCredentials()
+            mutableURLRequest.setValue(credentials["access-token"], forHTTPHeaderField: "access-token")
+            mutableURLRequest.setValue(credentials["client"], forHTTPHeaderField: "client")
+            mutableURLRequest.setValue(credentials["uid"], forHTTPHeaderField: "uid")
         }
         
         switch self {
