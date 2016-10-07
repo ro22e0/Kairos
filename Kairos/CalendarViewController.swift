@@ -29,7 +29,7 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
 
         // Fetch update
-//        DataSync.fetchCalendars()
+        DataSync.fetchCalendars()
         
         // Do any additional setup after loading the view.
         calendarView.scrollDirection = .Horizontal

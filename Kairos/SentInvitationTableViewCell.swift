@@ -26,6 +26,18 @@ class SentInvitationTableViewCell: UITableViewCell {
 
     @IBAction func cancel(sender: UIButton) {
         let friend = Friend.find("id == %@", args: self.tag) as! Friend
-        print(friend.name)
+        let parameters = ["user_id": friend.id!]
+        
+        FriendManager.sharedInstance.cancel(parameters) { (status) in
+            switch status {
+            case .Success:
+                friend.delete()
+                SpinnerManager.showWhistle("kFriendSuccess")
+            case .Error(let error):
+                SpinnerManager.showWhistle("kFriendError", success: false)
+                print(error)
+            }
+        }
+
     }
 }

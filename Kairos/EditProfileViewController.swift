@@ -34,7 +34,6 @@ class EditProfileViewController: FormViewController {
         // Create RowFomers
         
         let imageRow = LabelRowFormer<ProfileImagePickerTableViewCell>(instantiateType: .Nib(nibName: "ProfileImagePickerTableViewCell")) {
-            $0.imageProfileView.image = nil
             if self.user.imageData != nil {
                 $0.imageProfileView.image = UIImage(data: self.user.imageData!)
                 $0.imageProfileView.round()

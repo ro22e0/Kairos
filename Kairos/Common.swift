@@ -42,6 +42,13 @@ enum FriendStatus: String {
     case Accepted = "accepted"
 }
 
+enum UserStatus: String {
+    case Owner = "owner"
+    case Participating = "participating"
+    case Invited = "invited"
+    case Refused = "refused"
+}
+
 enum CustomStatus {
     case Success
     case Error(String)

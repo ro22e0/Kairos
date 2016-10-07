@@ -32,7 +32,7 @@ struct SpinnerManager {
         SwiftSpinner.setTitleFont(font)
         SwiftSpinner.show(title, animated: false).addTapHandler({ completion() }, subtitle: subtitle)
     }
-    
+
     static func updateTitle(title: String) {
         SwiftSpinner.sharedInstance.title = title
     }

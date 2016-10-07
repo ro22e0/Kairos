@@ -67,7 +67,7 @@ class AddFriendsTableViewController: UITableViewController {
         searchController.searchBar.sizeToFit()
         searchController.hidesNavigationBarDuringPresentation = false
         self.definesPresentationContext = true
-        
+    
         // Place the search bar view to the tableview headerview.
         self.navigationItem.titleView = searchController.searchBar
     }
@@ -87,6 +87,15 @@ class AddFriendsTableViewController: UITableViewController {
         
         // Configure the cell...
         cell.nameLabel.text = users[indexPath.row].name
+
+        let mutualFriends = users[indexPath.row].mutualFriends?.allObjects as? [Friend]
+        if let number = mutualFriends?.count where number > 0 {
+            cell.mutualFriendsLabel.hidden = false
+            cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
+        } else {
+            cell.mutualFriendsLabel.hidden = true
+        }
+
         cell.tag = Int(users[indexPath.row].id!)
         
         return cell
@@ -158,7 +167,7 @@ extension AddFriendsTableViewController: UISearchResultsUpdating, UISearchBarDel
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if shouldShowSearchResults {
             let searchString = searchController.searchBar.text
-            self.users = UserManager.sharedInstance.all(filtered: searchString!)
+            self.users = UserManager.sharedInstance.all(filtered: searchString!, forFriends: true)
             tableView.reloadData()
         }
     }

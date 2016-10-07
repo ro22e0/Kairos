@@ -24,11 +24,10 @@ class CalendarTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+
         if self.calendar == nil {
             self.calendar = Calendar.create() as? Calendar
         }
-
         
         self.tableView.registerNib(UINib(nibName: "CollaboratorTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "userCell")
     }

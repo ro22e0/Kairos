@@ -13,6 +13,7 @@ class InvitationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var mutualFriendsLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,55 +28,31 @@ class InvitationTableViewCell: UITableViewCell {
     
     @IBAction func accept(sender: UIButton) {
         let friend = Friend.find("id == %@", args: self.tag) as! Friend
+        let parameters = ["user_id": friend.id!]
         
-        let parameters = ["accepted_friends": [["user_id": friend.id!]]]
-        RouterWrapper.sharedInstance.request(.AcceptFriend(parameters)) { (response) in
-            print(response.response)
-            print(response.request)
-            switch response.result {
+        FriendManager.sharedInstance.accept(parameters) { (status) in
+            switch status {
             case .Success:
-                switch response.response!.statusCode {
-                case 200...203:
-                    SpinnerManager.showWhistle("kFriendInviteAccept", success: true)
-                    friend.status = FriendStatus.Accepted.rawValue
-                    UserManager.sharedInstance.setCredentials(response.response!)
-                    break;
-                default:
-                    SpinnerManager.showWhistle("kFail", success: false)
-                    break;
-                }
-                
-            case .Failure(let error):
-                SpinnerManager.showWhistle("kFail", success: false)
-                print(error.localizedDescription)
+                SpinnerManager.showWhistle("kFriendSuccess")
+            case .Error(let error):
+                SpinnerManager.showWhistle("kFriendError", success: false)
+                print(error)
             }
         }
     }
     
     @IBAction func decline(sender: UIButton) {
         let friend = Friend.find("id == %@", args: self.tag) as! Friend
-        
-        let parameters = ["declined_friends": [["user_id": friend.id!]]]
-        RouterWrapper.sharedInstance.request(.AcceptFriend(parameters)) { (response) in
+        let parameters = ["user_id": friend.id!]
 
-            print(response.response)
-            print(response.request)
-            switch response.result {
+        FriendManager.sharedInstance.refuse(parameters) { (status) in
+            switch status {
             case .Success:
-                switch response.response!.statusCode {
-                case 200...203:
-                    SpinnerManager.showWhistle("kFriendInviteAccept", success: true)
-                    friend.delete()
-                    UserManager.sharedInstance.setCredentials(response.response!)
-                    break;
-                default:
-                    SpinnerManager.showWhistle("kFail", success: false)
-                    break;
-                }
-            case .Failure(let error):
-                SpinnerManager.showWhistle("kFail", success: false)
-                print(error.localizedDescription)
+                friend.delete()
+                SpinnerManager.showWhistle("kFriendSuccess")
+            case .Error(let error):
+                SpinnerManager.showWhistle("kFriendError", success: false)
+                print(error)
             }
-        }
-    }
+        }    }
 }

@@ -7,7 +7,7 @@
             </userInfo>
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="calendarUsers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserCalendar" inverseName="calendar" inverseEntity="UserCalendar" syncable="YES"/>
+        <relationship name="calendarUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserCalendar" inverseName="calendar" inverseEntity="UserCalendar" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="calendar" inverseEntity="Event" syncable="YES"/>
     </entity>
     <entity name="Event" representedClassName=".Event" syncable="YES">
@@ -60,26 +60,30 @@
         <attribute name="school" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="mutualFriends" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="User" inverseName="mutualFriends" inverseEntity="User" syncable="YES"/>
-        <relationship name="userCalendars" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserCalendar" inverseName="user" inverseEntity="UserCalendar" syncable="YES"/>
-        <relationship name="userEvents" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEvent" inverseName="user" inverseEntity="UserEvent" syncable="YES"/>
+        <relationship name="userCalendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserCalendar" inverseName="user" inverseEntity="UserCalendar" syncable="YES"/>
+        <relationship name="userEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UserEvent" inverseName="user" inverseEntity="UserEvent" syncable="YES"/>
     </entity>
     <entity name="UserCalendar" representedClassName=".UserCalendar" syncable="YES">
-        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="calendarId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isOwner" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isSelected" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="calendar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Calendar" inverseName="calendarUsers" inverseEntity="Calendar" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userCalendars" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="UserEvent" representedClassName=".UserEvent" syncable="YES">
-        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="eventUsers" inverseEntity="Event" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="userEvents" inverseEntity="User" syncable="YES"/>
     </entity>
     <elements>
         <element name="Calendar" positionX="-14024" positionY="-2794" width="128" height="103"/>
-        <element name="Event" positionX="-14087" positionY="-2574" width="128" height="193"/>
+        <element name="Event" positionX="-14031" positionY="-2614" width="128" height="193"/>
         <element name="Friend" positionX="-14886" positionY="-2763" width="126" height="73"/>
         <element name="Owner" positionX="-14555" positionY="-2548" width="128" height="60"/>
         <element name="User" positionX="-14555" positionY="-2863" width="128" height="283"/>
-        <element name="UserCalendar" positionX="-14312" positionY="-2790" width="128" height="88"/>
-        <element name="UserEvent" positionX="-14312" positionY="-2538" width="128" height="88"/>
+        <element name="UserCalendar" positionX="-14292" positionY="-2770" width="128" height="148"/>
+        <element name="UserEvent" positionX="-14285" positionY="-2448" width="128" height="88"/>
     </elements>
 </model>

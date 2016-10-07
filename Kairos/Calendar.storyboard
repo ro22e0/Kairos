@@ -161,6 +161,11 @@
                                     <segue destination="nFZ-LV-ApQ" kind="show" id="IMZ-or-0fS"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="Filter" id="b7C-Lf-z3T">
+                                <connections>
+                                    <segue destination="h2w-dw-DbY" kind="presentation" id="lDO-ec-ABI"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -595,44 +600,36 @@
         <scene sceneID="YB0-FJ-Xlr">
             <objects>
                 <tableViewController id="iW3-81-7DK" customClass="CalendarFilterTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="K7P-V3-zE0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="K7P-V3-zE0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <sections>
-                            <tableViewSection id="ocN-qU-CMb">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="calendarCell" textLabel="iZV-LA-aRs" style="IBUITableViewCellStyleDefault" id="H8T-oi-g95">
-                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H8T-oi-g95" id="h0C-LP-Xow">
-                                            <rect key="frame" x="0.0" y="0.0" width="561" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iZV-LA-aRs">
-                                                    <rect key="frame" x="15" y="0.0" width="546" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="calendarCell" textLabel="iZV-LA-aRs" style="IBUITableViewCellStyleDefault" id="H8T-oi-g95">
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H8T-oi-g95" id="h0C-LP-Xow">
+                                    <rect key="frame" x="0.0" y="0.0" width="561" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iZV-LA-aRs">
+                                            <rect key="frame" x="15" y="0.0" width="546" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="iW3-81-7DK" id="Tby-J7-qcA"/>
                             <outlet property="delegate" destination="iW3-81-7DK" id="9cR-mP-z2B"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="2wN-DW-uiq">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="zx7-nz-Mx3">
-                            <connections>
-                                <segue destination="cyy-F8-0v6" kind="show" id="yJf-RJ-MT8"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="uoi-9g-LXM">
                             <connections>
                                 <action selector="done:" destination="iW3-81-7DK" id="C03-4V-3FA"/>
@@ -658,19 +655,48 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcq-tn-Xbp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5120" y="-1676"/>
+            <point key="canvasLocation" x="5166" y="-1736"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="aG7-On-tJH">
+            <objects>
+                <tableViewController id="rMI-9b-Zw8" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="FXd-qt-3ro">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JZE-EH-n5k">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JZE-EH-n5k" id="Q0g-CE-SUy">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rMI-9b-Zw8" id="S1s-3H-Gxq"/>
+                            <outlet property="delegate" destination="rMI-9b-Zw8" id="XT3-IC-uV6"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8jm-F0-pgo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5166" y="-1063"/>
         </scene>
         <!--Title-->
         <scene sceneID="kHM-UJ-fRb">
             <objects>
-                <tableViewController id="cyy-F8-0v6" customClass="CalendarEditTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EhB-Iu-bMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="CalendarEditTableViewController" id="cyy-F8-0v6" customClass="CalendarEditTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UG8-sB-APq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="ksN-X3-SLs" style="IBUITableViewCellStyleDefault" id="Or0-l9-cxB">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Or0-l9-cxB" id="Ggr-1z-vbG">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -685,9 +711,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="l4I-00-q33" kind="show" identifier="editCalendarSegue" id="8s3-BA-jFe"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -696,11 +719,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="Xke-bq-e6Q">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="5Cc-D8-f85">
-                            <connections>
-                                <action selector="done:" destination="cyy-F8-0v6" id="qsU-Es-P8e"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="doj-eF-KHN">
                             <connections>
                                 <segue destination="M7E-gC-E4d" kind="presentation" id="nrJ-6U-wrS"/>
@@ -708,9 +726,8 @@
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EhB-Iu-bMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4358" y="-1345"/>
+            <point key="canvasLocation" x="4398" y="-1345"/>
         </scene>
         <!--Calendar Table View Controller-->
         <scene sceneID="oSE-Of-dLw">
@@ -816,7 +833,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mXZ-HD-2xg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5861" y="-1345"/>
+            <point key="canvasLocation" x="5951" y="-1402"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="FyC-bk-cFc">
@@ -839,8 +856,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Jbv-4C-T54"/>
         <segue reference="biZ-Ui-IUl"/>
-        <segue reference="5b3-l3-aEB"/>
+        <segue reference="Jbv-4C-T54"/>
     </inferredMetricsTieBreakers>
 </document>

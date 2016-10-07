@@ -11,6 +11,7 @@
 		7EC8C50412FB335B18CC9ED4 /* Pods_KairosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079B844B84C39AB6C294AC82 /* Pods_KairosTests.framework */; };
 		DA0019061D9FEDEC00CA11F5 /* FriendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0019051D9FEDEC00CA11F5 /* FriendManager.swift */; };
 		DA0A75E11DA68242001881D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA0A75E01DA68242001881D0 /* Assets.xcassets */; };
+		DA0E144B1DA8125200865C20 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0E144A1DA8125200865C20 /* CalendarManager.swift */; };
 		DA11A9F61D986A6700218FF3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA11A9F51D986A6700218FF3 /* RequestManager.swift */; };
 		DA11A9F81D9872D400218FF3 /* ModalSearchSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */; };
 		DA1874571CDB7375008E7C38 /* EventTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1874561CDB7375008E7C38 /* EventTitleTableViewCell.swift */; };
@@ -118,6 +119,7 @@
 		CA9F71EE2164C082689D74FB /* Pods-KairosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KairosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KairosTests/Pods-KairosTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA0019051D9FEDEC00CA11F5 /* FriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendManager.swift; sourceTree = "<group>"; };
 		DA0A75E01DA68242001881D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DA0E144A1DA8125200865C20 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		DA11A9F51D986A6700218FF3 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalSearchSegue.swift; sourceTree = "<group>"; };
 		DA1874561CDB7375008E7C38 /* EventTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 			children = (
 				DA6853321CE25E2400B839F6 /* UserManager.swift */,
 				DA0019051D9FEDEC00CA11F5 /* FriendManager.swift */,
+				DA0E144A1DA8125200865C20 /* CalendarManager.swift */,
 				DAC801811CA1F0330092A717 /* SpinnerManager.swift */,
 				DA6853471CE2707600B839F6 /* RouterWrapper.swift */,
 				DA83262F1CE3CCFF00C09F31 /* DataSync.swift */,
@@ -866,6 +869,7 @@
 				DA5CDDE11D8ACF5000B406A1 /* CollaboratorTableViewCell.swift in Sources */,
 				DA6853401CE25E5E00B839F6 /* Calendar.swift in Sources */,
 				DA5CDDE81D8ADB0600B406A1 /* BaseCalendarTableViewCell.swift in Sources */,
+				DA0E144B1DA8125200865C20 /* CalendarManager.swift in Sources */,
 				DA5CDDE61D8AD94100B406A1 /* CalendarDeleteTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

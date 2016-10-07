@@ -16,17 +16,23 @@ class FriendManager {
     private init() {}
     
     func all() -> [Friend] {
-        let friends = Friend.query("owner == %@", args: UserManager.sharedInstance.current) as! [Friend]
+        if let friends = UserManager.sharedInstance.current.friends?.allObjects as? [Friend] {
+            return friends
+        } else {
+            return [Friend]()
+        }
 
-        return friends
     }
 
     func friends(withStatus status: FriendStatus = .Accepted) -> [Friend] {
-        //let predicate = NSPredicate(format: "owner == %@ AND status == %@", self.current, status.hashValue)
-        let properties = ["owner": UserManager.sharedInstance.current as NSManagedObject, "status": status.rawValue]
-        let friends = Friend.query(properties) as! [Friend]
-        
-        return friends
+        if var friends = UserManager.sharedInstance.current.friends?.allObjects as? [Friend] {
+            friends = friends.filter({ (f) -> Bool in
+                return f.status == status.rawValue
+            })
+            return friends
+        } else {
+            return [Friend]()
+        }
     }
     
     func fetch(handler: (() -> Void)?) {
@@ -75,7 +81,7 @@ class FriendManager {
     }
     
     func accept(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.InviteFriend(parameters)) { (response) in
+        RouterWrapper.sharedInstance.request(.AcceptFriend(parameters)) { (response) in
             switch response.result {
             case .Success:
                 switch response.response!.statusCode {
@@ -91,7 +97,7 @@ class FriendManager {
     }
     
     func refuse(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.InviteFriend(parameters)) { (response) in
+        RouterWrapper.sharedInstance.request(.DeclineFriend(parameters)) { (response) in
             switch response.result {
             case .Success:
                 switch response.response!.statusCode {
@@ -107,7 +113,7 @@ class FriendManager {
     }
     
     func remove(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.InviteFriend(parameters)) { (response) in
+        RouterWrapper.sharedInstance.request(.RemoveFriend(parameters)) { (response) in
             switch response.result {
             case .Success:
                 switch response.response!.statusCode {

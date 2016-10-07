@@ -20,8 +20,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7O-oL-SNe">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="267"/>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OoK-n3-odC">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="OoK-n3-odC">
                                     <rect key="frame" x="220" y="30" width="160" height="160"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="OoK-n3-odC" secondAttribute="height" multiplier="1:1" id="J9n-Ii-Mzj"/>
                                         <constraint firstAttribute="height" constant="160" id="du0-6Y-r13"/>
@@ -204,7 +205,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ywy-gq-xgn" kind="presentation" id="id0-A8-bhp"/>
+                                            <segue destination="s4J-Bb-0Km" kind="show" id="70P-H2-3Q7"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -480,21 +481,21 @@
             </objects>
             <point key="canvasLocation" x="1829" y="-21"/>
         </scene>
+        <!--CalendarEditTableViewController-->
+        <scene sceneID="OUa-gL-QKq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Calendar" referencedIdentifier="CalendarEditTableViewController" id="s4J-Bb-0Km" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xTm-dh-6P2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1906" y="-147"/>
+        </scene>
         <!--AddFriendsTableViewController-->
         <scene sceneID="yD9-3d-BDe">
             <objects>
                 <viewControllerPlaceholder storyboardName="Friends" referencedIdentifier="AddFriendsTableViewController" id="BFT-gC-5iz" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z0j-u6-6kI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1901.5" y="-143"/>
-        </scene>
-        <!--CalendarFilterTableViewController-->
-        <scene sceneID="u8Y-1U-CDb">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Calendar" referencedIdentifier="CalendarFilterTableViewController" id="ywy-gq-xgn" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GBE-8L-ni5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1910" y="-103"/>
+            <point key="canvasLocation" x="1901.5" y="-103"/>
         </scene>
         <!--General-->
         <scene sceneID="Jhi-To-JVs">
@@ -548,4 +549,7 @@
             <point key="canvasLocation" x="659" y="226"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="profile placeholder" width="44" height="44"/>
+    </resources>
 </document>

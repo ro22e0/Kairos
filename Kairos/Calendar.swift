@@ -16,6 +16,6 @@ class Calendar: NSManagedObject {
     
     @NSManaged var id: NSNumber?
     @NSManaged var name: String?
+    @NSManaged var calendarUsers: NSSet?
     @NSManaged var events: NSSet?
-    @NSManaged var calendarUsers: UserCalendar?
 }
