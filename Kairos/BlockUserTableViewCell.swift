@@ -23,20 +23,20 @@ class BlockUserTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    override func selected() {
-        let friend = Friend.find("id == %@", args: self.tag) as! Friend
-        
-        let parameters = ["blocked_friends": [["user_id": friend.id!]]]
-        RouterWrapper.sharedInstance.request(.BlockFriend(parameters)) { (response) in
-            switch response.result {
-            case .Success:
-                friend.status = FriendStatus.Blocked.hashValue
-                SpinnerManager.showWhistle("kFriendBlocked", success: false)
-            case .Failure(let error):
-                SpinnerManager.showWhistle("kFail", success: false)
-                print(error.localizedDescription)
-            }
-            self.viewController()?.dismissViewControllerAnimated(true, completion: nil)
-        }
-    }
+//    override func selected() {
+//        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+//        
+//        let parameters = ["blocked_friends": [["user_id": friend.id!]]]
+//        RouterWrapper.sharedInstance.request(.CancelFriend(parameters)) { (response) in
+//            switch response.result {
+//            case .Success:
+//                friend.status = FriendStatus.Blocked.hashValue
+//                SpinnerManager.showWhistle("kFriendBlocked", success: false)
+//            case .Failure(let error):
+//                SpinnerManager.showWhistle("kFail", success: false)
+//                print(error.localizedDescription)
+//            }
+//            self.viewController()?.dismissViewControllerAnimated(true, completion: nil)
+//        }
+//    }
 }

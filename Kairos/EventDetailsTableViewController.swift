@@ -127,7 +127,7 @@ class EventDetailsTableViewController: UITableViewController {
                 switch response.response!.statusCode {
                 case 200...203:
                     SpinnerManager.showWhistle("kEventDeleted", success: true)
-                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                    UserManager.sharedInstance.setCredentials(response.response!)
                     self.event?.delete()
                     self.dismissViewControllerAnimated(true, completion: nil)
                     break;

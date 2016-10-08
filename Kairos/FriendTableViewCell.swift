@@ -12,6 +12,7 @@ class FriendTableViewCell: UITableViewCell, UIPopoverPresentationControllerDeleg
 
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var mutualFriendsLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,11 +28,13 @@ class FriendTableViewCell: UITableViewCell, UIPopoverPresentationControllerDeleg
     @IBAction func actions(sender: UIButton) {
         let friend = Friend.find("id == %@", args: self.tag) as! Friend
 
-        let destVC = FriendActionPopoverTableViewController(nibName: "FriendActionPopoverTableViewController", bundle: NSBundle.mainBundle())
+        let storyboard = UIStoryboard(name: FriendsStoryboardID, bundle: nil)
+        let destVC = storyboard.instantiateViewControllerWithIdentifier("FriendActionPopoverTableViewController") as! FriendActionPopoverTableViewController
         destVC.friend = friend
-        destVC.modalPresentationStyle = .Popover
-        destVC.preferredContentSize = CGSizeMake(self.window!.frame.width, 87)
 
+        destVC.modalPresentationStyle = .Popover
+        destVC.preferredContentSize = CGSizeMake(self.window!.frame.width, 43)
+        
         let popoverPC = destVC.popoverPresentationController
         popoverPC?.sourceView = sender
         popoverPC?.permittedArrowDirections = .Up

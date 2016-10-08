@@ -13,12 +13,13 @@ import CoreData
 class User: NSManagedObject {
 
     // MARK: - CoreDataProperties
-    
+
     @NSManaged var company: String?
     @NSManaged var createdAt: NSDate?
     @NSManaged var email: String?
     @NSManaged var id: NSNumber?
     @NSManaged var image: String?
+    @NSManaged var imageData: NSData?
     @NSManaged var job: String?
     @NSManaged var location: String?
     @NSManaged var name: String?
@@ -26,6 +27,7 @@ class User: NSManagedObject {
     @NSManaged var promotion: String?
     @NSManaged var school: String?
     @NSManaged var updatedAt: NSDate?
-    @NSManaged var userCalendars: UserCalendar?
-    @NSManaged var userEvents: NSManagedObject?
+    @NSManaged var mutualFriends: NSSet?
+    @NSManaged var userCalendars: NSSet?
+    @NSManaged var userEvents: NSSet?
 }

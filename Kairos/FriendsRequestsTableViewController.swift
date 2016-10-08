@@ -16,7 +16,7 @@ class FriendsRequestsTableViewController: UITableViewController {
     let requestCellID = "invitationCell"
     let pendingCellID = "sentInvitationCell"
     var itemInfo = IndicatorInfo(title: "View")
-
+    
     var requestedFriends = [Friend]()
     var pendingFriends = [Friend]()
     
@@ -30,29 +30,32 @@ class FriendsRequestsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.tableView.tableFooterView = UIView()
-        
-        print("pendingFriends: ", pendingFriends.count)
-        print("requestedFriends: ", requestedFriends.count)
-        
-        self.navigationController?.navigationBar.translucent = false
-        tableView.registerNib(UINib(nibName: "InvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: requestCellID)
-        tableView.registerNib(UINib(nibName: "SentInvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: pendingCellID)
-        tableView.allowsSelection = false
+        configureView()
+        FriendManager.sharedInstance.fetch {
+            self.pendingFriends = FriendManager.sharedInstance.friends(withStatus: .Pending)
+            self.requestedFriends = FriendManager.sharedInstance.friends(withStatus: .Requested)
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        pendingFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Pending)
-        requestedFriends = OwnerManager.sharedInstance.getFriends(withStatus: .Requested)
-        
-        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func configureView() {
+        self.tableView.tableFooterView = UIView()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 74
+        self.navigationController?.navigationBar.translucent = false
+        tableView.registerNib(UINib(nibName: "InvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: requestCellID)
+        tableView.registerNib(UINib(nibName: "SentInvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: pendingCellID)
+        tableView.allowsSelection = false
     }
     
     // MARK: - Table view data source
@@ -73,6 +76,14 @@ class FriendsRequestsTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier(requestCellID, forIndexPath: indexPath) as! InvitationTableViewCell
             
             cell.nameLabel.text = requestedFriends[indexPath.row].name
+            let mutualFriends = requestedFriends[indexPath.row].mutualFriends?.allObjects as? [Friend]
+            if let number = mutualFriends?.count where number > 0 {
+                cell.mutualFriendsLabel.hidden = false
+                cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
+            } else {
+                cell.mutualFriendsLabel.hidden = true
+            }
+            
             cell.tag = Int(requestedFriends[indexPath.row].id!)
             
             return cell
@@ -130,7 +141,7 @@ class FriendsRequestsTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
-
+    
     @IBAction func done(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }

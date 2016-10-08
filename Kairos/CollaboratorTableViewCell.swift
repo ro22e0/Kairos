@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import Former
 
-class CollaboratorTableViewCell: UITableViewCell {
+class CollaboratorTableViewCell: UITableViewCell, LabelFormableRow {
+
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var statusColorView: UIView!
+    @IBOutlet weak var statusLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,4 +27,13 @@ class CollaboratorTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func formTextLabel() -> UILabel? {
+        return nameLabel
+    }
+    
+    func formSubTextLabel() -> UILabel? {
+        return statusLabel
+    }
+
+    func updateWithRowFormer(rowFormer: RowFormer) {}
 }

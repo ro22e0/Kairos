@@ -18,8 +18,12 @@ import JLToast
 class SignUpViewController: UIViewController {
     
     // MARK: - UI Properties
+    @IBOutlet weak var fullnameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordConfirmationTextField: UITextField!
+    @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var googleButton: UIButton!
     
     // MARK: - Class Properties
     var manager: Manager?
@@ -29,6 +33,9 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.facebookButton.round()
+        self.googleButton.round()
+        
         self.navigationItem.backBarButtonItem?.title = ""
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -75,7 +82,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func SignUp(sender: UIButton) {
-        self.userInfos = ["email": emailTextField.text!, "password": passwordTextField.text!]
+        self.userInfos = ["name": fullnameTextField.text!, "email": emailTextField.text!, "password": passwordTextField.text!]
         SignUpRequest()
     }
     
@@ -122,7 +129,7 @@ class SignUpViewController: UIViewController {
             case .Success:
                 if let value = response.result.value {
                     let json = JSON(value)
-                    self.userInfos = ["first_name": json["given_name"].stringValue, "last_name": json["family_name"].stringValue, "email": json["email"].stringValue, "password": ""]
+                    self.userInfos = ["name": json["given_name"].stringValue + json["family_name"].stringValue, "email": json["email"].stringValue, "password": ""]
                     SwiftSpinner.hide()
                     if json["email"].stringValue != "" {
                         completion()
@@ -154,7 +161,7 @@ class SignUpViewController: UIViewController {
             if error == nil {
                 if let value = result as? NSDictionary {
                     let json = JSON(value)
-                    self.userInfos = ["first_name": json["first_name"].stringValue, "last_name": json["last_name"].stringValue, "email": json["email"].stringValue, "password": ""]
+                    self.userInfos = ["name": json["first_name"].stringValue + json["last_name"].stringValue, "email": json["email"].stringValue, "password": ""]
                     SwiftSpinner.hide()
                     if json["email"].stringValue != "" {
                         completion()
@@ -173,46 +180,13 @@ class SignUpViewController: UIViewController {
     }
     
     private func SignUpRequest() {
-        let parameters = ["email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
-        
-        Router.needToken = false
-        RouterWrapper.sharedInstance.request(.CreateUser(parameters)) { (response) in
-            print(response.request)  // original URL request
-            print(response.response) // URL response
-            print(response.data)     // server data
-            print(response.result)   // result of response serialization
-            
-            switch response.result {
+        let parameters = ["name": userInfos!["name"]!,"email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
+
+        UserManager.sharedInstance.signUp(parameters) { (status) in
+            switch status {
             case .Success:
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    print("JSON: \(json)")
-                    switch response.response!.statusCode {
-                    case 200:
-                        SpinnerManager.delay(seconds: 1.0, completion: {
-                            SpinnerManager.showSpinner("Completed", subtitle: "Tap to sign in", completion: { () -> () in
-                                DataSync.sync(entity: "Owner", data: [json["data"].dictionaryObject!], completion: { error in
-                                    let owner = Owner.all().first as! Owner
-                                    OwnerManager.sharedInstance.newOwner(owner)
-                                    OwnerManager.sharedInstance.setCredentials(response.response!)
-                                    let defautls = NSUserDefaults.standardUserDefaults()
-                                    defautls.setValue(true, forKey: userLoginKeyConstant)
-                                    SwiftSpinner.hide()
-                                    self.setRootVC(BoardStoryboardID)
-                                })
-                            })
-                        })
-                    default:
-                        SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
-                            SwiftSpinner.hide()
-                        })
-                    }
-                }
-            case .Failure(let error):
-                SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
-                    SwiftSpinner.hide()
-                })
-                print(error)
+                self.performSegueWithIdentifier("showCompleteProfile", sender: self)
+            case .Error: break
             }
         }
     }
@@ -250,7 +224,7 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: GIDSignInUIDelegate {
     // MARK: - GIDSignInUIDelegate
-    
+
     // Present a view that prompts the user to sign in with Google
     func signIn(signIn: GIDSignIn!,
                 presentViewController viewController: UIViewController!) {

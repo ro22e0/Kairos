@@ -12,6 +12,7 @@ class UserTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var mutualFriendsLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,27 +27,15 @@ class UserTableViewCell: UITableViewCell {
     
     @IBAction func invite(sender: UIButton) {
         let user = User.find("id == %@", args: self.tag) as! User
-        
-        let parameters = ["friends": [["user_id": user.id!]]]
-        RouterWrapper.sharedInstance.request(.InviteFriend(parameters)) { (response) in
-            print(response.response)
-            print(response.request)
-            switch response.result {
-            case .Success:
-                switch response.response!.statusCode {
-                case 200...203:
-                    SpinnerManager.showWhistle("kFriendInviteSent", success: true)
-                    user.delete()
-                    OwnerManager.sharedInstance.setCredentials(response.response!)
-                    break;
-                default:
-                    SpinnerManager.showWhistle("kFail", success: false)
-                    break;
-                }
+        let parameters = ["user_id": user.id!]
 
-            case .Failure(let error):
-                SpinnerManager.showWhistle("kFail", success: false)
-                print(error.localizedDescription)
+        FriendManager.sharedInstance.invite(parameters) { (status) in
+            switch status {
+            case .Success:
+                SpinnerManager.showWhistle("kFriendSuccess")
+            case .Error(let error):
+                SpinnerManager.showWhistle("kFriendError", success: false)
+                print(error)
             }
         }
     }

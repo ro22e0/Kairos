@@ -9,6 +9,8 @@
 import Foundation
 import SideMenu
 import CoreData
+import SwiftyJSON
+import UIKit
 
 let MainStoryboardID = "Main"
 let CalendarStoryboardID = "Calendar"
@@ -24,7 +26,10 @@ let kUSER_GOOGLE_AUTH_NOTIFICATION = "kUserGoogleAuth"
 let kEventWillSaveNotification = "EventWillSave"
 let kCalendarWillSaveNotification = "CalendarWillSave"
 
-let userLoginKeyConstant = "userLoginKey"
+let userLoginKey = "userLoginKey"
+let userTokenKey = "userTokenKey"
+let userClientKey = "userClientKey"
+let userUIDKey = "userUIDKey"
 
 enum LoginSDK: String {
     case Facebook = "Facebook"
@@ -32,10 +37,21 @@ enum LoginSDK: String {
 }
 
 enum FriendStatus: String {
-    case Pending
-    case Requested
-    case Blocked
-    case Accepted
+    case Pending = "pending"
+    case Requested = "requested"
+    case Accepted = "accepted"
+}
+
+enum UserStatus: String {
+    case Owner = "owner"
+    case Participating = "participating"
+    case Invited = "invited"
+    case Refused = "refused"
+}
+
+enum CustomStatus {
+    case Success
+    case Error(String)
 }
 
 extension UIViewController {
@@ -50,13 +66,13 @@ extension UIViewController {
     
     func viewController(fromStoryboard storyboard: String, viewController name: String) -> UIViewController {
         let storyboard = UIStoryboard(name: storyboard, bundle: nil)
-        
+
         return storyboard.instantiateViewControllerWithIdentifier(name)
     }
     
     func setRootVC(storyboard: String) {
         let storyboard = UIStoryboard(name: storyboard, bundle: nil)
-        
+
         if let viewController = storyboard.instantiateInitialViewController() {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
@@ -67,5 +83,18 @@ extension UIViewController {
 
 extension UITableViewCell {
     func selected() {
+    }
+}
+
+extension UIView {
+    func round() {
+        self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2
+        self.clipsToBounds = true
+        
+    }
+
+    func addBorder(color: CGColor) {
+        self.layer.borderWidth = 3.0
+        self.layer.borderColor = color
     }
 }

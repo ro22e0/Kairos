@@ -9,7 +9,7 @@
 import UIKit
 
 class BaseCalendarTableViewCell: UITableViewCell {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,7 +20,7 @@ class BaseCalendarTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
     func configure(calendar: Calendar) {
         NSNotificationCenter.defaultCenter()
             .addObserver(self, selector:
@@ -28,10 +28,10 @@ class BaseCalendarTableViewCell: UITableViewCell {
                          name:kCalendarWillSaveNotification,
                          object: nil)
     }
-
+    
     @objc func updateCalendar(notification: NSNotification) {
         let calendar = notification.userInfo!["calendar"] as! Calendar
 
-            calendar.save()
+        calendar.save()
     }
 }

@@ -13,21 +13,35 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    var user: Owner!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.user = UserManager.sharedInstance.current
+        self.configure()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-//        RequestManager.fetchFriends()
-//        RequestManager.fetchUsers()
+        //        RequestManager.fetchFriends()
+        //        RequestManager.fetchUsers()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func configure() {
+        if self.user.imageData != nil {
+            self.profileImage.image = UIImage(data: self.user.imageData!)
+            self.profileImage.addBorder(UIColor.whiteColor().CGColor)
+        } else {
+            self.profileImage.backgroundColor = .whiteColor()
+        }
+        self.profileImage.round()
+        self.nameLabel.text = self.user.name
     }
     
     // MARK: - Table view data source
@@ -52,7 +66,7 @@ class ProfileTableViewController: UITableViewController {
      return true
      }
      */
-
+    
     /*
      // Override to support editing the table view.
      override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -89,35 +103,10 @@ class ProfileTableViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    @IBAction func friendsRequests(sender: UIButton) {
-//        let nvc = self.viewController(fromStoryboard: FriendsStoryboardID, viewController: "FriendsRequestsTableViewController")
-//
-//        self.presentViewController(nvc, animated: true, completion: nil)
-    }
     
-    @IBAction func calendarsRequests(sender: UIButton) {
-    }
-
     @IBAction func signOut(sender: UIButton) {
-        Router.needToken = true
-        RouterWrapper.sharedInstance.request(.Logout) { (response) in
-            switch response.result {
-            case .Success:
-                switch response.response!.statusCode {
-                case 200...203:
-                    let defautls = NSUserDefaults.standardUserDefaults()
-                    defautls.setValue(false, forKey: userLoginKeyConstant)
-                    self.setRootVC(LoginStoryboardID)
-                    break;
-                default:
-                    SpinnerManager.showWhistle("kFail", success: false)
-                    break;
-                }
-            case .Failure(let error):
-                SpinnerManager.showWhistle("kFail", success: false)
-                print(error.localizedDescription)
-            }
-            self.dismissViewControllerAnimated(true, completion: nil)
+        UserManager.sharedInstance.signOut() { (status) in
+            self.setRootVC(MainStoryboardID)
         }
     }
     

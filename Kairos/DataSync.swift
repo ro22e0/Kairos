@@ -21,9 +21,13 @@ struct DataSync {
         return delegate.dataStack
     }
     
-    static func sync(entity entityName: String, data: [[String: AnyObject]], completion: ((NSError?) -> Void), withDelete: Bool = false) {
-        let ops: DATAFilter.Operation = withDelete ? [.Insert, .Update, .Delete] : [.Insert, .Update]
-        Sync.changes(data, inEntityNamed: entityName, dataStack: self.dataStack(), operations: ops, completion: completion)
+    static func sync(entity entityName: String, predicate: NSPredicate?, data: [[String: AnyObject]], completion: ((NSError?) -> Void), all: Bool = false) {
+        let ops: DATAFilter.Operation = all ? [.All] : [.Insert, .Update]
+        if predicate != nil {
+            Sync.changes(data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops, completion: completion)
+        } else {
+            Sync.changes(data, inEntityNamed: entityName, dataStack: self.dataStack(), operations: ops, completion: completion)
+        }
     }
     
     static func transformJson(json: JSON) -> [[String: AnyObject]] {
@@ -38,9 +42,11 @@ struct DataSync {
     }
     
     static func deleteAll() {
+        Owner.deleteAll()
         Event.deleteAll()
         Calendar.deleteAll()
         Friend.deleteAll()
+        User.deleteAll()
     }
     
     // MARK: - Friends
@@ -59,20 +65,87 @@ struct DataSync {
         }
     }
     
-    private static func syncFriends(friends: [JSON], status: FriendStatus) {
+    private static func syncFriends(friends: [JSON]) {
         for f in friends {
             let friend = Friend.findOrCreate(["id": f["id"].object]) as! Friend
-            
-            friend.status = status.hashValue
+
             friend.name = f["name"].stringValue
             friend.nickname = f["nickname"].stringValue
+            friend.status = f["status"].stringValue
             friend.email = f["email"].stringValue
             friend.image = f["image"].stringValue
-            friend.owner = OwnerManager.sharedInstance.owner
+            friend.owner = UserManager.sharedInstance.current
         }
+        Friend.save()
         print(Friend.count())
     }
-
+    
+    static func fetchFriends(completionHandler: (CustomStatus) -> Void) {
+        Router.needToken = true
+        RouterWrapper.sharedInstance.request(.GetFriends) { (response) in
+            print(response.response) // URL response
+            switch response.result {
+            case .Success:
+                UserManager.sharedInstance.setCredentials(response.response!)
+                switch response.response!.statusCode {
+                case 200...203:
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        
+                        print(json)
+                        
+                        let friendsArray = json["friends"].arrayValue + json["friend_requests"].array! + json["pending_requests"].array!
+                        let data = DataSync.transformJson(JSON(friendsArray))
+                        print(data)
+                        var friends = [JSON]()
+                        //
+                        //                        let requested = DataSync.transformJson()
+                        //                        print(requested)
+                        //
+                        //                        let pending = DataSync.transformJson()
+                        //                        print(requested)
+                        for var f in friendsArray {
+                            f["owner"].number = UserManager.sharedInstance.current.id
+                            friends.append(f)
+                        }
+                        
+                        //                        for var f in requested {
+                        //                            f["status"] = FriendStatus.Requested.hashValue
+                        //                            f["owner"] = UserManager.sharedInstance.current
+                        //                        }
+                        //                        for var f in pending {
+                        //                            f["status"] = FriendStatus.Pending.hashValue
+                        //                            f["owner"] = UserManager.sharedInstance.current
+                        //                        }
+                        
+                        self.deleteFriends(friends)
+                        self.syncFriends(friends)
+                        completionHandler(CustomStatus.Success)
+                        
+                        
+                        //                        let pred = NSPredicate(format: "self.isKindOfClass %@", Friend)
+                        //                        DataSync.sync(entity: "Friend", predicate: nil, data: friends, completion: { error in
+                        //                            print(NSDate(), "done", true)
+                        //                            completionHandler(.Success)
+                        //                            })
+                        //                        DataSync.sync(entity: "Friend", data: requested, completion: { error in
+                        //                            print(NSDate(), "done")
+                        //                            completionHandler(.Success)
+                        //                        })
+                        //                        DataSync.sync(entity: "Friend", data: pending, completion: { error in
+                        //                            print(NSDate(), "done")
+                        //                            completionHandler(.Success)
+                        //                        })
+                    }
+                default:
+                    completionHandler(CustomStatus.Error("error"))
+                }
+            case .Failure(let error):
+                completionHandler(.Error(error.localizedDescription))
+            }
+        }
+    }
+    
     // MARK: - Users
     
     private static func deleteUsers(users: [JSON]) {
@@ -85,7 +158,12 @@ struct DataSync {
         let predicate = NSPredicate(format: "NOT (id IN %@)", ids)
         let deletedUsers = User.query(predicate) as! [User]
         for u in deletedUsers {
-            u.delete()
+            let friendExist = Friend.find("id == %@", args: u.id!) != nil ? true : false
+            let ownerExist = Owner.find("id == %@", args: u.id!) != nil ? true : false
+
+            if (!friendExist && !ownerExist) {
+                u.delete()
+            }
         }
     }
     
@@ -97,7 +175,10 @@ struct DataSync {
             print("Friend id : ", Friend.find("id == %@", args: u["id"].stringValue))
             print("Owner id : ", Owner.find("id == %@", args: u["id"].stringValue))
             
-            if Owner.find("id == %@", args: u["id"].stringValue) == nil && Friend.find("id == %@", args: u["id"].stringValue) == nil {
+            let friendExist = Friend.find("id == %@", args: u["id"].stringValue) != nil ? true : false
+            let ownerExist = Owner.find("id == %@", args: u["id"].stringValue) != nil ? true : false
+            
+            if (!friendExist && !ownerExist) {
                 let user = User.findOrCreate(["id": u["id"].object]) as! User
                 user.name = u["name"].stringValue
                 user.nickname = u["nickname"].stringValue
@@ -105,32 +186,37 @@ struct DataSync {
                 user.image = u["image"].stringValue
             }
         }
+        User.save()
     }
-    
-    static func fetchUsers() {
+
+    static func fetchUsers(completionHandler: (CustomStatus) -> Void) {
         Router.needToken = true
-        
-        print("fetchUsers")
-        print(OwnerManager.sharedInstance.owner!.accessToken)
-        print(OwnerManager.sharedInstance.owner!.client)
-        print(OwnerManager.sharedInstance.owner!.uid)
-        print("END---fetchUsers")
-        
         RouterWrapper.sharedInstance.request(.GetUsers) { (response) in
             print(response.response) // URL response
             switch response.result {
             case .Success:
-                OwnerManager.sharedInstance.setCredentials(response.response!)
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    
-                    let data = self.transformJson(json)
-                    
-                    self.sync(entity: "User", data: data, completion: { error in
-                        print(NSDate(), "done")
-                    })
+                UserManager.sharedInstance.setCredentials(response.response!)
+                switch response.response!.statusCode {
+                case 200...203:
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        let data = self.transformJson(json)
+                        let users = json.array!
+                        //
+                        self.deleteUsers(users)
+                        self.syncUsers(users)
+                        completionHandler(CustomStatus.Success)
+                        
+                        //                        let pred = NSPredicate(format: "id != %@", UserManager.sharedInstance.current.id!)
+                        //                        self.sync(entity: "User", predicate: nil, data: data, completion: { error in
+                        //                            completionHandler(CustomStatus.Success)
+                        //                        })
+                    }
+                default:
+                    completionHandler(CustomStatus.Error("error"))
                 }
             case .Failure(let error):
+                completionHandler(CustomStatus.Error(error.localizedDescription))
                 print(error)
             }
         }
@@ -140,6 +226,8 @@ struct DataSync {
     
     private static func deleteCalendars(calendars: [JSON]) {
         let ids = NSMutableArray()
+        
+        let id: Int?
         
         for c in calendars {
             ids.addObject(c["id"].object)
@@ -151,19 +239,7 @@ struct DataSync {
             c.delete()
         }
     }
-    
-    private static func syncCalendars(calendars: [JSON]) {
-        print(calendars)
-        for c in calendars {
-            print("YEAH : ", c["name"])
-            let calendar = Calendar.findOrCreate(["id": c["id"].object]) as! Calendar
-            calendar.name = c["name"].stringValue
-            print(calendar.id)
-            print(calendar.name)
-            calendar.save()
-        }
-    }
-    
+
     private static func deleteObject(data: [JSON], query: (AnyObject, AnyObject...) -> [NSManagedObject]) {
         let ids = NSMutableArray()
         
@@ -177,42 +253,72 @@ struct DataSync {
             o.delete()
         }
     }
-    
+
+    private static func syncUserCalendar(calendar: Calendar, users: [JSON]) {
+        for u in users {
+            guard let user = User.find("id == %@", args: u["id"].number!) as? User else {
+                return
+            }
+            if let uCalendar = UserCalendar.findOrCreate(["userId": user.id!, "calendarId": calendar.id!]) as? UserCalendar {
+                uCalendar.status = u["status"].string!
+                uCalendar.isOwner = u["status"].string! == UserStatus.Owner.rawValue
+                uCalendar.calendar = calendar
+                uCalendar.user = user
+                uCalendar.isSelected = true
+            }
+        }
+    }
+
+    private static func syncCalendars(calendars: [JSON]) {
+        print(calendars)
+        for c in calendars {
+            print("YEAH : ", c["name"])
+            let calendar = Calendar.findOrCreate(["id": c["id"].object]) as! Calendar
+            calendar.name = c["name"].stringValue
+            
+            var users = c["owners"].array! + c["participating_users"].array!
+            users += c["refused_users"].array! + c["invited_users"].array!
+            syncUserCalendar(calendar, users: users)
+
+            print(calendar.id)
+            print(calendar.name)
+        }
+        Calendar.save()
+    }
+
     static func fetchCalendars() {
         Router.needToken = true
-        
-        print(OwnerManager.sharedInstance.owner!.accessToken)
-        print(OwnerManager.sharedInstance.owner!.client)
-        print(OwnerManager.sharedInstance.owner!.uid)
-        
+
         RouterWrapper.sharedInstance.request(.GetCalendars) { (response) in
             print(response.response) // URL response
             switch response.result {
             case .Success:
-                OwnerManager.sharedInstance.setCredentials(response.response!)
+                UserManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
-                    let json = JSON(value)
+                    let json = JSON(value).array!
                     
                     print(json)
                     
-                    deleteObject(json.array!, query: Calendar.query)
+//                    deleteObject(json.array!, query: Calendar.query)
                     
-                    let completion: ((NSError?) -> Void) = { error in
-                        print(NSDate(), "done")
-                        
-                        for c in json.array! {
-                            var data = [[String : AnyObject]]()
-                            data += c["refused_users"].object as! [[String : AnyObject]]
-                            data += c["participating_users"].object as! [[String : AnyObject]]
-                            data += c["invited_users"].object as! [[String : AnyObject]]
-                            data += c["owners"].object as! [[String : AnyObject]]
-                            
-                            self.sync(entity: "User", data: data, completion: { error in
-                                print(NSDate(), "done")
-                            })
-                        }
-                    }
-                    self.sync(entity: "Calendar", data: json.object as! [[String : AnyObject]], completion: completion, withDelete: true)
+                self.syncCalendars(json)
+                    
+//                    let completion: ((NSError?) -> Void) = { error in
+//                        print(NSDate(), "done")
+//                        
+//                        for c in json.array! {
+//                            var data = [[String : AnyObject]]()
+//                            data += c["refused_users"].object as! [[String : AnyObject]]
+//                            data += c["participating_users"].object as! [[String : AnyObject]]
+//                            data += c["invited_users"].object as! [[String : AnyObject]]
+//                            data += c["owners"].object as! [[String : AnyObject]]
+//                            
+//                            self.sync(entity: "User", predicate: nil, data: data, completion: { error in
+//                                print(NSDate(), "done")
+//                            })
+//                        }
+//                    }
+//                    self.sync(entity: "Calendar", predicate: nil, data: json.object as! [[String : AnyObject]], completion: completion)
                 }
             case .Failure(let error):
                 print(error)
@@ -261,22 +367,18 @@ struct DataSync {
     static func fetchEvents() {
         Router.needToken = true
         
-        print(OwnerManager.sharedInstance.owner!.accessToken)
-        print(OwnerManager.sharedInstance.owner!.client)
-        print(OwnerManager.sharedInstance.owner!.uid)
-        
         RouterWrapper.sharedInstance.request(.GetEvents) { (response) in
             print(response.response) // URL response
             switch response.result {
             case .Success:
                 
-                OwnerManager.sharedInstance.setCredentials(response.response!)
+                UserManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
                     
                     print(json)
                     
-                    self.sync(entity: "Event", data: json.object as! [[String : AnyObject]], completion: { error in
+                    self.sync(entity: "Event", predicate: nil, data: json.object as! [[String : AnyObject]], completion: { error in
                         print(NSDate(), "done")
                     })
                 }

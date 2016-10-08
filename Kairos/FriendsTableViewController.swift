@@ -13,11 +13,8 @@ import DZNEmptyDataSet
 class FriendsTableViewController: UITableViewController {
     
     // MARK: - Class Properties
-    let cellIdentifier = "friendCell"
-    var itemInfo = IndicatorInfo(title: "View")
-
     var friends = [Friend]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,16 +23,19 @@ class FriendsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        self.tableView.tableFooterView = UIView()
-        
-        friends = OwnerManager.sharedInstance.getFriends(withStatus: .Accepted)
-        print(friends.count)
+        configureView()
+        FriendManager.sharedInstance.fetch {
+            self.friends = FriendManager.sharedInstance.friends()
+            self.tableView.reloadData()
+        }
+    }
 
-        tableView.registerNib(UINib(nibName: "FriendTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellIdentifier)
+    func configureView() {
+        tableView.tableFooterView = UIView()
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 65
+        tableView.registerNib(UINib(nibName: "FriendTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "friendCell")
         tableView.allowsSelection = false
-
-        definesPresentationContext = false
     }
     
     // MARK: - Methods
@@ -48,7 +48,7 @@ class FriendsTableViewController: UITableViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -65,11 +65,19 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! FriendTableViewCell
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell", forIndexPath: indexPath) as! FriendTableViewCell
+        
         cell.nameLabel.text = friends[indexPath.row].name
+        
+        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [Friend]
+        if let number = mutualFriends?.count where number > 0 {
+            cell.mutualFriendsLabel.hidden = false
+            cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
+        } else {
+            cell.mutualFriendsLabel.hidden = true
+        }
         cell.tag = Int(friends[indexPath.row].id!)
-
+        
         return cell
     }
     
@@ -121,6 +129,6 @@ class FriendsTableViewController: UITableViewController {
 
 extension FriendsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: "No friends to show.")
+        return NSAttributedString(string: "No friends to show")
     }
 }

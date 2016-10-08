@@ -14,6 +14,7 @@ class CalendarNameTableViewCell: BaseCalendarTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
     }
 
@@ -25,7 +26,7 @@ class CalendarNameTableViewCell: BaseCalendarTableViewCell {
     
     override func configure(calendar: Calendar) {
         super.configure(calendar)
-     
+
         self.nameTextField.text = calendar.name
     }
     
@@ -33,7 +34,7 @@ class CalendarNameTableViewCell: BaseCalendarTableViewCell {
         let calendar = notification.userInfo!["calendar"] as! Calendar
         
         calendar.name = nameTextField.text
-        
+
         super.updateCalendar(notification)
     }
 

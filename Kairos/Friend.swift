@@ -14,6 +14,6 @@ class Friend: User {
 
     // MARK: - CoreDataProperties
 
-    @NSManaged var status: NSNumber?
+    @NSManaged var status: String?
     @NSManaged var owner: Owner?
 }

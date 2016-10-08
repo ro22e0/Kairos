@@ -9,6 +9,7 @@
 import UIKit
 import FSCalendar
 import SwiftRecord
+import DZNEmptyDataSet
 
 private let SWIPE_ANIMATION_DURATION = 0.3
 
@@ -28,7 +29,7 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
 
         // Fetch update
-//        DataSync.fetchCalendars()
+        DataSync.fetchCalendars()
         
         // Do any additional setup after loading the view.
         calendarView.scrollDirection = .Horizontal
@@ -134,7 +135,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     
     func calendar(calendar: FSCalendar, numberOfEventsForDate date: NSDate) -> Int {
         return 0
-        //OwnerManager.sharedInstance.getEvents(forDate: date).count
+        //UserManager.sharedInstance.getEvents(forDate: date).count
     }
     
     // MARK: FSCalendarDelegate
@@ -147,7 +148,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
         print("selected date: ", date)
-        self.events = OwnerManager.sharedInstance.getEvents(forDate: calendarView.selectedDate)
+        self.events = UserManager.sharedInstance.getEvents(forDate: calendarView.selectedDate)
         self.eventTableView.reloadData()
     }
     
@@ -159,5 +160,11 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     // MARK: FSCalendarDelegateAppearance
     func calendar(calendar: FSCalendar, appearance: FSCalendarAppearance, eventColorsForDate date: NSDate) -> [AnyObject]? {
         return []
+    }
+}
+
+extension CalendarViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No Events")
     }
 }

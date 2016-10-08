@@ -37,7 +37,6 @@ class EventTableViewController: FormViewController {
         //        eventStartDateCell = EventStartDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
         //        eventEndDateCell = EventEndDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
         
-        self.configure()
         
         if let event = event {
             self.saveButton.title = "Update"
@@ -47,6 +46,7 @@ class EventTableViewController: FormViewController {
             event?.dateStart = NSDate()
             event?.dateEnd = NSDate()
         }
+        self.configure()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -257,7 +257,7 @@ class EventTableViewController: FormViewController {
                 switch response.response!.statusCode {
                 case 200...203:
                     SpinnerManager.showWhistle("kEventCreated", success: true)
-                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                    UserManager.sharedInstance.setCredentials(response.response!)
                     break;
                 default:
                     SpinnerManager.showWhistle("kFail", success: false)
@@ -292,7 +292,7 @@ class EventTableViewController: FormViewController {
                 switch response.response!.statusCode {
                 case 200...203:
                     SpinnerManager.showWhistle("kEventCreated", success: true)
-                    OwnerManager.sharedInstance.setCredentials(response.response!)
+                    UserManager.sharedInstance.setCredentials(response.response!)
                     break;
                 default:
                     SpinnerManager.showWhistle("kFail", success: false)
@@ -315,7 +315,6 @@ class EventTableViewController: FormViewController {
             success = success && (event!.dateStart!.compare(event!.dateEnd!) == .OrderedAscending || event!.dateStart!.compare(event!.dateEnd!) == .OrderedSame)
         }
         success = success && event?.notes != nil
-        
         return success
     }
     

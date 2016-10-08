@@ -62,15 +62,44 @@
                             <outlet property="emptyDataSetSource" destination="3SN-Wk-4fd" id="ORM-sS-RCq"/>
                         </connections>
                     </tableView>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="isL-BK-ddl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2541" y="409"/>
         </scene>
-        <!--Search Friends Table View Controller-->
+        <!--Friend Action Popover Table View Controller-->
+        <scene sceneID="PE3-ER-n3g">
+            <objects>
+                <tableViewController storyboardIdentifier="FriendActionPopoverTableViewController" id="uXX-kG-K42" customClass="FriendActionPopoverTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eqC-QR-HlQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UNs-sv-Q8y">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UNs-sv-Q8y" id="9Kw-PS-LS4">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uXX-kG-K42" id="QJs-ow-cnc"/>
+                            <outlet property="delegate" destination="uXX-kG-K42" id="Ee4-qO-L9c"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ptv-R1-7hu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3247" y="409"/>
+        </scene>
+        <!--Add Friends Table View Controller-->
         <scene sceneID="6gH-gN-0sW">
             <objects>
-                <tableViewController id="Uhw-4Q-aJQ" customClass="SearchFriendsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Uhw-4Q-aJQ" customClass="AddFriendsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="N9Y-dx-111">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,22 +110,16 @@
                             <outlet property="delegate" destination="Uhw-4Q-aJQ" id="nao-pG-X3f"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="56q-P6-4F2">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="B3B-gP-Asa">
-                            <connections>
-                                <action selector="done:" destination="Uhw-4Q-aJQ" id="dQm-qd-q51"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="56q-P6-4F2"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdf-pM-tbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3353" y="1107"/>
+            <point key="canvasLocation" x="2541" y="1107"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iEa-C2-5je">
             <objects>
-                <navigationController storyboardIdentifier="SearchFriendsTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="0tU-hL-e8K" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AddFriendsTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="0tU-hL-e8K" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DUg-18-Yp6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -109,7 +132,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uvv-Is-AID" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2541" y="1107"/>
+            <point key="canvasLocation" x="1729" y="1107"/>
         </scene>
     </scenes>
 </document>

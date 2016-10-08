@@ -28,7 +28,7 @@ public enum Router: URLRequestConvertible {
      
      - returns: A `String` baseURL.
      */
-    static let baseURL = "https://kairos-api-ro22e0.c9users.io/api/v1"
+    static let baseURL = "http://kairos-api-ro22e0.c9users.io/api/v1"
     
     /**
      Determine if the request need credentials in headers.
@@ -37,10 +37,13 @@ public enum Router: URLRequestConvertible {
      */
     static var needToken: Bool = true
     
-    case Logout
+    case SignOut
     
     /// Create a new user.
     case CreateUser([String: AnyObject])
+    
+    /// Update user.
+    case UpdateUser([String: AnyObject])
     
     /// Get users.
     case GetUsers
@@ -61,10 +64,11 @@ public enum Router: URLRequestConvertible {
     case InviteFriend([String: AnyObject])
     
     /// Block a friend.
-    case BlockFriend([String: AnyObject])
+    case CancelFriend([String: AnyObject])
     
     /// Remove a friend.
     case RemoveFriend([String: AnyObject])
+    
     
     case GetEvents
     
@@ -76,6 +80,7 @@ public enum Router: URLRequestConvertible {
     
     case DeleteEvent([String: AnyObject])
     
+    
     case GetCalendars
     
     case GetCalendar([String: AnyObject])
@@ -86,6 +91,11 @@ public enum Router: URLRequestConvertible {
     
     case DeleteCalendar([String: AnyObject])
     
+    case InviteCalendar([String: AnyObject])
+    case AcceptCalendar([String: AnyObject])
+    case RefuseCalendar([String: AnyObject])
+    case OwnerCalendar([String: AnyObject])
+    
     /**
      The method use for the request.
      
@@ -93,13 +103,13 @@ public enum Router: URLRequestConvertible {
      */
     var method: HTTPMethod {
         switch self {
-        case .CreateUser, .Authenticate, .InviteFriend, .BlockFriend, .CreateCalendar, .CreateEvent:
+        case .CreateUser, .Authenticate, .InviteFriend, .CreateCalendar, .CreateEvent:
             return .POST
         case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .GetCalendars, .GetCalendar:
             return .GET
-        case .AcceptFriend, .DeclineFriend, .UpdateEvent, .UpdateCalendar:
+        case .UpdateUser, .AcceptFriend, .DeclineFriend, .UpdateEvent, .UpdateCalendar, .InviteCalendar, .AcceptCalendar, .RefuseCalendar, .OwnerCalendar:
             return .PUT
-        case .RemoveFriend, .DeleteEvent, .DeleteCalendar, .Logout:
+        case .RemoveFriend, .CancelFriend, .DeleteEvent, .DeleteCalendar, .SignOut:
             return .DELETE
         }
     }
@@ -115,10 +125,25 @@ public enum Router: URLRequestConvertible {
             return "/auth"
         case .Authenticate:
             return "/auth/sign_in"
-        case .GetFriends, .AcceptFriend, .DeclineFriend, .InviteFriend, .BlockFriend, .RemoveFriend:
+            
+        case .GetFriends:
             return "/friends"
+        case .InviteFriend:
+            return "/friends/invite"
+        case .CancelFriend:
+            return "/friends/cancel"
+        case .AcceptFriend:
+            return "/friends/accept"
+        case .DeclineFriend:
+            return "/friends/refuse"
+        case .RemoveFriend:
+            return "/friends/remove"
+            
         case .GetUsers:
             return "/users"
+        case .UpdateUser(let parameters):
+            return "/users/\(parameters["id"])"
+            
         case .CreateEvent, .GetEvents:
             return "/events"
         case .UpdateEvent(let parameters):
@@ -127,6 +152,7 @@ public enum Router: URLRequestConvertible {
             return "/events/\(parameters["id"])"
         case .DeleteEvent(let parameters):
             return "/events/\(parameters["id"])"
+            
         case .CreateCalendar, .GetCalendars:
             return "/calendars"
         case .UpdateCalendar(let parameters):
@@ -135,7 +161,15 @@ public enum Router: URLRequestConvertible {
             return "/calendars/\(parameters["id"])"
         case .DeleteCalendar(let parameters):
             return "/calendars/\(parameters["id"])"
-        case .Logout:
+        case .InviteCalendar(let parameters):
+            return "/calendars/\(parameters["id"])/invite"
+        case .AcceptCalendar(let parameters):
+            return "/calendars/\(parameters["id"])/accept"
+        case .RefuseCalendar(let parameters):
+            return "/calendars/\(parameters["id"])/refuse"
+        case .OwnerCalendar(let parameters):
+            return "/calendars/\(parameters["id"])/set_owner"
+        case .SignOut:
             return "/auth/sign_out"
         }
     }
@@ -155,30 +189,30 @@ public enum Router: URLRequestConvertible {
         print(Router.needToken)
         
         if Router.needToken {
-            print(OwnerManager.sharedInstance.owner!.accessToken)
-            print(OwnerManager.sharedInstance.owner!.client)
-            print(OwnerManager.sharedInstance.owner!.uid)
-            mutableURLRequest.setValue(OwnerManager.sharedInstance.owner!.accessToken, forHTTPHeaderField: "access-token")
-            mutableURLRequest.setValue(OwnerManager.sharedInstance.owner!.client, forHTTPHeaderField: "client")
-            mutableURLRequest.setValue(OwnerManager.sharedInstance.owner!.uid, forHTTPHeaderField: "uid")
+            let credentials = UserManager.sharedInstance.getCredentials()
+            mutableURLRequest.setValue(credentials["access-token"], forHTTPHeaderField: "access-token")
+            mutableURLRequest.setValue(credentials["client"], forHTTPHeaderField: "client")
+            mutableURLRequest.setValue(credentials["uid"], forHTTPHeaderField: "uid")
         }
         
         switch self {
         case .CreateUser(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
+        case .UpdateUser(let parameters):
+            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .Authenticate(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .AcceptFriend(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .DeclineFriend(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .InviteFriend(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .BlockFriend(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .CancelFriend(let parameters):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .AcceptFriend(let parameters):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .DeclineFriend(let parameters):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
         case .RemoveFriend(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .DeleteEvent, .GetCalendars, .GetCalendar, .DeleteCalendar, .Logout:
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .DeleteEvent, .GetCalendars, .GetCalendar, .AcceptCalendar, .RefuseCalendar, .DeleteCalendar, .SignOut:
             return mutableURLRequest
         case .CreateEvent(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
@@ -188,6 +222,10 @@ public enum Router: URLRequestConvertible {
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .UpdateCalendar(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
+        case .InviteCalendar(let parameters):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .OwnerCalendar(let parameters):
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
         }
     }
 }
@@ -210,7 +248,7 @@ class RouterWrapper: NSObject, NSURLSessionTaskDelegate {
     
     /**
      Initialize the manager use by Alamofire.
-
+     
      - returns: The created manager.
      */
     private lazy var manager: Manager = {

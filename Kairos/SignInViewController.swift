@@ -36,52 +36,25 @@ class SignInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     // MARK: - Actions
     @IBAction func SignIn(sender: UIButton) {
         SignInRequest()
     }
-    
+
     // MARK: - Methods
     private func SignInRequest() {
         let parameters = ["email": emailTextField.text!, "password": passwordTextField.text!]
-        
-        Router.needToken = false
-        RouterWrapper.sharedInstance.request(.Authenticate(parameters)) { (response) in
-            print(response.request)  // original URL request
-            print(response.response) // URL response
-            print(response.data)     // server data
-            print(response.result)   // result of response serialization
-            switch response.result {
+
+        UserManager.sharedInstance.signIn(parameters) { (status) in
+            switch status {
             case .Success:
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    print("JSON: \(json)")
-                    switch response.response!.statusCode {
-                    case 200:
-                        DataSync.sync(entity: "Owner", data: [json["data"].dictionaryObject!], completion: { error in
-                            let owner = Owner.all().first as! Owner
-                            OwnerManager.sharedInstance.newOwner(owner)
-                            OwnerManager.sharedInstance.setCredentials(response.response!)
-                            let defautls = NSUserDefaults.standardUserDefaults()
-                            defautls.setValue(true, forKey: userLoginKeyConstant)
-                            self.setRootVC(BoardStoryboardID)
-                        })
-                    default:
-                        SpinnerManager.showSpinner("Failed to connect", subtitle: "Tap to dismiss", completion: { () -> () in
-                            SwiftSpinner.hide()
-                        })
-                    }
-                }
-            case .Failure(let error):
-                SpinnerManager.showSpinner("Failed to connect", subtitle: "Tap to dismiss", completion: { () -> () in
-                    SwiftSpinner.hide()
-                })
-                print(error)
+                self.setRootVC(BoardStoryboardID)
+            case .Error: break
             }
         }
     }
-    
+
     func networkManager(manager: NetworkReachabilityManager, request: Request) {
         manager.listener = { (status) in
             print("Network Status Changed: \(status)")
