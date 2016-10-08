@@ -11,7 +11,5 @@ import SwiftyJSON
 import Alamofire
 
 class RequestManager {
-    
     static let sharedInstance = RequestManager()
-
 }

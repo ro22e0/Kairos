@@ -37,7 +37,6 @@ class EventTableViewController: FormViewController {
         //        eventStartDateCell = EventStartDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
         //        eventEndDateCell = EventEndDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
         
-        self.configure()
         
         if let event = event {
             self.saveButton.title = "Update"
@@ -47,6 +46,7 @@ class EventTableViewController: FormViewController {
             event?.dateStart = NSDate()
             event?.dateEnd = NSDate()
         }
+        self.configure()
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -32,7 +32,6 @@ class EditProfileViewController: FormViewController {
         tableView.contentInset.bottom = 40
         
         // Create RowFomers
-        
         let imageRow = LabelRowFormer<ProfileImagePickerTableViewCell>(instantiateType: .Nib(nibName: "ProfileImagePickerTableViewCell")) {
             if self.user.imageData != nil {
                 $0.imageProfileView.image = UIImage(data: self.user.imageData!)

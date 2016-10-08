@@ -1,19 +1,21 @@
 //
-//  CalendarTableViewController.swift
+//  CalendarDetailsTableViewController.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 10/09/2016.
+//  Created by Ronaël Bajazet on 07/10/2016.
 //  Copyright © 2016 Kairos-app. All rights reserved.
 //
 
 import UIKit
 import Former
 
-class CalendarTableViewController: FormViewController {
+class CalendarDetailsTableViewController: UITableViewController {
     
-    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+
+    private lazy var former: Former = Former(tableView: self.tableView)
     
-    var calendar: Calendar?
+    var calendar: UserCalendar?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +25,9 @@ class CalendarTableViewController: FormViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        if self.calendar == nil {
-            self.saveButton.title = "Save"
-            //            self.calendar = Calendar.create() as? Calendar
-        } else {
-            self.saveButton.title = "Update"
-        }
-        self.configure()
+//        editButton.enabled = false
+//        editButton.tintColor = .clearColor()
+        configure()
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,19 +36,20 @@ class CalendarTableViewController: FormViewController {
     }
     
     func configure() {
-        self.title = "Edit Calendar"
+        self.title = "Calendar Details"
         self.tableView.tableFooterView = UIView()
         
-        //        self.tableView.rowHeight = UITableViewAutomaticDimension
-        //        self.tableView.estimatedRowHeight = 44
+//        self.tableView.rowHeight = UITableViewAutomaticDimension
+//        self.tableView.estimatedRowHeight = 44
         
         var rows = [RowFormer]()
         
-        let nameRow = TextFieldRowFormer<FormTextFieldCell>() {
-            $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+        let calendarHeader = LabelRowFormer<CalendarHeaderCell>(instantiateType: .Nib(nibName: "CalendarHeaderCell")) {
+            $0.eventLabel.text = "No events"
+            $0.participantLabel.text = "1 participant"
             }.configure {
-                $0.placeholder = "Name"
+                $0.text = calendar?.calendar?.name
+                $0.rowHeight = 86
         }
         
         let participant = LabelRowFormer<CollaboratorTableViewCell>(instantiateType: .Nib(nibName: "CollaboratorTableViewCell")) {
@@ -62,7 +60,7 @@ class CalendarTableViewController: FormViewController {
                 $0.subText = "owner"
                 $0.rowHeight = 60
         }
-        //        rows.append(participant)
+        rows.append(participant)
         
         let addPerson = LabelRowFormer<FormLabelCell>() {
             $0.titleLabel.textColor = UIColor.orangeColor()
@@ -74,23 +72,29 @@ class CalendarTableViewController: FormViewController {
         }
         rows.append(addPerson)
         
-        // Create Headers
-        
-        let createHeader: (String -> ViewFormer) = { text in
-            return LabelViewFormer<FormLabelHeaderView>()
-                .configure {
-                    $0.viewHeight = 40
-                    $0.text = text
+        let createHeader: (ViewFormer) = {
+            return CustomViewFormer<UITableViewHeaderFooterView>() {
+                $0.backgroundView = UIView()
+                }.configure {
+                    $0.viewHeight = 10
             }
-        }
+        }()
         
-        // Create SectionFormers
-        
-        let sectionHeader = SectionFormer(rowFormer: nameRow).set(headerViewFormer: createHeader(""))
-        let sectionParticipants = SectionFormer(rowFormers: rows).set(headerViewFormer: createHeader("Shared with:"))
+        let sectionHeader = SectionFormer(rowFormer: calendarHeader).set(headerViewFormer: nil)
+        let sectionParticipants = SectionFormer(rowFormers: rows).set(headerViewFormer: createHeader)
         
         former.append(sectionFormer: sectionHeader, sectionParticipants)
     }
+    
+    /*
+     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+     
+     // Configure the cell...
+     
+     return cell
+     }
+     */
     
     /*
      // Override to support conditional editing of the table view.
@@ -137,30 +141,4 @@ class CalendarTableViewController: FormViewController {
      }
      */
     
-    // MARK: - Navigation
-    
-    @IBAction func done(sender: UIBarButtonItem) {
-        let isPresentingInAddEventMode = presentingViewController is UITabBarController
-        
-        if isPresentingInAddEventMode {
-            dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            navigationController!.popViewControllerAnimated(true)
-        }
-    }
-    
-    @IBAction func cancel(sender: AnyObject) {
-        let isPresentingInAddEventMode = presentingViewController is UITabBarController
-        
-        if isPresentingInAddEventMode {
-            //            event?.delete()
-            dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            //            let changedValues = event!.changedValuesForCurrentEvent()
-            //            for (key, value) in changedValues {
-            //                event!.setValue(value, forKey: key)
-            //            }
-            navigationController!.popViewControllerAnimated(true)
-        }
-    }
 }

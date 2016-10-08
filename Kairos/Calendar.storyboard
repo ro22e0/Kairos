@@ -594,7 +594,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XO1-vd-2yR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3677" y="-2044"/>
+            <point key="canvasLocation" x="3830" y="-2060"/>
         </scene>
         <!--Calendar Filter Table View Controller-->
         <scene sceneID="YB0-FJ-Xlr">
@@ -639,7 +639,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kau-79-igA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3677" y="-1345"/>
+            <point key="canvasLocation" x="3830" y="-1357"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fdu-gL-qAg">
@@ -650,69 +650,50 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="l4I-00-q33" kind="relationship" relationship="rootViewController" id="5b3-l3-aEB"/>
+                        <segue destination="l4I-00-q33" kind="relationship" relationship="rootViewController" id="Dbc-m1-qtg"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lcq-tn-Xbp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5166" y="-1736"/>
+            <point key="canvasLocation" x="5296" y="-2692"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="aG7-On-tJH">
+        <!--Calendar Details Table View Controller-->
+        <scene sceneID="E0v-uM-zIk">
             <objects>
-                <tableViewController id="rMI-9b-Zw8" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="FXd-qt-3ro">
+                <tableViewController id="2Tg-Pp-cVg" customClass="CalendarDetailsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="3mc-Q1-goB">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JZE-EH-n5k">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JZE-EH-n5k" id="Q0g-CE-SUy">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="rMI-9b-Zw8" id="S1s-3H-Gxq"/>
-                            <outlet property="delegate" destination="rMI-9b-Zw8" id="XT3-IC-uV6"/>
+                            <outlet property="dataSource" destination="2Tg-Pp-cVg" id="FnE-i2-vy1"/>
+                            <outlet property="delegate" destination="2Tg-Pp-cVg" id="pR0-6n-lpc"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="gbH-v6-VgO">
+                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="edit" id="eus-il-KDs">
+                            <connections>
+                                <segue destination="l4I-00-q33" kind="show" id="HxC-lB-9Np"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="editButton" destination="eus-il-KDs" id="Hyo-Qa-o29"/>
+                    </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8jm-F0-pgo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H4U-fF-sIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5166" y="-1063"/>
+            <point key="canvasLocation" x="5296" y="-2033"/>
         </scene>
-        <!--Title-->
+        <!--Calendars-->
         <scene sceneID="kHM-UJ-fRb">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EhB-Iu-bMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="CalendarEditTableViewController" id="cyy-F8-0v6" customClass="CalendarEditTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CalendarEditTableViewController" title="Calendars" id="cyy-F8-0v6" customClass="CalendarEditTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="UG8-sB-APq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="ksN-X3-SLs" style="IBUITableViewCellStyleDefault" id="Or0-l9-cxB">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Or0-l9-cxB" id="Ggr-1z-vbG">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ksN-X3-SLs">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="cyy-F8-0v6" id="b8E-YY-7LN"/>
                             <outlet property="delegate" destination="cyy-F8-0v6" id="8YU-YX-ETh"/>
@@ -725,115 +706,38 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="2Tg-Pp-cVg" kind="show" identifier="showCalendarDetails" id="TFd-1Q-YlV"/>
+                    </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EhB-Iu-bMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4398" y="-1345"/>
+            <point key="canvasLocation" x="4582" y="-2060"/>
         </scene>
         <!--Calendar Table View Controller-->
         <scene sceneID="oSE-Of-dLw">
             <objects>
                 <tableViewController id="l4I-00-q33" customClass="CalendarTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="sCA-4K-5Og">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <sections>
-                            <tableViewSection id="Nja-ZH-yj3">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9hU-aB-4hk" customClass="CalendarNameTableViewCell" customModule="Kairos" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9hU-aB-4hk" id="4N0-As-EAG">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ehs-eD-I1v">
-                                                    <rect key="frame" x="8" y="0.0" width="584" height="43.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ehs-eD-I1v" firstAttribute="leading" secondItem="4N0-As-EAG" secondAttribute="leading" constant="8" id="1zM-DF-e5y"/>
-                                                <constraint firstItem="ehs-eD-I1v" firstAttribute="top" secondItem="4N0-As-EAG" secondAttribute="top" id="U5P-Bf-Qbl"/>
-                                                <constraint firstAttribute="trailing" secondItem="ehs-eD-I1v" secondAttribute="trailing" constant="8" id="eKt-hz-lRN"/>
-                                                <constraint firstAttribute="bottom" secondItem="ehs-eD-I1v" secondAttribute="bottom" id="hfg-GZ-QgI"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="nameTextField" destination="ehs-eD-I1v" id="JGI-My-OPP"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="vHe-mv-aBD">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sQj-cq-L9b">
-                                        <rect key="frame" x="0.0" y="179" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sQj-cq-L9b" id="gCY-T6-v37">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="je1-Zf-zAo">
-                                                    <rect key="frame" x="8" y="7" width="50" height="30"/>
-                                                    <state key="normal" title="Invite..."/>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="je1-Zf-zAo" firstAttribute="centerY" secondItem="gCY-T6-v37" secondAttribute="centerY" id="UmH-f3-iXC"/>
-                                                <constraint firstItem="je1-Zf-zAo" firstAttribute="leading" secondItem="gCY-T6-v37" secondAttribute="leading" constant="8" id="dta-mM-Ryl"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="6AV-kK-IQ8">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2gC-lq-HJ2" customClass="CalendarDeleteTableViewCell" customModule="Kairos" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="259" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2gC-lq-HJ2" id="AH1-wH-lhX">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qeb-cj-UFq">
-                                                    <rect key="frame" x="278" y="7" width="45" height="30"/>
-                                                    <state key="normal" title="Delete">
-                                                        <color key="titleColor" red="0.9107572115" green="0.03408877062" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="qeb-cj-UFq" firstAttribute="centerY" secondItem="AH1-wH-lhX" secondAttribute="centerY" id="Gvc-t8-fwf"/>
-                                                <constraint firstItem="qeb-cj-UFq" firstAttribute="centerX" secondItem="AH1-wH-lhX" secondAttribute="centerX" id="lb4-E5-ckh"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="l4I-00-q33" id="tk8-rB-scf"/>
-                            <outlet property="delegate" destination="l4I-00-q33" id="Oa3-aT-lbV"/>
-                        </connections>
-                    </tableView>
                     <navigationItem key="navigationItem" id="gjP-9b-aqL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="5PZ-YI-HGR">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="iYM-Qc-xTd">
+                            <connections>
+                                <action selector="cancel:" destination="l4I-00-q33" id="BFf-Yb-Wl2"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="5PZ-YI-HGR">
                             <connections>
                                 <action selector="done:" destination="l4I-00-q33" id="Wdr-79-Y7G"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="calendarDeleteCell" destination="2gC-lq-HJ2" id="zEO-bj-6SN"/>
-                        <outlet property="calendarInviteCell" destination="sQj-cq-L9b" id="O1e-rB-ljW"/>
-                        <outlet property="calendarNameCell" destination="9hU-aB-4hk" id="5MS-Dv-GA5"/>
+                        <outlet property="saveButton" destination="5PZ-YI-HGR" id="91C-Ur-e0t"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mXZ-HD-2xg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5951" y="-1402"/>
+            <point key="canvasLocation" x="6013" y="-2380"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="FyC-bk-cFc">
@@ -856,7 +760,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="WjU-w8-vSq"/>
         <segue reference="biZ-Ui-IUl"/>
-        <segue reference="Jbv-4C-T54"/>
+        <segue reference="Dbc-m1-qtg"/>
     </inferredMetricsTieBreakers>
 </document>

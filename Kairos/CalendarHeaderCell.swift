@@ -1,20 +1,19 @@
 //
-//  CollaboratorTableViewCell.swift
+//  CalendarHeaderCell.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 15/09/2016.
+//  Created by Ronaël Bajazet on 08/10/2016.
 //  Copyright © 2016 Kairos-app. All rights reserved.
 //
 
 import UIKit
 import Former
 
-class CollaboratorTableViewCell: UITableViewCell, LabelFormableRow {
+class CalendarHeaderCell: UITableViewCell, LabelFormableRow {
 
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var statusColorView: UIView!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var eventLabel: UILabel!
+    @IBOutlet weak var participantLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,14 +25,14 @@ class CollaboratorTableViewCell: UITableViewCell, LabelFormableRow {
 
         // Configure the view for the selected state
     }
-    
+ 
     func formTextLabel() -> UILabel? {
-        return nameLabel
+        return titleLabel
     }
     
     func formSubTextLabel() -> UILabel? {
-        return statusLabel
+        return nil
     }
-
+    
     func updateWithRowFormer(rowFormer: RowFormer) {}
 }

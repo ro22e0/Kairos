@@ -98,6 +98,11 @@
 		DAEE7CBB1CA49A580019C8D4 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE7CBA1CA49A580019C8D4 /* FriendsTableViewController.swift */; };
 		DAF66D2C1CA3EB3700B6062D /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */; };
 		DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF66D301CA4028800B6062D /* MenuTableViewController.swift */; };
+		DAFA00221DA83B040039AD4D /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFA00201DA83B040039AD4D /* CalendarTableViewCell.swift */; };
+		DAFA00231DA83B040039AD4D /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAFA00211DA83B040039AD4D /* CalendarTableViewCell.xib */; };
+		DAFA00251DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFA00241DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift */; };
+		DAFA00281DA852800039AD4D /* CalendarHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFA00261DA852800039AD4D /* CalendarHeaderCell.swift */; };
+		DAFA00291DA852800039AD4D /* CalendarHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAFA00271DA852800039AD4D /* CalendarHeaderCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +216,11 @@
 		DAEE7CBA1CA49A580019C8D4 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		DAF66D301CA4028800B6062D /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		DAFA00201DA83B040039AD4D /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
+		DAFA00211DA83B040039AD4D /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
+		DAFA00241DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDetailsTableViewController.swift; sourceTree = "<group>"; };
+		DAFA00261DA852800039AD4D /* CalendarHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarHeaderCell.swift; sourceTree = "<group>"; };
+		DAFA00271DA852800039AD4D /* CalendarHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarHeaderCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +322,7 @@
 		DA52AAE51CD7F82500464096 /* Event */ = {
 			isa = PBXGroup;
 			children = (
+				DA52AAE41CD7ECA100464096 /* Details */,
 				DA1874561CDB7375008E7C38 /* EventTitleTableViewCell.swift */,
 				DA1874581CDB738B008E7C38 /* EventLocationTableViewCell.swift */,
 				DA18745A1CDB73AF008E7C38 /* EventStartDateTableViewCell.swift */,
@@ -338,7 +349,6 @@
 			children = (
 				DA624AAD1D81518E001473EA /* Calendar */,
 				DA52AAE51CD7F82500464096 /* Event */,
-				DA52AAE41CD7ECA100464096 /* Details */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -346,8 +356,8 @@
 		DA612CB51CA473060027D7FB /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DA1E12001D784AC90068207F /* EditProfileViewController.swift */,
 				DADF545A1D932C5100D0E092 /* ProfileTableViewController.swift */,
+				DA1E12001D784AC90068207F /* EditProfileViewController.swift */,
 				DADC45DB1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift */,
 				DADC45DD1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift */,
 				DADC45DF1D9FBE0A003CC4D1 /* ChangePasswordViewController.swift */,
@@ -363,6 +373,10 @@
 				DA5CDDE31D8AD6FB00B406A1 /* CalendarNameTableViewCell.swift */,
 				DA5CDDE51D8AD94100B406A1 /* CalendarDeleteTableViewCell.swift */,
 				DA5CDDE71D8ADB0600B406A1 /* BaseCalendarTableViewCell.swift */,
+				DAFA00201DA83B040039AD4D /* CalendarTableViewCell.swift */,
+				DAFA00211DA83B040039AD4D /* CalendarTableViewCell.xib */,
+				DAFA00261DA852800039AD4D /* CalendarHeaderCell.swift */,
+				DAFA00271DA852800039AD4D /* CalendarHeaderCell.xib */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -449,6 +463,7 @@
 				DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */,
 				DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */,
 				DA31B7731D9514D9004D5E81 /* CalendarEditTableViewController.swift */,
+				DAFA00241DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -664,12 +679,14 @@
 				DA0A75E11DA68242001881D0 /* Assets.xcassets in Resources */,
 				DA3F3ACD1C9AF0D200E82FC6 /* Login.storyboard in Resources */,
 				DAF66D2C1CA3EB3700B6062D /* Friends.storyboard in Resources */,
+				DAFA00231DA83B040039AD4D /* CalendarTableViewCell.xib in Resources */,
 				DA68533D1CE25E5E00B839F6 /* User-Info.plist in Resources */,
 				DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */,
 				DA7913041CEFCF6E00661753 /* UnfriendTableViewCell.xib in Resources */,
 				DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */,
 				DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */,
 				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
+				DAFA00291DA852800039AD4D /* CalendarHeaderCell.xib in Resources */,
 				DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */,
 				DAC801881CA346B70092A717 /* Settings.storyboard in Resources */,
 				DA612CB41CA472F90027D7FB /* Profile.storyboard in Resources */,
@@ -819,6 +836,7 @@
 				DA7912F91CEFCBF800661753 /* FriendActionPopoverTableViewController.swift in Sources */,
 				DA68533F1CE25E5E00B839F6 /* Event.swift in Sources */,
 				DA11A9F61D986A6700218FF3 /* RequestManager.swift in Sources */,
+				DAFA00251DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift in Sources */,
 				DADC45DC1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift in Sources */,
 				DA18745F1CDB78A9008E7C38 /* EventNotesTableViewCell.swift in Sources */,
 				DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */,
@@ -835,6 +853,7 @@
 				DA1D4BE31D841F7E00B11AD1 /* CalendarTableViewController.swift in Sources */,
 				DADC45DE1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift in Sources */,
 				DA68533E1CE25E5E00B839F6 /* Plist.swift in Sources */,
+				DAFA00221DA83B040039AD4D /* CalendarTableViewCell.swift in Sources */,
 				DA1874591CDB738B008E7C38 /* EventLocationTableViewCell.swift in Sources */,
 				DA8CA94E1D8CA295007E40FF /* UserEvent.swift in Sources */,
 				DA3F3AD31C9B022F00E82FC6 /* SignInViewController.swift in Sources */,
@@ -866,6 +885,7 @@
 				DAA6B6B71D99CAD600D68016 /* CompleteProfileViewController.swift in Sources */,
 				DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */,
 				DA0019061D9FEDEC00CA11F5 /* FriendManager.swift in Sources */,
+				DAFA00281DA852800039AD4D /* CalendarHeaderCell.swift in Sources */,
 				DA5CDDE11D8ACF5000B406A1 /* CollaboratorTableViewCell.swift in Sources */,
 				DA6853401CE25E5E00B839F6 /* Calendar.swift in Sources */,
 				DA5CDDE81D8ADB0600B406A1 /* BaseCalendarTableViewCell.swift in Sources */,
