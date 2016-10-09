@@ -134,5 +134,23 @@
             </objects>
             <point key="canvasLocation" x="1729" y="1107"/>
         </scene>
+        <!--Friends Invite Table View Controller-->
+        <scene sceneID="WX3-C2-3AX">
+            <objects>
+                <tableViewController storyboardIdentifier="FriendsInviteTableViewController" id="ndz-b5-nKX" customClass="FriendsInviteTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zAP-ew-HBM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="ndz-b5-nKX" id="llm-Vp-66n"/>
+                            <outlet property="delegate" destination="ndz-b5-nKX" id="3tI-YO-0Zn"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ba-vb-dnR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2541" y="1859"/>
+        </scene>
     </scenes>
 </document>

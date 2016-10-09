@@ -10,9 +10,12 @@ import UIKit
 
 class UserTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var mutualFriendsLabel: UILabel!
+    
+    var onSelected: ((User, ()->Void) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,16 +30,9 @@ class UserTableViewCell: UITableViewCell {
     
     @IBAction func invite(sender: UIButton) {
         let user = User.find("id == %@", args: self.tag) as! User
-        let parameters = ["user_id": user.id!]
-
-        FriendManager.sharedInstance.invite(parameters) { (status) in
-            switch status {
-            case .Success:
-                SpinnerManager.showWhistle("kFriendSuccess")
-            case .Error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
-                print(error)
-            }
+        self.onSelected!(user) {
+            self.inviteButton.titleLabel?.text = "Sent"
+            self.inviteButton.userInteractionEnabled = false
         }
     }
     
