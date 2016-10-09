@@ -14,6 +14,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="65.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yvy-n7-sVa">
+                        <rect key="frame" x="263" y="17" width="37" height="30"/>
+                        <state key="normal" title="Invite"/>
+                        <connections>
+                            <action selector="invite:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oxe-2R-Xyl"/>
+                        </connections>
+                    </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Io6-eD-4N7">
                         <rect key="frame" x="8" y="8" width="49.5" height="49.5"/>
                         <constraints>
@@ -38,13 +45,6 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yvy-n7-sVa">
-                        <rect key="frame" x="263" y="18" width="37" height="30"/>
-                        <state key="normal" title="Invite"/>
-                        <connections>
-                            <action selector="invite:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oxe-2R-Xyl"/>
-                        </connections>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="SNH-vf-IUM" firstAttribute="leading" secondItem="Io6-eD-4N7" secondAttribute="trailing" constant="12" id="87D-LW-eCR"/>
@@ -59,7 +59,6 @@
             </tableViewCellContentView>
             <inset key="separatorInset" minX="65" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
-                <outlet property="inviteButton" destination="Yvy-n7-sVa" id="NQM-sR-Luo"/>
                 <outlet property="mutualFriendsLabel" destination="9G9-bl-T59" id="7Sx-vs-WGC"/>
                 <outlet property="nameLabel" destination="mbO-uD-gSQ" id="wCx-PQ-92O"/>
                 <outlet property="profilePictureImageView" destination="Io6-eD-4N7" id="DYa-tw-y1y"/>

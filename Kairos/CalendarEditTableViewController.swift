@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DZNEmptyDataSet
 
 class CalendarEditTableViewController: UITableViewController {
     
@@ -18,13 +17,12 @@ class CalendarEditTableViewController: UITableViewController {
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.calendars = CalendarManager.sharedInstance.calendars(withStatus: .Participating)
-
+        self.calendars = CalendarManager.sharedInstance.all()
+        
         self.title = "Calendars"
-        self.tableView.tableFooterView = UIView()
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44
         self.tableView.registerNib(UINib(nibName: "CalendarTableViewCell", bundle: nil), forCellReuseIdentifier: "calendarCell")
@@ -49,22 +47,17 @@ class CalendarEditTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("calendarCell", forIndexPath: indexPath) as! CalendarTableViewCell
         
         // Configure the cell...
-        let calendar = calendars[indexPath.row].calendar!
-        cell.nameLabel.text = calendar.name
-        let participants = CalendarManager.sharedInstance.users(forCalendar: calendar)
-        cell.participantsLabel.text = String(participants.count) + " participants"
-
+        cell.nameLabel.text = calendars[indexPath.row].calendar!.name
+        let participants = calendars[indexPath.row].calendar!.calendarUsers
+        cell.participantsLabel.text = String(participants!.allObjects.count) + " participants"
+        
         return cell
     }
-
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = self.tableView.cellForRowAtIndexPath(indexPath)
         
         self.performSegueWithIdentifier("showCalendarDetails", sender: cell)
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 52
     }
     
     /*
@@ -120,10 +113,4 @@ class CalendarEditTableViewController: UITableViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-}
-
-extension CalendarEditTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        return NSAttributedString(string: "No calendars to show")
-    }
 }

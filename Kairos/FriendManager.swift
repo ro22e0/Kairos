@@ -35,20 +35,7 @@ class FriendManager {
         }
     }
     
-    func all(filtered text: String, forFriends: Bool = false) -> [Friend] {
-           let namePred = NSPredicate(format: "name contains[c] %@", text)
-           let nicknamePred = NSPredicate(format: "nickname contains[c] %@", text)
-            let emailPred = NSPredicate(format: "email contains[c] %@", text)
-
-        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
-        
-        let friends = Friend.query(compoundPred) as! [Friend]
-        //        user.first?.entity.name
-        return friends
-    }
-
-    
-    func fetch(handler: (() -> Void)? = nil) {
+    func fetch(handler: (() -> Void)?) {
         DataSync.fetchFriends { (status) in
             switch status {
             case .Success:

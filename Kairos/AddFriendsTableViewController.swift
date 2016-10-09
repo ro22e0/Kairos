@@ -15,7 +15,7 @@ class AddFriendsTableViewController: UITableViewController {
     var shouldShowSearchResults = false
     
     var users = [User]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,21 +40,6 @@ class AddFriendsTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    private func invite(user: User, done: ()->Void) -> Void {
-        let parameters = ["user_id": user.id!]
-
-        FriendManager.sharedInstance.invite(parameters) { (status) in
-            switch status {
-            case .Success:
-                SpinnerManager.showWhistle("kFriendSuccess")
-                done()
-            case .Error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
-                print(error)
-            }
-        }
     }
 
     func configure() {
@@ -110,11 +95,7 @@ class AddFriendsTableViewController: UITableViewController {
         } else {
             cell.mutualFriendsLabel.hidden = true
         }
-        cell.onSelected = { user, done in
-            self.invite(user) {
-                done()
-            }
-        }
+
         cell.tag = Int(users[indexPath.row].id!)
         
         return cell

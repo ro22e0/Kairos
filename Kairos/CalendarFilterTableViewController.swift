@@ -20,7 +20,7 @@ class CalendarFilterTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.calendars = CalendarManager.sharedInstance.calendars(withStatus: .Participating)
+        self.calendars = CalendarManager.sharedInstance.all()
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,7 +40,7 @@ class CalendarFilterTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("calendarCell", forIndexPath: indexPath)
-
+        
         cell.textLabel?.text = calendars[indexPath.row].calendar!.name
         if calendars[indexPath.row].isSelected! == true {
             cell.accessoryType = .Checkmark

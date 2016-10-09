@@ -23,8 +23,9 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            emailTextField.text = "rona@mail.com"
-            passwordTextField.text = "qwerty123"
+        emailTextField.text = "rona@mail.com"
+        passwordTextField.text = "qwerty123"
+        
         self.navigationItem.backBarButtonItem?.title = ""
         
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -35,16 +36,16 @@ class SignInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     // MARK: - Actions
     @IBAction func SignIn(sender: UIButton) {
         SignInRequest()
     }
-    
+
     // MARK: - Methods
     private func SignInRequest() {
         let parameters = ["email": emailTextField.text!, "password": passwordTextField.text!]
-        
+
         UserManager.sharedInstance.signIn(parameters) { (status) in
             switch status {
             case .Success:
@@ -53,7 +54,7 @@ class SignInViewController: UIViewController {
             }
         }
     }
-    
+
     func networkManager(manager: NetworkReachabilityManager, request: Request) {
         manager.listener = { (status) in
             print("Network Status Changed: \(status)")

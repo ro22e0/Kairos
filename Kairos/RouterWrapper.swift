@@ -142,33 +142,33 @@ public enum Router: URLRequestConvertible {
         case .GetUsers:
             return "/users"
         case .UpdateUser(let parameters):
-            return "/users/\(parameters["id"]!)"
+            return "/users/\(parameters["id"])"
             
         case .CreateEvent, .GetEvents:
             return "/events"
         case .UpdateEvent(let parameters):
-            return "/events/\(parameters["id"]!)"
+            return "/events/\(parameters["id"])"
         case .GetEvent(let parameters):
-            return "/events/\(parameters["id"]!)"
+            return "/events/\(parameters["id"])"
         case .DeleteEvent(let parameters):
-            return "/events/\(parameters["id"]!)"
+            return "/events/\(parameters["id"])"
             
         case .CreateCalendar, .GetCalendars:
             return "/calendars"
         case .UpdateCalendar(let parameters):
-            return "/calendars/\(parameters["id"]!)"
+            return "/calendars/\(parameters["id"])"
         case .GetCalendar(let parameters):
-            return "/calendars/\(parameters["id"]!)"
+            return "/calendars/\(parameters["id"])"
         case .DeleteCalendar(let parameters):
-            return "/calendars/\(parameters["id"]!)"
+            return "/calendars/\(parameters["id"])"
         case .InviteCalendar(let parameters):
-            return "/calendars/\(parameters["id"]!)/invite"
+            return "/calendars/\(parameters["id"])/invite"
         case .AcceptCalendar(let parameters):
-            return "/calendars/\(parameters["id"]!)/accept"
+            return "/calendars/\(parameters["id"])/accept"
         case .RefuseCalendar(let parameters):
-            return "/calendars/\(parameters["id"]!)/refuse"
+            return "/calendars/\(parameters["id"])/refuse"
         case .OwnerCalendar(let parameters):
-            return "/calendars/\(parameters["id"]!)/set_owner"
+            return "/calendars/\(parameters["id"])/set_owner"
         case .SignOut:
             return "/auth/sign_out"
         }
@@ -223,9 +223,9 @@ public enum Router: URLRequestConvertible {
         case .UpdateCalendar(let parameters):
             return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
         case .InviteCalendar(let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: ["user_id": parameters["user_id"]!]).0
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
         case .OwnerCalendar(let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: ["user_id": parameters["user_id"]!]).0
+            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
         }
     }
 }
