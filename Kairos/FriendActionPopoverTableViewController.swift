@@ -40,12 +40,11 @@ class FriendActionPopoverTableViewController: UITableViewController {
     }
     
     private func configure() {
-        
         //        title = "Complete your profile"
         tableView.tableFooterView = UIView()
         tableView.backgroundView?.backgroundColor = .whiteColor()
         // Create RowFomers
-        
+
         let remove = LabelRowFormer<UnfriendTableViewCell>(instantiateType: .Nib(nibName: "UnfriendTableViewCell")) {
             $0.titleLabel.textColor = .formerColor()
             $0.titleLabel.font = .boldSystemFontOfSize(15)
@@ -55,7 +54,7 @@ class FriendActionPopoverTableViewController: UITableViewController {
             }.onSelected {_ in
                 self.removeFriend()
         }
-
+        
         let section = SectionFormer(rowFormer: remove).set(headerViewFormer: nil)
         former.append(sectionFormer: section)
     }
@@ -73,7 +72,7 @@ class FriendActionPopoverTableViewController: UITableViewController {
     private func removeFriend() {
         let user = User.find("id == %@", args: friend!.id!) as! User
         let parameters = ["user_id": user.id!]
-
+        
         FriendManager.sharedInstance.remove(parameters) { (status) in
             switch status {
             case .Success:

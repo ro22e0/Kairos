@@ -25,6 +25,10 @@
 		DA1E11FF1D78440E0068207F /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E11FE1D78440E0068207F /* SignOutViewController.swift */; };
 		DA1E12011D784AC90068207F /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E12001D784AC90068207F /* EditProfileViewController.swift */; };
 		DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */; };
+		DA2EC0271DA9009700BCA895 /* UserCalendarActionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2EC0261DA9009700BCA895 /* UserCalendarActionTableViewController.swift */; };
+		DA2EC0291DA90FC100BCA895 /* FriendsInviteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2EC0281DA90FC100BCA895 /* FriendsInviteTableViewController.swift */; };
+		DA2EC02C1DA9102E00BCA895 /* FriendInviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2EC02A1DA9102E00BCA895 /* FriendInviteTableViewCell.swift */; };
+		DA2EC02D1DA9102E00BCA895 /* FriendInviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA2EC02B1DA9102E00BCA895 /* FriendInviteTableViewCell.xib */; };
 		DA31B7741D9514D9004D5E81 /* CalendarEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA31B7731D9514D9004D5E81 /* CalendarEditTableViewController.swift */; };
 		DA3603C11CC26C3300A89B5A /* EventInfosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C01CC26C3300A89B5A /* EventInfosTableViewCell.swift */; };
 		DA3603C31CC26C4700A89B5A /* EventCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C21CC26C4700A89B5A /* EventCalendarTableViewCell.swift */; };
@@ -138,6 +142,10 @@
 		DA1E11FE1D78440E0068207F /* SignOutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
 		DA1E12001D784AC90068207F /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCalendarTableViewController.swift; sourceTree = "<group>"; };
+		DA2EC0261DA9009700BCA895 /* UserCalendarActionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCalendarActionTableViewController.swift; sourceTree = "<group>"; };
+		DA2EC0281DA90FC100BCA895 /* FriendsInviteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInviteTableViewController.swift; sourceTree = "<group>"; };
+		DA2EC02A1DA9102E00BCA895 /* FriendInviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendInviteTableViewCell.swift; sourceTree = "<group>"; };
+		DA2EC02B1DA9102E00BCA895 /* FriendInviteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendInviteTableViewCell.xib; sourceTree = "<group>"; };
 		DA31B7731D9514D9004D5E81 /* CalendarEditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEditTableViewController.swift; sourceTree = "<group>"; };
 		DA3603C01CC26C3300A89B5A /* EventInfosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EventInfosTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA3603C21CC26C4700A89B5A /* EventCalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCalendarTableViewCell.swift; sourceTree = "<group>"; };
@@ -442,6 +450,8 @@
 				DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */,
 				DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */,
 				DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */,
+				DA2EC02A1DA9102E00BCA895 /* FriendInviteTableViewCell.swift */,
+				DA2EC02B1DA9102E00BCA895 /* FriendInviteTableViewCell.xib */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -460,10 +470,11 @@
 				DA3603C61CC26DA000A89B5A /* EventDetailsTableViewController.swift */,
 				DA52AAE21CD7EC5900464096 /* EventTableViewController.swift */,
 				DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */,
-				DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */,
 				DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */,
 				DA31B7731D9514D9004D5E81 /* CalendarEditTableViewController.swift */,
 				DAFA00241DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift */,
+				DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */,
+				DA2EC0261DA9009700BCA895 /* UserCalendarActionTableViewController.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -574,6 +585,7 @@
 				DAEE7CBA1CA49A580019C8D4 /* FriendsTableViewController.swift */,
 				DAA2D4781DA3079700D5E6A7 /* AddFriendsTableViewController.swift */,
 				DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */,
+				DA2EC0281DA90FC100BCA895 /* FriendsInviteTableViewController.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -674,6 +686,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2EC02D1DA9102E00BCA895 /* FriendInviteTableViewCell.xib in Resources */,
 				DAECFECE1DA0578C00D3F724 /* CustomTextFieldTableViewCell.xib in Resources */,
 				DA668F3F1CA4AEA000230912 /* InvitationTableViewCell.xib in Resources */,
 				DA0A75E11DA68242001881D0 /* Assets.xcassets in Resources */,
@@ -823,9 +836,11 @@
 			files = (
 				DA3F3ACF1C9AFC2A00E82FC6 /* Common.swift in Sources */,
 				DA52AAE31CD7EC5900464096 /* EventTableViewController.swift in Sources */,
+				DA2EC0291DA90FC100BCA895 /* FriendsInviteTableViewController.swift in Sources */,
 				DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */,
 				DA7912FD1CEFCDA100661753 /* BlockUserTableViewCell.swift in Sources */,
 				DA7913031CEFCF6E00661753 /* UnfriendTableViewCell.swift in Sources */,
+				DA2EC02C1DA9102E00BCA895 /* FriendInviteTableViewCell.swift in Sources */,
 				DA11A9F81D9872D400218FF3 /* ModalSearchSegue.swift in Sources */,
 				DA6853301CE25D6700B839F6 /* SentInvitationTableViewCell.swift in Sources */,
 				DAA2D4791DA3079700D5E6A7 /* AddFriendsTableViewController.swift in Sources */,
@@ -881,6 +896,7 @@
 				DADD55E41CA60CE200C44D40 /* UserTableViewCell.swift in Sources */,
 				DA6853411CE25E5E00B839F6 /* User.swift in Sources */,
 				DA18745B1CDB73AF008E7C38 /* EventStartDateTableViewCell.swift in Sources */,
+				DA2EC0271DA9009700BCA895 /* UserCalendarActionTableViewController.swift in Sources */,
 				DAEE7CBB1CA49A580019C8D4 /* FriendsTableViewController.swift in Sources */,
 				DAA6B6B71D99CAD600D68016 /* CompleteProfileViewController.swift in Sources */,
 				DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */,
@@ -1088,7 +1104,7 @@
 				DAAEE1731C9ABE1F00D53AEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DAAEE1741C9ABE1F00D53AEC /* Build configuration list for PBXNativeTarget "Kairos" */ = {
 			isa = XCConfigurationList;
@@ -1097,7 +1113,7 @@
 				DAAEE1761C9ABE1F00D53AEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DAAEE1771C9ABE1F00D53AEC /* Build configuration list for PBXNativeTarget "KairosTests" */ = {
 			isa = XCConfigurationList;
@@ -1106,7 +1122,7 @@
 				DAAEE1791C9ABE1F00D53AEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

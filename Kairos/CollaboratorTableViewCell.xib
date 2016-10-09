@@ -15,19 +15,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GxA-ZG-FX7">
-                        <rect key="frame" x="68" y="21" width="37.5" height="18"/>
+                        <rect key="frame" x="70.5" y="22.5" width="37.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4za-aM-XM4">
-                        <rect key="frame" x="267" y="40" width="33" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cau-3k-2yT">
-                        <rect key="frame" x="249" y="43" width="10" height="10"/>
+                        <rect key="frame" x="290" y="45.5" width="10" height="10"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="GUB-3F-pFL"/>
@@ -35,23 +29,28 @@
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="fgC-Ml-5ME">
-                        <rect key="frame" x="12" y="8" width="44" height="44"/>
+                        <rect key="frame" x="12" y="8" width="46.5" height="46.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="fgC-Ml-5ME" secondAttribute="height" multiplier="1:1" id="8V4-ug-MwF"/>
-                            <constraint firstAttribute="height" constant="44" id="I3t-Ns-vYT"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4za-aM-XM4">
+                        <rect key="frame" x="249" y="42.5" width="33" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="4za-aM-XM4" secondAttribute="bottom" constant="4" id="6R0-R3-sqy"/>
-                    <constraint firstItem="4za-aM-XM4" firstAttribute="leading" secondItem="Cau-3k-2yT" secondAttribute="trailing" constant="8" id="CEn-4s-R6v"/>
-                    <constraint firstAttribute="trailing" secondItem="4za-aM-XM4" secondAttribute="trailing" constant="20" id="EoW-Kb-3HR"/>
+                    <constraint firstItem="Cau-3k-2yT" firstAttribute="leading" secondItem="4za-aM-XM4" secondAttribute="trailing" constant="8" id="9lk-UJ-AoT"/>
                     <constraint firstItem="fgC-Ml-5ME" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Lzm-oM-QUM"/>
                     <constraint firstItem="4za-aM-XM4" firstAttribute="centerY" secondItem="Cau-3k-2yT" secondAttribute="centerY" id="Qba-Gb-LPq"/>
                     <constraint firstItem="GxA-ZG-FX7" firstAttribute="leading" secondItem="fgC-Ml-5ME" secondAttribute="trailing" constant="12" id="VJi-si-bJH"/>
                     <constraint firstItem="fgC-Ml-5ME" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bB0-k2-gJL"/>
                     <constraint firstItem="GxA-ZG-FX7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cWn-5p-pkx"/>
                     <constraint firstAttribute="bottom" secondItem="fgC-Ml-5ME" secondAttribute="bottom" constant="8" id="jSt-bk-jAU"/>
+                    <constraint firstAttribute="trailing" secondItem="Cau-3k-2yT" secondAttribute="trailing" constant="20" id="scD-Nj-hTa"/>
                     <constraint firstItem="fgC-Ml-5ME" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="vJA-0b-We9"/>
                 </constraints>
             </tableViewCellContentView>
@@ -61,7 +60,7 @@
                 <outlet property="statusColorView" destination="Cau-3k-2yT" id="9sA-OM-pNy"/>
                 <outlet property="statusLabel" destination="4za-aM-XM4" id="jSL-OK-e5B"/>
             </connections>
-            <point key="canvasLocation" x="139" y="154.5"/>
+            <point key="canvasLocation" x="90" y="215.5"/>
         </tableViewCell>
     </objects>
     <resources>

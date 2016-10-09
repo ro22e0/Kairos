@@ -1,25 +1,27 @@
 //
-//  AddFriendsTableViewController.swift
+//  FriendsInviteTableViewController.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 03/10/2016.
+//  Created by Ronaël Bajazet on 08/10/2016.
 //  Copyright © 2016 Kairos-app. All rights reserved.
 //
 
 import UIKit
 import DZNEmptyDataSet
 
-class AddFriendsTableViewController: UITableViewController {
+class FriendsInviteTableViewController: UITableViewController {
     
     var searchController: UISearchController!
-    var shouldShowSearchResults = false
+    var shouldShowSearchResults = true
     
-    var users = [User]()
-
+    var friends = [Friend]()
+    var onSelected: ((User, ()->Void) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        UserManager.sharedInstance.fetch()
+        
+        FriendManager.sharedInstance.fetch()
+        self.friends = FriendManager.sharedInstance.friends()
         configureSearchController()
         configure()
         // Uncomment the following line to preserve selection between presentations
@@ -28,35 +30,20 @@ class AddFriendsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
         searchController.active = true
-        dispatch_async(dispatch_get_main_queue(), {
-            self.searchController.searchBar.becomeFirstResponder()
-        })
+//        dispatch_async(dispatch_get_main_queue(), {
+//            self.searchController.searchBar.becomeFirstResponder()
+//        })
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    private func invite(user: User, done: ()->Void) -> Void {
-        let parameters = ["user_id": user.id!]
-
-        FriendManager.sharedInstance.invite(parameters) { (status) in
-            switch status {
-            case .Success:
-                SpinnerManager.showWhistle("kFriendSuccess")
-                done()
-            case .Error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
-                print(error)
-            }
-        }
-    }
-
     func configure() {
         self.tableView.tableFooterView = UIView()
 
@@ -65,7 +52,7 @@ class AddFriendsTableViewController: UITableViewController {
         blurEffectView.frame = self.view.bounds
         blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
         self.tableView.backgroundView = blurEffectView
-
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
         tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "userCell")
@@ -82,7 +69,7 @@ class AddFriendsTableViewController: UITableViewController {
         searchController.searchBar.sizeToFit()
         searchController.hidesNavigationBarDuringPresentation = false
         self.definesPresentationContext = true
-    
+        
         // Place the search bar view to the tableview headerview.
         self.navigationItem.titleView = searchController.searchBar
     }
@@ -94,28 +81,28 @@ class AddFriendsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shouldShowSearchResults ? self.users.count : 0
+        return shouldShowSearchResults ? self.friends.count : 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! UserTableViewCell
         
         // Configure the cell...
-        cell.nameLabel.text = users[indexPath.row].name
-
-        let mutualFriends = users[indexPath.row].mutualFriends?.allObjects as? [Friend]
-        if let number = mutualFriends?.count where number > 0 {
-            cell.mutualFriendsLabel.hidden = false
-            cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
-        } else {
-            cell.mutualFriendsLabel.hidden = true
-        }
+        cell.nameLabel.text = friends[indexPath.row].name
+        
+        //        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [Friend]
+        //        if let number = mutualFriends?.count where number > 0 {
+        //            cell.mutualFriendsLabel.hidden = false
+        //            cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
+        //        } else {
+                    cell.mutualFriendsLabel.hidden = true
+        //        }
         cell.onSelected = { user, done in
-            self.invite(user) {
+            self.onSelected!(user) {
                 done()
             }
         }
-        cell.tag = Int(users[indexPath.row].id!)
+        cell.tag = Int(friends[indexPath.row].id!)
         
         return cell
     }
@@ -171,28 +158,32 @@ class AddFriendsTableViewController: UITableViewController {
     
 }
 
-extension AddFriendsTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
-
+extension FriendsInviteTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         shouldShowSearchResults = true
         tableView.reloadData()
     }
-
+    
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         shouldShowSearchResults = false
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if shouldShowSearchResults {
             let searchString = searchController.searchBar.text
-            self.users = UserManager.sharedInstance.all(filtered: searchString!, forFriends: true)
+            if !searchString!.isEmpty {
+                self.friends = FriendManager.sharedInstance.all(filtered: searchString!, forFriends: true)
+            } else {
+                self.friends = FriendManager.sharedInstance.friends()
+            }
             tableView.reloadData()
         }
     }
 }
 
-extension AddFriendsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+extension FriendsInviteTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         return NSAttributedString(string: "No friends to show.")
     }
