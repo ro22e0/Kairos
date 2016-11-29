@@ -31,11 +31,8 @@ class FriendsRequestsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         configureView()
-        FriendManager.sharedInstance.fetch {
-            self.pendingFriends = FriendManager.sharedInstance.friends(withStatus: .Pending)
-            self.requestedFriends = FriendManager.sharedInstance.friends(withStatus: .Requested)
-            self.tableView.reloadData()
-        }
+        self.pendingFriends = FriendManager.sharedInstance.friends(withStatus: .Pending)
+        self.requestedFriends = FriendManager.sharedInstance.friends(withStatus: .Requested)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -95,6 +92,13 @@ class FriendsRequestsTableViewController: UITableViewController {
         cell.tag = Int(pendingFriends[indexPath.row].id!)
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "REQUESTED"
+        }
+        return "INVITED"
     }
     
     /*

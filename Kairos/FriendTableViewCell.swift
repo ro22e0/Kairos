@@ -34,7 +34,7 @@ class FriendTableViewCell: UITableViewCell, UIPopoverPresentationControllerDeleg
 
         destVC.modalPresentationStyle = .Popover
         destVC.preferredContentSize = CGSizeMake(self.window!.frame.width, 43)
-        
+
         let popoverPC = destVC.popoverPresentationController
         popoverPC?.sourceView = sender
         popoverPC?.permittedArrowDirections = .Up

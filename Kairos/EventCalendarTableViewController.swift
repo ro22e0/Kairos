@@ -55,9 +55,9 @@ class EventCalendarTableViewController: UITableViewController {
         let calendar = calendars[indexPath.row]
         event?.calendar = calendar
         event?.save()
-        
+
         print(event?.calendar?.name)
-        
+
         self.performSegueWithIdentifier("unwindToEventVC", sender: self)
     }
     

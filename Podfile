@@ -22,6 +22,7 @@ target 'Kairos' do
   pod 'Sync', '~> 1.x'
   pod 'Former', '~> 1.4.0'
   pod 'DZNEmptyDataSet', '~> 1.8'
+  pod 'DynamicColor', '~> 2'
 end
 
 target 'KairosTests' do

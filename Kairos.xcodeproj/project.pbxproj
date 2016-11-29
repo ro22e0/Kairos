@@ -34,12 +34,16 @@
 		DA3603C31CC26C4700A89B5A /* EventCalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C21CC26C4700A89B5A /* EventCalendarTableViewCell.swift */; };
 		DA3603C51CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C41CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift */; };
 		DA3603C71CC26DA000A89B5A /* EventDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3603C61CC26DA000A89B5A /* EventDetailsTableViewController.swift */; };
+		DA3642981DE4DA6600DAEAA2 /* CalendarRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3642971DE4DA6600DAEAA2 /* CalendarRequestsTableViewController.swift */; };
 		DA3F3ACB1C9AEA5200E82FC6 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3ACA1C9AEA5200E82FC6 /* LoadingViewController.swift */; };
 		DA3F3ACD1C9AF0D200E82FC6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA3F3ACC1C9AF0D200E82FC6 /* Login.storyboard */; };
 		DA3F3ACF1C9AFC2A00E82FC6 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */; };
 		DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3AD01C9B022400E82FC6 /* SignUpViewController.swift */; };
 		DA3F3AD31C9B022F00E82FC6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3AD21C9B022F00E82FC6 /* SignInViewController.swift */; };
 		DA3F3AD51C9B037600E82FC6 /* GetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3AD41C9B037600E82FC6 /* GetStartedViewController.swift */; };
+		DA40416D1DE75DA60043A8F0 /* LabelColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40416B1DE75DA60043A8F0 /* LabelColorCell.swift */; };
+		DA40416E1DE75DA60043A8F0 /* LabelColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA40416C1DE75DA60043A8F0 /* LabelColorCell.xib */; };
+		DA4041701DE769450043A8F0 /* ColorSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40416F1DE769450043A8F0 /* ColorSelectionViewController.swift */; };
 		DA52AAE31CD7EC5900464096 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA52AAE21CD7EC5900464096 /* EventTableViewController.swift */; };
 		DA5CDDE11D8ACF5000B406A1 /* CollaboratorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5CDDDF1D8ACF5000B406A1 /* CollaboratorTableViewCell.swift */; };
 		DA5CDDE21D8ACF5000B406A1 /* CollaboratorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA5CDDE01D8ACF5000B406A1 /* CollaboratorTableViewCell.xib */; };
@@ -68,8 +72,8 @@
 		DA7912F91CEFCBF800661753 /* FriendActionPopoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */; };
 		DA7912FD1CEFCDA100661753 /* BlockUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7912FB1CEFCDA100661753 /* BlockUserTableViewCell.swift */; };
 		DA7912FE1CEFCDA100661753 /* BlockUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */; };
-		DA7913031CEFCF6E00661753 /* UnfriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */; };
-		DA7913041CEFCF6E00661753 /* UnfriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */; };
+		DA7913031CEFCF6E00661753 /* UserActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7913011CEFCF6E00661753 /* UserActionTableViewCell.swift */; };
+		DA7913041CEFCF6E00661753 /* UserActionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7913021CEFCF6E00661753 /* UserActionTableViewCell.xib */; };
 		DA799DF71D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA799DF51D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift */; };
 		DA799DF81D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA799DF61D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib */; };
 		DA8326301CE3CCFF00C09F31 /* DataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83262F1CE3CCFF00C09F31 /* DataSync.swift */; };
@@ -88,7 +92,7 @@
 		DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC801841CA3334D0092A717 /* Menu.storyboard */; };
 		DAC801881CA346B70092A717 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC801871CA346B70092A717 /* Settings.storyboard */; };
 		DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC8018B1CA353AF0092A717 /* Board.storyboard */; };
-		DAD51B941D982CF000A20376 /* Extentions+Former.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD51B931D982CF000A20376 /* Extentions+Former.swift */; };
+		DAD51B941D982CF000A20376 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD51B931D982CF000A20376 /* Extentions.swift */; };
 		DADC45DC1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC45DB1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift */; };
 		DADC45DE1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC45DD1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift */; };
 		DADC45E01D9FBE0A003CC4D1 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC45DF1D9FBE0A003CC4D1 /* ChangePasswordViewController.swift */; };
@@ -151,12 +155,16 @@
 		DA3603C21CC26C4700A89B5A /* EventCalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCalendarTableViewCell.swift; sourceTree = "<group>"; };
 		DA3603C41CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		DA3603C61CC26DA000A89B5A /* EventDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EventDetailsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DA3642971DE4DA6600DAEAA2 /* CalendarRequestsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarRequestsTableViewController.swift; sourceTree = "<group>"; };
 		DA3F3ACA1C9AEA5200E82FC6 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		DA3F3ACC1C9AF0D200E82FC6 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		DA3F3AD01C9B022400E82FC6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		DA3F3AD21C9B022F00E82FC6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DA3F3AD41C9B037600E82FC6 /* GetStartedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStartedViewController.swift; sourceTree = "<group>"; };
+		DA40416B1DE75DA60043A8F0 /* LabelColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelColorCell.swift; sourceTree = "<group>"; };
+		DA40416C1DE75DA60043A8F0 /* LabelColorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelColorCell.xib; sourceTree = "<group>"; };
+		DA40416F1DE769450043A8F0 /* ColorSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSelectionViewController.swift; sourceTree = "<group>"; };
 		DA52AAE21CD7EC5900464096 /* EventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EventTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA5CDDDF1D8ACF5000B406A1 /* CollaboratorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollaboratorTableViewCell.swift; sourceTree = "<group>"; };
 		DA5CDDE01D8ACF5000B406A1 /* CollaboratorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollaboratorTableViewCell.xib; sourceTree = "<group>"; };
@@ -185,8 +193,8 @@
 		DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendActionPopoverTableViewController.swift; sourceTree = "<group>"; };
 		DA7912FB1CEFCDA100661753 /* BlockUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockUserTableViewCell.swift; sourceTree = "<group>"; };
 		DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlockUserTableViewCell.xib; sourceTree = "<group>"; };
-		DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfriendTableViewCell.swift; sourceTree = "<group>"; };
-		DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnfriendTableViewCell.xib; sourceTree = "<group>"; };
+		DA7913011CEFCF6E00661753 /* UserActionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActionTableViewCell.swift; sourceTree = "<group>"; };
+		DA7913021CEFCF6E00661753 /* UserActionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserActionTableViewCell.xib; sourceTree = "<group>"; };
 		DA799DF51D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImagePickerTableViewCell.swift; sourceTree = "<group>"; };
 		DA799DF61D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileImagePickerTableViewCell.xib; sourceTree = "<group>"; };
 		DA83262F1CE3CCFF00C09F31 /* DataSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataSync.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -210,7 +218,7 @@
 		DAC801841CA3334D0092A717 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		DAC801871CA346B70092A717 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		DAC8018B1CA353AF0092A717 /* Board.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Board.storyboard; sourceTree = "<group>"; };
-		DAD51B931D982CF000A20376 /* Extentions+Former.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extentions+Former.swift"; sourceTree = "<group>"; };
+		DAD51B931D982CF000A20376 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		DADC45DB1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSecurityTableViewController.swift; sourceTree = "<group>"; };
 		DADC45DD1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
 		DADC45DF1D9FBE0A003CC4D1 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -346,7 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */,
-				DAD51B931D982CF000A20376 /* Extentions+Former.swift */,
+				DAD51B931D982CF000A20376 /* Extentions.swift */,
 				DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */,
 			);
 			name = Common;
@@ -431,6 +439,8 @@
 				DA81BBDA1D4A2DFD00C2C349 /* Friends */,
 				DAECFECB1DA0578C00D3F724 /* CustomTextFieldTableViewCell.swift */,
 				DAECFECC1DA0578C00D3F724 /* CustomTextFieldTableViewCell.xib */,
+				DA40416B1DE75DA60043A8F0 /* LabelColorCell.swift */,
+				DA40416C1DE75DA60043A8F0 /* LabelColorCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -448,8 +458,8 @@
 				DADD55E31CA60CE200C44D40 /* UserTableViewCell.xib */,
 				DA7912FB1CEFCDA100661753 /* BlockUserTableViewCell.swift */,
 				DA7912FC1CEFCDA100661753 /* BlockUserTableViewCell.xib */,
-				DA7913011CEFCF6E00661753 /* UnfriendTableViewCell.swift */,
-				DA7913021CEFCF6E00661753 /* UnfriendTableViewCell.xib */,
+				DA7913011CEFCF6E00661753 /* UserActionTableViewCell.swift */,
+				DA7913021CEFCF6E00661753 /* UserActionTableViewCell.xib */,
 				DA2EC02A1DA9102E00BCA895 /* FriendInviteTableViewCell.swift */,
 				DA2EC02B1DA9102E00BCA895 /* FriendInviteTableViewCell.xib */,
 			);
@@ -475,6 +485,8 @@
 				DAFA00241DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift */,
 				DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */,
 				DA2EC0261DA9009700BCA895 /* UserCalendarActionTableViewController.swift */,
+				DA3642971DE4DA6600DAEAA2 /* CalendarRequestsTableViewController.swift */,
+				DA40416F1DE769450043A8F0 /* ColorSelectionViewController.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -686,6 +698,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA40416E1DE75DA60043A8F0 /* LabelColorCell.xib in Resources */,
 				DA2EC02D1DA9102E00BCA895 /* FriendInviteTableViewCell.xib in Resources */,
 				DAECFECE1DA0578C00D3F724 /* CustomTextFieldTableViewCell.xib in Resources */,
 				DA668F3F1CA4AEA000230912 /* InvitationTableViewCell.xib in Resources */,
@@ -695,7 +708,7 @@
 				DAFA00231DA83B040039AD4D /* CalendarTableViewCell.xib in Resources */,
 				DA68533D1CE25E5E00B839F6 /* User-Info.plist in Resources */,
 				DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */,
-				DA7913041CEFCF6E00661753 /* UnfriendTableViewCell.xib in Resources */,
+				DA7913041CEFCF6E00661753 /* UserActionTableViewCell.xib in Resources */,
 				DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */,
 				DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */,
 				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
@@ -839,9 +852,10 @@
 				DA2EC0291DA90FC100BCA895 /* FriendsInviteTableViewController.swift in Sources */,
 				DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */,
 				DA7912FD1CEFCDA100661753 /* BlockUserTableViewCell.swift in Sources */,
-				DA7913031CEFCF6E00661753 /* UnfriendTableViewCell.swift in Sources */,
+				DA7913031CEFCF6E00661753 /* UserActionTableViewCell.swift in Sources */,
 				DA2EC02C1DA9102E00BCA895 /* FriendInviteTableViewCell.swift in Sources */,
 				DA11A9F81D9872D400218FF3 /* ModalSearchSegue.swift in Sources */,
+				DA40416D1DE75DA60043A8F0 /* LabelColorCell.swift in Sources */,
 				DA6853301CE25D6700B839F6 /* SentInvitationTableViewCell.swift in Sources */,
 				DAA2D4791DA3079700D5E6A7 /* AddFriendsTableViewController.swift in Sources */,
 				DA18745D1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift in Sources */,
@@ -867,13 +881,14 @@
 				DA1E11FF1D78440E0068207F /* SignOutViewController.swift in Sources */,
 				DA1D4BE31D841F7E00B11AD1 /* CalendarTableViewController.swift in Sources */,
 				DADC45DE1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift in Sources */,
+				DA3642981DE4DA6600DAEAA2 /* CalendarRequestsTableViewController.swift in Sources */,
 				DA68533E1CE25E5E00B839F6 /* Plist.swift in Sources */,
 				DAFA00221DA83B040039AD4D /* CalendarTableViewCell.swift in Sources */,
 				DA1874591CDB738B008E7C38 /* EventLocationTableViewCell.swift in Sources */,
 				DA8CA94E1D8CA295007E40FF /* UserEvent.swift in Sources */,
 				DA3F3AD31C9B022F00E82FC6 /* SignInViewController.swift in Sources */,
 				DA8CA94B1D8CA295007E40FF /* UserCalendar.swift in Sources */,
-				DAD51B941D982CF000A20376 /* Extentions+Former.swift in Sources */,
+				DAD51B941D982CF000A20376 /* Extentions.swift in Sources */,
 				DA1874571CDB7375008E7C38 /* EventTitleTableViewCell.swift in Sources */,
 				DADF545B1D932C5100D0E092 /* ProfileTableViewController.swift in Sources */,
 				DA3603C11CC26C3300A89B5A /* EventInfosTableViewCell.swift in Sources */,
@@ -905,6 +920,7 @@
 				DA5CDDE11D8ACF5000B406A1 /* CollaboratorTableViewCell.swift in Sources */,
 				DA6853401CE25E5E00B839F6 /* Calendar.swift in Sources */,
 				DA5CDDE81D8ADB0600B406A1 /* BaseCalendarTableViewCell.swift in Sources */,
+				DA4041701DE769450043A8F0 /* ColorSelectionViewController.swift in Sources */,
 				DA0E144B1DA8125200865C20 /* CalendarManager.swift in Sources */,
 				DA5CDDE61D8AD94100B406A1 /* CalendarDeleteTableViewCell.swift in Sources */,
 			);

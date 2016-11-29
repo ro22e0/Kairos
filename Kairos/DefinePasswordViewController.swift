@@ -24,7 +24,7 @@ class DefinePasswordViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         contentView.layer.cornerRadius = 20
-        closeButton.layer.cornerRadius = 15
+        closeButton.round()
         
         addBlurEffect()
     }

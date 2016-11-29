@@ -45,7 +45,7 @@ class FriendActionPopoverTableViewController: UITableViewController {
         tableView.backgroundView?.backgroundColor = .whiteColor()
         // Create RowFomers
 
-        let remove = LabelRowFormer<UnfriendTableViewCell>(instantiateType: .Nib(nibName: "UnfriendTableViewCell")) {
+        let remove = LabelRowFormer<UserActionTableViewCell>(instantiateType: .Nib(nibName: "UserActionTableViewCell")) {
             $0.titleLabel.textColor = .formerColor()
             $0.titleLabel.font = .boldSystemFontOfSize(15)
             }.configure {

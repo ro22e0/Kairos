@@ -24,12 +24,10 @@ class FriendsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         configureView()
-        FriendManager.sharedInstance.fetch {
-            self.friends = FriendManager.sharedInstance.friends()
-            self.tableView.reloadData()
-        }
+        self.friends = FriendManager.sharedInstance.friends()
+        self.tableView.reloadData()
     }
-
+    
     func configureView() {
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -39,7 +37,7 @@ class FriendsTableViewController: UITableViewController {
     }
     
     // MARK: - Methods
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
@@ -48,7 +46,7 @@ class FriendsTableViewController: UITableViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

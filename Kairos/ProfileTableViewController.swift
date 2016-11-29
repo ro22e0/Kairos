@@ -36,9 +36,9 @@ class ProfileTableViewController: UITableViewController {
     func configure() {
         if self.user.imageData != nil {
             self.profileImage.image = UIImage(data: self.user.imageData!)
-            self.profileImage.addBorder(UIColor.whiteColor().CGColor)
+//            self.profileImage.addBorder(UIColor.whiteColor().CGColor)
         } else {
-            self.profileImage.backgroundColor = .whiteColor()
+//            self.profileImage.backgroundColor = .whiteColor()
         }
         self.profileImage.round()
         self.nameLabel.text = self.user.name

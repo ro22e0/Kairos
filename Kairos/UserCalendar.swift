@@ -14,12 +14,11 @@ class UserCalendar: NSManagedObject {
 
     // MARK: - CoreDataProperties
 
-    @NSManaged var status: String?
-    @NSManaged var isOwner: NSNumber?
-    @NSManaged var userId: NSNumber?
     @NSManaged var calendarId: NSNumber?
+    @NSManaged var isOwner: NSNumber?
     @NSManaged var isSelected: NSNumber?
+    @NSManaged var status: String?
+    @NSManaged var userId: NSNumber?
     @NSManaged var calendar: Calendar?
     @NSManaged var user: User?
-
 }

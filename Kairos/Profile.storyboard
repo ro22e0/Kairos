@@ -192,6 +192,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9w-fH-8Uu">
                                                     <rect key="frame" x="521" y="7" width="71" height="30"/>
                                                     <state key="normal" title="Invitations"/>
+                                                    <connections>
+                                                        <segue destination="fjc-xP-ayu" kind="presentation" id="3vN-Lz-Jf5"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -481,6 +484,14 @@
             </objects>
             <point key="canvasLocation" x="1829" y="-21"/>
         </scene>
+        <!--CalendarRequestsTableViewController-->
+        <scene sceneID="5C5-eo-1qX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Calendar" referencedIdentifier="CalendarRequestsTableViewController" id="fjc-xP-ayu" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Fi-o2-KZ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1922" y="-191"/>
+        </scene>
         <!--CalendarEditTableViewController-->
         <scene sceneID="OUa-gL-QKq">
             <objects>
@@ -550,6 +561,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="profile placeholder" width="44" height="44"/>
+        <image name="profile placeholder" width="60" height="60"/>
     </resources>
 </document>

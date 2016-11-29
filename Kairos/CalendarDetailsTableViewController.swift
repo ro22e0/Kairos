@@ -8,6 +8,7 @@
 
 import UIKit
 import Former
+import DynamicColor
 
 class CalendarDetailsTableViewController: UITableViewController {
     
@@ -23,16 +24,31 @@ class CalendarDetailsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadData(_:)), name: Notifications.CalendarDidChange.rawValue, object: nil)
         configure()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+    //        NSNotificationCenter.defaultCenter().removeObserver(self, name: Notifications.CalendarDidChange.rawValue, object: nil)
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    ///  Reload data notification handler
+    ///
+    ///  - parameter notification: The notification
+    @objc func reloadData(notification: NSNotification) {
+        if calendar?.calendar != nil {
+            if let calendar = self.calendar where calendar.status != UserStatus.Refused.rawValue {
+                former.removeAllUpdate()
+                configure()
+            } else {
+                self.navigationController?.popViewControllerAnimated(true)
+            }
+        } else {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     func configure() {
@@ -54,9 +70,15 @@ class CalendarDetailsTableViewController: UITableViewController {
         
         let participants = CalendarManager.sharedInstance.users(forCalendar: calendar!.calendar!)
         let calendarHeader = LabelRowFormer<CalendarHeaderCell>(instantiateType: .Nib(nibName: "CalendarHeaderCell")) {
+            $0.acceptButton.enabled = false
             $0.eventLabel.text = "No events"
             $0.participantLabel.text = String(participants.count) + " participants"
+            if let color = self.calendar?.calendar?.color {
+                $0.colorImageView.backgroundColor = DynamicColor(hexString: CalendarManager.sharedInstance.colors[color]!)
+                $0.colorImageView.round()
+            }
             }.configure {
+                $0.cell.tag = calendar!.calendar!.id!.integerValue
                 $0.text = calendar?.calendar?.name
                 $0.rowHeight = 86
         }
@@ -79,6 +101,7 @@ class CalendarDetailsTableViewController: UITableViewController {
                     $0.text = user.user?.name
                     $0.subText = user.status
                     $0.rowHeight = 60
+                    
             }
             rows.append(participant)
         }
@@ -117,19 +140,19 @@ class CalendarDetailsTableViewController: UITableViewController {
     
     private func invite(user: User, done: ()->Void) -> Void {
         let parameters = ["id": calendar!.calendar!.id!, "user_id": user.id!]
-
+        
         CalendarManager.sharedInstance.invite(parameters) { (status) in
             switch status {
             case .Success:
                 SpinnerManager.showWhistle("kCalendarSuccess")
                 done()
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.CalendarDidChange.rawValue, object: nil)
             case .Error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }
     }
-    
     
     /*
      override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

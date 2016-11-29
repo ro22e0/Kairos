@@ -108,7 +108,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Ygh-2D-QXn" firstAttribute="top" secondItem="rrg-Sr-Uek" secondAttribute="bottom" constant="30" id="3Zr-TK-S4P"/>
                             <constraint firstAttribute="trailing" secondItem="x9j-2M-wnp" secondAttribute="trailing" constant="20" id="U8K-qQ-fyx"/>
@@ -193,7 +193,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7od-tw-X1G">
-                                        <rect key="frame" x="230" y="384" width="61" height="40"/>
+                                        <rect key="frame" x="229.5" y="384" width="61" height="40"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <state key="normal" title="Sign Up">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
@@ -251,9 +251,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="yUS-Vv-1Ox" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v95-aB-fBS" secondAttribute="bottom" constant="2" id="8mg-Pb-bsu"/>
                             <constraint firstItem="0Le-Wt-2SH" firstAttribute="top" secondItem="I29-dV-X3l" secondAttribute="bottom" constant="8" symbolic="YES" id="LNP-zy-XxR"/>
                             <constraint firstItem="yUS-Vv-1Ox" firstAttribute="leading" secondItem="8uh-v4-tlb" secondAttribute="leading" constant="40" id="UNz-iC-A1T"/>
                             <constraint firstItem="jpZ-0U-fAH" firstAttribute="centerX" secondItem="8uh-v4-tlb" secondAttribute="centerX" id="c9z-wH-Rkm"/>
@@ -294,7 +295,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21o-A8-dnU">
                                 <rect key="frame" x="170" y="152" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WeF-kx-J4S"/>
                                     <constraint firstAttribute="width" secondItem="21o-A8-dnU" secondAttribute="height" multiplier="1:1" id="a80-Je-U9k"/>
@@ -352,7 +353,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="8eI-XH-Sf6" firstAttribute="centerX" secondItem="aL1-lQ-eP5" secondAttribute="centerX" priority="750" id="62Q-xP-Paa"/>
                                     <constraint firstItem="8eI-XH-Sf6" firstAttribute="centerY" secondItem="aL1-lQ-eP5" secondAttribute="centerY" id="8iB-pH-tY9"/>
@@ -409,7 +410,7 @@
                                 </state>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="LuB-Uh-0dW">
-                                <rect key="frame" x="40" y="74.5" width="520" height="451"/>
+                                <rect key="frame" x="40" y="75" width="520" height="451"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="5Zc-dO-cJE">
                                         <rect key="frame" x="210" y="0.0" width="100" height="200"/>
@@ -471,7 +472,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="7e0-Te-nC1" firstAttribute="centerX" secondItem="4EJ-WG-5zJ" secondAttribute="centerX" id="0mM-Ba-Npt"/>
                             <constraint firstAttribute="trailing" secondItem="LuB-Uh-0dW" secondAttribute="trailing" constant="40" id="7EQ-hG-EBx"/>
@@ -479,6 +480,7 @@
                             <constraint firstItem="LuB-Uh-0dW" firstAttribute="centerX" secondItem="4EJ-WG-5zJ" secondAttribute="centerX" id="hEh-aa-p3i"/>
                             <constraint firstItem="AQ7-V4-kHd" firstAttribute="top" secondItem="7e0-Te-nC1" secondAttribute="bottom" constant="30" id="oum-fE-Dm9"/>
                             <constraint firstItem="LuB-Uh-0dW" firstAttribute="centerY" secondItem="4EJ-WG-5zJ" secondAttribute="centerY" id="scN-3h-plx"/>
+                            <constraint firstItem="LuB-Uh-0dW" firstAttribute="top" relation="greaterThanOrEqual" secondItem="PG2-Rk-Jy5" secondAttribute="bottom" constant="2" id="v87-Nl-o1j"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sign In" id="kjr-a6-sXx"/>

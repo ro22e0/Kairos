@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Checkmark Filled.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "profile placeholder.pdf",
       "scale" : "2x"
     },
     {

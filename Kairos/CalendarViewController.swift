@@ -27,10 +27,15 @@ class CalendarViewController: UIViewController {
     // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Fetch update
-        DataSync.fetchCalendars()
         
+        // Fetch update
+        DataSync.fetchUsers { (status) in
+            FriendManager.sharedInstance.fetch()
+            CalendarManager.sharedInstance.fetch()
+            DataSync.fetchCalendarColors()
+            DataSync.fetchEvents()
+        }
+    
         // Do any additional setup after loading the view.
         calendarView.scrollDirection = .Horizontal
         calendarView.placeholderType = .FillHeadTail
@@ -55,7 +60,7 @@ class CalendarViewController: UIViewController {
     }
     
     // MARK: - Actions
-
+    
     @IBAction func setTodaySelected(sender: AnyObject) {
         calendarView.selectDate(calendarView.today!)
     }
@@ -115,7 +120,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     // MARK: UITableViewDelegate
-
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("ShowEventDetails", sender: indexPath)
     }
@@ -139,7 +144,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     }
     
     // MARK: FSCalendarDelegate
-
+    
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
         if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.beginingOfMonthOfDate(calendar.currentPage), toCalendarUnit: .Month) {
             calendarView.selectDate(calendar.beginingOfMonthOfDate(calendar.currentPage))
@@ -156,7 +161,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
         self.calendarHeightConstraint.constant = bounds.height
         self.view.layoutIfNeeded()
     }
-
+    
     // MARK: FSCalendarDelegateAppearance
     func calendar(calendar: FSCalendar, appearance: FSCalendarAppearance, eventColorsForDate date: NSDate) -> [AnyObject]? {
         return []

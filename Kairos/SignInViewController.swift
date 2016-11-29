@@ -16,17 +16,16 @@ class SignInViewController: UIViewController {
     // MARK: - UI Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
+
     // MARK: - Class Properties
     var manager: Manager?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-            emailTextField.text = "rona@mail.com"
+            emailTextField.text = "bernolt@mail.com"
             passwordTextField.text = "qwerty123"
         self.navigationItem.backBarButtonItem?.title = ""
-        
+
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         self.manager = Alamofire.Manager(configuration: configuration)
     }

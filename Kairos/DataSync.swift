@@ -47,6 +47,8 @@ struct DataSync {
         Calendar.deleteAll()
         Friend.deleteAll()
         User.deleteAll()
+        UserCalendar.deleteAll()
+        UserEvent.deleteAll()
     }
     
     // MARK: - Friends
@@ -68,7 +70,7 @@ struct DataSync {
     private static func syncFriends(friends: [JSON]) {
         for f in friends {
             let friend = Friend.findOrCreate(["id": f["id"].object]) as! Friend
-
+            
             friend.name = f["name"].stringValue
             friend.nickname = f["nickname"].stringValue
             friend.status = f["status"].stringValue
@@ -160,7 +162,7 @@ struct DataSync {
         for u in deletedUsers {
             let friendExist = Friend.find("id == %@", args: u.id!) != nil ? true : false
             let ownerExist = Owner.find("id == %@", args: u.id!) != nil ? true : false
-
+            
             if (!friendExist && !ownerExist) {
                 u.delete()
             }
@@ -188,7 +190,7 @@ struct DataSync {
         }
         User.save()
     }
-
+    
     static func fetchUsers(completionHandler: (CustomStatus) -> Void) {
         Router.needToken = true
         RouterWrapper.sharedInstance.request(.GetUsers) { (response) in
@@ -200,7 +202,7 @@ struct DataSync {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        let data = self.transformJson(json)
+//                        let data = self.transformJson(json)
                         let users = json.array!
                         //
                         self.deleteUsers(users)
@@ -226,9 +228,8 @@ struct DataSync {
     
     private static func deleteCalendars(calendars: [JSON]) {
         let ids = NSMutableArray()
-        
         let id: Int?
-        
+
         for c in calendars {
             ids.addObject(c["id"].object)
         }
@@ -239,7 +240,7 @@ struct DataSync {
             c.delete()
         }
     }
-
+    
     private static func deleteObject(data: [JSON], query: (AnyObject, AnyObject...) -> [NSManagedObject]) {
         let ids = NSMutableArray()
         
@@ -253,7 +254,7 @@ struct DataSync {
             o.delete()
         }
     }
-
+    
     private static func syncUserCalendar(calendar: Calendar, users: [JSON]) {
         for u in users {
             guard let user = User.find("id == %@", args: u["id"].number!) as? User else {
@@ -268,27 +269,28 @@ struct DataSync {
             }
         }
     }
-
-    private static func syncCalendars(calendars: [JSON]) {
+    
+    static func syncCalendars(calendars: [JSON]) {
         print(calendars)
         for c in calendars {
             print("YEAH : ", c["name"])
             let calendar = Calendar.findOrCreate(["id": c["id"].object]) as! Calendar
             calendar.name = c["name"].stringValue
+            calendar.color = c["color"].string
             
             var users = c["owners"].array! + c["participating_users"].array!
             users += c["refused_users"].array! + c["invited_users"].array!
             syncUserCalendar(calendar, users: users)
-
+            
             print(calendar.id)
             print(calendar.name)
         }
         Calendar.save()
     }
-
-    static func fetchCalendars() {
+    
+    static func fetchCalendars(completionHandler: (CustomStatus) -> Void) {
         Router.needToken = true
-
+        
         RouterWrapper.sharedInstance.request(.GetCalendars) { (response) in
             print(response.response) // URL response
             switch response.result {
@@ -298,27 +300,47 @@ struct DataSync {
                     let json = JSON(value).array!
                     
                     print(json)
+                    //                    deleteObject(json.array!, query: Calendar.query)
                     
-//                    deleteObject(json.array!, query: Calendar.query)
+                    self.syncCalendars(json)
+                    completionHandler(.Success)
                     
-                self.syncCalendars(json)
-                    
-//                    let completion: ((NSError?) -> Void) = { error in
-//                        print(NSDate(), "done")
-//                        
-//                        for c in json.array! {
-//                            var data = [[String : AnyObject]]()
-//                            data += c["refused_users"].object as! [[String : AnyObject]]
-//                            data += c["participating_users"].object as! [[String : AnyObject]]
-//                            data += c["invited_users"].object as! [[String : AnyObject]]
-//                            data += c["owners"].object as! [[String : AnyObject]]
-//                            
-//                            self.sync(entity: "User", predicate: nil, data: data, completion: { error in
-//                                print(NSDate(), "done")
-//                            })
-//                        }
-//                    }
-//                    self.sync(entity: "Calendar", predicate: nil, data: json.object as! [[String : AnyObject]], completion: completion)
+                    //                    let completion: ((NSError?) -> Void) = { error in
+                    //                        print(NSDate(), "done")
+                    //
+                    //                        for c in json.array! {
+                    //                            var data = [[String : AnyObject]]()
+                    //                            data += c["refused_users"].object as! [[String : AnyObject]]
+                    //                            data += c["participating_users"].object as! [[String : AnyObject]]
+                    //                            data += c["invited_users"].object as! [[String : AnyObject]]
+                    //                            data += c["owners"].object as! [[String : AnyObject]]
+                    //
+                    //                            self.sync(entity: "User", predicate: nil, data: data, completion: { error in
+                    //                                print(NSDate(), "done")
+                    //                            })
+                    //                        }
+                    //                    }
+                    //                    self.sync(entity: "Calendar", predicate: nil, data: json.object as! [[String : AnyObject]], completion: completion)
+                }
+            case .Failure(let error):
+                completionHandler(.Error("error"))
+                print(error)
+            }
+        }
+    }
+    
+    static func fetchCalendarColors() {
+        Router.needToken = true
+        
+        RouterWrapper.sharedInstance.request(.GetCalendarColors) { (response) in
+            print(response.response) // URL response
+            switch response.result {
+            case .Success:
+                UserManager.sharedInstance.setCredentials(response.response!)
+                if let value = response.result.value {
+                    let json = JSON(value).dictionaryObject as! [String: String]
+                    print(json)
+                    CalendarManager.sharedInstance.colors = json
                 }
             case .Failure(let error):
                 print(error)
@@ -329,11 +351,10 @@ struct DataSync {
     // MARK: - Events
     private static func deleteEvents(events: [JSON]) {
         let ids = NSMutableArray()
-        
+
         for e in events {
             ids.addObject(e["id"].object)
         }
-        
         let predicate = NSPredicate(format: "NOT (id IN %@)", ids)
         let deletedEvents = Event.query(predicate) as! [Event]
         for e in deletedEvents {
@@ -371,13 +392,10 @@ struct DataSync {
             print(response.response) // URL response
             switch response.result {
             case .Success:
-                
                 UserManager.sharedInstance.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
-                    
                     print(json)
-                    
                     self.sync(entity: "Event", predicate: nil, data: json.object as! [[String : AnyObject]], completion: { error in
                         print(NSDate(), "done")
                     })

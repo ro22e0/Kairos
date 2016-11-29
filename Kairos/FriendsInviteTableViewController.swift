@@ -20,7 +20,6 @@ class FriendsInviteTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FriendManager.sharedInstance.fetch()
         self.friends = FriendManager.sharedInstance.friends()
         configureSearchController()
         configure()
@@ -103,7 +102,6 @@ class FriendsInviteTableViewController: UITableViewController {
             }
         }
         cell.tag = Int(friends[indexPath.row].id!)
-        
         return cell
     }
     

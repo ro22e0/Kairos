@@ -31,8 +31,8 @@ class UserTableViewCell: UITableViewCell {
     @IBAction func invite(sender: UIButton) {
         let user = User.find("id == %@", args: self.tag) as! User
         self.onSelected!(user) {
-            self.inviteButton.titleLabel?.text = "Sent"
-            self.inviteButton.userInteractionEnabled = false
+            self.inviteButton.setTitle("Sent", forState: .Normal)
+            self.inviteButton.enabled = false
         }
     }
     

@@ -12,6 +12,17 @@ import CoreData
 import SwiftyJSON
 import UIKit
 
+enum StoryboardID: String {
+    case Main
+    case Calendar
+    case Login
+    case Board
+    case Friends
+    case Profile
+    case Settings
+}
+
+// Detele replace by StoryboardID enum
 let MainStoryboardID = "Main"
 let CalendarStoryboardID = "Calendar"
 let LoginStoryboardID = "Login"
@@ -25,6 +36,10 @@ let kUSER_GOOGLE_AUTH_NOTIFICATION = "kUserGoogleAuth"
 
 let kEventWillSaveNotification = "EventWillSave"
 let kCalendarWillSaveNotification = "CalendarWillSave"
+
+enum Notifications: String {
+    case CalendarDidChange
+}
 
 let userLoginKey = "userLoginKey"
 let userTokenKey = "userTokenKey"
@@ -47,54 +62,10 @@ enum UserStatus: String {
     case Participating = "participating"
     case Invited = "invited"
     case Refused = "refused"
+    case Removed = "removed"
 }
 
 enum CustomStatus {
     case Success
     case Error(String)
-}
-
-extension UIViewController {
-    @IBAction private func menu() {
-        presentViewController(SideMenuManager.menuLeftNavigationController!, animated: true, completion: nil)
-    }
-    
-    @IBAction func showStoryboard(segue: UIStoryboardSegue) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.window?.rootViewController = segue.destinationViewController
-    }
-    
-    func viewController(fromStoryboard storyboard: String, viewController name: String) -> UIViewController {
-        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
-
-        return storyboard.instantiateViewControllerWithIdentifier(name)
-    }
-    
-    func setRootVC(storyboard: String) {
-        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
-
-        if let viewController = storyboard.instantiateInitialViewController() {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            appDelegate.window?.rootViewController = viewController
-        }
-    }
-}
-
-extension UITableViewCell {
-    func selected() {
-    }
-}
-
-extension UIView {
-    func round() {
-        self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2
-        self.clipsToBounds = true
-        
-    }
-
-    func addBorder(color: CGColor) {
-        self.layer.borderWidth = 3.0
-        self.layer.borderColor = color
-    }
 }
