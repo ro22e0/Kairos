@@ -2,7 +2,7 @@
 //  Calendar.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 21/04/2016.
+//  Created by Ronaël Bajazet on 14/12/2016.
 //  Copyright © 2016 Kairos-app. All rights reserved.
 //
 
@@ -12,11 +12,6 @@ import CoreData
 
 class Calendar: NSManagedObject {
 
-    // MARK: - CoreDataProperties
-    
-    @NSManaged var id: NSNumber?
-    @NSManaged var name: String?
-    @NSManaged var color: String?
-    @NSManaged var calendarUsers: NSSet?
-    @NSManaged var events: NSSet?
+// Insert code here to add functionality to your managed object subclass
+
 }

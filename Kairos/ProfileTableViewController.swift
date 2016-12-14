@@ -34,14 +34,14 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func configure() {
-        if self.user.imageData != nil {
-            self.profileImage.image = UIImage(data: self.user.imageData!)
+        if self.user.user!.image != nil {
+            self.profileImage.image = UIImage(data: self.user.user!.image!)
 //            self.profileImage.addBorder(UIColor.whiteColor().CGColor)
         } else {
 //            self.profileImage.backgroundColor = .whiteColor()
         }
         self.profileImage.round()
-        self.nameLabel.text = self.user.name
+        self.nameLabel.text = self.user.user!.name
     }
     
     // MARK: - Table view data source

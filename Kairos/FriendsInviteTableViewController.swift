@@ -14,7 +14,7 @@ class FriendsInviteTableViewController: UITableViewController {
     var searchController: UISearchController!
     var shouldShowSearchResults = true
     
-    var friends = [Friend]()
+    var friends = [User]()
     var onSelected: ((User, ()->Void) -> Void)?
     
     override func viewDidLoad() {
@@ -89,7 +89,7 @@ class FriendsInviteTableViewController: UITableViewController {
         // Configure the cell...
         cell.nameLabel.text = friends[indexPath.row].name
         
-        //        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [Friend]
+        //        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [User]
         //        if let number = mutualFriends?.count where number > 0 {
         //            cell.mutualFriendsLabel.hidden = false
         //            cell.mutualFriendsLabel.text = String(number)  + "mutual friends"

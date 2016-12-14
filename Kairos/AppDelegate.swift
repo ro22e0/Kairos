@@ -12,7 +12,6 @@ import AlamofireNetworkActivityIndicator
 import FBSDKLoginKit
 import IQKeyboardManagerSwift
 import JLToast
-import SideMenu
 import Fabric
 import Crashlytics
 import SwiftRecord
@@ -29,30 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [
             NSFontAttributeName: UIFont.systemFontOfSize(20, weight: UIFontWeightLight)
         ]
-        
-        // SideMenu
-        let storyboard = UIStoryboard(name: MenuStoryboardID, bundle: nil)
-        let menuLeftNavigationController = storyboard.instantiateViewControllerWithIdentifier("LeftMenuNavigationController") as? UISideMenuNavigationController
-        SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
-        menuLeftNavigationController!.leftSide = true
-        
-        //        SideMenuManager.menuPresentMode = .ViewSlideOut
-        //        SideMenuManager.menuAllowPushOfSameClassTwice = true
-        //        SideMenuManager.menuAllowPopIfPossible = false
-        //        SideMenuManager.menuWidth = max(round(min(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height) * 0.75), 240)
-        //        SideMenuManager.menuPresentMode = .MenuSlideIn
-        //        SideMenuManager.menuAnimationPresentDuration = 0.35
-        //        SideMenuManager.menuAnimationDismissDuration = 0.35
-        //        SideMenuManager.menuAnimationFadeStrength = 0.5
-        //        SideMenuManager.menuAnimationShrinkStrength = 0.90
-        SideMenuManager.menuAnimationBackgroundColor = nil
-        //        SideMenuManager.menuShadowOpacity = 0.5
-        //        SideMenuManager.menuShadowColor = UIColor.darkGrayColor()
-        //        SideMenuManager.menuShadowRadius = 10
-        //        SideMenuManager.menuParallaxStrength = 1
-        //        SideMenuManager.menuFadeStatusBar = true
-        //        SideMenuManager.menuBlurEffectStyle = .Dark // Note: if you want cells in a UITableViewController menu to look good, make them a subclass of UITableViewVibrantCell!
-        
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.changeNotification), name: NSManagedObjectContextObjectsDidChangeNotification, object: self.dataStack.mainContext)
+
         SwiftRecord.generateRelationships = true
         SwiftRecord.sharedRecord.managedObjectContext = self.dataStack.mainContext
 
@@ -115,6 +93,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return dataStack
     }()
+    
+    func changeNotification(notification: NSNotification) {
+        let deletedObjects = notification.userInfo![NSDeletedObjectsKey]
+        print(deletedObjects)
+        let insertedObjects = notification.userInfo![NSInsertedObjectsKey]
+        print(insertedObjects)
+    }
     
     // MARK: - Core Data Saving support
 

@@ -11,7 +11,7 @@ import Former
 
 class FriendActionPopoverTableViewController: UITableViewController {
     
-    var friend: Friend?
+    var friend: User?
     
     private lazy var former: Former = Former(tableView: self.tableView)
     

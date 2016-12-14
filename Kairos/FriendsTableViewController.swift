@@ -13,7 +13,7 @@ import DZNEmptyDataSet
 class FriendsTableViewController: UITableViewController {
     
     // MARK: - Class Properties
-    var friends = [Friend]()
+    var friends = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +67,7 @@ class FriendsTableViewController: UITableViewController {
         
         cell.nameLabel.text = friends[indexPath.row].name
         
-        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [Friend]
+        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [User]
         if let number = mutualFriends?.count where number > 0 {
             cell.mutualFriendsLabel.hidden = false
             cell.mutualFriendsLabel.text = String(number)  + "mutual friends"

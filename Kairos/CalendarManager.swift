@@ -39,39 +39,42 @@ class CalendarManager {
     }
 
     func calendars(withStatus status: UserStatus) -> [UserCalendar] {
-        if var calendars = UserManager.sharedInstance.current.userCalendars?.allObjects as? [UserCalendar] {
-            calendars = calendars.filter({ (uCalendar) -> Bool in
-                if status == .Participating {
-                    return uCalendar.status == UserStatus.Owner.rawValue || uCalendar.status == status.rawValue
-                }
-                return uCalendar.status == status.rawValue
-            })
-            return calendars
-        } else {
-            return [UserCalendar]()
-        }
+//        if var calendars = UserManager.sharedInstance.current.userCalendars?.allObjects as? [UserCalendar] {
+//            calendars = calendars.filter({ (uCalendar) -> Bool in
+//                if status == .Participating {
+//                    return uCalendar.status == UserStatus.Owner.rawValue || uCalendar.status == status.rawValue
+//                }
+//                return uCalendar.status == status.rawValue
+//            })
+//            return calendars
+//        } else {
+//            return [UserCalendar]()
+//        }
+        return [UserCalendar]()
     }
 
         func userIsIn(calendar: Calendar, user: User) -> Bool {
-            let users = calendar.calendarUsers?.allObjects as? [UserCalendar]
-            var isIn = false
-            isIn = (users?.contains({ (u) -> Bool in
-                return u.userId == user.id
-            }))!
-    //        users?.forEach({ (u) in
-    //            if u.userId == user.id {
-    //                isIn = true
-    //            }
-    //        })
-            return isIn
+//            let users = calendar.calendarUsers?.allObjects as? [UserCalendar]
+//            var isIn = false
+//            isIn = (users?.contains({ (u) -> Bool in
+//                return u.userId == user.id
+//            }))!
+//    //        users?.forEach({ (u) in
+//    //            if u.userId == user.id {
+//    //                isIn = true
+//    //            }
+//    //        })
+//            return isIn
+            return true
         }
     
     func users(forCalendar calendar: Calendar) -> [UserCalendar] {
-        if let users = calendar.calendarUsers?.allObjects as? [UserCalendar] {
-            return users
-        } else {
-            return [UserCalendar]()
-        }
+//        if let users = calendar.calendarUsers?.allObjects as? [UserCalendar] {
+//            return users
+//        } else {
+//            return [UserCalendar]()
+//        }
+        return [UserCalendar]()
     }
 
     func deleteUser(user: User, forCalendar calendar: Calendar) {

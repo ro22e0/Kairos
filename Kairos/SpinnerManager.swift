@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftSpinner
-import SideMenu
 import Whisper
 
 private let font = UIFont.systemFontOfSize(20, weight: UIFontWeightThin)

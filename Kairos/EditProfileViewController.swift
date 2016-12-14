@@ -33,8 +33,8 @@ class EditProfileViewController: FormViewController {
         
         // Create RowFomers
         let imageRow = LabelRowFormer<ProfileImagePickerTableViewCell>(instantiateType: .Nib(nibName: "ProfileImagePickerTableViewCell")) {
-            if self.user.imageData != nil {
-                $0.imageProfileView.image = UIImage(data: self.user.imageData!)
+            if self.user.user!.image != nil {
+                $0.imageProfileView.image = UIImage(data: self.user.user!.image!)
                 $0.imageProfileView.round()
             }
             }.configure {
@@ -52,9 +52,9 @@ class EditProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.configure {
-                $0.text = user.name
+                $0.text = user.user!.name
             }.onTextChanged { (text) in
-                self.user.name = text
+                self.user.user!.name = text
         }
         self.rows.append(fullnameRow)
         
@@ -64,9 +64,9 @@ class EditProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.configure {
-                $0.text = user.nickname
+                $0.text = user.user!.nickname
             }.onTextChanged { (text) in
-                self.user.nickname = text
+                self.user.user!.nickname = text
         }
         self.rows.append(nicknameRow)
         
@@ -76,9 +76,9 @@ class EditProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.configure {
-                $0.text = user.school
+                $0.text = user.user!.school
             }.onTextChanged { (text) in
-                self.user.school = text
+                self.user.user!.school = text
         }
         rows.append(schoolRow)
         
@@ -88,9 +88,9 @@ class EditProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.configure {
-                $0.text = user.promotion
+                $0.text = user.user!.promotion
             }.onTextChanged { (text) in
-                self.user.promotion = text
+                self.user.user!.promotion = text
         }
         rows.append(promotionRow)
         
@@ -100,9 +100,9 @@ class EditProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.configure {
-                $0.text = user.location
+                $0.text = user.user!.location
             }.onTextChanged { (text) in
-                self.user.location = text
+                self.user.user!.location = text
         }
         rows.append(locationRow)
         
@@ -113,9 +113,9 @@ class EditProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.configure {
-                $0.text = user.company
+                $0.text = user.user!.company
             }.onTextChanged { (text) in
-                self.user.company = text
+                self.user.user!.company = text
         }
         rows.append(companyRow)
         
@@ -126,9 +126,9 @@ class EditProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.configure {
-                $0.text = user.job
+                $0.text = user.user!.job
             }.onTextChanged { (text) in
-                self.user.job = text
+                self.user.user!.job = text
         }
         rows.append(jobRow)
         
@@ -175,7 +175,7 @@ class EditProfileViewController: FormViewController {
      */
     
     @IBAction func done(sender: AnyObject) {
-        let parameters = user.dictionaryWithValuesForKeys(["id", "name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
+        let parameters = user.user!.dictionaryWithValuesForKeys(["id", "name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
         UserManager.sharedInstance.update(parameters) { (status) in
             switch status {
             case .Success:
@@ -189,7 +189,7 @@ class EditProfileViewController: FormViewController {
     }
 
     @IBAction func cancel(sender: AnyObject) {
-        let changedValues = user.committedValuesForKeys(["name", "nickname", "image", "imageData", "email", "school", "promotion", "location", "company", "job"])
+        let changedValues = user.user!.committedValuesForKeys(["name", "nickname", "image", "imageData", "email", "school", "promotion", "location", "company", "job"])
         for (key, value) in changedValues {
             if value is NSNull {
                 user.setValue(nil, forKey: key)
@@ -204,7 +204,7 @@ class EditProfileViewController: FormViewController {
 extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismissViewControllerAnimated(true, completion: nil)
-        user.imageData = UIImageJPEGRepresentation(image, 1)
+        user.user!.image = UIImageJPEGRepresentation(image, 1)
         let imageRow = self.rows.first as! LabelRowFormer<ProfileImagePickerTableViewCell>
         imageRow.cellUpdate {
             $0.imageProfileView.image = image

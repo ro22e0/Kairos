@@ -15,34 +15,31 @@ class FriendManager {
     static let sharedInstance = FriendManager()
     private init() {}
     
-    func all() -> [Friend] {
-        if let friends = UserManager.sharedInstance.current.friends?.allObjects as? [Friend] {
-            return friends
-        } else {
-            return [Friend]()
+    func all() -> [User] {
+        guard let friends = UserManager.sharedInstance.current.friends?.allObjects as? [User],
+              let requestedFriends = UserManager.sharedInstance.current.requestedFriends?.allObjects as? [User],
+              let pendingFriends = UserManager.sharedInstance.current.pendingFriends?.allObjects as? [User] else {
+            return [User]()
         }
-
+        return friends + requestedFriends + pendingFriends
     }
 
-    func friends(withStatus status: FriendStatus = .Accepted) -> [Friend] {
-        if var friends = UserManager.sharedInstance.current.friends?.allObjects as? [Friend] {
-            friends = friends.filter({ (f) -> Bool in
-                return f.status == status.rawValue
-            })
+    func friends(withStatus status: FriendStatus = .Accepted) -> [User] {
+        if var friends = UserManager.sharedInstance.current.friends?.allObjects as? [User] {
             return friends
         } else {
-            return [Friend]()
+            return [User]()
         }
     }
     
-    func all(filtered text: String, forFriends: Bool = false) -> [Friend] {
+    func all(filtered text: String, forFriends: Bool = false) -> [User] {
            let namePred = NSPredicate(format: "name contains[c] %@", text)
            let nicknamePred = NSPredicate(format: "nickname contains[c] %@", text)
             let emailPred = NSPredicate(format: "email contains[c] %@", text)
 
         let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
         
-        let friends = Friend.query(compoundPred) as! [Friend]
+        let friends = User.query(compoundPred) as! [User]
         //        user.first?.entity.name
         return friends
     }

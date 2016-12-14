@@ -24,7 +24,7 @@ class BlockUserTableViewCell: UITableViewCell {
     }
     
 //    override func selected() {
-//        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+//        let friend = User.find("id == %@", args: self.tag) as! User
 //        
 //        let parameters = ["blocked_friends": [["user_id": friend.id!]]]
 //        RouterWrapper.sharedInstance.request(.CancelFriend(parameters)) { (response) in

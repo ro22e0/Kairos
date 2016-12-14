@@ -26,7 +26,7 @@ class FriendTableViewCell: UITableViewCell, UIPopoverPresentationControllerDeleg
     }
     
     @IBAction func actions(sender: UIButton) {
-        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+        let friend = User.find("id == %@", args: self.tag) as! User
 
         let storyboard = UIStoryboard(name: FriendsStoryboardID, bundle: nil)
         let destVC = storyboard.instantiateViewControllerWithIdentifier("FriendActionPopoverTableViewController") as! FriendActionPopoverTableViewController

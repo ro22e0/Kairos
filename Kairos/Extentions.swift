@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SideMenu
 
 extension String {
     static func mediumDateShortTime(date: NSDate) -> String {
@@ -51,7 +50,6 @@ extension UIColor {
 
 extension UIViewController {
     @IBAction private func menu() {
-        presentViewController(SideMenuManager.menuLeftNavigationController!, animated: true, completion: nil)
     }
     
     @IBAction func showStoryboard(segue: UIStoryboardSegue) {

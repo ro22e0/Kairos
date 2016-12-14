@@ -27,7 +27,7 @@ class InvitationTableViewCell: UITableViewCell {
     }
     
     @IBAction func accept(sender: UIButton) {
-        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+        let friend = User.find("id == %@", args: self.tag) as! User
         let parameters = ["user_id": friend.id!]
         
         FriendManager.sharedInstance.accept(parameters) { (status) in
@@ -42,7 +42,7 @@ class InvitationTableViewCell: UITableViewCell {
     }
     
     @IBAction func decline(sender: UIButton) {
-        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+        let friend = User.find("id == %@", args: self.tag) as! User
         let parameters = ["user_id": friend.id!]
 
         FriendManager.sharedInstance.refuse(parameters) { (status) in

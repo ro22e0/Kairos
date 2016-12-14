@@ -21,19 +21,30 @@ class UserManager {
         return Owner.all().first as! Owner
     }
     
-    private func syncOwner(data: JSON) {
+    private func syncOwner(data: JSON, completionHandler: (CustomStatus) -> Void) {
+//        if let owner = Owner.all().first as? Owner {
+//            if owner.id != data["id"].number {
+//                DataSync.deleteAll()
+//            }
+//        }
+//        let owner = Owner.findOrCreate(["id": data["id"].number!]) as! Owner
+//        
+//        owner.name = data["name"].stringValue
+//        owner.nickname = data["nickname"].stringValue
+//        owner.email = data["email"].stringValue
+//        owner.image = data["image"].rawValue as? NSData
+//        Owner.save()
         if let owner = Owner.all().first as? Owner {
             if owner.id != data["id"].number {
                 DataSync.deleteAll()
             }
         }
-        let owner = Owner.findOrCreate(["id": data["id"].number!]) as! Owner
-        
-        owner.name = data["name"].stringValue
-        owner.nickname = data["nickname"].stringValue
-        owner.email = data["email"].stringValue
-        owner.image = data["image"].stringValue
-        Owner.save()
+        print(data)
+        DataSync.sync(entity: "Owner", predicate: nil, data: [data.dictionaryObject!], completion: { error in
+            let defautls = NSUserDefaults.standardUserDefaults()
+            defautls.setValue(true, forKey: userLoginKey)
+            completionHandler(.Success)
+        })
     }
     
     func signIn(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
@@ -41,24 +52,30 @@ class UserManager {
         RouterWrapper.sharedInstance.request(.Authenticate(parameters)) { (response) in
             switch response.result {
             case .Success:
+                self.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
                     switch response.response!.statusCode {
                     case 200:
-                        self.syncOwner(json["data"])
-                        
-                        let defautls = NSUserDefaults.standardUserDefaults()
-                        defautls.setValue(true, forKey: userLoginKey)
-                        self.setCredentials(response.response!)
-                        completionHandler(.Success)
-                        
-                        
-                        //                        DataSync.sync(entity: "Owner", predicate: nil, data: [json["data"].dictionaryObject!], completion: { error in
-                        //                            let defautls = NSUserDefaults.standardUserDefaults()
-                        //                            defautls.setValue(true, forKey: userLoginKey)
-                        //                            self.setCredentials(response.response!)
-                        //                            completionHandler(.Success)
-                    //                            })
+                        //                        self.syncOwner(json["data"])
+                        //                        let defautls = NSUserDefaults.standardUserDefaults()
+                        //                        defautls.setValue(true, forKey: userLoginKey)
+                        //                        self.setCredentials(response.response!)
+                        //                        completionHandler(.Success)
+                        if let owner = Owner.all().first as? Owner {
+                            if owner.id != json["data"]["id"].number {
+                                DataSync.deleteAll()
+                            }
+                        }
+                        var data: [String: AnyObject] = ["user": json["data"].object]
+                        data["id"] = json["data"]["id"].number
+                        print(data)
+                        DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
+                            let defautls = NSUserDefaults.standardUserDefaults()
+                            defautls.setValue(true, forKey: userLoginKey)
+                            completionHandler(.Success)
+                            try! DataSync.dataStack().mainContext.save()
+                        })
                     default:
                         completionHandler(.Error("Fail to connect"))
                     }
@@ -79,12 +96,17 @@ class UserManager {
                     let json = JSON(value)
                     switch response.response!.statusCode {
                     case 200:
-                        self.syncOwner(json["data"])
-                        
-                        let defautls = NSUserDefaults.standardUserDefaults()
-                        defautls.setValue(true, forKey: userLoginKey)
-                        self.setCredentials(response.response!)
-                        completionHandler(.Success)
+                        if let owner = Owner.all().first as? Owner {
+                            if owner.id != json["data"]["id"].number {
+                                DataSync.deleteAll()
+                            }
+                        }
+                        print(json["data"])
+                        DataSync.sync(entity: "Owner", predicate: nil, data: [json["data"].dictionaryObject!], completion: { error in
+                            let defautls = NSUserDefaults.standardUserDefaults()
+                            defautls.setValue(true, forKey: userLoginKey)
+                            completionHandler(.Success)
+                        })
                         
                         //                        DataSync.sync(entity: "Owner", predicate: nil, data: [json["data"].dictionaryObject!], completion: { error in
                         //                            let defautls = NSUserDefaults.standardUserDefaults()
@@ -170,7 +192,7 @@ class UserManager {
         let emailPred: NSPredicate
         
         if forFriends {
-            let friends = Friend.all() as? [Friend]
+            let friends = User.all() as? [User]
             
             let ids = NSMutableArray()
             for f in friends! {

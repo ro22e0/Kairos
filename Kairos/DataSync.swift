@@ -11,7 +11,6 @@ import SwiftyJSON
 import SwiftRecord
 import Sync
 import DATAStack
-import DATAFilter
 
 struct DataSync {
     
@@ -45,7 +44,6 @@ struct DataSync {
         Owner.deleteAll()
         Event.deleteAll()
         Calendar.deleteAll()
-        Friend.deleteAll()
         User.deleteAll()
         UserCalendar.deleteAll()
         UserEvent.deleteAll()
@@ -61,26 +59,26 @@ struct DataSync {
         }
         
         let predicate = NSPredicate(format: "NOT (id IN %@)", ids)
-        let deletedFriends = Friend.query(predicate) as! [Friend]
+        let deletedFriends = User.query(predicate) as! [User]
         for f in deletedFriends {
             f.delete()
         }
     }
     
-    private static func syncFriends(friends: [JSON]) {
-        for f in friends {
-            let friend = Friend.findOrCreate(["id": f["id"].object]) as! Friend
-            
-            friend.name = f["name"].stringValue
-            friend.nickname = f["nickname"].stringValue
-            friend.status = f["status"].stringValue
-            friend.email = f["email"].stringValue
-            friend.image = f["image"].stringValue
-            friend.owner = UserManager.sharedInstance.current
-        }
-        Friend.save()
-        print(Friend.count())
-    }
+    //    private static func syncFriends(friends: [JSON]) {
+    //        for f in friends {
+    //            let friend = User.findOrCreate(["id": f["id"].object]) as! User
+    //
+    //            friend.name = f["name"].stringValue
+    //            friend.nickname = f["nickname"].stringValue
+    //            friend.status = f["status"].stringValue
+    //            friend.email = f["email"].stringValue
+    //            friend.image = f["image"].stringValue
+    //            friend.owner = UserManager.sharedInstance.current
+    //        }
+    //        User.save()
+    //        print(User.count())
+    //    }
     
     static func fetchFriends(completionHandler: (CustomStatus) -> Void) {
         Router.needToken = true
@@ -95,21 +93,25 @@ struct DataSync {
                         let json = JSON(value)
                         
                         print(json)
+
+                        DataSync.sync(entity: "Owner", predicate: nil, data: [json.dictionaryObject!], completion: { error in
+                            try! self.dataStack().mainContext.save()
+                            print(NSDate(), "done")
+                            completionHandler(.Success)
+                        })
                         
-                        let friendsArray = json["friends"].arrayValue + json["friend_requests"].array! + json["pending_requests"].array!
-                        let data = DataSync.transformJson(JSON(friendsArray))
-                        print(data)
-                        var friends = [JSON]()
+                        //                        var friends = [JSON]()
+                        
                         //
                         //                        let requested = DataSync.transformJson()
                         //                        print(requested)
                         //
                         //                        let pending = DataSync.transformJson()
                         //                        print(requested)
-                        for var f in friendsArray {
-                            f["owner"].number = UserManager.sharedInstance.current.id
-                            friends.append(f)
-                        }
+                        //                        for var f in friendsArray {
+                        //                            f["owner"].number = UserManager.sharedInstance.current.id
+                        //                            friends.append(f)
+                        //                        }
                         
                         //                        for var f in requested {
                         //                            f["status"] = FriendStatus.Requested.hashValue
@@ -120,21 +122,21 @@ struct DataSync {
                         //                            f["owner"] = UserManager.sharedInstance.current
                         //                        }
                         
-                        self.deleteFriends(friends)
-                        self.syncFriends(friends)
-                        completionHandler(CustomStatus.Success)
+                        //                        self.deleteFriends(friends)
+                        //                        self.syncFriends(friends)
+                        //                        completionHandler(CustomStatus.Success)
                         
                         
-                        //                        let pred = NSPredicate(format: "self.isKindOfClass %@", Friend)
-                        //                        DataSync.sync(entity: "Friend", predicate: nil, data: friends, completion: { error in
+                        //                        let pred = NSPredicate(format: "self.isKindOfClass %@", User)
+                        //                        DataSync.sync(entity: "User", predicate: nil, data: friends, completion: { error in
                         //                            print(NSDate(), "done", true)
                         //                            completionHandler(.Success)
                         //                            })
-                        //                        DataSync.sync(entity: "Friend", data: requested, completion: { error in
+                        //                        DataSync.sync(entity: "User", data: requested, completion: { error in
                         //                            print(NSDate(), "done")
                         //                            completionHandler(.Success)
                         //                        })
-                        //                        DataSync.sync(entity: "Friend", data: pending, completion: { error in
+                        //                        DataSync.sync(entity: "User", data: pending, completion: { error in
                         //                            print(NSDate(), "done")
                         //                            completionHandler(.Success)
                         //                        })
@@ -160,7 +162,7 @@ struct DataSync {
         let predicate = NSPredicate(format: "NOT (id IN %@)", ids)
         let deletedUsers = User.query(predicate) as! [User]
         for u in deletedUsers {
-            let friendExist = Friend.find("id == %@", args: u.id!) != nil ? true : false
+            let friendExist = User.find("id == %@", args: u.id!) != nil ? true : false
             let ownerExist = Owner.find("id == %@", args: u.id!) != nil ? true : false
             
             if (!friendExist && !ownerExist) {
@@ -172,12 +174,12 @@ struct DataSync {
     private static func syncUsers(users: [JSON]) {
         for u in users {
             print("OWNER:  ", Owner.all())
-            print("FRIENDS:  ", Friend.all())
+            print("FRIENDS:  ", User.all())
             print("User id : ", u["id"])
-            print("Friend id : ", Friend.find("id == %@", args: u["id"].stringValue))
+            print("User id : ", User.find("id == %@", args: u["id"].stringValue))
             print("Owner id : ", Owner.find("id == %@", args: u["id"].stringValue))
             
-            let friendExist = Friend.find("id == %@", args: u["id"].stringValue) != nil ? true : false
+            let friendExist = User.find("id == %@", args: u["id"].stringValue) != nil ? true : false
             let ownerExist = Owner.find("id == %@", args: u["id"].stringValue) != nil ? true : false
             
             if (!friendExist && !ownerExist) {
@@ -185,7 +187,7 @@ struct DataSync {
                 user.name = u["name"].stringValue
                 user.nickname = u["nickname"].stringValue
                 user.email = u["email"].stringValue
-                user.image = u["image"].stringValue
+                user.image = u["image"].rawValue as? NSData
             }
         }
         User.save()
@@ -202,13 +204,19 @@ struct DataSync {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-//                        let data = self.transformJson(json)
-                        let users = json.array!
+                        print(json)
+                        //                        let data = self.transformJson(json)
+                        //                        let users = json.array!
                         //
-                        self.deleteUsers(users)
-                        self.syncUsers(users)
-                        completionHandler(CustomStatus.Success)
-                        
+                        //                        self.deleteUsers(users)
+                        //                        self.syncUsers(users)
+                        //                        completionHandler(CustomStatus.Success)
+                        let predicate = NSPredicate(format: "id <> %@", UserManager.sharedInstance.current.id!)
+                        self.sync(entity: "User", predicate: nil, data: DataSync.transformJson(json), completion: { error in
+                            try! self.dataStack().mainContext.save()
+                            completionHandler(CustomStatus.Success)
+                        })
+
                         //                        let pred = NSPredicate(format: "id != %@", UserManager.sharedInstance.current.id!)
                         //                        self.sync(entity: "User", predicate: nil, data: data, completion: { error in
                         //                            completionHandler(CustomStatus.Success)
@@ -229,7 +237,7 @@ struct DataSync {
     private static func deleteCalendars(calendars: [JSON]) {
         let ids = NSMutableArray()
         let id: Int?
-
+        
         for c in calendars {
             ids.addObject(c["id"].object)
         }
@@ -351,7 +359,7 @@ struct DataSync {
     // MARK: - Events
     private static func deleteEvents(events: [JSON]) {
         let ids = NSMutableArray()
-
+        
         for e in events {
             ids.addObject(e["id"].object)
         }

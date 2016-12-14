@@ -17,8 +17,8 @@ class FriendsRequestsTableViewController: UITableViewController {
     let pendingCellID = "sentInvitationCell"
     var itemInfo = IndicatorInfo(title: "View")
     
-    var requestedFriends = [Friend]()
-    var pendingFriends = [Friend]()
+    var requestedFriends = [User]()
+    var pendingFriends = [User]()
     
     // MARK: - Methods
     
@@ -73,7 +73,7 @@ class FriendsRequestsTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier(requestCellID, forIndexPath: indexPath) as! InvitationTableViewCell
             
             cell.nameLabel.text = requestedFriends[indexPath.row].name
-            let mutualFriends = requestedFriends[indexPath.row].mutualFriends?.allObjects as? [Friend]
+            let mutualFriends = requestedFriends[indexPath.row].mutualFriends?.allObjects as? [User]
             if let number = mutualFriends?.count where number > 0 {
                 cell.mutualFriendsLabel.hidden = false
                 cell.mutualFriendsLabel.text = String(number)  + "mutual friends"

@@ -56,9 +56,9 @@ class CompleteProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.configure {
-                $0.text = user.name
+                $0.text = user.user!.name
             }.onTextChanged { (text) in
-                self.user.name = text
+                self.user.user!.name = text
         }
         self.rows.append(fullnameRow)
         
@@ -68,7 +68,7 @@ class CompleteProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.onTextChanged { (text) in
-                self.user.nickname = text
+                self.user.user!.nickname = text
         }
         self.rows.append(nicknameRow)
         
@@ -78,7 +78,7 @@ class CompleteProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.onTextChanged { (text) in
-                self.user.school = text
+                self.user.user!.school = text
         }
         rows.append(schoolRow)
         
@@ -88,7 +88,7 @@ class CompleteProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.onTextChanged { (text) in
-                self.user.promotion = text
+                self.user.user!.promotion = text
         }
         rows.append(promotionRow)
         
@@ -98,7 +98,7 @@ class CompleteProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.onTextChanged { (text) in
-                self.user.location = text
+                self.user.user!.location = text
         }
         rows.append(locationRow)
         
@@ -109,7 +109,7 @@ class CompleteProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.onTextChanged { (text) in
-                self.user.company = text
+                self.user.user!.company = text
         }
         rows.append(companyRow)
         
@@ -120,7 +120,7 @@ class CompleteProfileViewController: FormViewController {
             $0.textField.textColor = .formerColor()
             $0.textField.font = .systemFontOfSize(15)
             }.onTextChanged { (text) in
-                self.user.job = text
+                self.user.user!.job = text
         }
         rows.append(jobRow)
         
@@ -196,7 +196,7 @@ class CompleteProfileViewController: FormViewController {
 extension CompleteProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismissViewControllerAnimated(true, completion: nil)
-        user.imageData = UIImageJPEGRepresentation(image, 1)
+        user.user!.image = UIImageJPEGRepresentation(image, 1)
         let imageRow = self.rows.first as! LabelRowFormer<ProfileImagePickerTableViewCell>
         imageRow.cellUpdate {
             $0.imageProfileView.image = image

@@ -31,9 +31,9 @@ class CalendarViewController: UIViewController {
         // Fetch update
         DataSync.fetchUsers { (status) in
             FriendManager.sharedInstance.fetch()
-            CalendarManager.sharedInstance.fetch()
-            DataSync.fetchCalendarColors()
-            DataSync.fetchEvents()
+//            CalendarManager.sharedInstance.fetch()
+//            DataSync.fetchCalendarColors()
+//            DataSync.fetchEvents()
         }
     
         // Do any additional setup after loading the view.
@@ -146,9 +146,9 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     // MARK: FSCalendarDelegate
     
     func calendarCurrentPageDidChange(calendar: FSCalendar) {
-        if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.beginingOfMonthOfDate(calendar.currentPage), toCalendarUnit: .Month) {
-            calendarView.selectDate(calendar.beginingOfMonthOfDate(calendar.currentPage))
-        }
+//        if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.beginingOfMonthOfDate(calendar.currentPage), toCalendarUnit: .Month) {
+//            calendarView.selectDate(calendar.beginingOfMonthOfDate(calendar.currentPage))
+//        }
     }
     
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {

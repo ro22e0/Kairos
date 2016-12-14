@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SideMenu
 import CoreData
 import SwiftyJSON
 import UIKit
