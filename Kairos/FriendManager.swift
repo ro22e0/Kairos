@@ -17,33 +17,66 @@ class FriendManager {
     
     func all() -> [User] {
         guard let friends = UserManager.sharedInstance.current.friends?.allObjects as? [User],
-              let requestedFriends = UserManager.sharedInstance.current.requestedFriends?.allObjects as? [User],
-              let pendingFriends = UserManager.sharedInstance.current.pendingFriends?.allObjects as? [User] else {
-            return [User]()
+            let requestedFriends = UserManager.sharedInstance.current.requestedFriends?.allObjects as? [User],
+            let pendingFriends = UserManager.sharedInstance.current.pendingFriends?.allObjects as? [User] else {
+                return [User]()
         }
         return friends + requestedFriends + pendingFriends
     }
-
+    
     func friends(withStatus status: FriendStatus = .Accepted) -> [User] {
-        if var friends = UserManager.sharedInstance.current.friends?.allObjects as? [User] {
-            return friends
-        } else {
-            return [User]()
+        var friends: [User]?
+
+        switch status {
+        case .Accepted:
+            friends = UserManager.sharedInstance.current.friends?.allObjects as? [User]
+        case .Pending:
+            friends = UserManager.sharedInstance.current.pendingFriends?.allObjects as? [User]
+        case .Requested:
+            friends = UserManager.sharedInstance.current.requestedFriends?.allObjects as? [User]
         }
+        return friends != nil ? friends! : [User]()
     }
     
-    func all(filtered text: String, forFriends: Bool = false) -> [User] {
-           let namePred = NSPredicate(format: "name contains[c] %@", text)
-           let nicknamePred = NSPredicate(format: "nickname contains[c] %@", text)
-            let emailPred = NSPredicate(format: "email contains[c] %@", text)
-
+    func all(filtered text: String) -> [User] {
+        let namePred = NSPredicate(format: "name contains[c] %@", text)
+        let nicknamePred = NSPredicate(format: "nickname contains[c] %@", text)
+        let emailPred = NSPredicate(format: "email contains[c] %@", text)
+        
         let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
         
-        let friends = User.query(compoundPred) as! [User]
-        //        user.first?.entity.name
-        return friends
+        guard let friends = UserManager.sharedInstance.current.friends?.allObjects as? [User],
+            let requestedFriends = UserManager.sharedInstance.current.requestedFriends?.allObjects as? [User],
+            let pendingFriends = UserManager.sharedInstance.current.pendingFriends?.allObjects as? [User] else {
+                return [User]()
+        }
+        let friendsArr = friends + requestedFriends + pendingFriends
+        
+        if let allFriends = (friendsArr as NSArray).filteredArrayUsingPredicate(compoundPred) as? [User] {
+            return allFriends
+        }
+        return [User]()
     }
+    
+    func friendsToAdd(filtered text:String) -> [User] {
+        let currentUser = UserManager.sharedInstance.current
+        let friends = self.all()
+        var ids = [NSNumber]()
 
+        for f in friends {
+            ids.append(f.id!)
+        }
+
+        let namePred = NSPredicate(format: "name contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
+        let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
+        let emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
+        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
+        
+        if let users = User.query(compoundPred) as? [User] {
+            return users
+        }
+        return [User]()
+    }
     
     func fetch(handler: (() -> Void)? = nil) {
         DataSync.fetchFriends { (status) in
@@ -57,10 +90,10 @@ class FriendManager {
             }
         }
     }
-
+    
     func invite(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
         RouterWrapper.sharedInstance.request(.InviteFriend(parameters)) { (response) in
-        switch response.result {
+            switch response.result {
             case .Success:
                 switch response.response!.statusCode {
                 case 200...203:

@@ -23,9 +23,10 @@ class FriendsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        configureView()
         self.friends = FriendManager.sharedInstance.friends()
-        self.tableView.reloadData()
+
+        configureView()
+//        self.tableView.reloadData()
     }
     
     func configureView() {

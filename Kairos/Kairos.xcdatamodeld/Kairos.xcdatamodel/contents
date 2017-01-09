@@ -38,7 +38,12 @@
         <relationship name="refusedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
     </entity>
     <entity name="Owner" representedClassName=".Owner" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+            <userInfo>
+                <entry key="hyper.isPrimaryKey" value="true"/>
+                <entry key="hyper.remoteKey" value="id"/>
+            </userInfo>
+        </attribute>
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
         <relationship name="pendingFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" syncable="YES">
             <userInfo>
@@ -75,7 +80,7 @@
     <elements>
         <element name="Calendar" positionX="-14123" positionY="-2790" width="128" height="178"/>
         <element name="Event" positionX="-14121" positionY="-2556" width="128" height="223"/>
-        <element name="Owner" positionX="-14526" positionY="-2665" width="126" height="118"/>
+        <element name="Owner" positionX="-14526" positionY="-2665" width="126" height="120"/>
         <element name="User" positionX="-14337" positionY="-2700" width="128" height="240"/>
     </elements>
 </model>

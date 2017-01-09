@@ -172,7 +172,7 @@ extension FriendsInviteTableViewController: UISearchResultsUpdating, UISearchBar
         if shouldShowSearchResults {
             let searchString = searchController.searchBar.text
             if !searchString!.isEmpty {
-                self.friends = FriendManager.sharedInstance.all(filtered: searchString!, forFriends: true)
+                self.friends = FriendManager.sharedInstance.all(filtered: searchString!)
             } else {
                 self.friends = FriendManager.sharedInstance.friends()
             }

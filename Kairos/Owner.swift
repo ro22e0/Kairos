@@ -13,5 +13,9 @@ import CoreData
 class Owner: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
-
+    @NSManaged var id: NSNumber?
+    @NSManaged var friends: NSSet?
+    @NSManaged var pendingFriends: NSSet?
+    @NSManaged var requestedFriends: NSSet?
+    @NSManaged var user: User?
 }

@@ -22,18 +22,18 @@ class UserManager {
     }
     
     private func syncOwner(data: JSON, completionHandler: (CustomStatus) -> Void) {
-//        if let owner = Owner.all().first as? Owner {
-//            if owner.id != data["id"].number {
-//                DataSync.deleteAll()
-//            }
-//        }
-//        let owner = Owner.findOrCreate(["id": data["id"].number!]) as! Owner
-//        
-//        owner.name = data["name"].stringValue
-//        owner.nickname = data["nickname"].stringValue
-//        owner.email = data["email"].stringValue
-//        owner.image = data["image"].rawValue as? NSData
-//        Owner.save()
+        //        if let owner = Owner.all().first as? Owner {
+        //            if owner.id != data["id"].number {
+        //                DataSync.deleteAll()
+        //            }
+        //        }
+        //        let owner = Owner.findOrCreate(["id": data["id"].number!]) as! Owner
+        //
+        //        owner.name = data["name"].stringValue
+        //        owner.nickname = data["nickname"].stringValue
+        //        owner.email = data["email"].stringValue
+        //        owner.image = data["image"].rawValue as? NSData
+        //        Owner.save()
         if let owner = Owner.all().first as? Owner {
             if owner.id != data["id"].number {
                 DataSync.deleteAll()
@@ -73,8 +73,8 @@ class UserManager {
                         DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
                             let defautls = NSUserDefaults.standardUserDefaults()
                             defautls.setValue(true, forKey: userLoginKey)
-                            completionHandler(.Success)
                             try! DataSync.dataStack().mainContext.save()
+                            completionHandler(.Success)
                         })
                     default:
                         completionHandler(.Error("Fail to connect"))
@@ -101,10 +101,13 @@ class UserManager {
                                 DataSync.deleteAll()
                             }
                         }
-                        print(json["data"])
-                        DataSync.sync(entity: "Owner", predicate: nil, data: [json["data"].dictionaryObject!], completion: { error in
+                        var data: [String: AnyObject] = ["user": json["data"].object]
+                        data["id"] = json["data"]["id"].number
+                        print(data)
+                        DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
                             let defautls = NSUserDefaults.standardUserDefaults()
                             defautls.setValue(true, forKey: userLoginKey)
+                            try! DataSync.dataStack().mainContext.save()
                             completionHandler(.Success)
                         })
                         
@@ -180,39 +183,23 @@ class UserManager {
         return ["access-token": token!, "client": client!, "uid": uid!]
     }
     
-    func all(forFriends: Bool = false) -> [User] {
+    func all() -> [User] {
         let users = User.all() as! [User]
         
         return users
     }
     
-    func all(filtered text: String, forFriends: Bool = false) -> [User] {
-        let namePred: NSPredicate
-        let nicknamePred: NSPredicate
-        let emailPred: NSPredicate
-        
-        if forFriends {
-            let friends = User.all() as? [User]
-            
-            let ids = NSMutableArray()
-            for f in friends! {
-                ids.addObject(f.id!)
-            }
-            
-            namePred = NSPredicate(format: "name contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, self.current, ids)
-            nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, self.current, ids)
-            emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, self.current, ids)
-        } else {
-            namePred = NSPredicate(format: "name contains[c] %@ AND self != %@", text, self.current)
-            nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@", text, self.current)
-            emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@", text, self.current)
-        }
+    func all(filtered text: String) -> [User] {
+        let namePred = NSPredicate(format: "name contains[c] %@ AND self != %@", text, self.current)
+        let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@", text, self.current)
+        let emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@", text, self.current)
         
         let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
         
-        let user = User.query(compoundPred) as! [User]
-        //        user.first?.entity.name
-        return user
+        if let users = User.query(compoundPred) as? [User] {
+            return users
+        }
+        return [User]()
     }
     
     func fetch(handler: (() -> Void)? = nil) {

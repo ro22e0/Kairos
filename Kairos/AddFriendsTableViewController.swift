@@ -19,7 +19,6 @@ class AddFriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UserManager.sharedInstance.fetch()
         configureSearchController()
         configure()
         // Uncomment the following line to preserve selection between presentations
@@ -186,7 +185,7 @@ extension AddFriendsTableViewController: UISearchResultsUpdating, UISearchBarDel
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         if shouldShowSearchResults {
             let searchString = searchController.searchBar.text
-            self.users = UserManager.sharedInstance.all(filtered: searchString!, forFriends: true)
+            self.users = FriendManager.sharedInstance.friendsToAdd(filtered: searchString!)
             tableView.reloadData()
         }
     }

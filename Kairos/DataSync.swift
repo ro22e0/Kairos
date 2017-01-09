@@ -93,8 +93,11 @@ struct DataSync {
                         let json = JSON(value)
                         
                         print(json)
-
-                        DataSync.sync(entity: "Owner", predicate: nil, data: [json.dictionaryObject!], completion: { error in
+                        
+                        var data: [String: AnyObject] = json.dictionaryObject!
+                        data["id"] = UserManager.sharedInstance.current.id
+                        print(data)
+                        DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
                             try! self.dataStack().mainContext.save()
                             print(NSDate(), "done")
                             completionHandler(.Success)
