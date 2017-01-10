@@ -14,7 +14,7 @@ class ProfileImagePickerTableViewCell: UITableViewCell, LabelFormableRow {
     @IBOutlet weak var imageProfileView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    private var imageViewColor: UIColor?
+    fileprivate var imageViewColor: UIColor?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +23,7 @@ class ProfileImagePickerTableViewCell: UITableViewCell, LabelFormableRow {
         imageProfileView.round()
     }
     
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if imageViewColor == nil {
             imageViewColor = imageProfileView.backgroundColor
         }
@@ -33,7 +33,7 @@ class ProfileImagePickerTableViewCell: UITableViewCell, LabelFormableRow {
         }
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         if imageViewColor == nil {
             imageViewColor = imageProfileView.backgroundColor
         }
@@ -51,5 +51,5 @@ class ProfileImagePickerTableViewCell: UITableViewCell, LabelFormableRow {
         return nil
     }
     
-    func updateWithRowFormer(rowFormer: RowFormer) {}
+    func updateWithRowFormer(_ rowFormer: RowFormer) {}
 }

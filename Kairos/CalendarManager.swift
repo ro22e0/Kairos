@@ -12,19 +12,19 @@ import SwiftyJSON
 // MARK: Singleton
 class CalendarManager {
     
-    static let sharedInstance = CalendarManager()
-    private init() {colors = [:]}
+    static let shared = CalendarManager()
+    fileprivate init() {colors = [:]}
 
     var colors: [String: String]
     
-    func fetch(handler: (() -> Void)? = nil) {
+    func fetch(_ handler: (() -> Void)? = nil) {
         DataSync.fetchCalendars() { (status) in
             switch status {
-            case .Success:
+            case .success:
                 if handler != nil {
                     handler!()
                 }
-            case .Error(let error):
+            case .error(let error):
                 print(error)
             }
         }
@@ -39,7 +39,7 @@ class CalendarManager {
     }
 
     func calendars(withStatus status: UserStatus) -> [UserCalendar] {
-//        if var calendars = UserManager.sharedInstance.current.userCalendars?.allObjects as? [UserCalendar] {
+//        if var calendars = UserManager.shared.current.userCalendars?.allObjects as? [UserCalendar] {
 //            calendars = calendars.filter({ (uCalendar) -> Bool in
 //                if status == .Participating {
 //                    return uCalendar.status == UserStatus.Owner.rawValue || uCalendar.status == status.rawValue
@@ -53,7 +53,7 @@ class CalendarManager {
         return [UserCalendar]()
     }
 
-        func userIsIn(calendar: Calendar, user: User) -> Bool {
+        func userIsIn(_ calendar: Calendar, user: User) -> Bool {
 //            let users = calendar.calendarUsers?.allObjects as? [UserCalendar]
 //            var isIn = false
 //            isIn = (users?.contains({ (u) -> Bool in
@@ -77,145 +77,145 @@ class CalendarManager {
         return [UserCalendar]()
     }
 
-    func deleteUser(user: User, forCalendar calendar: Calendar) {
+    func deleteUser(_ user: User, forCalendar calendar: Calendar) {
         if let user = UserCalendar.find("userId == %@ AND calendarId == %@", args: user.id!, calendar.id!) {
             user.delete()
             UserCalendar.save()
         }
     }
 
-    func create(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.CreateCalendar(parameters)) { (response) in
+    func create(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.createCalendar(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
                         DataSync.syncCalendars([json])
                     }
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
 
-    func update(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.UpdateCalendar(parameters)) { (response) in
+    func update(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.updateCalendar(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
                         DataSync.syncCalendars([json])
                     }
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func invite(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.InviteCalendar(parameters)) { (response) in
+    func invite(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.inviteCalendar(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
                         DataSync.syncCalendars([json])
                     }
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func accept(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.AcceptCalendar(parameters)) { (response) in
+    func accept(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.acceptCalendar(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
                         DataSync.syncCalendars([json])
                     }
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func refuse(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.RefuseCalendar(parameters)) { (response) in
+    func refuse(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.refuseCalendar(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
                         DataSync.syncCalendars([json])
                     }
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func remove(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.RemoveCalendar(parameters)) { (response) in
+    func remove(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.removeCalendar(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
                         DataSync.syncCalendars([json])
                     }
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func delete(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.DeleteCalendar(parameters)) { (response) in
+    func delete(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.deleteCalendar(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...299:
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }

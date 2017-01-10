@@ -9,28 +9,28 @@
 import Foundation
 
 extension String {
-    static func mediumDateShortTime(date: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = .currentLocale()
-        dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateStyle = .MediumStyle
-        return dateFormatter.stringFromDate(date)
+    static func mediumDateShortTime(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .current
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: date)
     }
     
-    static func mediumDateNoTime(date: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = .currentLocale()
-        dateFormatter.timeStyle = .NoStyle
-        dateFormatter.dateStyle = .MediumStyle
-        return dateFormatter.stringFromDate(date)
+    static func mediumDateNoTime(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .current
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: date)
     }
     
-    static func fullDate(date: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = .currentLocale()
-        dateFormatter.timeStyle = .NoStyle
-        dateFormatter.dateStyle = .FullStyle
-        return dateFormatter.stringFromDate(date)
+    static func fullDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .current
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .full
+        return dateFormatter.string(from: date)
     }
 }
 
@@ -49,25 +49,25 @@ extension UIColor {
 }
 
 extension UIViewController {
-    @IBAction private func menu() {
+    @IBAction fileprivate func menu() {
     }
     
-    @IBAction func showStoryboard(segue: UIStoryboardSegue) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.window?.rootViewController = segue.destinationViewController
+    @IBAction func showStoryboard(_ segue: UIStoryboardSegue) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = segue.destination
     }
     
     func viewController(fromStoryboard storyboard: String, viewController name: String) -> UIViewController {
         let storyboard = UIStoryboard(name: storyboard, bundle: nil)
         
-        return storyboard.instantiateViewControllerWithIdentifier(name)
+        return storyboard.instantiateViewController(withIdentifier: name)
     }
     
-    func setRootVC(storyboard: String) {
+    func setRootVC(_ storyboard: String) {
         let storyboard = UIStoryboard(name: storyboard, bundle: nil)
         
         if let viewController = storyboard.instantiateInitialViewController() {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             appDelegate.window?.rootViewController = viewController
         }
@@ -81,12 +81,12 @@ extension UITableViewCell {
 
 extension UIView {
     func round() {
-        self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2
+        self.layer.cornerRadius = self.bounds.height / 2
         self.clipsToBounds = true
         
     }
 
-    func addBorder(color: CGColor) {
+    func addBorder(_ color: CGColor) {
         self.layer.borderWidth = 3.0
         self.layer.borderColor = color
     }

@@ -13,7 +13,7 @@ import DynamicColor
 class CalendarDetailsTableViewController: UITableViewController {
     
     @IBOutlet weak var editButton: UIBarButtonItem!
-    private lazy var former: Former = Former(tableView: self.tableView)
+    fileprivate lazy var former: Former = Former(tableView: self.tableView)
     var calendar: UserCalendar?
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class CalendarDetailsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadData(_:)), name: Notifications.CalendarDidChange.rawValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
         configure()
     }
     
@@ -38,26 +38,26 @@ class CalendarDetailsTableViewController: UITableViewController {
     ///  Reload data notification handler
     ///
     ///  - parameter notification: The notification
-    @objc func reloadData(notification: NSNotification) {
+    @objc func reloadData(_ notification: Notification) {
         if calendar?.calendar != nil {
-            if let calendar = self.calendar where calendar.status != UserStatus.Refused.rawValue {
+            if let calendar = self.calendar, calendar.status != UserStatus.Refused.rawValue {
                 former.removeAllUpdate()
                 configure()
             } else {
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
             }
         } else {
-            self.navigationController?.popViewControllerAnimated(true)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
     func configure() {
-        if calendar!.isOwner == true && calendar!.user! == UserManager.sharedInstance.current {
-            editButton.enabled = true
+        if calendar!.isOwner == true && calendar!.user! == UserManager.shared.current {
+            editButton.isEnabled = true
             editButton.tintColor = nil
         } else {
-            editButton.enabled = false
-            editButton.tintColor = .clearColor()
+            editButton.isEnabled = false
+            editButton.tintColor = .clear
         }
         
         self.title = "Calendar Details"
@@ -68,17 +68,17 @@ class CalendarDetailsTableViewController: UITableViewController {
         
         var rows = [RowFormer]()
         
-        let participants = CalendarManager.sharedInstance.users(forCalendar: calendar!.calendar!)
+        let participants = CalendarManager.shared.users(forCalendar: calendar!.calendar!)
         let calendarHeader = LabelRowFormer<CalendarHeaderCell>(instantiateType: .Nib(nibName: "CalendarHeaderCell")) {
-            $0.acceptButton.enabled = false
+            $0.acceptButton.isEnabled = false
             $0.eventLabel.text = "No events"
             $0.participantLabel.text = String(participants.count) + " participants"
             if let color = self.calendar?.calendar?.color {
-                $0.colorImageView.backgroundColor = DynamicColor(hexString: CalendarManager.sharedInstance.colors[color]!)
+                $0.colorImageView.backgroundColor = DynamicColor(hexString: CalendarManager.shared.colors[color]!)
                 $0.colorImageView.round()
             }
             }.configure {
-                $0.cell.tag = calendar!.calendar!.id!.integerValue
+                $0.cell.tag = calendar!.calendar!.id!.intValue
                 $0.text = calendar?.calendar?.name
                 $0.rowHeight = 86
         }
@@ -87,13 +87,13 @@ class CalendarDetailsTableViewController: UITableViewController {
             let participant = LabelRowFormer<CollaboratorTableViewCell>(instantiateType: .Nib(nibName: "CollaboratorTableViewCell")) {
                 switch user.status! {
                 case UserStatus.Invited.rawValue:
-                    $0.statusColorView.backgroundColor = .orangeColor()
+                    $0.statusColorView.backgroundColor = .orange
                 case UserStatus.Participating.rawValue:
-                    $0.statusColorView.backgroundColor = UIColor.greenColor()
+                    $0.statusColorView.backgroundColor = UIColor.green
                 case UserStatus.Refused.rawValue:
-                    $0.statusColorView.backgroundColor = .redColor()
+                    $0.statusColorView.backgroundColor = .red
                 case UserStatus.Owner.rawValue:
-                    $0.statusColorView.backgroundColor = .cyanColor()
+                    $0.statusColorView.backgroundColor = .cyan
                 default: break
                 }
                 $0.statusColorView.round()
@@ -107,20 +107,20 @@ class CalendarDetailsTableViewController: UITableViewController {
         }
         
         let addPerson = LabelRowFormer<FormLabelCell>() {
-            $0.titleLabel.textColor = UIColor.orangeColor()
+            $0.titleLabel.textColor = UIColor.orange
             }.configure {
                 $0.text = "Add participant..."
-                $0.cell.accessoryType = .DisclosureIndicator
-                $0.cell.selectionStyle = .None
+                $0.cell.accessoryType = .disclosureIndicator
+                $0.cell.selectionStyle = .none
                 $0.rowHeight = 44
             }.onSelected { [weak self] _ in
                 let storyboard = UIStoryboard(name: FriendsStoryboardID, bundle: nil)
-                let destVC = storyboard.instantiateViewControllerWithIdentifier("FriendsInviteTableViewController") as! FriendsInviteTableViewController
+                let destVC = storyboard.instantiateViewController(withIdentifier: "FriendsInviteTableViewController") as! FriendsInviteTableViewController
                 destVC.onSelected = { user, done in
                     self?.invite(user, done: done)
                 }
                 let nvc = UINavigationController(rootViewController: destVC)
-                self?.presentViewController(nvc, animated: true, completion: nil)
+                self?.present(nvc, animated: true, completion: nil)
         }
         rows.append(addPerson)
         
@@ -138,16 +138,16 @@ class CalendarDetailsTableViewController: UITableViewController {
         former.append(sectionFormer: sectionHeader, sectionParticipants)
     }
     
-    private func invite(user: User, done: ()->Void) -> Void {
+    fileprivate func invite(_ user: User, done: @escaping ()->Void) -> Void {
         let parameters = ["id": calendar!.calendar!.id!, "user_id": user.id!]
         
-        CalendarManager.sharedInstance.invite(parameters) { (status) in
+        CalendarManager.shared.invite(parameters) { (status) in
             switch status {
-            case .Success:
+            case .success:
                 SpinnerManager.showWhistle("kCalendarSuccess")
                 done()
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.CalendarDidChange.rawValue, object: nil)
-            case .Error(let error):
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+            case .error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)
             }
@@ -202,11 +202,11 @@ class CalendarDetailsTableViewController: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "showEditCalendar" {
-            let destVC = segue.destinationViewController as! CalendarTableViewController
+            let destVC = segue.destination as! CalendarTableViewController
             destVC.calendar = calendar?.calendar
         }
     }

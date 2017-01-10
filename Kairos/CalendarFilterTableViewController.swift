@@ -20,7 +20,7 @@ class CalendarFilterTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.calendars = CalendarManager.sharedInstance.calendars(withStatus: .Participating)
+        self.calendars = CalendarManager.shared.calendars(withStatus: .Participating)
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,34 +30,34 @@ class CalendarFilterTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.calendars.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("calendarCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath)
 
         cell.textLabel?.text = calendars[indexPath.row].calendar!.name
         if calendars[indexPath.row].isSelected! == true {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         } else {
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)!
-        if cell.accessoryType == .Checkmark {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)!
+        if cell.accessoryType == .checkmark {
             calendars[indexPath.row].isSelected = false
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         } else {
             calendars[indexPath.row].isSelected = true
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         }
     }
     
@@ -105,18 +105,18 @@ class CalendarFilterTableViewController: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "editCalendarSegue" {
-            let destVC = segue.destinationViewController as! CalendarTableViewController
+            let destVC = segue.destination as! CalendarTableViewController
             destVC.calendar = nil
         }
     }
     
     // MARK: - Actions
-    @IBAction func done(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func done(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

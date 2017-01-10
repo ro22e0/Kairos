@@ -13,8 +13,8 @@ import CoreData
 class Event: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
-    @NSManaged var dateEnd: NSDate?
-    @NSManaged var dateStart: NSDate?
+    @NSManaged var dateEnd: Date?
+    @NSManaged var dateStart: Date?
     @NSManaged var id: NSNumber?
     @NSManaged var location: String?
     @NSManaged var notes: String?

@@ -24,7 +24,7 @@ class ColorSelectionViewController: UIViewController, UICollectionViewDataSource
         
         // Do any additional setup after loading the view.
         contentView.layer.cornerRadius = 25
-        colors = CalendarManager.sharedInstance.colors
+        colors = CalendarManager.shared.colors
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,7 +36,7 @@ class ColorSelectionViewController: UIViewController, UICollectionViewDataSource
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
@@ -45,16 +45,16 @@ class ColorSelectionViewController: UIViewController, UICollectionViewDataSource
     
     // MARK: UICollectionViewDataSource
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colors.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("colorItem", forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colorItem", for: indexPath)
 
         // Configure the cell
         cell.backgroundColor = DynamicColor(hexString: colors[colorStrings[indexPath.row]]!)
@@ -64,8 +64,8 @@ class ColorSelectionViewController: UIViewController, UICollectionViewDataSource
     }
     
     // MARK: UICollectionViewDelegate
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         onSelected!(colorStrings[indexPath.row])
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }

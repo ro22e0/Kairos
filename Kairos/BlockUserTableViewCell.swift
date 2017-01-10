@@ -17,7 +17,7 @@ class BlockUserTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -27,12 +27,12 @@ class BlockUserTableViewCell: UITableViewCell {
 //        let friend = User.find("id == %@", args: self.tag) as! User
 //        
 //        let parameters = ["blocked_friends": [["user_id": friend.id!]]]
-//        RouterWrapper.sharedInstance.request(.CancelFriend(parameters)) { (response) in
+//        RouterWrapper.shared.request(.CancelFriend(parameters)) { (response) in
 //            switch response.result {
-//            case .Success:
+//            case .success:
 //                friend.status = FriendStatus.Blocked.hashValue
 //                SpinnerManager.showWhistle("kFriendBlocked", success: false)
-//            case .Failure(let error):
+//            case .failure(let error):
 //                SpinnerManager.showWhistle("kFail", success: false)
 //                print(error.localizedDescription)
 //            }

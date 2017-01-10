@@ -16,12 +16,12 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
     
     var calendar: Calendar?
     
-    private var sectionParticipants: SectionFormer!
-    private var rows = [RowFormer]()
-    private var addPerson: RowFormer!
-    private var deleteRow: RowFormer?
+    fileprivate var sectionParticipants: SectionFormer!
+    fileprivate var rows = [RowFormer]()
+    fileprivate var addPerson: RowFormer!
+    fileprivate var deleteRow: RowFormer?
     
-    private var addedUsers = [User: UserStatus]()
+    fileprivate var addedUsers = [User: UserStatus]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +39,8 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         } else {
             self.saveButton.title = "Update"
             deleteRow = LabelRowFormer<FormLabelCell>() {
-                $0.titleLabel.textAlignment = .Center
-                $0.titleLabel.textColor = .redColor()
+                $0.titleLabel.textAlignment = .center
+                $0.titleLabel.textColor = .red
                 }
                 .configure { row in
                     row.text = "Delete calendar"
@@ -65,7 +65,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         
         let nameRow = TextFieldRowFormer<FormTextFieldCell>() {
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.configure {
                 $0.placeholder = "Name"
                 $0.text = calendar?.name
@@ -75,58 +75,58 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         setParticipants()
         
         addPerson = LabelRowFormer<FormLabelCell>() {
-            $0.titleLabel.textColor = .orangeColor()
-            $0.titleLabel.font = .boldSystemFontOfSize(15)
+            $0.titleLabel.textColor = .orange
+            $0.titleLabel.font = .boldSystemFont(ofSize: 15)
             }.configure {
                 $0.text = "Add participant..."
-                $0.cell.accessoryType = .DisclosureIndicator
-                $0.cell.selectionStyle = .None
+                $0.cell.accessoryType = .disclosureIndicator
+                $0.cell.selectionStyle = .none
                 $0.rowHeight = 44
             }.onSelected { [weak self] _ in
                 let storyboard = UIStoryboard(name: FriendsStoryboardID, bundle: nil)
-                let destVC = storyboard.instantiateViewControllerWithIdentifier("FriendsInviteTableViewController") as! FriendsInviteTableViewController
+                let destVC = storyboard.instantiateViewController(withIdentifier: "FriendsInviteTableViewController") as! FriendsInviteTableViewController
                 destVC.onSelected = { user, done in
                     self?.invite(user, done: done)
                 }
                 let nvc = UINavigationController(rootViewController: destVC)
-                self?.presentViewController(nvc, animated: true, completion: nil)
+                self?.present(nvc, animated: true, completion: nil)
         }
         rows.append(addPerson)
         
         let colorRow = LabelRowFormer<LabelColorCell>(instantiateType: .Nib(nibName: "LabelColorCell")){
             $0.titleLabel.textColor = .formerColor()
-            $0.titleLabel.font = .boldSystemFontOfSize(15)
+            $0.titleLabel.font = .boldSystemFont(ofSize: 15)
             $0.colorImageView.round()
             if let color = self.calendar?.color {
-                $0.colorImageView.backgroundColor = DynamicColor(hexString: CalendarManager.sharedInstance.colors[color]!)
+                $0.colorImageView.backgroundColor = DynamicColor(hexString: CalendarManager.shared.colors[color]!)
             }
             }.configure {
                 $0.text = "Change color"
-                $0.cell.accessoryType = .DisclosureIndicator
-                $0.cell.selectionStyle = .None
+                $0.cell.accessoryType = .disclosureIndicator
+                $0.cell.selectionStyle = .none
                 $0.rowHeight = 44
             }.onSelected { [weak self] cell in
                 let storyboard = UIStoryboard(name: CalendarStoryboardID, bundle: nil)
-                let destVC = storyboard.instantiateViewControllerWithIdentifier("ColorSelectionViewController") as! ColorSelectionViewController
+                let destVC = storyboard.instantiateViewController(withIdentifier: "ColorSelectionViewController") as! ColorSelectionViewController
                 destVC.onSelected = { color in
                     self?.calendar?.color = color
                     cell.update() {
-                        $0.cell.colorImageView.backgroundColor = DynamicColor(hexString: CalendarManager.sharedInstance.colors[color]!)
+                        $0.cell.colorImageView.backgroundColor = DynamicColor(hexString: CalendarManager.shared.colors[color]!)
                     }
                 }
-                destVC.modalPresentationStyle = .OverCurrentContext
-                destVC.preferredContentSize = CGSizeMake(self!.view.frame.width, 43)
+                destVC.modalPresentationStyle = .overCurrentContext
+                destVC.preferredContentSize = CGSize(width: self!.view.frame.width, height: 43)
                 let popoverPC = destVC.popoverPresentationController
                 
-                popoverPC?.permittedArrowDirections = .Up
+                popoverPC?.permittedArrowDirections = .up
                 popoverPC?.delegate = self
                 popoverPC?.sourceView = cell.cell
                 popoverPC?.sourceRect = CGRect(x: cell.cell.frame.width / 2, y: cell.cell.frame.height, width: 1, height: 1)
-                self!.presentViewController(destVC, animated: true, completion: nil)
+                self!.present(destVC, animated: true, completion: nil)
         }
         // Create Headers
         
-        let createHeader: (String -> ViewFormer) = { text in
+        let createHeader: ((String) -> ViewFormer) = { text in
             return LabelViewFormer<FormLabelHeaderView>()
                 .configure {
                     $0.viewHeight = 40
@@ -147,19 +147,19 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         }
     }
     
-    private func setParticipants() {
-        let users = CalendarManager.sharedInstance.users(forCalendar: calendar!)
+    fileprivate func setParticipants() {
+        let users = CalendarManager.shared.users(forCalendar: calendar!)
         for user in users {
             let participant = LabelRowFormer<CollaboratorTableViewCell>(instantiateType: .Nib(nibName: "CollaboratorTableViewCell")) {
                 switch user.status! {
                 case UserStatus.Invited.rawValue:
-                    $0.statusColorView.backgroundColor = .orangeColor()
+                    $0.statusColorView.backgroundColor = .orange
                 case UserStatus.Participating.rawValue:
-                    $0.statusColorView.backgroundColor = UIColor.greenColor()
+                    $0.statusColorView.backgroundColor = UIColor.green
                 case UserStatus.Refused.rawValue:
-                    $0.statusColorView.backgroundColor = .redColor()
+                    $0.statusColorView.backgroundColor = .red
                 case UserStatus.Owner.rawValue:
-                    $0.statusColorView.backgroundColor = .cyanColor()
+                    $0.statusColorView.backgroundColor = .cyan
                 default: break
                 }
                 $0.statusColorView.round()
@@ -174,15 +174,15 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         }
     }
     
-    private func invite(user: User, done: ()->Void) -> Void {
+    fileprivate func invite(_ user: User, done: ()->Void) -> Void {
         let isIn = addedUsers.contains { (u, _) -> Bool in
             return user == u
         }
         if !isIn {
             addedUsers[user] = .Invited
-            if !CalendarManager.sharedInstance.userIsIn(calendar!, user: user) {
+            if !CalendarManager.shared.userIsIn(calendar!, user: user) {
                 let participant = LabelRowFormer<CollaboratorTableViewCell>(instantiateType: .Nib(nibName: "CollaboratorTableViewCell")) {
-                    $0.statusColorView.backgroundColor = .orangeColor()
+                    $0.statusColorView.backgroundColor = .orange
                     $0.statusColorView.round()
                     }.configure {
                         $0.text = user.name
@@ -193,7 +193,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
                 }
                 SpinnerManager.showWhistle("kCalendarSuccess")
                 done()
-                former.insertUpdate(rowFormer: participant, above: addPerson, rowAnimation: .Automatic)
+                former.insertUpdate(rowFormer: participant, above: addPerson, rowAnimation: .automatic)
                 former.reload(sectionFormer: sectionParticipants)
             }
         } else {
@@ -240,7 +240,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
@@ -248,58 +248,58 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
     
     // MARK: - Navigation
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
-    private func selectedUser(user: User, cell: LabelRowFormer<CollaboratorTableViewCell>) {
+    fileprivate func selectedUser(_ user: User, cell: LabelRowFormer<CollaboratorTableViewCell>) {
         let storyboard = UIStoryboard(name: CalendarStoryboardID, bundle: nil)
-        let destVC = storyboard.instantiateViewControllerWithIdentifier("UserCalendarActionTableViewController") as! UserCalendarActionTableViewController
+        let destVC = storyboard.instantiateViewController(withIdentifier: "UserCalendarActionTableViewController") as! UserCalendarActionTableViewController
         destVC.user = user
         destVC.calendar = self.calendar
         destVC.remove = { user in
             if self.addedUsers[user] == UserStatus.Invited {
-                self.addedUsers.removeValueForKey(user)
+                self.addedUsers.removeValue(forKey: user)
             } else {
                 self.addedUsers[user] = UserStatus.Removed
             }
             self.former.removeUpdate(rowFormer: cell)
         }
-        destVC.modalPresentationStyle = .Popover
-        destVC.preferredContentSize = CGSizeMake(self.view.frame.width, 43)
+        destVC.modalPresentationStyle = .popover
+        destVC.preferredContentSize = CGSize(width: self.view.frame.width, height: 43)
         let popoverPC = destVC.popoverPresentationController
         
-        popoverPC?.permittedArrowDirections = .Up
+        popoverPC?.permittedArrowDirections = .up
         popoverPC?.delegate = self
         popoverPC?.sourceView = cell.cell
         popoverPC?.sourceRect = CGRect(x: cell.cell.frame.width / 2, y: cell.cell.frame.height, width: 1, height: 1)
-        self.presentViewController(destVC, animated: true, completion: nil)
+        self.present(destVC, animated: true, completion: nil)
     }
     
-    private func delete() {
+    fileprivate func delete() {
         let parameters = ["id": calendar!.id!]
         
-        CalendarManager.sharedInstance.delete(parameters) { (status) in
+        CalendarManager.shared.delete(parameters) { (status) in
             switch status {
-            case .Success:
+            case .success:
                 SpinnerManager.showWhistle("kCalendarSuccess")
                 self.calendar?.delete()
                 UserCalendar.count()
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.CalendarDidChange.rawValue, object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
                 if self.presentingViewController is UITabBarController {
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                 } else {
-                    self.navigationController!.popViewControllerAnimated(true)
+                    self.navigationController!.popViewController(animated: true)
                 }
-            case .Error(let error):
+            case .error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }
     }
     
-    private func create() {
-        var parameters = calendar!.dictionaryWithValuesForKeys(["name"])
+    fileprivate func create() {
+        var parameters = calendar!.dictionaryWithValues(forKeys: ["name"])
         var invited = [Int]()
         var removed = [Int]()
         var owners = [Int]()
@@ -307,11 +307,11 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         addedUsers.forEach { (user, status) in
             switch status {
             case .Invited:
-                invited.append(user.id!.integerValue)
+                invited.append(user.id!.intValue)
             case .Removed:
-                removed.append(user.id!.integerValue)
+                removed.append(user.id!.intValue)
             case .Owner:
-                owners.append(user.id!.integerValue)
+                owners.append(user.id!.intValue)
             default:
                 break
             }
@@ -321,22 +321,22 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         parameters["owners"] = owners
         parameters["color"] = calendar?.color
         
-        CalendarManager.sharedInstance.create(parameters) { (status) in
+        CalendarManager.shared.create(parameters as [String : Any]) { (status) in
             switch status {
-            case .Success:
+            case .success:
                 SpinnerManager.showWhistle("kCalendarSuccess")
                 self.calendar?.save()
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.CalendarDidChange.rawValue, object: nil)
-                self.dismissViewControllerAnimated(true, completion: nil)
-            case .Error(let error):
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+                self.dismiss(animated: true, completion: nil)
+            case .error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }
     }
     
-    private func update() {
-        var parameters = calendar!.dictionaryWithValuesForKeys(["id", "name"])
+    fileprivate func update() {
+        var parameters = calendar!.dictionaryWithValues(forKeys: ["id", "name"])
         var invited = [Int]()
         var removed = [Int]()
         var owners = [Int]()
@@ -344,11 +344,11 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         addedUsers.forEach { (user, status) in
             switch status {
             case .Invited:
-                invited.append(user.id!.integerValue)
+                invited.append(user.id!.intValue)
             case .Removed:
-                removed.append(user.id!.integerValue)
+                removed.append(user.id!.intValue)
             case .Owner:
-                owners.append(user.id!.integerValue)
+                owners.append(user.id!.intValue)
             default:
                 break
             }
@@ -358,26 +358,26 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         parameters["owners"] = owners
         parameters["color"] = calendar?.color
         
-        CalendarManager.sharedInstance.update(parameters) { (status) in
+        CalendarManager.shared.update(parameters as [String : Any]) { (status) in
             switch status {
-            case .Success:
+            case .success:
                 SpinnerManager.showWhistle("kCalendarSuccess")
                 for userId in removed {
                     if let user = User.find("id == %@", args: userId) as? User {
-                        CalendarManager.sharedInstance.deleteUser(user, forCalendar: self.calendar!)
+                        CalendarManager.shared.deleteUser(user, forCalendar: self.calendar!)
                     }
                 }
                 self.calendar?.save()
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.CalendarDidChange.rawValue, object: nil)
-                self.navigationController!.popViewControllerAnimated(true)
-            case .Error(let error):
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+                self.navigationController!.popViewController(animated: true)
+            case .error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }
     }
     
-    @IBAction func done(sender: UIBarButtonItem) {
+    @IBAction func done(_ sender: UIBarButtonItem) {
         let isPresentingInAddEventMode = presentingViewController is UITabBarController
         
         if isPresentingInAddEventMode {
@@ -387,18 +387,18 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         }
     }
     
-    @IBAction func cancel(sender: AnyObject) {
+    @IBAction func cancel(_ sender: Any) {
         let isPresentingInAddEventMode = presentingViewController is UITabBarController
         
         if isPresentingInAddEventMode {
             calendar!.delete()
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         } else {
             let changedValues = calendar!.changedValuesForCurrentEvent()
             for (key, value) in changedValues {
                 calendar!.setValue(value, forKey: key)
             }
-            navigationController!.popViewControllerAnimated(true)
+            navigationController!.popViewController(animated: true)
         }
     }
 }

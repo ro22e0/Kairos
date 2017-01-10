@@ -10,7 +10,7 @@ import UIKit
 
 class CalendarRequestsTableViewController: UITableViewController {
     
-    private let cellID = "cellHeaderCalendar"
+    fileprivate let cellID = "cellHeaderCalendar"
     
     var requestedCalendars = [UserCalendar]()
     var refusedCalendar = [UserCalendar]()
@@ -24,9 +24,9 @@ class CalendarRequestsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.reloadData(_:)), name: Notifications.CalendarDidChange.rawValue, object: nil)
-        self.requestedCalendars = CalendarManager.sharedInstance.calendars(withStatus: .Invited)
-        self.refusedCalendar = CalendarManager.sharedInstance.calendars(withStatus: .Refused)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+        self.requestedCalendars = CalendarManager.shared.calendars(withStatus: .Invited)
+        self.refusedCalendar = CalendarManager.shared.calendars(withStatus: .Refused)
 
         configureView()
     }
@@ -39,11 +39,11 @@ class CalendarRequestsTableViewController: UITableViewController {
     ///  Reload data notification handler
     ///
     ///  - parameter notification: The notification
-    @objc func reloadData(notification: NSNotification) {
-        self.requestedCalendars = CalendarManager.sharedInstance.calendars(withStatus: .Invited)
-        self.refusedCalendar = CalendarManager.sharedInstance.calendars(withStatus: .Refused)
+    @objc func reloadData(_ notification: Notification) {
+        self.requestedCalendars = CalendarManager.shared.calendars(withStatus: .Invited)
+        self.refusedCalendar = CalendarManager.shared.calendars(withStatus: .Refused)
         
-        dispatch_async(dispatch_get_main_queue()) { 
+        DispatchQueue.main.async { 
             self.tableView.reloadData()
         }
     }
@@ -52,48 +52,48 @@ class CalendarRequestsTableViewController: UITableViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 86
-        tableView.registerNib(UINib(nibName: "CalendarHeaderCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: cellID)
+        tableView.register(UINib(nibName: "CalendarHeaderCell", bundle: Bundle.main), forCellReuseIdentifier: cellID)
         tableView.allowsSelection = false
     }
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return requestedCalendars.count
         }
         return refusedCalendar.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! CalendarHeaderCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CalendarHeaderCell
         
         // Configure the cell...
         var calendar: UserCalendar
         
         if indexPath.section == 0 {
             calendar = requestedCalendars[indexPath.row]
-            cell.acceptButton.enabled = true
-            cell.declineButton.enabled = true
+            cell.acceptButton.isEnabled = true
+            cell.declineButton.isEnabled = true
         } else {
             calendar = refusedCalendar[indexPath.row]
-            cell.declineButton.enabled = false
-            cell.acceptButton.enabled = true
+            cell.declineButton.isEnabled = false
+            cell.acceptButton.isEnabled = true
         }
-        let participants = CalendarManager.sharedInstance.users(forCalendar: calendar.calendar!)
+        let participants = CalendarManager.shared.users(forCalendar: calendar.calendar!)
         cell.eventLabel.text = "No events"
         cell.titleLabel.text = calendar.calendar?.name
         cell.participantLabel.text = String(participants.count) + " participants"
-        cell.tag = calendar.calendar!.id!.integerValue
+        cell.tag = calendar.calendar!.id!.intValue
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "REQUESTED"
         }
@@ -139,13 +139,13 @@ class CalendarRequestsTableViewController: UITableViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
      */
     
-    @IBAction func done(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func done(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

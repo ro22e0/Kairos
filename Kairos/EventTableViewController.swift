@@ -11,12 +11,12 @@ import FSCalendar
 import Former
 
 private enum eventCell {
-    case Title
-    case Location
-    case StartDate
-    case EndDate
-    case Calendar
-    case Description
+    case title
+    case location
+    case startDate
+    case endDate
+    case calendar
+    case description
 }
 
 class EventTableViewController: FormViewController {
@@ -43,18 +43,18 @@ class EventTableViewController: FormViewController {
         } else {
             self.saveButton.title = "Save"
             event = Event.create() as? Event
-            event?.dateStart = NSDate()
-            event?.dateEnd = NSDate()
+            event?.dateStart = Date()
+            event?.dateEnd = Date()
         }
         self.configure()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().postNotificationName(kEventWillSaveNotification, object: nil, userInfo:["event": event!])
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kEventWillSaveNotification), object: nil, userInfo:["event": event!])
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,11 +62,11 @@ class EventTableViewController: FormViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.tableView.superview!.endEditing(true)
     }
 
-    private func configure() {
+    fileprivate func configure() {
         title = "Add Event"
         tableView.contentInset.top = 10
         tableView.contentInset.bottom = 30
@@ -76,7 +76,7 @@ class EventTableViewController: FormViewController {
         
         let titleRow = TextFieldRowFormer<FormTextFieldCell>() {
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.configure {
                 $0.placeholder = "Event title"
         }
@@ -84,7 +84,7 @@ class EventTableViewController: FormViewController {
         
         let locationRow = TextFieldRowFormer<FormTextFieldCell>() {
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.configure {
                 $0.placeholder = "Location"
         }
@@ -93,7 +93,7 @@ class EventTableViewController: FormViewController {
         let allDayRow = SwitchRowFormer<FormSwitchCell>() {
             $0.titleLabel.text = "All-day"
             $0.titleLabel.textColor = .formerColor()
-            $0.titleLabel.font = .boldSystemFontOfSize(15)
+            $0.titleLabel.font = .boldSystemFont(ofSize: 15)
             $0.switchButton.onTintColor = .formerSubColor()
         }
         rows.append(allDayRow)
@@ -101,28 +101,28 @@ class EventTableViewController: FormViewController {
         let startRow = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
             $0.titleLabel.text = "Start date"
             $0.titleLabel.textColor = .formerColor()
-            $0.titleLabel.font = .boldSystemFontOfSize(15)
+            $0.titleLabel.font = .boldSystemFont(ofSize: 15)
             $0.displayLabel.textColor = .formerSubColor()
-            $0.displayLabel.font = .systemFontOfSize(15)
+            $0.displayLabel.font = .systemFont(ofSize: 15)
             }.inlineCellSetup {
-                $0.datePicker.datePickerMode = .DateAndTime
+                $0.datePicker.datePickerMode = .dateAndTime
             }.displayTextFromDate(String.mediumDateShortTime)
         rows.append(startRow)
 
         let endRow = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
             $0.titleLabel.text = "End date"
             $0.titleLabel.textColor = .formerColor()
-            $0.titleLabel.font = .boldSystemFontOfSize(15)
+            $0.titleLabel.font = .boldSystemFont(ofSize: 15)
             $0.displayLabel.textColor = .formerSubColor()
-            $0.displayLabel.font = .systemFontOfSize(15)
+            $0.displayLabel.font = .systemFont(ofSize: 15)
             }.inlineCellSetup {
-                $0.datePicker.datePickerMode = .DateAndTime
+                $0.datePicker.datePickerMode = .dateAndTime
             }.displayTextFromDate(String.mediumDateShortTime)
         rows.append(endRow)
         
         let urlRow = TextFieldRowFormer<FormTextFieldCell>() {
             $0.textField.textColor = .formerSubColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.configure {
                 $0.placeholder = "URL"
         }
@@ -130,35 +130,35 @@ class EventTableViewController: FormViewController {
         
         let calendarRow = LabelRowFormer<FormLabelCell>() {
             $0.formTextLabel()?.textColor = .formerColor()
-            $0.formTextLabel()?.font = .boldSystemFontOfSize(15)
+            $0.formTextLabel()?.font = .boldSystemFont(ofSize: 15)
             $0.formSubTextLabel()?.textColor = .formerSubColor()
-            $0.formSubTextLabel()?.font = .systemFontOfSize(15)
+            $0.formSubTextLabel()?.font = .systemFont(ofSize: 15)
             }.configure {
                 $0.text = "Calendar"
-                $0.cell.accessoryType = .DisclosureIndicator
+                $0.cell.accessoryType = .disclosureIndicator
                 $0.subText = "None"
             }.onSelected { _ in
-                self.performSegueWithIdentifier("showEventCalendar", sender: self)
+                self.performSegue(withIdentifier: "showEventCalendar", sender: self)
         }
         rows.append(calendarRow)
         
         let inviteesRow = LabelRowFormer<FormLabelCell>() {
             $0.formTextLabel()?.textColor = .formerColor()
-            $0.formTextLabel()?.font = .boldSystemFontOfSize(15)
+            $0.formTextLabel()?.font = .boldSystemFont(ofSize: 15)
             $0.formSubTextLabel()?.textColor = .formerSubColor()
-            $0.formSubTextLabel()?.font = .systemFontOfSize(15)
+            $0.formSubTextLabel()?.font = .systemFont(ofSize: 15)
             }.configure {
                 $0.text = "Invitees"
-                $0.cell.accessoryType = .DisclosureIndicator
+                $0.cell.accessoryType = .disclosureIndicator
                 $0.subText = "None"
             }.onSelected { _ in
-                self.performSegueWithIdentifier("showEventInvitees", sender: self)
+                self.performSegue(withIdentifier: "showEventInvitees", sender: self)
         }
         rows.append(inviteesRow)
         
         let noteRow = TextViewRowFormer<FormTextViewCell>() {
             $0.textView.textColor = .formerSubColor()
-            $0.textView.font = .systemFontOfSize(15)
+            $0.textView.font = .systemFont(ofSize: 15)
             }.configure {
                 $0.placeholder = "Note"
                 $0.rowHeight = 150
@@ -166,7 +166,7 @@ class EventTableViewController: FormViewController {
         rows.append(noteRow)
         
         endRow.onDateChanged { date in
-            if startRow.date.compare(date) == .OrderedDescending {
+            if startRow.date.compare(date) == .orderedDescending {
                 startRow.update {
                     $0.date = date
                 }
@@ -174,7 +174,7 @@ class EventTableViewController: FormViewController {
             }
         }
         startRow.onDateChanged { date in
-            if endRow.date.compare(date) == .OrderedAscending {
+            if endRow.date.compare(date) == .orderedAscending {
                 endRow.update {
                     $0.date = date
                 }
@@ -189,7 +189,7 @@ class EventTableViewController: FormViewController {
                 )
             }
             startRow.inlineCellUpdate {
-                $0.datePicker.datePickerMode = on ? .Date : .DateAndTime
+                $0.datePicker.datePickerMode = on ? .date : .dateAndTime
             }
             endRow.update {
                 $0.displayTextFromDate(
@@ -197,7 +197,7 @@ class EventTableViewController: FormViewController {
                 )
             }
             endRow.inlineCellUpdate {
-                $0.datePicker.datePickerMode = on ? .Date : .DateAndTime
+                $0.datePicker.datePickerMode = on ? .date : .dateAndTime
             }
         }
         
@@ -227,43 +227,43 @@ class EventTableViewController: FormViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "showEventCalendarVC" {
-            let destVC = segue.destinationViewController as! EventCalendarTableViewController
+            let destVC = segue.destination as! EventCalendarTableViewController
             destVC.event = event
         }
     }
     
-    private func createEvent() {
+    fileprivate func createEvent() {
         
-        let parameters: [String: AnyObject] = [
+        let parameters: [String: Any] = [
             "calendar_id": self.event!.calendar!.id!,
-            "title": self.event!.title!,
-            "description": self.event!.notes!,
-            "location": self.event!.location!,
+            "title": self.event!.title! as Any,
+            "description": self.event!.notes! as Any,
+            "location": self.event!.location! as Any,
             "date_start": FSCalendar().stringFromDate(self.event!.dateStart!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "date_end": FSCalendar().stringFromDate(self.event!.dateEnd!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "users": [[:]]]
         
         print(self.event!.dateStart!)
         print(self.event!.dateEnd!)
-        RouterWrapper.sharedInstance.request(.CreateEvent(parameters)) { (response) in
+        RouterWrapper.shared.request(.createEvent(parameters)) { (response) in
             print(response.response)
             print(response.request)
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
                     SpinnerManager.showWhistle("kEventCreated", success: true)
-                    UserManager.sharedInstance.setCredentials(response.response!)
+                    UserManager.shared.setCredentials(response.response!)
                     break;
                 default:
                     SpinnerManager.showWhistle("kFail", success: false)
                     break;
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 SpinnerManager.showWhistle("kFail", success: false)
                 print(error.localizedDescription)
             }
@@ -271,34 +271,34 @@ class EventTableViewController: FormViewController {
         
     }
     
-    private func updateEvent() {
-        let parameters: [String: AnyObject] = [
+    fileprivate func updateEvent() {
+        let parameters: [String: Any] = [
             "id": self.event!.id!,
             "calendar_id": self.event!.calendar!.id!,
-            "title": self.event!.title!,
-            "description": self.event!.notes!,
-            "location": self.event!.location!,
+            "title": self.event!.title! as Any,
+            "description": self.event!.notes! as Any,
+            "location": self.event!.location! as Any,
             "date_start": FSCalendar().stringFromDate(self.event!.dateStart!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "date_end": FSCalendar().stringFromDate(self.event!.dateEnd!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "users": [[:]]]
         
         print(self.event!.dateStart!)
         print(self.event!.dateEnd!)
-        RouterWrapper.sharedInstance.request(.CreateEvent(parameters)) { (response) in
+        RouterWrapper.shared.request(.createEvent(parameters)) { (response) in
             print(response.response)
             print(response.request)
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
                     SpinnerManager.showWhistle("kEventCreated", success: true)
-                    UserManager.sharedInstance.setCredentials(response.response!)
+                    UserManager.shared.setCredentials(response.response!)
                     break;
                 default:
                     SpinnerManager.showWhistle("kFail", success: false)
                     break;
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 SpinnerManager.showWhistle("kFail", success: false)
                 print(error.localizedDescription)
             }
@@ -306,35 +306,35 @@ class EventTableViewController: FormViewController {
         
     }
     
-    private func checkEventDetails() -> Bool {
+    fileprivate func checkEventDetails() -> Bool {
         var success = event?.title != nil
         success = success && event?.location != nil
         success = success && event?.dateStart != nil
         success = success && event?.dateEnd != nil
         if event?.dateStart != nil && event?.dateEnd != nil {
-            success = success && (event!.dateStart!.compare(event!.dateEnd!) == .OrderedAscending || event!.dateStart!.compare(event!.dateEnd!) == .OrderedSame)
+            success = success && (event!.dateStart!.compare(event!.dateEnd! as Date) == .orderedAscending || event!.dateStart!.compare(event!.dateEnd! as Date) == .orderedSame)
         }
         success = success && event?.notes != nil
         return success
     }
     
-    @IBAction func cancel(sender: UIBarButtonItem) {
-        let isPresentingInAddEventMode = self.parentViewController is UINavigationController
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        let isPresentingInAddEventMode = self.parent is UINavigationController
         
         if isPresentingInAddEventMode {
             event?.delete()
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         } else {
             let changedValues = event!.changedValuesForCurrentEvent()
             for (key, value) in changedValues {
                 event!.setValue(value, forKey: key)
             }
-            navigationController!.popViewControllerAnimated(true)
+            navigationController!.popViewController(animated: true)
         }
     }
     
-    @IBAction func saveEvent(sender: UIBarButtonItem) {
-        NSNotificationCenter.defaultCenter().postNotificationName(kEventWillSaveNotification, object: nil, userInfo:["event": event!])
+    @IBAction func saveEvent(_ sender: UIBarButtonItem) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: kEventWillSaveNotification), object: nil, userInfo:["event": event!])
         
         let isPresentingInAddEventMode = presentingViewController is UINavigationController
         
@@ -342,16 +342,16 @@ class EventTableViewController: FormViewController {
             //            if checkEventDetails() {
             //                createEvent()
             //            }
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
         } else {
             //            if checkEventDetails() {
             //                updateEvent()
             //            }
-            navigationController!.popViewControllerAnimated(true)
+            navigationController!.popViewController(animated: true)
         }
     }
     
-    @IBAction func unwindToEvent(sender: UIStoryboardSegue) {
+    @IBAction func unwindToEvent(_ sender: UIStoryboardSegue) {
         self.tableView.reloadData()
     }
 }

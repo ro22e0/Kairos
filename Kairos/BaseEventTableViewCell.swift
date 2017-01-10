@@ -15,20 +15,20 @@ class BaseEventTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
 
-    func configure(event: Event) {
-        NSNotificationCenter.defaultCenter()
+    func configure(_ event: Event) {
+        NotificationCenter.default
             .addObserver(self, selector: #selector(BaseEventTableViewCell.updateEvent(_:)),
-                         name:kEventWillSaveNotification,
+                         name:NSNotification.Name(rawValue: kEventWillSaveNotification),
                          object: nil)
     }
 
-    @objc func updateEvent(notification: NSNotification) {
+    @objc func updateEvent(_ notification: Notification) {
         let event = notification.userInfo!["event"] as! Event
 
         event.save()

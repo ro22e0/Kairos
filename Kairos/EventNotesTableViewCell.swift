@@ -18,23 +18,23 @@ class EventNotesTableViewCell: BaseEventTableViewCell, UITextViewDelegate {
         
         notesTextView.delegate = self
         notesTextView.text = "Description"
-        notesTextView.textColor = UIColor.lightGrayColor()
+        notesTextView.textColor = UIColor.lightGray
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    override func configure(event: Event) {
+    override func configure(_ event: Event) {
         super.configure(event)
         
-        notesTextView.textColor = UIColor.blackColor()
+        notesTextView.textColor = UIColor.black
         notesTextView.text = event.notes
     }
     
-    override func updateEvent(notification: NSNotification) {
+    override func updateEvent(_ notification: Notification) {
         let event = notification.userInfo!["event"] as! Event
         
         event.notes = notesTextView.text
@@ -44,17 +44,17 @@ class EventNotesTableViewCell: BaseEventTableViewCell, UITextViewDelegate {
 
     // MARK: UITextViewDelegate
 
-    func textViewDidBeginEditing(textView: UITextView) {
-        if textView.textColor == UIColor.lightGrayColor() {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
             textView.text = nil
-            textView.textColor = UIColor.blackColor()
+            textView.textColor = UIColor.black
         }
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "Description"
-            textView.textColor = UIColor.lightGrayColor()
+            textView.textColor = UIColor.lightGray
         }
     }
 }

@@ -14,14 +14,14 @@ import SwiftyJSON
 class UserManager {
     
     // MARK: Singleton
-    static let sharedInstance = UserManager()
-    private init() {}
+    static let shared = UserManager()
+    fileprivate init() {}
     
     var current: Owner {
         return Owner.all().first as! Owner
     }
     
-    private func syncOwner(data: JSON, completionHandler: (CustomStatus) -> Void) {
+    fileprivate func syncOwner(_ data: JSON, completionHandler: @escaping (StatusRequest) -> Void) {
         //        if let owner = Owner.all().first as? Owner {
         //            if owner.id != data["id"].number {
         //                DataSync.deleteAll()
@@ -40,18 +40,18 @@ class UserManager {
             }
         }
         print(data)
-        DataSync.sync(entity: "Owner", predicate: nil, data: [data.dictionaryObject!], completion: { error in
-            let defautls = NSUserDefaults.standardUserDefaults()
+        DataSync.sync(entity: "Owner", predicate: nil, data: [data.dictionaryObject! as Dictionary<String, Any>], completion: { error in
+            let defautls = UserDefaults.standard
             defautls.setValue(true, forKey: userLoginKey)
-            completionHandler(.Success)
+            completionHandler(.success(nil))
         })
     }
     
-    func signIn(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
+    func signIn(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
         Router.needToken = false
-        RouterWrapper.sharedInstance.request(.Authenticate(parameters)) { (response) in
+        RouterWrapper.shared.request(.authenticate(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 self.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
@@ -61,37 +61,37 @@ class UserManager {
                         //                        let defautls = NSUserDefaults.standardUserDefaults()
                         //                        defautls.setValue(true, forKey: userLoginKey)
                         //                        self.setCredentials(response.response!)
-                        //                        completionHandler(.Success)
+                        //                        completionHandler(.success(nil))
                         if let owner = Owner.all().first as? Owner {
                             if owner.id != json["data"]["id"].number {
                                 DataSync.deleteAll()
                             }
                         }
-                        var data: [String: AnyObject] = ["user": json["data"].object]
+                        var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
                         DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
-                            let defautls = NSUserDefaults.standardUserDefaults()
+                            let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
                             try! DataSync.dataStack().mainContext.save()
-                            completionHandler(.Success)
+                            completionHandler(.success(nil))
                         })
                     default:
-                        completionHandler(.Error("Fail to connect"))
+                        completionHandler(.error("Fail to connect"))
                     }
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func signUp(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
+    func signUp(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
         Router.needToken = false
         
-        RouterWrapper.sharedInstance.request(.CreateUser(parameters)) { (response) in
+        RouterWrapper.shared.request(.createUser(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 if let value = response.result.value {
                     let json = JSON(value)
                     switch response.response!.statusCode {
@@ -101,84 +101,84 @@ class UserManager {
                                 DataSync.deleteAll()
                             }
                         }
-                        var data: [String: AnyObject] = ["user": json["data"].object]
+                        var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
                         DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
-                            let defautls = NSUserDefaults.standardUserDefaults()
+                            let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
                             try! DataSync.dataStack().mainContext.save()
-                            completionHandler(.Success)
+                            completionHandler(.success(nil))
                         })
                         
                         //                        DataSync.sync(entity: "Owner", predicate: nil, data: [json["data"].dictionaryObject!], completion: { error in
                         //                            let defautls = NSUserDefaults.standardUserDefaults()
                         //                            defautls.setValue(true, forKey: userLoginKey)
                         //                            self.setCredentials(response.response!)
-                        //                            completionHandler(.Success)
+                        //                            completionHandler(.success(nil))
                     //                            }, all: true)
                     default:
-                        completionHandler(.Error("The operation can't be completed"))
+                        completionHandler(.error("The operation can't be completed"))
                     }
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func signOut(completionHandler: (CustomStatus) -> Void) {
+    func signOut(_ completionHandler: @escaping (StatusRequest) -> Void) {
         Router.needToken = true
-        RouterWrapper.sharedInstance.request(.SignOut) { (response) in
-            let defautls = NSUserDefaults.standardUserDefaults()
+        RouterWrapper.shared.request(.signOut) { (response) in
+            let defautls = UserDefaults.standard
             defautls.setValue(false, forKey: userLoginKey)
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func update(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
+    func update(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
         Router.needToken = true
-        RouterWrapper.sharedInstance.request(.UpdateUser(parameters)) { (response) in
+        RouterWrapper.shared.request(.updateUser(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 if let value = response.result.value {
                     let _ = JSON(value)
                     switch response.response!.statusCode {
                     case 200:
                         self.setCredentials(response.response!)
-                        completionHandler(.Success)
+                        completionHandler(.success(nil))
                     default:
-                        completionHandler(.Error("Fail to connect"))
+                        completionHandler(.error("Fail to connect"))
                     }
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func setCredentials(response: NSHTTPURLResponse) {
-        let defautls = NSUserDefaults.standardUserDefaults()
+    func setCredentials(_ response: HTTPURLResponse) {
+        let defautls = UserDefaults.standard
         defautls.setValue(response.allHeaderFields["access-token"] as? String, forKey: userTokenKey)
         defautls.setValue(response.allHeaderFields["client"] as? String, forKey: userClientKey)
         defautls.setValue(response.allHeaderFields["uid"] as? String, forKey: userUIDKey)
     }
     
     func getCredentials() -> [String: String] {
-        let defautls = NSUserDefaults.standardUserDefaults()
-        let token = defautls.valueForKey(userTokenKey) as? String
-        let client = defautls.valueForKey(userClientKey) as? String
-        let uid = defautls.valueForKey(userUIDKey) as? String
+        let defautls = UserDefaults.standard
+        let token = defautls.value(forKey: userTokenKey) as? String
+        let client = defautls.value(forKey: userClientKey) as? String
+        let uid = defautls.value(forKey: userUIDKey) as? String
         
         return ["access-token": token!, "client": client!, "uid": uid!]
     }
@@ -194,7 +194,7 @@ class UserManager {
         let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@", text, self.current)
         let emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@", text, self.current)
         
-        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
+        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: [namePred, nicknamePred, emailPred])
         
         if let users = User.query(compoundPred) as? [User] {
             return users
@@ -202,14 +202,14 @@ class UserManager {
         return [User]()
     }
     
-    func fetch(handler: (() -> Void)? = nil) {
+    func fetch(_ handler: (() -> Void)? = nil) {
         DataSync.fetchUsers { (status) in
             switch status {
-            case .Success:
+            case .success:
                 if handler != nil {
                     handler!()
                 }
-            case .Error(let error):
+            case .error(let error):
                 print(error)
             }
         }
@@ -229,15 +229,15 @@ class UserManager {
         return events
     }
     
-    func getEvents(forDate date: NSDate) -> [Event] {
+    func getEvents(forDate date: Date) -> [Event] {
         let events = self.getEvents()
         var fEvents = [Event]()
         
         for e in events {
-            let dateStart = FSCalendar().dateByIgnoringTimeComponentsOfDate(e.dateStart!)
-            let dateEnd = FSCalendar().dateByIgnoringTimeComponentsOfDate(e.dateEnd!)
+            let dateStart = FSCalendar().date(byIgnoringTimeComponentsOf: e.dateStart! as Date)
+            let dateEnd = FSCalendar().date(byIgnoringTimeComponentsOf: e.dateEnd! as Date)
             
-            if (dateStart.compare(date) == .OrderedAscending || dateStart.compare(FSCalendar().dateByIgnoringTimeComponentsOfDate(date)) == .OrderedSame) && (dateEnd.compare(date) == .OrderedDescending || dateEnd.compare(FSCalendar().dateByIgnoringTimeComponentsOfDate(date)) == .OrderedSame) {
+            if (dateStart.compare(date) == .orderedAscending || dateStart.compare(FSCalendar().date(byIgnoringTimeComponentsOf: date)) == .orderedSame) && (dateEnd.compare(date) == .orderedDescending || dateEnd.compare(FSCalendar().date(byIgnoringTimeComponentsOf: date)) == .orderedSame) {
                 fEvents.append(e)
             }
         }

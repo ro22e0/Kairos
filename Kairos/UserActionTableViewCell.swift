@@ -21,14 +21,14 @@ class UserActionTableViewCell: UITableViewCell, LabelFormableRow {
         self.done = doneFunc
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    private func doneFunc() {
-        self.viewController()?.dismissViewControllerAnimated(true, completion: nil)
+    fileprivate func doneFunc() {
+        self.viewController()?.dismiss(animated: true, completion: nil)
     }
 
     func formTextLabel() -> UILabel? {
@@ -39,5 +39,5 @@ class UserActionTableViewCell: UITableViewCell, LabelFormableRow {
         return nil
     }
     
-    func updateWithRowFormer(rowFormer: RowFormer) {}
+    func updateWithRowFormer(_ rowFormer: RowFormer) {}
 }

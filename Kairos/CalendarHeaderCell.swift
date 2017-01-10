@@ -21,13 +21,13 @@ class CalendarHeaderCell: UITableViewCell, LabelFormableRow {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.acceptButton.setImage(UIImage(named: "Checkmark"), forState: .Normal)
-        self.acceptButton.setImage(UIImage(named: "Checkmark Filled"), forState: .Disabled)
-        self.declineButton.setImage(UIImage(named: "Delete"), forState: .Normal)
-        self.declineButton.setImage(UIImage(named: "Delete Filled"), forState: .Disabled)
+        self.acceptButton.setImage(UIImage(named: "Checkmark"), for: UIControlState())
+        self.acceptButton.setImage(UIImage(named: "Checkmark Filled"), for: .disabled)
+        self.declineButton.setImage(UIImage(named: "Delete"), for: UIControlState())
+        self.declineButton.setImage(UIImage(named: "Delete Filled"), for: .disabled)
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
@@ -41,38 +41,38 @@ class CalendarHeaderCell: UITableViewCell, LabelFormableRow {
         return nil
     }
 
-    func updateWithRowFormer(rowFormer: RowFormer) {}
+    func updateWithRowFormer(_ rowFormer: RowFormer) {}
 
-    @IBAction func accept(sender: AnyObject) {
+    @IBAction func accept(_ sender: Any) {
         let calendar = Calendar.find("id == %@", args: self.tag) as! Calendar
         let parameters = ["id": calendar.id!]
         
-        CalendarManager.sharedInstance.accept(parameters) { (status) in
+        CalendarManager.shared.accept(parameters) { (status) in
             switch status {
-            case .Success:
-                self.acceptButton.enabled = false
-                self.declineButton.enabled = true
+            case .success:
+                self.acceptButton.isEnabled = false
+                self.declineButton.isEnabled = true
                 SpinnerManager.showWhistle("kCalendarSuccess")
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.CalendarDidChange.rawValue, object: nil)
-            case .Error(let error):
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+            case .error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }
     }
 
-    @IBAction func decline(sender: AnyObject) {
+    @IBAction func decline(_ sender: Any) {
         let calendar = Calendar.find("id == %@", args: self.tag) as! Calendar
         let parameters = ["id": calendar.id!]
         
-        CalendarManager.sharedInstance.refuse(parameters) { (status) in
+        CalendarManager.shared.refuse(parameters) { (status) in
             switch status {
-            case .Success:
-                self.declineButton.enabled = false
-                self.acceptButton.enabled = true
+            case .success:
+                self.declineButton.isEnabled = false
+                self.acceptButton.isEnabled = true
                 SpinnerManager.showWhistle("kCalendarSuccess")
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.CalendarDidChange.rawValue, object: nil)
-            case .Error(let error):
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+            case .error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)
             }

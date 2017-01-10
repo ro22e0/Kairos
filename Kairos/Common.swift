@@ -65,6 +65,11 @@ enum UserStatus: String {
 }
 
 enum CustomStatus {
-    case Success
-    case Error(String)
+    case success
+    case error(String)
+}
+
+enum StatusRequest {
+    case success(Any?)
+    case error(String)
 }

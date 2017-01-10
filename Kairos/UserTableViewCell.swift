@@ -15,24 +15,24 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var mutualFriendsLabel: UILabel!
     
-    var onSelected: ((User, ()->Void) -> Void)?
+    var onSelected: ((User, @escaping ()->Void) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    @IBAction func invite(sender: UIButton) {
+    @IBAction func invite(_ sender: UIButton) {
         let user = User.find("id == %@", args: self.tag) as! User
         self.onSelected!(user) {
-            self.inviteButton.setTitle("Sent", forState: .Normal)
-            self.inviteButton.enabled = false
+            self.inviteButton.setTitle("Sent", for: UIControlState())
+            self.inviteButton.isEnabled = false
         }
     }
     

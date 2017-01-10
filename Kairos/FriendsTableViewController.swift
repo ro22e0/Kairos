@@ -23,7 +23,7 @@ class FriendsTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.friends = FriendManager.sharedInstance.friends()
+        self.friends = FriendManager.shared.friends()
 
         configureView()
 //        self.tableView.reloadData()
@@ -33,18 +33,18 @@ class FriendsTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
-        tableView.registerNib(UINib(nibName: "FriendTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "friendCell")
+        tableView.register(UINib(nibName: "FriendTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "friendCell")
         tableView.allowsSelection = false
     }
     
     // MARK: - Methods
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
@@ -55,25 +55,25 @@ class FriendsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell", forIndexPath: indexPath) as! FriendTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
         
         cell.nameLabel.text = friends[indexPath.row].name
         
         let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [User]
-        if let number = mutualFriends?.count where number > 0 {
-            cell.mutualFriendsLabel.hidden = false
+        if let number = mutualFriends?.count, number > 0 {
+            cell.mutualFriendsLabel.isHidden = false
             cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
         } else {
-            cell.mutualFriendsLabel.hidden = true
+            cell.mutualFriendsLabel.isHidden = true
         }
         cell.tag = Int(friends[indexPath.row].id!)
         
@@ -119,7 +119,7 @@ class FriendsTableViewController: UITableViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
@@ -127,7 +127,7 @@ class FriendsTableViewController: UITableViewController {
 }
 
 extension FriendsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         return NSAttributedString(string: "No friends to show")
     }
 }

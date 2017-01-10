@@ -33,30 +33,30 @@ class EventDetailsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("kEventInfosCell", forIndexPath: indexPath) as! EventInfosTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "kEventInfosCell", for: indexPath) as! EventInfosTableViewCell
             cell.titleLabel.text = event?.title
-            cell.locationTextView.autoresizingMask = [.FlexibleTopMargin, .FlexibleBottomMargin]
+            cell.locationTextView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin]
             cell.locationTextView.text = event?.location
             fillDates(cell)
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier("kEventCalendarCell", forIndexPath: indexPath) as! EventCalendarTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "kEventCalendarCell", for: indexPath) as! EventCalendarTableViewCell
             cell.calendarLabel.text = event?.calendar?.name ?? ""
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCellWithIdentifier("kEventDescriptionCell", forIndexPath: indexPath) as! EventDescriptionTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "kEventDescriptionCell", for: indexPath) as! EventDescriptionTableViewCell
             cell.descriptionLabel.text = event?.notes
             return cell
         default:
@@ -65,19 +65,19 @@ class EventDetailsTableViewController: UITableViewController {
         }
     }
     
-    private func fillDates(cell: EventInfosTableViewCell) {
-        if event!.dateStart!.isEqualToDate(event!.dateEnd!) == true {
+    fileprivate func fillDates(_ cell: EventInfosTableViewCell) {
+        if (event!.dateStart! == event!.dateEnd!) == true {
             print("fidsvsdfgkdflkgdfm")
         } else {
             print("nooooooooooooo")
         }
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .FullStyle
-        dateFormatter.timeStyle = .ShortStyle
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .short
 
         
-        cell.startDateLabel.text = dateFormatter.stringFromDate(event!.dateStart!)
-        cell.endDateLabel.text = dateFormatter.stringFromDate(event!.dateEnd!)
+        cell.startDateLabel.text = dateFormatter.string(from: event!.dateStart! as Date)
+        cell.endDateLabel.text = dateFormatter.string(from: event!.dateEnd! as Date)
     }
     
     /*
@@ -115,27 +115,27 @@ class EventDetailsTableViewController: UITableViewController {
      }
      */
     
-    @IBAction func deleteEvent(sender: UIButton) {
+    @IBAction func deleteEvent(_ sender: UIButton) {
         
-        let parameters: [String: AnyObject] = ["id": self.event!.id!]
+        let parameters: [String: Any] = ["id": self.event!.id!]
         
-        RouterWrapper.sharedInstance.request(.DeleteEvent(parameters)) { (response) in
+        RouterWrapper.shared.request(.deleteEvent(parameters)) { (response) in
             print(response.response)
             print(response.request)
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
                     SpinnerManager.showWhistle("kEventDeleted", success: true)
-                    UserManager.sharedInstance.setCredentials(response.response!)
+                    UserManager.shared.setCredentials(response.response!)
                     self.event?.delete()
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                     break;
                 default:
                     SpinnerManager.showWhistle("kFail", success: false)
                     break;
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 SpinnerManager.showWhistle("kFail", success: false)
                 print(error.localizedDescription)
             }
@@ -146,18 +146,18 @@ class EventDetailsTableViewController: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "ShowEditEventSegue" {
-            let destVC = segue.destinationViewController as! EventTableViewController
+            let destVC = segue.destination as! EventTableViewController
             destVC.event = event
         }
     }
     
-    @IBAction func unwindToEventDetails(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as? EventTableViewController, event = sourceViewController.event {
+    @IBAction func unwindToEventDetails(_ sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? EventTableViewController, let event = sourceViewController.event {
             self.event = event
         }
     }

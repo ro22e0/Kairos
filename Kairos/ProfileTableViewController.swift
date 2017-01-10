@@ -17,7 +17,7 @@ class ProfileTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.user = UserManager.sharedInstance.current
+        self.user = UserManager.shared.current
         self.configure()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,7 +35,7 @@ class ProfileTableViewController: UITableViewController {
     
     func configure() {
         if self.user.user!.image != nil {
-            self.profileImage.image = UIImage(data: self.user.user!.image!)
+            self.profileImage.image = UIImage(data: self.user.user!.image! as Data)
 //            self.profileImage.addBorder(UIColor.whiteColor().CGColor)
         } else {
 //            self.profileImage.backgroundColor = .whiteColor()
@@ -46,17 +46,17 @@ class ProfileTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, cellForRowAt: indexPath)
     }
     
     /*
@@ -98,14 +98,14 @@ class ProfileTableViewController: UITableViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
      */
     
-    @IBAction func signOut(sender: UIButton) {
-        UserManager.sharedInstance.signOut() { (status) in
+    @IBAction func signOut(_ sender: UIButton) {
+        UserManager.shared.signOut() { (status) in
             self.setRootVC(MainStoryboardID)
         }
     }
