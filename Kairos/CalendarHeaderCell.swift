@@ -53,7 +53,7 @@ class CalendarHeaderCell: UITableViewCell, LabelFormableRow {
                 self.acceptButton.isEnabled = false
                 self.declineButton.isEnabled = true
                 SpinnerManager.showWhistle("kCalendarSuccess")
-                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarStatusChange.rawValue), object: nil)
             case .error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)
@@ -71,7 +71,7 @@ class CalendarHeaderCell: UITableViewCell, LabelFormableRow {
                 self.declineButton.isEnabled = false
                 self.acceptButton.isEnabled = true
                 SpinnerManager.showWhistle("kCalendarSuccess")
-                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarStatusChange.rawValue), object: nil)
             case .error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)

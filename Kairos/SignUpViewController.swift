@@ -36,8 +36,9 @@ class SignUpViewController: UIViewController {
         
         self.navigationItem.backBarButtonItem?.title = ""
         
-        self.manager = SessionManager()
-        
+        let configuration = URLSessionConfiguration.default
+        self.manager = SessionManager(configuration: configuration)
+
         GIDSignIn.sharedInstance().uiDelegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(SignUpViewController.handleGoogleSignUp(_:)), name:NSNotification.Name(rawValue: kUSER_GOOGLE_AUTH_NOTIFICATION), object: nil)
@@ -120,7 +121,8 @@ class SignUpViewController: UIViewController {
         self.manager!.startRequestsImmediately = false
         
         let parameters = ["access_token": user.authentication.accessToken]
-        let request = self.manager!.request(.GET, "https://www.googleapis.com/oauth2/v3/userinfo", parameters: parameters).responseJSON { (response) in
+        let request = self.manager?.request("https://www.googleapis.com/oauth2/v3/userinfo", method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: nil)
+            .responseJSON { response in
             switch response.result {
             case .success:
                 if let value = response.result.value {
@@ -144,7 +146,7 @@ class SignUpViewController: UIViewController {
         debugPrint(request)
         
         networkManager(manager, request: request)
-        request.resume()
+        request?.resume()
     }
     
     fileprivate func facebookFetch(_ result: FBSDKLoginManagerLoginResult, completion: @escaping () -> Void) {

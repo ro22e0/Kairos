@@ -15,7 +15,7 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var mutualFriendsLabel: UILabel!
     
-    var onSelected: ((User, @escaping ()->Void) -> Void)?
+    var onSelected: ((User, @escaping (String)->Void) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,8 +30,8 @@ class UserTableViewCell: UITableViewCell {
     
     @IBAction func invite(_ sender: UIButton) {
         let user = User.find("id == %@", args: self.tag) as! User
-        self.onSelected!(user) {
-            self.inviteButton.setTitle("Sent", for: UIControlState())
+        self.onSelected!(user) { text in
+            self.inviteButton.setTitle(text, for: UIControlState())
             self.inviteButton.isEnabled = false
         }
     }

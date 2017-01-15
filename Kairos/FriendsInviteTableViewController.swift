@@ -15,7 +15,7 @@ class FriendsInviteTableViewController: UITableViewController {
     var shouldShowSearchResults = true
     
     var friends = [User]()
-    var onSelected: ((User, @escaping ()->Void) -> Void)?
+    var onSelected: ((User, @escaping (String)->Void) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,15 +27,15 @@ class FriendsInviteTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.done))
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        searchController.isActive = true
-//        dispatch_async(dispatch_get_main_queue(), {
-//            self.searchController.searchBar.becomeFirstResponder()
-//        })
+//        searchController.isActive = true
+        //        dispatch_async(dispatch_get_main_queue(), {
+        //            self.searchController.searchBar.becomeFirstResponder()
+        //        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,7 +45,7 @@ class FriendsInviteTableViewController: UITableViewController {
     
     func configure() {
         self.tableView.tableFooterView = UIView()
-
+        
         let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.view.bounds
@@ -57,10 +57,11 @@ class FriendsInviteTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "userCell")
         tableView.allowsSelection = false
     }
-
+    
     func configureSearchController() {
         // Initialize and perform a minimum configuration to the search controller.
         searchController = UISearchController(searchResultsController: nil)
+        searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search here..."
@@ -92,13 +93,13 @@ class FriendsInviteTableViewController: UITableViewController {
         //        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [User]
         //        if let number = mutualFriends?.count where number > 0 {
         //            cell.mutualFriendsLabel.hidden = false
-        //            cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
+        //            cell.mutualFriendsLabel.text = String(number)  + " mutual friends"
         //        } else {
-                    cell.mutualFriendsLabel.isHidden = true
+        cell.mutualFriendsLabel.isHidden = true
         //        }
         cell.onSelected = { user, done in
-            self.onSelected!(user) {
-                done()
+            self.onSelected!(user) { text in
+                done(text)
             }
         }
         cell.tag = Int(friends[indexPath.row].id!)
@@ -154,9 +155,17 @@ class FriendsInviteTableViewController: UITableViewController {
      }
      */
     
+    func done(_ sender: Any) {
+        shouldShowSearchResults = false
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
-extension FriendsInviteTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension FriendsInviteTableViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+    
+    func didPresentSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.showsCancelButton = false
+    }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         shouldShowSearchResults = true
@@ -164,8 +173,6 @@ extension FriendsInviteTableViewController: UISearchResultsUpdating, UISearchBar
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        shouldShowSearchResults = false
-        self.dismiss(animated: true, completion: nil)
     }
     
     func updateSearchResults(for searchController: UISearchController) {

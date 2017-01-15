@@ -207,7 +207,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         picker.dismiss(animated: true, completion: nil)
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            user.user!.image = UIImageJPEGRepresentation(pickedImage, 1)
+            user.user!.image = UIImageJPEGRepresentation(pickedImage, 1) as NSData?
             let imageRow = self.rows.first as! LabelRowFormer<ProfileImagePickerTableViewCell>
             imageRow.cellUpdate {
                 $0.imageProfileView.image = pickedImage

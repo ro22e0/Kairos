@@ -105,13 +105,13 @@ class AddFriendsTableViewController: UITableViewController {
         let mutualFriends = users[indexPath.row].mutualFriends?.allObjects as? [User]
         if let number = mutualFriends?.count, number > 0 {
             cell.mutualFriendsLabel.isHidden = false
-            cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
+            cell.mutualFriendsLabel.text = String(number) + " mutual friends"
         } else {
             cell.mutualFriendsLabel.isHidden = true
         }
         cell.onSelected = { user, done in
             self.invite(user) {
-                done()
+                done("Invited")
             }
         }
         cell.tag = Int(users[indexPath.row].id!)

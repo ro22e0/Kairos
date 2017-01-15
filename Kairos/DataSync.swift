@@ -21,8 +21,8 @@ struct DataSync {
         return delegate.dataStack
     }
     
-    static func sync(entity entityName: String, predicate: NSPredicate?, data: [[String: Any]], completion: ((NSError?) -> Void), all: Bool = false) {
-        let ops: DATAFilter.Operation = all ? [.All] : [.Insert, .Update]
+    static func sync(entity entityName: String, predicate: NSPredicate?, data: [[String: Any]], completion: @escaping ((NSError?) -> Void), all: Bool = false) {
+        let ops: Sync.OperationOptions = all ? [.All] : [.Insert, .Update]
         if predicate != nil {
             Sync.changes(data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops, completion: completion)
         } else {
@@ -46,8 +46,8 @@ struct DataSync {
         Event.deleteAll()
         Calendar.deleteAll()
         User.deleteAll()
-        UserCalendar.deleteAll()
-        UserEvent.deleteAll()
+        Calendar.deleteAll()
+        Event.deleteAll()
     }
     
     // MARK: - Friends
@@ -82,7 +82,6 @@ struct DataSync {
     //    }
     
     static func fetchFriends(_ completionHandler: @escaping (StatusRequest) -> Void) {
-        Router.needToken = true
         RouterWrapper.shared.request(.getFriends) { (response) in
             print(response.response) // URL response
             switch response.result {
@@ -191,14 +190,13 @@ struct DataSync {
                 user.name = u["name"].stringValue
                 user.nickname = u["nickname"].stringValue
                 user.email = u["email"].stringValue
-                user.image = u["image"].rawValue as? Data
+                user.image = u["image"].rawValue as? NSData
             }
         }
         User.save()
     }
     
     static func fetchUsers(_ completionHandler: @escaping (StatusRequest) -> Void) {
-        Router.needToken = true
         RouterWrapper.shared.request(.getUsers) { (response) in
             print(response.response) // URL response
             switch response.result {
@@ -220,7 +218,7 @@ struct DataSync {
                             try! self.dataStack().mainContext.save()
                             completionHandler(StatusRequest.success(nil))
                         })
-
+                        
                         //                        let pred = NSPredicate(format: "id != %@", UserManager.shared.current.id!)
                         //                        self.sync(entity: "User", predicate: nil, data: data, completion: { error in
                         //                            completionHandler(StatusRequest.success(nil))
@@ -268,54 +266,70 @@ struct DataSync {
     }
     
     fileprivate static func syncUserCalendar(_ calendar: Calendar, users: [JSON]) {
-        for u in users {
-            guard let user = User.find("id == %@", args: u["id"].number!) as? User else {
-                return
-            }
-            if let uCalendar = UserCalendar.findOrCreate(["userId": user.id!, "calendarId": calendar.id!]) as? UserCalendar {
-                uCalendar.status = u["status"].string!
-                uCalendar.isOwner = (u["status"].stringValue == UserStatus.Owner.rawValue)
-                uCalendar.calendar = calendar
-                uCalendar.user = user
-                uCalendar.isSelected = true
-            }
-        }
+        //        for u in users {
+        //            guard let user = User.find("id == %@", args: u["id"].number!) as? User else {
+        //                return
+        //            }
+        //            if let uCalendar = Calendar.findOrCreate(["userId": user.id!, "calendarId": calendar.id!]) as? Calendar {
+        //                uCalendar.status = u["status"].string!
+        ////                uCalendar.isOwner = (u["status"].stringValue == UserStatus.Owner.rawValue)
+        //                uCalendar.calendar = calendar
+        //                uCalendar.user = user
+        //                uCalendar.isSelected = true
+        //            }
+        //        }
     }
     
-    static func syncCalendars(_ calendars: [JSON]) {
-        print(calendars)
-        for c in calendars {
-            print("YEAH : ", c["name"])
-            let calendar = Calendar.findOrCreate(["id": c["id"].object]) as! Calendar
-            calendar.name = c["name"].stringValue
-            calendar.color = c["color"].string
-            
-            var users = c["owners"].array! + c["participating_users"].array!
-            users += c["refused_users"].array! + c["invited_users"].array!
-            syncUserCalendar(calendar, users: users)
-            
-            print(calendar.id)
-            print(calendar.name)
-        }
-        Calendar.save()
+    static func syncCalendars(_ json: JSON, completionHandler: @escaping ()->()) {
+        //        print(calendars)
+        //        for c in calendars {
+        //            print("YEAH : ", c["name"])
+        //            let calendar = Calendar.findOrCreate(["id": c["id"].object]) as! Calendar
+        //            calendar.name = c["name"].stringValue
+        //            calendar.color = c["color"].string
+        //
+        //            var users = c["owners"].array! + c["participating_users"].array!
+        //            users += c["refused_users"].array! + c["invited_users"].array!
+        //            syncUserCalendar(calendar, users: users)
+        //
+        //            print(calendar.id)
+        //            print(calendar.name)
+        //        }
+        //        Calendar.save()
+        let data = json.dictionaryObject
+        DataSync.sync(entity: "Calendar", predicate: nil, data: [data!], completion: { error in
+  //          try! self.dataStack().mainContext.save()
+            let c = Calendar.all().first as! Calendar
+            print(c)
+            print(NSDate(), "done")
+            completionHandler()
+        })
     }
     
     static func fetchCalendars(_ completionHandler: @escaping (StatusRequest) -> Void) {
-        Router.needToken = true
-        
         RouterWrapper.shared.request(.getCalendars) { (response) in
             print(response.response) // URL response
             switch response.result {
             case .success:
                 UserManager.shared.setCredentials(response.response!)
                 if let value = response.result.value {
-                    let json = JSON(value).array!
+                    let json = JSON(value)
                     
                     print(json)
+                    
+                    let data = DataSync.transformJson(json)
+                    DataSync.sync(entity: "Calendar", predicate: nil, data: data, completion: { error in
+                        try! self.dataStack().mainContext.save()
+                        let c = Calendar.all().first as! Calendar
+                        print(c)
+                        print(NSDate(), "done")
+                        completionHandler(.success(nil))
+                    })
+                    
                     //                    deleteObject(json.array!, query: Calendar.query)
                     
-                    self.syncCalendars(json)
-                    completionHandler(.success(nil))
+                    //                    self.syncCalendars(json)
+                    //                    completionHandler(.success(nil))
                     
                     //                    let completion: ((NSError?) -> Void) = { error in
                     //                        print(NSDate(), "done")
@@ -342,8 +356,6 @@ struct DataSync {
     }
     
     static func fetchCalendarColors() {
-        Router.needToken = true
-        
         RouterWrapper.shared.request(.getCalendarColors) { (response) in
             print(response.response) // URL response
             switch response.result {
@@ -388,8 +400,8 @@ struct DataSync {
             let event = Event.findOrCreate(["id": e["id"].stringValue]) as! Event
             
             event.title = e["title"].stringValue
-            event.dateStart = dateStart
-            event.dateEnd = dateEnd
+            event.dateStart = dateStart as NSDate?
+            event.dateEnd = dateEnd as NSDate?
             event.location = e["location"].stringValue
             event.notes = e["description"].stringValue
             print(Calendar.all().first)
@@ -398,8 +410,6 @@ struct DataSync {
     }
     
     static func fetchEvents() {
-        Router.needToken = true
-        
         RouterWrapper.shared.request(.getEvents) { (response) in
             print(response.response) // URL response
             switch response.result {

@@ -31,8 +31,8 @@ class CalendarViewController: UIViewController {
         // Fetch update
         DataSync.fetchUsers { (status) in
             FriendManager.shared.fetch()
-//            CalendarManager.shared.fetch()
-//            DataSync.fetchCalendarColors()
+            CalendarManager.shared.fetch()
+            DataSync.fetchCalendarColors()
 //            DataSync.fetchEvents()
         }
     

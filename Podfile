@@ -18,8 +18,7 @@ target 'Kairos' do
   pod 'Former'
   pod 'DZNEmptyDataSet'
   pod 'DynamicColor'
-  
-  pod 'SwiftRecord', :git => 'https://github.com/arkverse/SwiftRecord.git'
+  pod 'SwiftRecord'
   
   # pod 'DatePickerCell'
   # pod 'UITextField+Shake', '~> 1.1'

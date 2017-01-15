@@ -38,6 +38,7 @@ let kCalendarWillSaveNotification = "CalendarWillSave"
 
 enum Notifications: String {
     case CalendarDidChange
+    case CalendarStatusChange
 }
 
 let userLoginKey = "userLoginKey"

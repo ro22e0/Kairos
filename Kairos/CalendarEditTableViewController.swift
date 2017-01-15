@@ -10,9 +10,9 @@ import UIKit
 import DZNEmptyDataSet
 
 class CalendarEditTableViewController: UITableViewController {
-    
-    var calendars = [UserCalendar]()
-    
+
+    var calendars = [Calendar]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,14 +21,18 @@ class CalendarEditTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
         self.calendars = CalendarManager.shared.calendars(withStatus: .Participating)
         print(calendars.count)
         self.title = "Calendars"
         self.tableView.tableFooterView = UIView()
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 44
+        self.tableView.estimatedRowHeight = 52
         self.tableView.register(UINib(nibName: "CalendarTableViewCell", bundle: nil), forCellReuseIdentifier: "calendarCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.calendars = CalendarManager.shared.calendars(withStatus: .Participating)
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,11 +62,10 @@ class CalendarEditTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath) as! CalendarTableViewCell
         
         // Configure the cell...
-        if let calendar = calendars[indexPath.row].calendar {
+        let calendar = calendars[indexPath.row]
             cell.nameLabel.text = calendar.name
-            let participants = CalendarManager.shared.users(forCalendar: calendar)
+            let participants = CalendarManager.shared.allUsers(forCalendar: calendar)
             cell.participantsLabel.text = String(participants.count) + " participants"
-        }
         
         return cell
     }

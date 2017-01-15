@@ -12,8 +12,8 @@ class CalendarRequestsTableViewController: UITableViewController {
     
     fileprivate let cellID = "cellHeaderCalendar"
     
-    var requestedCalendars = [UserCalendar]()
-    var refusedCalendar = [UserCalendar]()
+    var requestedCalendars = [Calendar]()
+    var refusedCalendar = [Calendar]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class CalendarRequestsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.CalendarStatusChange.rawValue), object: nil)
         self.requestedCalendars = CalendarManager.shared.calendars(withStatus: .Invited)
         self.refusedCalendar = CalendarManager.shared.calendars(withStatus: .Refused)
 
@@ -73,7 +73,7 @@ class CalendarRequestsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CalendarHeaderCell
         
         // Configure the cell...
-        var calendar: UserCalendar
+        var calendar: Calendar
         
         if indexPath.section == 0 {
             calendar = requestedCalendars[indexPath.row]
@@ -84,11 +84,11 @@ class CalendarRequestsTableViewController: UITableViewController {
             cell.declineButton.isEnabled = false
             cell.acceptButton.isEnabled = true
         }
-        let participants = CalendarManager.shared.users(forCalendar: calendar.calendar!)
+        let participants = CalendarManager.shared.allUsers(forCalendar: calendar)
         cell.eventLabel.text = "No events"
-        cell.titleLabel.text = calendar.calendar?.name
+        cell.titleLabel.text = calendar.name
         cell.participantLabel.text = String(participants.count) + " participants"
-        cell.tag = calendar.calendar!.id!.intValue
+        cell.tag = calendar.id!.intValue
         
         return cell
     }

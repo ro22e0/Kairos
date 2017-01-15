@@ -28,14 +28,21 @@ public enum Router: URLRequestConvertible {
      
      - returns: A `String` baseURL.
      */
-    static let baseURLString = "http://kairos-api-ro22e0.c9users.io/api/v1"
+    static let baseURLString = "https://kairos-api-ro22e0.c9users.io/api/v1"
     
     /**
      Determine if the request need credentials in headers.
      
      - returns: A boolean `true` or `false`.
      */
-    static var needToken: Bool = true
+    var needToken: Bool {
+        switch self {
+        case .authenticate, .createUser:
+            return false
+        default:
+            return true
+        }
+    }
     
     case signOut
     
@@ -190,10 +197,10 @@ public enum Router: URLRequestConvertible {
         let url = try Router.baseURLString.asURL()
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
+
+        print(needToken)
         
-        print(Router.needToken)
-        
-        if Router.needToken {
+        if needToken {
             let credentials = UserManager.shared.getCredentials()
             urlRequest.setValue(credentials["access-token"], forHTTPHeaderField: "access-token")
             urlRequest.setValue(credentials["client"], forHTTPHeaderField: "client")

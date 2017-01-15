@@ -10,7 +10,7 @@ import UIKit
 
 class CalendarFilterTableViewController: UITableViewController {
     
-    var calendars = [UserCalendar]()
+    var calendars = [Calendar]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,28 +38,28 @@ class CalendarFilterTableViewController: UITableViewController {
         return self.calendars.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath)
-
-        cell.textLabel?.text = calendars[indexPath.row].calendar!.name
-        if calendars[indexPath.row].isSelected! == true {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)!
-        if cell.accessoryType == .checkmark {
-            calendars[indexPath.row].isSelected = false
-            cell.accessoryType = .none
-        } else {
-            calendars[indexPath.row].isSelected = true
-            cell.accessoryType = .checkmark
-        }
-    }
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath)
+//
+//        cell.textLabel?.text = calendars[indexPath.row].name
+//        if calendars[indexPath.row].isSelected! == true {
+//            cell.accessoryType = .checkmark
+//        } else {
+//            cell.accessoryType = .none
+//        }
+//        return cell
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cell = tableView.cellForRow(at: indexPath)!
+//        if cell.accessoryType == .checkmark {
+//            calendars[indexPath.row].isSelected = false
+//            cell.accessoryType = .none
+//        } else {
+//            calendars[indexPath.row].isSelected = true
+//            cell.accessoryType = .checkmark
+//        }
+//    }
     
 //    // Override to support conditional editing of the table view.
 //    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

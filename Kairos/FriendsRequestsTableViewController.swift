@@ -76,7 +76,7 @@ class FriendsRequestsTableViewController: UITableViewController {
             let mutualFriends = requestedFriends[indexPath.row].mutualFriends?.allObjects as? [User]
             if let number = mutualFriends?.count, number > 0 {
                 cell.mutualFriendsLabel.isHidden = false
-                cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
+                cell.mutualFriendsLabel.text = String(number)  + " mutual friends"
             } else {
                 cell.mutualFriendsLabel.isHidden = true
             }

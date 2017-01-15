@@ -194,13 +194,16 @@ class CompleteProfileViewController: FormViewController {
 }
 
 extension CompleteProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : Any]?) {
-        picker.dismiss(animated: true, completion: nil)
-        user.user!.image = UIImageJPEGRepresentation(image, 1)
-        let imageRow = self.rows.first as! LabelRowFormer<ProfileImagePickerTableViewCell>
-        imageRow.cellUpdate {
-            $0.imageProfileView.image = image
-            $0.imageProfileView.round()
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            picker.dismiss(animated: true, completion: nil)
+            user.user!.image = UIImageJPEGRepresentation(image, 1) as NSData?
+            let imageRow = self.rows.first as! LabelRowFormer<ProfileImagePickerTableViewCell>
+            imageRow.cellUpdate {
+                $0.imageProfileView.image = image
+                $0.imageProfileView.round()
+            }
         }
     }
 }

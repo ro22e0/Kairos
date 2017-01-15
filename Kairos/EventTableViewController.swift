@@ -43,8 +43,8 @@ class EventTableViewController: FormViewController {
         } else {
             self.saveButton.title = "Save"
             event = Event.create() as? Event
-            event?.dateStart = Date()
-            event?.dateEnd = Date()
+            event?.dateStart = NSDate()
+            event?.dateEnd = NSDate()
         }
         self.configure()
     }
@@ -243,8 +243,8 @@ class EventTableViewController: FormViewController {
             "title": self.event!.title! as Any,
             "description": self.event!.notes! as Any,
             "location": self.event!.location! as Any,
-            "date_start": FSCalendar().stringFromDate(self.event!.dateStart!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
-            "date_end": FSCalendar().stringFromDate(self.event!.dateEnd!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_start": FSCalendar().string(from: self.event!.dateStart! as Date, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_end": FSCalendar().string(from: self.event!.dateEnd! as Date, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "users": [[:]]]
         
         print(self.event!.dateStart!)
@@ -278,8 +278,8 @@ class EventTableViewController: FormViewController {
             "title": self.event!.title! as Any,
             "description": self.event!.notes! as Any,
             "location": self.event!.location! as Any,
-            "date_start": FSCalendar().stringFromDate(self.event!.dateStart!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
-            "date_end": FSCalendar().stringFromDate(self.event!.dateEnd!, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_start": FSCalendar().string(from: self.event!.dateStart! as Date, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
+            "date_end": FSCalendar().string(from: self.event!.dateEnd! as Date, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
             "users": [[:]]]
         
         print(self.event!.dateStart!)

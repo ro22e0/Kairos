@@ -48,7 +48,6 @@ class UserManager {
     }
     
     func signIn(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
-        Router.needToken = false
         RouterWrapper.shared.request(.authenticate(parameters)) { (response) in
             switch response.result {
             case .success:
@@ -87,8 +86,6 @@ class UserManager {
     }
     
     func signUp(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
-        Router.needToken = false
-        
         RouterWrapper.shared.request(.createUser(parameters)) { (response) in
             switch response.result {
             case .success:
@@ -128,7 +125,6 @@ class UserManager {
     }
     
     func signOut(_ completionHandler: @escaping (StatusRequest) -> Void) {
-        Router.needToken = true
         RouterWrapper.shared.request(.signOut) { (response) in
             let defautls = UserDefaults.standard
             defautls.setValue(false, forKey: userLoginKey)
@@ -147,7 +143,6 @@ class UserManager {
     }
     
     func update(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
-        Router.needToken = true
         RouterWrapper.shared.request(.updateUser(parameters)) { (response) in
             switch response.result {
             case .success:
