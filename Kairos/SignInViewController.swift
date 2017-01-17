@@ -16,54 +16,52 @@ class SignInViewController: UIViewController {
     // MARK: - UI Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
+
     // MARK: - Class Properties
-    var manager: Manager?
-    
+    var manager: SessionManager?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        emailTextField.text = "rona@mail.com"
-        passwordTextField.text = "qwerty123"
-        
+            emailTextField.text = "bernolt@mail.com"
+            passwordTextField.text = "qwerty123"
         self.navigationItem.backBarButtonItem?.title = ""
-        
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        self.manager = Alamofire.Manager(configuration: configuration)
+
+        let configuration = URLSessionConfiguration.default
+        self.manager = SessionManager(configuration: configuration)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Actions
-    @IBAction func SignIn(sender: UIButton) {
+    @IBAction func SignIn(_ sender: UIButton) {
         SignInRequest()
     }
-
+    
     // MARK: - Methods
-    private func SignInRequest() {
+    fileprivate func SignInRequest() {
         let parameters = ["email": emailTextField.text!, "password": passwordTextField.text!]
-
-        UserManager.sharedInstance.signIn(parameters) { (status) in
+        
+        UserManager.shared.signIn(parameters as [String : Any]) { (status) in
             switch status {
-            case .Success:
+            case .success:
                 self.setRootVC(BoardStoryboardID)
-            case .Error: break
+            case .error: break
             }
         }
     }
-
-    func networkManager(manager: NetworkReachabilityManager, request: Request) {
+    
+    func networkManager(_ manager: NetworkReachabilityManager, request: Request) {
         manager.listener = { (status) in
             print("Network Status Changed: \(status)")
             switch status {
-            case .Reachable(.WWAN):
+            case .reachable(.wwan):
                 break
-            case .Reachable(.EthernetOrWiFi):
+            case .reachable(.ethernetOrWiFi):
                 break
-            case .NotReachable:
+            case .notReachable:
                 manager.startListening()
             default:
                 break
@@ -75,7 +73,7 @@ class SignInViewController: UIViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }

@@ -24,16 +24,16 @@ class DefinePasswordViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         contentView.layer.cornerRadius = 20
-        closeButton.layer.cornerRadius = 15
+        closeButton.round()
         
         addBlurEffect()
     }
     
     func addBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .Dark)
+        let blurEffect = UIBlurEffect(style: .dark)
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = view.bounds
-        blurView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
         self.view.addSubview(blurView)
         
         self.view.addSubview(contentView)
@@ -46,30 +46,30 @@ class DefinePasswordViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func cancel(sender: UIButton) {
-        let alertController = UIAlertController(title: nil, message: "This will cancel the sign up process, are you sure ?", preferredStyle: .ActionSheet)
+    @IBAction func cancel(_ sender: UIButton) {
+        let alertController = UIAlertController(title: nil, message: "This will cancel the sign up process, are you sure ?", preferredStyle: .actionSheet)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Destructive) { (action) in
-            self.dismissViewControllerAnimated(true, completion: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
+            self.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(cancelAction)
         
-        let okAction = UIAlertAction(title: "Continue", style: .Default, handler: nil)
+        let okAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
         alertController.addAction(okAction)
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func done(sender: UIButton) {
+    @IBAction func done(_ sender: UIButton) {
         password = passwordTextField.text
-        performSegueWithIdentifier("unwindToSignUpSegue", sender: self)
+        performSegue(withIdentifier: "unwindToSignUpSegue", sender: self)
     }
     
     /*
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
     }

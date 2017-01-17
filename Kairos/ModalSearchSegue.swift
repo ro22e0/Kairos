@@ -10,17 +10,17 @@ import UIKit
 
 class ModalSearchSegue: UIStoryboardSegue {
     override func perform() {
-        let src = self.sourceViewController as UIViewController
-        let dst = self.destinationViewController as UIViewController
+        let src = self.source as UIViewController
+        let dst = self.destination as UIViewController
         
         src.view.superview?.insertSubview(dst.view, aboveSubview: src.view)
-        dst.view.transform = CGAffineTransformMakeTranslation(0, -src.view.frame.size.height)
+        dst.view.transform = CGAffineTransform(translationX: 0, y: -src.view.frame.size.height)
         
-        UIView.animateWithDuration(0.3, animations: {
-            dst.view.transform = CGAffineTransformMakeTranslation(0, 0)
+        UIView.animate(withDuration: 0.3, animations: {
+            dst.view.transform = CGAffineTransform(translationX: 0, y: 0)
             
-        }) { (Finished) in
-            src.presentViewController(dst, animated: false, completion: nil)
-        }
+        }, completion: { (Finished) in
+            src.present(dst, animated: false, completion: nil)
+        }) 
     }
 }

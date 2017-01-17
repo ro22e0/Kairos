@@ -27,11 +27,11 @@ class AccountSecurityTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
 
@@ -84,13 +84,13 @@ class AccountSecurityTableViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     */
 
-    @IBAction func deleteAccount(sender: UIButton) {
+    @IBAction func deleteAccount(_ sender: UIButton) {
         
     }
 }

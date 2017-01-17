@@ -15,21 +15,21 @@ class BaseCalendarTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func configure(calendar: Calendar) {
-        NSNotificationCenter.defaultCenter()
+    func configure(_ calendar: Calendar) {
+        NotificationCenter.default
             .addObserver(self, selector:
                 #selector(BaseCalendarTableViewCell.updateCalendar(_:)),
-                         name:kCalendarWillSaveNotification,
+                         name:NSNotification.Name(rawValue: kCalendarWillSaveNotification),
                          object: nil)
     }
     
-    @objc func updateCalendar(notification: NSNotification) {
+    @objc func updateCalendar(_ notification: Notification) {
         let calendar = notification.userInfo!["calendar"] as! Calendar
 
         calendar.save()

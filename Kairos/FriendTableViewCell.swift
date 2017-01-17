@@ -19,32 +19,32 @@ class FriendTableViewCell: UITableViewCell, UIPopoverPresentationControllerDeleg
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    @IBAction func actions(sender: UIButton) {
-        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+    @IBAction func actions(_ sender: UIButton) {
+        let friend = User.find("id == %@", args: self.tag) as! User
 
         let storyboard = UIStoryboard(name: FriendsStoryboardID, bundle: nil)
-        let destVC = storyboard.instantiateViewControllerWithIdentifier("FriendActionPopoverTableViewController") as! FriendActionPopoverTableViewController
+        let destVC = storyboard.instantiateViewController(withIdentifier: "FriendActionPopoverTableViewController") as! FriendActionPopoverTableViewController
         destVC.friend = friend
 
-        destVC.modalPresentationStyle = .Popover
-        destVC.preferredContentSize = CGSizeMake(self.window!.frame.width, 43)
-        
+        destVC.modalPresentationStyle = .popover
+        destVC.preferredContentSize = CGSize(width: self.window!.frame.width, height: 43)
+
         let popoverPC = destVC.popoverPresentationController
         popoverPC?.sourceView = sender
-        popoverPC?.permittedArrowDirections = .Up
+        popoverPC?.permittedArrowDirections = .up
         popoverPC?.delegate = self
         popoverPC?.sourceRect = CGRect(x: sender.frame.width / 2, y: sender.frame.height, width: 1, height: 1)
 
-        self.viewController()?.presentViewController(destVC, animated: true, completion: nil)
+        self.viewController()?.present(destVC, animated: true, completion: nil)
     }
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }

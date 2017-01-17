@@ -26,13 +26,13 @@ class ChangePasswordViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     */
 
-    @IBAction func cancel(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func cancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

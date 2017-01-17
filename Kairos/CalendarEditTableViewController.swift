@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class CalendarEditTableViewController: UITableViewController {
-    
-    var calendars = [UserCalendar]()
-    
+
+    var calendars = [Calendar]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,44 +21,63 @@ class CalendarEditTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        self.calendars = CalendarManager.sharedInstance.all()
-        
+        self.calendars = CalendarManager.shared.calendars(withStatus: .Participating)
+        print(calendars.count)
         self.title = "Calendars"
+        self.tableView.tableFooterView = UIView()
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 44
-        self.tableView.registerNib(UINib(nibName: "CalendarTableViewCell", bundle: nil), forCellReuseIdentifier: "calendarCell")
+        self.tableView.estimatedRowHeight = 52
+        self.tableView.register(UINib(nibName: "CalendarTableViewCell", bundle: nil), forCellReuseIdentifier: "calendarCell")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.calendars = CalendarManager.shared.calendars(withStatus: .Participating)
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    ///  Reload data notification handler
+    ///
+    ///  - parameter notification: The notification
+    @objc func reloadData(_ notification: Notification) {
+        self.calendars = CalendarManager.shared.calendars(withStatus: .Participating)
+        self.tableView.reloadData()
+    }
+
     // MARK: - Table view data source
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.calendars.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("calendarCell", forIndexPath: indexPath) as! CalendarTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "calendarCell", for: indexPath) as! CalendarTableViewCell
         
         // Configure the cell...
-        cell.nameLabel.text = calendars[indexPath.row].calendar!.name
-        let participants = calendars[indexPath.row].calendar!.calendarUsers
-        cell.participantsLabel.text = String(participants!.allObjects.count) + " participants"
+        let calendar = calendars[indexPath.row]
+            cell.nameLabel.text = calendar.name
+            let participants = CalendarManager.shared.allUsers(forCalendar: calendar)
+            cell.participantsLabel.text = String(participants.count) + " participants"
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = self.tableView.cellForRow(at: indexPath)
         
-        self.performSegueWithIdentifier("showCalendarDetails", sender: cell)
+        self.performSegue(withIdentifier: "showCalendarDetails", sender: cell)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 52
     }
     
     /*
@@ -98,19 +118,25 @@ class CalendarEditTableViewController: UITableViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         if segue.identifier == "showCalendarDetails" {
-            let indexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
-            let destVC = segue.destinationViewController as! CalendarDetailsTableViewController
+            let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)!
+            let destVC = segue.destination as! CalendarDetailsTableViewController
             destVC.calendar = calendars[indexPath.row]
         }
         // Pass the selected object to the new view controller.
     }
     
-    @IBAction func done(sender: AnyObject) {
+    @IBAction func done(_ sender: Any) {
         //        self.navigationController?.popViewControllerAnimated(true)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
+}
+
+extension CalendarEditTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No calendars to show")
+    }
 }

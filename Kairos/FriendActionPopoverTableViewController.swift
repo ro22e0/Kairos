@@ -11,9 +11,9 @@ import Former
 
 class FriendActionPopoverTableViewController: UITableViewController {
     
-    var friend: Friend?
+    var friend: User?
     
-    private lazy var former: Former = Former(tableView: self.tableView)
+    fileprivate lazy var former: Former = Former(tableView: self.tableView)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,29 +33,28 @@ class FriendActionPopoverTableViewController: UITableViewController {
     
     override var preferredContentSize: CGSize {
         get {
-            let height = self.tableView.rectForSection(0).height - 1
+            let height = self.tableView.rect(forSection: 0).height - 1
             return CGSize(width: super.preferredContentSize.width, height: height)
         }
         set { super.preferredContentSize = newValue }
     }
     
-    private func configure() {
-        
+    fileprivate func configure() {
         //        title = "Complete your profile"
         tableView.tableFooterView = UIView()
-        tableView.backgroundView?.backgroundColor = .whiteColor()
+        tableView.backgroundView?.backgroundColor = .white
         // Create RowFomers
-        
-        let remove = LabelRowFormer<UnfriendTableViewCell>(instantiateType: .Nib(nibName: "UnfriendTableViewCell")) {
+
+        let remove = LabelRowFormer<UserActionTableViewCell>(instantiateType: .Nib(nibName: "UserActionTableViewCell")) {
             $0.titleLabel.textColor = .formerColor()
-            $0.titleLabel.font = .boldSystemFontOfSize(15)
+            $0.titleLabel.font = .boldSystemFont(ofSize: 15)
             }.configure {
                 $0.text = "Unfriend" + " " + self.friend!.name!
                 $0.rowHeight = 44
             }.onSelected {_ in
                 self.removeFriend()
         }
-
+        
         let section = SectionFormer(rowFormer: remove).set(headerViewFormer: nil)
         former.append(sectionFormer: section)
     }
@@ -64,21 +63,21 @@ class FriendActionPopoverTableViewController: UITableViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
      */
     
-    private func removeFriend() {
+    fileprivate func removeFriend() {
         let user = User.find("id == %@", args: friend!.id!) as! User
         let parameters = ["user_id": user.id!]
-
-        FriendManager.sharedInstance.remove(parameters) { (status) in
+        
+        FriendManager.shared.remove(parameters) { (status) in
             switch status {
-            case .Success:
+            case .success:
                 SpinnerManager.showWhistle("kFriendSuccess")
-            case .Error(let error):
+            case .error(let error):
                 SpinnerManager.showWhistle("kFriendError", success: false)
                 print(error)
             }

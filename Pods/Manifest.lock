@@ -1,0 +1,129 @@
+PODS:
+  - Alamofire (4.0.1)
+  - AlamofireNetworkActivityIndicator (2.0.1):
+    - Alamofire (~> 4.0)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - Crashlytics (3.8.3):
+    - Fabric (~> 1.6.3)
+  - DATAStack (6.1.2)
+  - DynamicColor (3.1.0)
+  - DZNEmptyDataSet (1.8.1)
+  - Fabric (1.6.11)
+  - FBSDKCoreKit (4.17.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.17.0):
+    - FBSDKCoreKit
+  - FirebaseAnalytics (3.5.1):
+    - FirebaseCore (~> 3.4)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.4.4):
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.8)
+  - Former (1.5.0)
+  - FSCalendar (2.5.0)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
+  - Google/SignIn (3.0.3):
+    - Google/Core
+    - GoogleSignIn (~> 4.0)
+  - GoogleAppUtilities (1.1.2):
+    - GoogleSymbolUtilities (~> 1.1)
+  - GoogleInterchangeUtilities (1.2.2):
+    - GoogleSymbolUtilities (~> 1.1)
+  - GoogleSignIn (4.0.1):
+    - GoogleAppUtilities (~> 1.1)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleSymbolUtilities (1.1.2)
+  - GoogleToolboxForMac/DebugUtils (2.1.0):
+    - GoogleToolboxForMac/Defines (= 2.1.0)
+  - GoogleToolboxForMac/Defines (2.1.0)
+  - GoogleToolboxForMac/NSData+zlib (2.1.0):
+    - GoogleToolboxForMac/Defines (= 2.1.0)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.0):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.0)
+    - GoogleToolboxForMac/Defines (= 2.1.0)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.0)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.0)
+  - GTMOAuth2 (1.1.4):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.7):
+    - GTMSessionFetcher/Full (= 1.1.7)
+  - GTMSessionFetcher/Core (1.1.7)
+  - GTMSessionFetcher/Full (1.1.7):
+    - GTMSessionFetcher/Core (= 1.1.7)
+  - IQKeyboardManagerSwift (4.0.7)
+  - SwiftRecord (0.0.5)
+  - SwiftSpinner (1.1.0)
+  - SwiftyJSON (3.1.1)
+  - Sync (2.3.4):
+    - DATAStack (~> 6.1.2)
+    - SYNCPropertyMapper (~> 5.1.2)
+  - SYNCPropertyMapper (5.1.2)
+  - Whisper (4.0.0)
+  - XLPagerTabStrip (6.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - AlamofireNetworkActivityIndicator
+  - Crashlytics
+  - DynamicColor
+  - DZNEmptyDataSet
+  - FBSDKLoginKit
+  - Former
+  - FSCalendar
+  - Google/SignIn
+  - IQKeyboardManagerSwift
+  - SwiftRecord
+  - SwiftSpinner
+  - SwiftyJSON
+  - Sync
+  - Whisper
+  - XLPagerTabStrip
+
+SPEC CHECKSUMS:
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  AlamofireNetworkActivityIndicator: 3e55069ada3e1ff7703665156429eedcdfea0bc1
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  DATAStack: a45fc144e15193f1b22c26b507cc46655ce96a71
+  DynamicColor: 4dec283a881f7f9d9f3bc88fb5f306724242575f
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  FBSDKCoreKit: 30a21d2d7b92984b3d80497113433c00824c35e9
+  FBSDKLoginKit: 42b7129ac0373ca99eaf4cbebf4d07bd42371f59
+  FirebaseAnalytics: 6e58fc9b397664369ac7617fb0ba93fab6ba7b5b
+  FirebaseCore: d0ed25f27b6f9158eccc439f1be6f92e81207e28
+  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  Former: 8f9f41e51eceb75e47b4275147795ec477b121ec
+  FSCalendar: eacc1e0086e8784b395731595033d84ccc13a217
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
+  GoogleAppUtilities: a8a552aa74f6597f805e45b5a3962766c3134973
+  GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
+  GoogleSignIn: a8694c0a8e6d1b0ec77c58014de5bfd4ba2fa766
+  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
+  GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
+  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
+  GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
+  IQKeyboardManagerSwift: 58bbcf46b5cf9fd4ed625d28a60cb2fbae4ab0f4
+  SwiftRecord: f7fed44d27ef7703afd4a87ebf0d57cb26aacf12
+  SwiftSpinner: c03815614599b91eea46594bd52ba742849d0414
+  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  Sync: b946c2ab9c51153f075bcaec828215d071ddf6db
+  SYNCPropertyMapper: e4cf0f851aa3a1307a42985ab8600787b3382427
+  Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
+  XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
+
+PODFILE CHECKSUM: c0712bbfb3e8d88c85ddeae6e202e12417a29a11
+
+COCOAPODS: 1.1.1

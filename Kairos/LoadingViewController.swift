@@ -20,13 +20,13 @@ class LoadingViewController: UIViewController {
         // Do any additional setup after loading the view.
         projectLabel.adjustsFontSizeToFitWidth = true
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         //        UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
@@ -42,15 +42,15 @@ class LoadingViewController: UIViewController {
     // MARK: - Methods
     func checkStart() {
         var storyboard: UIStoryboard
-        let defautls = NSUserDefaults.standardUserDefaults()
-        if let userHasLogged = defautls.valueForKey(userLoginKey) as? Bool {
+        let defautls = UserDefaults.standard
+        if let userHasLogged = defautls.value(forKey: userLoginKey) as? Bool {
             storyboard = userHasLogged ? UIStoryboard(name: BoardStoryboardID, bundle: nil) : UIStoryboard(name: LoginStoryboardID, bundle: nil)
         } else {
             storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
         }
-        //       storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
+//        storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil) // COMMENT
         if let viewController = storyboard.instantiateInitialViewController() {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             appDelegate.window?.rootViewController = viewController
         }
@@ -60,7 +60,7 @@ class LoadingViewController: UIViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }

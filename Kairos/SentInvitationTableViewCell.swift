@@ -18,22 +18,22 @@ class SentInvitationTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    @IBAction func cancel(sender: UIButton) {
-        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+    @IBAction func cancel(_ sender: UIButton) {
+        let friend = User.find("id == %@", args: self.tag) as! User
         let parameters = ["user_id": friend.id!]
         
-        FriendManager.sharedInstance.cancel(parameters) { (status) in
+        FriendManager.shared.cancel(parameters) { (status) in
             switch status {
-            case .Success:
+            case .success:
                 friend.delete()
                 SpinnerManager.showWhistle("kFriendSuccess")
-            case .Error(let error):
+            case .error(let error):
                 SpinnerManager.showWhistle("kFriendError", success: false)
                 print(error)
             }

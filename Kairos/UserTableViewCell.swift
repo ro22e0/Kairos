@@ -10,33 +10,29 @@ import UIKit
 
 class UserTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var mutualFriendsLabel: UILabel!
+    
+    var onSelected: ((User, @escaping (String)->Void) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    @IBAction func invite(sender: UIButton) {
+    @IBAction func invite(_ sender: UIButton) {
         let user = User.find("id == %@", args: self.tag) as! User
-        let parameters = ["user_id": user.id!]
-
-        FriendManager.sharedInstance.invite(parameters) { (status) in
-            switch status {
-            case .Success:
-                SpinnerManager.showWhistle("kFriendSuccess")
-            case .Error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
-                print(error)
-            }
+        self.onSelected!(user) { text in
+            self.inviteButton.setTitle(text, for: UIControlState())
+            self.inviteButton.isEnabled = false
         }
     }
     

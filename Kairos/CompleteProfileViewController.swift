@@ -21,7 +21,7 @@ class CompleteProfileViewController: FormViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.user = UserManager.sharedInstance.current
+        self.user = UserManager.shared.current
         configure()
     }
     
@@ -30,7 +30,7 @@ class CompleteProfileViewController: FormViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func configure() {
+    fileprivate func configure() {
         former = Former(tableView: self.profileTableView)
         
         title = "Complete your profile"
@@ -45,88 +45,88 @@ class CompleteProfileViewController: FormViewController {
                 $0.text = "Choose profile image from library"
                 $0.rowHeight = 55
             }.onSelected { [weak self] _ in
-                self?.former.deselect(true)
+                self?.former.deselect(animated: true)
                 self?.presentImagePicker()
         }
         self.rows.append(imageRow)
         
         let fullnameRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Fullname"
-            $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
+            $0.titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.configure {
-                $0.text = user.name
+                $0.text = user.user!.name
             }.onTextChanged { (text) in
-                self.user.name = text
+                self.user.user!.name = text
         }
         self.rows.append(fullnameRow)
         
         let nicknameRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Nickname"
-            $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
+            $0.titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.onTextChanged { (text) in
-                self.user.nickname = text
+                self.user.user!.nickname = text
         }
         self.rows.append(nicknameRow)
         
         let schoolRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "School"
-            $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
+            $0.titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.onTextChanged { (text) in
-                self.user.school = text
+                self.user.user!.school = text
         }
         rows.append(schoolRow)
         
         let promotionRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Promotion"
-            $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
+            $0.titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.onTextChanged { (text) in
-                self.user.promotion = text
+                self.user.user!.promotion = text
         }
         rows.append(promotionRow)
         
         let locationRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Location"
-            $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
+            $0.titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.onTextChanged { (text) in
-                self.user.location = text
+                self.user.user!.location = text
         }
         rows.append(locationRow)
         
         let companyRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Company"
-            $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
+            $0.titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
             
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.onTextChanged { (text) in
-                self.user.company = text
+                self.user.user!.company = text
         }
         rows.append(companyRow)
         
         let jobRow = TextFieldRowFormer<CustomTextFieldTableViewCell>(instantiateType: .Nib(nibName: "CustomTextFieldTableViewCell")) {
             $0.titleLabel.text = "Job"
-            $0.titleLabel.font = UIFont.boldSystemFontOfSize(15)
+            $0.titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
             
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFontOfSize(15)
+            $0.textField.font = .systemFont(ofSize: 15)
             }.onTextChanged { (text) in
-                self.user.job = text
+                self.user.user!.job = text
         }
         rows.append(jobRow)
         
         // Create Headers
         
-        let createHeader: (String -> ViewFormer) = { text in
+        let createHeader: ((String) -> ViewFormer) = { text in
             return LabelViewFormer<FormLabelHeaderView>()
                 .configure {
                     $0.viewHeight = 40
@@ -148,30 +148,30 @@ class CompleteProfileViewController: FormViewController {
         former.append(sectionFormer: imageSection, aboutSection, moreSection)
     }
     
-    private func presentImagePicker() {
+    fileprivate func presentImagePicker() {
         let picker = UIImagePickerController()
         picker.delegate = self
-        picker.sourceType = .PhotoLibrary
+        picker.sourceType = .photoLibrary
         picker.allowsEditing = false
-        presentViewController(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
     
-    @IBAction func done(sender: AnyObject) {
-        let parameters = user.dictionaryWithValuesForKeys(["id", "name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
-        UserManager.sharedInstance.update(parameters) { (status) in
+    @IBAction func done(_ sender: Any) {
+        let parameters = user.dictionaryWithValues(forKeys: ["id", "name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
+        UserManager.shared.update(parameters as [String : Any]) { (status) in
             switch status {
-            case .Success:
+            case .success:
                 print("yeah")
                 self.user.save()
                 self.setRootVC(BoardStoryboardID)
-            case .Error(let error):
+            case .error(let error):
                 print(error)
             }
         }
     }
     
-    @IBAction func skip(sender: AnyObject) {
-        let changedValues = user.committedValuesForKeys(["name", "nickname", "image", "imageData", "email", "school", "promotion", "location", "company", "job"])
+    @IBAction func skip(_ sender: Any) {
+        let changedValues = user.committedValues(forKeys: ["name", "nickname", "image", "imageData", "email", "school", "promotion", "location", "company", "job"])
         for (key, value) in changedValues {
             if value is NSNull {
                 user.setValue(nil, forKey: key)
@@ -185,7 +185,7 @@ class CompleteProfileViewController: FormViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
@@ -194,13 +194,16 @@ class CompleteProfileViewController: FormViewController {
 }
 
 extension CompleteProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        user.imageData = UIImageJPEGRepresentation(image, 1)
-        let imageRow = self.rows.first as! LabelRowFormer<ProfileImagePickerTableViewCell>
-        imageRow.cellUpdate {
-            $0.imageProfileView.image = image
-            $0.imageProfileView.round()
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            picker.dismiss(animated: true, completion: nil)
+            user.user!.image = UIImageJPEGRepresentation(image, 1) as NSData?
+            let imageRow = self.rows.first as! LabelRowFormer<ProfileImagePickerTableViewCell>
+            imageRow.cellUpdate {
+                $0.imageProfileView.image = image
+                $0.imageProfileView.round()
+            }
         }
     }
 }

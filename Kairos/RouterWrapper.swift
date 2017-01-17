@@ -28,73 +28,88 @@ public enum Router: URLRequestConvertible {
      
      - returns: A `String` baseURL.
      */
-    static let baseURL = "http://kairos-api-ro22e0.c9users.io/api/v1"
+    static let baseURLString = "https://kairos-api-ro22e0.c9users.io/api/v1"
     
     /**
      Determine if the request need credentials in headers.
      
      - returns: A boolean `true` or `false`.
      */
-    static var needToken: Bool = true
+    var needToken: Bool {
+        switch self {
+        case .authenticate, .createUser:
+            return false
+        default:
+            return true
+        }
+    }
     
-    case SignOut
+    case signOut
     
     /// Create a new user.
-    case CreateUser([String: AnyObject])
+    case createUser(Parameters)
     
     /// Update user.
-    case UpdateUser([String: AnyObject])
+    case updateUser(Parameters)
     
     /// Get users.
-    case GetUsers
+    case getUsers
     
     /// Authenticate a user.
-    case Authenticate([String: AnyObject])
+    case authenticate(Parameters)
     
     /// Get friends.
-    case GetFriends
+    case getFriends
     
     /// Accept a friend request.
-    case AcceptFriend([String: AnyObject])
+    case acceptFriend(Parameters)
     
     /// Decline a friend request.
-    case DeclineFriend([String: AnyObject])
+    case declineFriend(Parameters)
     
     /// Send a friend request.
-    case InviteFriend([String: AnyObject])
+    case inviteFriend(Parameters)
     
     /// Block a friend.
-    case CancelFriend([String: AnyObject])
+    case cancelFriend(Parameters)
     
     /// Remove a friend.
-    case RemoveFriend([String: AnyObject])
+    case removeFriend(Parameters)
     
     
-    case GetEvents
+    case getEvents
     
-    case GetEvent([String: AnyObject])
+    case getEvent(Parameters)
     
-    case CreateEvent([String: AnyObject])
+    case createEvent(Parameters)
     
-    case UpdateEvent([String: AnyObject])
+    case updateEvent(Parameters)
     
-    case DeleteEvent([String: AnyObject])
+    case deleteEvent(Parameters)
     
     
-    case GetCalendars
+    case getCalendarColors
+    case getCalendars
     
-    case GetCalendar([String: AnyObject])
+    case getCalendar(Parameters)
     
-    case CreateCalendar([String: AnyObject])
+    case createCalendar(Parameters)
     
-    case UpdateCalendar([String: AnyObject])
+    case updateCalendar(Parameters)
     
-    case DeleteCalendar([String: AnyObject])
+    case deleteCalendar(Parameters)
     
-    case InviteCalendar([String: AnyObject])
-    case AcceptCalendar([String: AnyObject])
-    case RefuseCalendar([String: AnyObject])
-    case OwnerCalendar([String: AnyObject])
+    case inviteCalendar(Parameters)
+    case acceptCalendar(Parameters)
+    case refuseCalendar(Parameters)
+    case ownerCalendar(Parameters)
+    case removeCalendar(Parameters)
+
+    case inviteEvent(Parameters)
+    case acceptEvent(Parameters)
+    case refuseEvent(Parameters)
+    case ownerEvent(Parameters)
+    case removeEvent(Parameters)
     
     /**
      The method use for the request.
@@ -103,13 +118,13 @@ public enum Router: URLRequestConvertible {
      */
     var method: HTTPMethod {
         switch self {
-        case .CreateUser, .Authenticate, .InviteFriend, .CreateCalendar, .CreateEvent:
+        case .createUser, .authenticate, .inviteFriend, .createCalendar, .createEvent:
             return .POST
-        case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .GetCalendars, .GetCalendar:
+        case .getFriends, .getUsers, .getEvents, .getEvent, .getCalendars, .getCalendar, .getCalendarColors:
             return .GET
-        case .UpdateUser, .AcceptFriend, .DeclineFriend, .UpdateEvent, .UpdateCalendar, .InviteCalendar, .AcceptCalendar, .RefuseCalendar, .OwnerCalendar:
+        case .updateUser, .acceptFriend, .declineFriend, .updateEvent, .updateCalendar, .inviteCalendar, .acceptCalendar, .refuseCalendar, .ownerCalendar, .removeCalendar, .inviteEvent, .acceptEvent, .refuseEvent, .ownerEvent, .removeEvent:
             return .PUT
-        case .RemoveFriend, .CancelFriend, .DeleteEvent, .DeleteCalendar, .SignOut:
+        case .removeFriend, .cancelFriend, .deleteEvent, .deleteCalendar, .signOut:
             return .DELETE
         }
     }
@@ -121,55 +136,68 @@ public enum Router: URLRequestConvertible {
      */
     var path: String {
         switch self {
-        case .CreateUser:
+        case .createUser:
             return "/auth"
-        case .Authenticate:
+        case .authenticate:
             return "/auth/sign_in"
-            
-        case .GetFriends:
+        case .getFriends:
             return "/friends"
-        case .InviteFriend:
+        case .inviteFriend:
             return "/friends/invite"
-        case .CancelFriend:
+        case .cancelFriend:
             return "/friends/cancel"
-        case .AcceptFriend:
+        case .acceptFriend:
             return "/friends/accept"
-        case .DeclineFriend:
+        case .declineFriend:
             return "/friends/refuse"
-        case .RemoveFriend:
+        case .removeFriend:
             return "/friends/remove"
             
-        case .GetUsers:
+        case .getUsers:
             return "/users"
-        case .UpdateUser(let parameters):
-            return "/users/\(parameters["id"])"
+        case .updateUser(let parameters):
+            return "/users/\(parameters["id"]!)"
             
-        case .CreateEvent, .GetEvents:
+        case .createEvent, .getEvents:
             return "/events"
-        case .UpdateEvent(let parameters):
-            return "/events/\(parameters["id"])"
-        case .GetEvent(let parameters):
-            return "/events/\(parameters["id"])"
-        case .DeleteEvent(let parameters):
-            return "/events/\(parameters["id"])"
+        case .updateEvent(let parameters):
+            return "/events/\(parameters["id"]!)"
+        case .getEvent(let parameters):
+            return "/events/\(parameters["id"]!)"
+        case .deleteEvent(let parameters):
+            return "/events/\(parameters["id"]!)"
+        case .inviteEvent(let parameters):
+            return "/events/\(parameters["id"]!)/invite"
+        case .acceptEvent(let parameters):
+            return "/events/\(parameters["id"]!)/accept"
+        case .refuseEvent(let parameters):
+            return "/events/\(parameters["id"]!)/refuse"
+        case .ownerEvent(let parameters):
+            return "/events/\(parameters["id"]!)/set_owner"
+        case .removeEvent(let parameters):
+            return "/events/\(parameters["id"]!)/remove"
             
-        case .CreateCalendar, .GetCalendars:
+        case .createCalendar, .getCalendars:
             return "/calendars"
-        case .UpdateCalendar(let parameters):
-            return "/calendars/\(parameters["id"])"
-        case .GetCalendar(let parameters):
-            return "/calendars/\(parameters["id"])"
-        case .DeleteCalendar(let parameters):
-            return "/calendars/\(parameters["id"])"
-        case .InviteCalendar(let parameters):
-            return "/calendars/\(parameters["id"])/invite"
-        case .AcceptCalendar(let parameters):
-            return "/calendars/\(parameters["id"])/accept"
-        case .RefuseCalendar(let parameters):
-            return "/calendars/\(parameters["id"])/refuse"
-        case .OwnerCalendar(let parameters):
-            return "/calendars/\(parameters["id"])/set_owner"
-        case .SignOut:
+        case .getCalendarColors:
+            return "/calendars/colors"
+        case .updateCalendar(let parameters):
+            return "/calendars/\(parameters["id"]!)"
+        case .getCalendar(let parameters):
+            return "/calendars/\(parameters["id"]!)"
+        case .deleteCalendar(let parameters):
+            return "/calendars/\(parameters["id"]!)"
+        case .inviteCalendar(let parameters):
+            return "/calendars/\(parameters["id"]!)/invite"
+        case .acceptCalendar(let parameters):
+            return "/calendars/\(parameters["id"]!)/accept"
+        case .refuseCalendar(let parameters):
+            return "/calendars/\(parameters["id"]!)/refuse"
+        case .ownerCalendar(let parameters):
+            return "/calendars/\(parameters["id"]!)/set_owner"
+        case .removeCalendar(let parameters):
+            return "/calendars/\(parameters["id"]!)/remove"
+        case .signOut:
             return "/auth/sign_out"
         }
     }
@@ -181,59 +209,68 @@ public enum Router: URLRequestConvertible {
      
      - returns: The request as `NSMutableURLRequest` use by `RouterWrapper`.
      */
-    public var URLRequest: NSMutableURLRequest {
-        let URL = NSURL(string: Router.baseURL)!
-        let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
-        mutableURLRequest.HTTPMethod = method.rawValue
+    public func asURLRequest() throws -> URLRequest {
+        let url = try Router.baseURLString.asURL()
+        var urlRequest = URLRequest(url: url.appendingPathComponent(path))
+        urlRequest.httpMethod = method.rawValue
+
+        print(needToken)
         
-        print(Router.needToken)
-        
-        if Router.needToken {
-            let credentials = UserManager.sharedInstance.getCredentials()
-            mutableURLRequest.setValue(credentials["access-token"], forHTTPHeaderField: "access-token")
-            mutableURLRequest.setValue(credentials["client"], forHTTPHeaderField: "client")
-            mutableURLRequest.setValue(credentials["uid"], forHTTPHeaderField: "uid")
+        if needToken {
+            let credentials = UserManager.shared.getCredentials()
+            urlRequest.setValue(credentials["access-token"], forHTTPHeaderField: "access-token")
+            urlRequest.setValue(credentials["client"], forHTTPHeaderField: "client")
+            urlRequest.setValue(credentials["uid"], forHTTPHeaderField: "uid")
         }
-        
+
         switch self {
-        case .CreateUser(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .UpdateUser(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .Authenticate(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .InviteFriend(let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .CancelFriend(let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .AcceptFriend(let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .DeclineFriend(let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .RemoveFriend(let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .GetFriends, .GetUsers, .GetEvents, .GetEvent, .DeleteEvent, .GetCalendars, .GetCalendar, .AcceptCalendar, .RefuseCalendar, .DeleteCalendar, .SignOut:
-            return mutableURLRequest
-        case .CreateEvent(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .UpdateEvent(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .CreateCalendar(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .UpdateCalendar(let parameters):
-            return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
-        case .InviteCalendar(let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
-        case .OwnerCalendar(let parameters):
-            return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
+        case .createUser(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .updateUser(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .authenticate(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .inviteFriend(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case .cancelFriend(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case .acceptFriend(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case .declineFriend(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case .removeFriend(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case .createEvent(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .updateEvent(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .inviteEvent(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .ownerEvent(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .removeEvent(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .createCalendar(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .updateCalendar(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .inviteCalendar(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .ownerCalendar(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .removeCalendar(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        default:
+            break;
         }
+        return urlRequest
     }
 }
 
 /**
  Responsible for creating and managing `RouterWrapper` requests, as well as their underlying `URLRequestConvertible`.
  */
-class RouterWrapper: NSObject, NSURLSessionTaskDelegate {
+class RouterWrapper: NSObject, URLSessionTaskDelegate {
     
     // MARK: - Singleton
     
@@ -242,7 +279,7 @@ class RouterWrapper: NSObject, NSURLSessionTaskDelegate {
      
      - returns: The instance created.
      */
-    static let sharedInstance = RouterWrapper()
+    static let shared = RouterWrapper()
     
     private override init() {}
     
@@ -251,11 +288,11 @@ class RouterWrapper: NSObject, NSURLSessionTaskDelegate {
      
      - returns: The created manager.
      */
-    private lazy var manager: Manager = {
-        let config: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+    private lazy var manager: SessionManager = {
+        let config: URLSessionConfiguration = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 15.0
         
-        return Alamofire.Manager(configuration: config)
+        return SessionManager(configuration: config)
     }()
     
     /**
@@ -265,23 +302,23 @@ class RouterWrapper: NSObject, NSURLSessionTaskDelegate {
      - route: The request define in enum Router
      - completionHandler: A closure to be executed once the request has finished.
      */
-    func request(request: Router, completionHandler: Response<AnyObject, NSError> -> Void) {
+    func request(_ request: Router, completionHandler: @escaping (DataResponse<Any>) -> Void) {
         let manager = NetworkReachabilityManager(host: "www.apple.com")
         manager!.listener = { (status) in
             print("Network Status Changed: \(status)")
             switch status {
-            case .Reachable(.WWAN):
+            case .reachable(.wwan):
                 break
-            case .Reachable(.EthernetOrWiFi):
+            case .reachable(.ethernetOrWiFi):
                 break
-            case .NotReachable:
+            case .notReachable:
                 manager!.startListening()
-            default:
+            case .unknown:
                 break
             }
         }
         manager!.startListening()
-        RouterWrapper.sharedInstance.manager.request(request).responseJSON(completionHandler: completionHandler)
-        //RouterWrapper.sharedInstance.manager.request(request).responseJSON(queue: queue, options: .AllowFragments, completionHandler: completionHandler)
+        self.manager.request(request).responseJSON(completionHandler: completionHandler)
+        //RouterWrapper.shared.manager.request(request).responseJSON(queue: queue, options: .AllowFragments, completionHandler: completionHandler)
     }
 }
