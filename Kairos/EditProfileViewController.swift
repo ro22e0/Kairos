@@ -187,14 +187,14 @@ class EditProfileViewController: FormViewController {
             }
         }
     }
-    
+
     @IBAction func cancel(_ sender: Any) {
-        let changedValues = user.user!.committedValues(forKeys: ["name", "nickname", "image", "imageData", "email", "school", "promotion", "location", "company", "job"])
+        let changedValues = user.user!.committedValues(forKeys: ["name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
         for (key, value) in changedValues {
             if value is NSNull {
-                user.setValue(nil, forKey: key)
+                user.user!.setValue(nil, forKey: key)
             } else {
-                user.setValue(value, forKey: key)
+                user.user!.setValue(value, forKey: key)
             }
         }
         self.navigationController?.popViewController(animated: true)

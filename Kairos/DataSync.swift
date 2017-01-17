@@ -21,6 +21,12 @@ struct DataSync {
         return delegate.dataStack
     }
     
+    static func save() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+
+        delegate.saveContext()
+    }
+    
     static func sync(entity entityName: String, predicate: NSPredicate?, data: [[String: Any]], completion: @escaping ((NSError?) -> Void), all: Bool = false) {
         let ops: Sync.OperationOptions = all ? [.All] : [.Insert, .Update]
         if predicate != nil {
@@ -98,13 +104,13 @@ struct DataSync {
                         data["id"] = UserManager.shared.current.id
                         print(data)
                         DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
-                            try! self.dataStack().mainContext.save()
-                            print(NSDate(), "done")
-                            completionHandler(.success(nil))
+//                                try? self.dataStack().mainContext.save()
+                                print(NSDate(), "done")
+                                completionHandler(.success(nil))
                         })
-                        
+
                         //                        var friends = [JSON]()
-                        
+
                         //
                         //                        let requested = DataSync.transformJson()
                         //                        print(requested)
@@ -213,9 +219,12 @@ struct DataSync {
                         //                        self.deleteUsers(users)
                         //                        self.syncUsers(users)
                         //                        completionHandler(StatusRequest.success(nil))
-                        let predicate = NSPredicate(format: "id <> %@", UserManager.shared.current.id!)
+//                        deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+//                            return User.query(predicate)
+//                        })
+//                        let predicate = NSPredicate(format: "id <> %@", UserManager.shared.current.id!)
                         self.sync(entity: "User", predicate: nil, data: DataSync.transformJson(json), completion: { error in
-                            try! self.dataStack().mainContext.save()
+                            //                            try! self.dataStack().mainContext.save()
                             completionHandler(StatusRequest.success(nil))
                         })
                         
@@ -251,7 +260,7 @@ struct DataSync {
         }
     }
     
-    fileprivate static func deleteObject(_ data: [JSON], query: (Any, Any...) -> [NSManagedObject]) {
+    fileprivate static func deleteObject(_ data: [JSON], query: @escaping (NSPredicate) -> [NSManagedObject]) {
         let ids = NSMutableArray()
         
         for elem in data {
@@ -298,7 +307,7 @@ struct DataSync {
         //        Calendar.save()
         let data = json.dictionaryObject
         DataSync.sync(entity: "Calendar", predicate: nil, data: [data!], completion: { error in
-  //          try! self.dataStack().mainContext.save()
+            //          try! self.dataStack().mainContext.save()
             let c = Calendar.all().first as! Calendar
             print(c)
             print(NSDate(), "done")
@@ -314,11 +323,15 @@ struct DataSync {
                 UserManager.shared.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
-                    
+
                     print(json)
-                    
+
+                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+                        return Calendar.query(predicate)
+                    })
                     let data = DataSync.transformJson(json)
                     DataSync.sync(entity: "Calendar", predicate: nil, data: data, completion: { error in
+//                        Calendar.save()
                         try! self.dataStack().mainContext.save()
                         let c = Calendar.all().first as! Calendar
                         print(c)
@@ -385,28 +398,36 @@ struct DataSync {
             e.delete()
         }
     }
-    
-    fileprivate static func syncEvents(_ events: [JSON]) {
-        for e in events {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            let dateStart = dateFormatter.date(from: e["date_start"].stringValue)
-            let dateEnd = dateFormatter.date(from: e["date_end"].stringValue)
-            let calendar = Calendar.find("id == %@", args: e["calendar_id"].stringValue) as? Calendar
-            
-            print(e["calendar_id"].stringValue)
-            print(e["id"].stringValue)
-            
-            let event = Event.findOrCreate(["id": e["id"].stringValue]) as! Event
-            
-            event.title = e["title"].stringValue
-            event.dateStart = dateStart as NSDate?
-            event.dateEnd = dateEnd as NSDate?
-            event.location = e["location"].stringValue
-            event.notes = e["description"].stringValue
-            print(Calendar.all().first)
-            event.calendar = calendar!
-        }
+
+    static func syncEvents(_ json: JSON, completionHandler: @escaping ()->()) {
+        let data = json.dictionaryObject
+        DataSync.sync(entity: "Event", predicate: nil, data: [data!], completion: { error in
+            //          try! self.dataStack().mainContext.save()
+            let c = Event.all().first as! Event
+            print(c)
+            print(NSDate(), "done")
+            completionHandler()
+        })
+//        for e in events {
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+//            let dateStart = dateFormatter.date(from: e["date_start"].stringValue)
+//            let dateEnd = dateFormatter.date(from: e["date_end"].stringValue)
+//            let calendar = Calendar.find("id == %@", args: e["calendar_id"].stringValue) as? Calendar
+//            
+//            print(e["calendar_id"].stringValue)
+//            print(e["id"].stringValue)
+//            
+//            let event = Event.findOrCreate(["id": e["id"].stringValue]) as! Event
+//            
+//            event.title = e["title"].stringValue
+//            event.dateStart = dateStart as NSDate?
+//            event.dateEnd = dateEnd as NSDate?
+//            event.location = e["location"].stringValue
+//            event.notes = e["description"].stringValue
+//            print(Calendar.all().first)
+//            event.calendar = calendar!
+//        }
     }
     
     static func fetchEvents() {
@@ -428,5 +449,35 @@ struct DataSync {
             print(NSDate(), "done")
         }
     }
+    
+    static func fetchEvents(_ completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.getEvents) { (response) in
+            print(response.response) // URL response
+            switch response.result {
+            case .success:
+                UserManager.shared.setCredentials(response.response!)
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    print(json)
+                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+                        return Event.query(predicate)
+                    })
+                    let data = DataSync.transformJson(json)
+                    DataSync.sync(entity: "Event", predicate: nil, data: data, completion: { error in
+                        //                        Calendar.save()
+                        try! self.dataStack().mainContext.save()
+                        let c = Event.all().first as! Event
+                        print(c)
+                        print(NSDate(), "done")
+                        completionHandler(.success(nil))
+                    })
+                }
+            case .failure(let error):
+                completionHandler(.error("error"))
+                print(error)
+            }
+        }
+    }
+
     
 }

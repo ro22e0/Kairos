@@ -104,6 +104,12 @@ public enum Router: URLRequestConvertible {
     case refuseCalendar(Parameters)
     case ownerCalendar(Parameters)
     case removeCalendar(Parameters)
+
+    case inviteEvent(Parameters)
+    case acceptEvent(Parameters)
+    case refuseEvent(Parameters)
+    case ownerEvent(Parameters)
+    case removeEvent(Parameters)
     
     /**
      The method use for the request.
@@ -116,7 +122,7 @@ public enum Router: URLRequestConvertible {
             return .POST
         case .getFriends, .getUsers, .getEvents, .getEvent, .getCalendars, .getCalendar, .getCalendarColors:
             return .GET
-        case .updateUser, .acceptFriend, .declineFriend, .updateEvent, .updateCalendar, .inviteCalendar, .acceptCalendar, .refuseCalendar, .ownerCalendar, .removeCalendar:
+        case .updateUser, .acceptFriend, .declineFriend, .updateEvent, .updateCalendar, .inviteCalendar, .acceptCalendar, .refuseCalendar, .ownerCalendar, .removeCalendar, .inviteEvent, .acceptEvent, .refuseEvent, .ownerEvent, .removeEvent:
             return .PUT
         case .removeFriend, .cancelFriend, .deleteEvent, .deleteCalendar, .signOut:
             return .DELETE
@@ -160,6 +166,16 @@ public enum Router: URLRequestConvertible {
             return "/events/\(parameters["id"]!)"
         case .deleteEvent(let parameters):
             return "/events/\(parameters["id"]!)"
+        case .inviteEvent(let parameters):
+            return "/events/\(parameters["id"]!)/invite"
+        case .acceptEvent(let parameters):
+            return "/events/\(parameters["id"]!)/accept"
+        case .refuseEvent(let parameters):
+            return "/events/\(parameters["id"]!)/refuse"
+        case .ownerEvent(let parameters):
+            return "/events/\(parameters["id"]!)/set_owner"
+        case .removeEvent(let parameters):
+            return "/events/\(parameters["id"]!)/remove"
             
         case .createCalendar, .getCalendars:
             return "/calendars"
@@ -206,7 +222,7 @@ public enum Router: URLRequestConvertible {
             urlRequest.setValue(credentials["client"], forHTTPHeaderField: "client")
             urlRequest.setValue(credentials["uid"], forHTTPHeaderField: "uid")
         }
-        
+
         switch self {
         case .createUser(let parameters):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
@@ -228,6 +244,12 @@ public enum Router: URLRequestConvertible {
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case .updateEvent(let parameters):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .inviteEvent(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .ownerEvent(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .removeEvent(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
         case .createCalendar(let parameters):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case .updateCalendar(let parameters):

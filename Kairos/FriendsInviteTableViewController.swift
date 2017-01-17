@@ -20,7 +20,6 @@ class FriendsInviteTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.friends = FriendManager.shared.friends()
         configureSearchController()
         configure()
         // Uncomment the following line to preserve selection between presentations

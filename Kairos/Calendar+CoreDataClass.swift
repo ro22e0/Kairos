@@ -12,4 +12,8 @@ import CoreData
 
 public class Calendar: NSManagedObject {
 
+    static func temporary() -> Calendar {
+        let entity = NSEntityDescription.entity(forEntityName: "Calendar", in: DataSync.dataStack().mainContext)
+        return Calendar(entity: entity!, insertInto: nil)
+    }
 }

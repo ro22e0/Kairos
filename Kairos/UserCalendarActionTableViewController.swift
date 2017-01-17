@@ -16,7 +16,8 @@ class UserCalendarActionTableViewController: UITableViewController {
     fileprivate lazy var former: Former = Former(tableView: self.tableView)
     
     var remove: ((User) -> Void)?
-    
+    var owner: ((User) -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,19 +40,36 @@ class UserCalendarActionTableViewController: UITableViewController {
         tableView.backgroundView?.backgroundColor = .white
         // Create RowFomers
         
+        var rows = [RowFormer]()
+
         if let remove = remove {
-            let remove = LabelRowFormer<UserActionTableViewCell>(instantiateType: .Nib(nibName: "UserActionTableViewCell")) {
+            let removeCell = LabelRowFormer<UserActionTableViewCell>(instantiateType: .Nib(nibName: "UserActionTableViewCell")) {
                 $0.titleLabel.textColor = .formerColor()
                 $0.titleLabel.font = .boldSystemFont(ofSize: 15)
                 }.configure {
                     $0.text = "Remove" + " " + self.user!.name!
                     $0.rowHeight = 44
                 }.onSelected { cell in
-                    self.remove!(self.user!)
+                    remove(self.user!)
                     cell.cell.done()
             }
+            rows.append(removeCell)
         }
-        let section = SectionFormer(rowFormer: remove).set(headerViewFormer: nil)
+        if let owner = owner {
+            let ownerCell = LabelRowFormer<UserActionTableViewCell>(instantiateType: .Nib(nibName: "UserActionTableViewCell")) {
+                $0.titleLabel.textColor = .formerColor()
+                $0.titleLabel.font = .boldSystemFont(ofSize: 15)
+                }.configure {
+                    $0.text = "Grant" + " " + self.user!.name! + " as owner"
+                    $0.rowHeight = 44
+                }.onSelected { cell in
+                    owner(self.user!)
+                    cell.cell.done()
+            }
+            rows.append(ownerCell)
+        }
+        
+        let section = SectionFormer(rowFormers: rows).set(headerViewFormer: nil)
         former.append(sectionFormer: section)
     }
     

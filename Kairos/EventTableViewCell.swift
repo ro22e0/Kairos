@@ -12,13 +12,17 @@ class EventTableViewCell: UITableViewCell {
 
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
-    @IBOutlet weak var colorView: UIView!
+    @IBOutlet weak var lineColorView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var participantLabel: UILabel!
+    @IBOutlet weak var roundColorView: UIView!
+    @IBOutlet weak var whiteView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        whiteView.round()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

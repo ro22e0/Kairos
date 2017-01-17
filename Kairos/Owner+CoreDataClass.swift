@@ -11,5 +11,4 @@ import CoreData
 
 
 public class Owner: NSManagedObject {
-
 }

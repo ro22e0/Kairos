@@ -14,6 +14,7 @@ import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
 import SwiftRecord
+import Sync
 import DATAStack
 
 @UIApplicationMain
@@ -99,11 +100,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let insertedObjects = notification.userInfo![NSInsertedObjectsKey]
         print(insertedObjects)
     }
-    
+
     // MARK: - Core Data Saving support
 
     func saveContext() {
-        try! self.dataStack.mainContext.save()
+       try! self.dataStack.mainContext.save()
     }
 }
 

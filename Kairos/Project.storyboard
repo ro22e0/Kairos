@@ -12,7 +12,7 @@
         <scene sceneID="RCa-Lg-MZ8">
             <objects>
                 <collectionViewController id="Kl5-Q7-4TI" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="cmH-Ou-wQF">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="cmH-Ou-wQF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xSq-89-cQO">
@@ -61,11 +61,13 @@
             </objects>
             <point key="canvasLocation" x="1335" y="414"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Projects-->
         <scene sceneID="kpV-iv-lN4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="k8t-aX-38B" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Projects" id="iPW-Gj-bG5"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3ZU-Qr-T9h">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

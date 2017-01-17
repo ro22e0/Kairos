@@ -9,6 +9,7 @@
 import UIKit
 import Former
 import DynamicColor
+import CoreData
 
 class CalendarTableViewController: FormViewController, UIPopoverPresentationControllerDelegate {
     
@@ -17,12 +18,13 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
     var calendar: Calendar?
     
     fileprivate var sectionParticipants: SectionFormer!
+    fileprivate var sectionDelete: SectionFormer!
     fileprivate var rows = [RowFormer]()
     fileprivate var addPerson: RowFormer!
     fileprivate var deleteRow: RowFormer?
-    
+
     fileprivate var addedUsers = [User: UserStatus]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,9 +37,10 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         if self.calendar == nil {
             self.saveButton.title = "Save"
             self.navigationItem.title = "New Calendar"
-            self.calendar = Calendar.create() as? Calendar
+            self.calendar = Calendar.temporary()
         } else {
-            self.saveButton.title = "Update"
+            self.navigationItem.title = "Update Calendar"
+            self.saveButton.title = "Save"
             deleteRow = LabelRowFormer<FormLabelCell>() {
                 $0.titleLabel.textAlignment = .center
                 $0.titleLabel.textColor = .red
@@ -75,10 +78,10 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         
         let cm = CalendarManager.shared
         
-        set(participants: cm.users(withStatus: .Owner, forCalendar: calendar!), rows: &rows, status: .Owner)
-        set(participants: cm.users(withStatus: .Participating, forCalendar: calendar!), rows: &rows, status: .Participating)
-        set(participants: cm.users(withStatus: .Invited, forCalendar: calendar!), rows: &rows, status: .Invited)
-        set(participants: cm.users(withStatus: .Refused, forCalendar: calendar!), rows: &rows, status: .Refused)
+        set(participants: cm.users(withStatus: .Owner, forCalendar: calendar!), status: .Owner)
+        set(participants: cm.users(withStatus: .Participating, forCalendar: calendar!),  status: .Participating)
+        set(participants: cm.users(withStatus: .Invited, forCalendar: calendar!), status: .Invited)
+        set(participants: cm.users(withStatus: .Refused, forCalendar: calendar!), status: .Refused)
         
         addPerson = LabelRowFormer<FormLabelCell>() {
             $0.titleLabel.textColor = .orange
@@ -91,6 +94,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
             }.onSelected { [weak self] _ in
                 let storyboard = UIStoryboard(name: FriendsStoryboardID, bundle: nil)
                 let destVC = storyboard.instantiateViewController(withIdentifier: "FriendsInviteTableViewController") as! FriendsInviteTableViewController
+                destVC.friends = FriendManager.shared.friends()
                 destVC.onSelected = { user, done in
                     self?.invite(user, done: done)
                 }
@@ -148,12 +152,12 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         former.append(sectionFormer: sectionHeader, colorHeader, sectionParticipants)
         
         if let delRow = deleteRow {
-            let deleteSection = SectionFormer(rowFormer: delRow).set(headerViewFormer: createHeader(""))
-            former.append(sectionFormer: deleteSection)
+            sectionDelete = SectionFormer(rowFormer: delRow).set(headerViewFormer: createHeader(""))
+            former.append(sectionFormer: sectionDelete)
         }
     }
     
-    func set(participants: [User], rows: inout [RowFormer], status: UserStatus) {
+    func set(participants: [User], status: UserStatus) {
         for user in participants {
             addedUsers[user] = status
             let participant = LabelRowFormer<CollaboratorTableViewCell>(instantiateType: .Nib(nibName: "CollaboratorTableViewCell")) {
@@ -173,16 +177,54 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
                     $0.text = user.name
                     $0.subText = status.rawValue
                     $0.rowHeight = 45
-                }.onSelected{ [weak self] cell in
+            }
+            if !user.isEqual(UserManager.shared.current.user) {
+                participant.onSelected{ [weak self] cell in
                     self!.selectedUser(user, cell: cell)
+                }
             }
             rows.append(participant)
         }
     }
     
+    func reloadParticipants() {
+        former.remove(rowFormers: sectionParticipants.rowFormers)
+        rows.removeAll()
+        for (user, status) in addedUsers {
+            let participant = LabelRowFormer<CollaboratorTableViewCell>(instantiateType: .Nib(nibName: "CollaboratorTableViewCell")) {
+                switch status {
+                case .Invited:
+                    $0.statusColorView.backgroundColor = .orange
+                case .Participating:
+                    $0.statusColorView.backgroundColor = UIColor.green
+                case .Refused:
+                    $0.statusColorView.backgroundColor = .red
+                case .Owner:
+                    $0.statusColorView.backgroundColor = .cyan
+                default: break
+                }
+                $0.statusColorView.round()
+                }.configure {
+                    $0.text = user.name
+                    $0.subText = status.rawValue
+                    $0.rowHeight = 45
+            }
+            if !user.isEqual(UserManager.shared.current.user) {
+                participant.onSelected{ [weak self] cell in
+                    self!.selectedUser(user, cell: cell)
+                }
+            }
+            rows.append(participant)
+        }
+        rows.append(addPerson)
+        sectionParticipants.add(rowFormers: rows)
+        former.reload(sectionFormer: sectionParticipants)
+        //        rows.append(addPerson)
+    }
+    
     fileprivate func invite(_ user: User, done: (String)->Void) -> Void {
-        let isIn = addedUsers.contains { (u, _) -> Bool in
-            return user == u
+        let isIn = addedUsers.contains { (u, status) -> Bool in
+            return user == u && status != .Removed
         }
         
         if !isIn {
@@ -272,10 +314,18 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
             //                }
             //                self.addedUsers.removeValue(forKey: user)
             //            } else {
-            self.addedUsers[user] = UserStatus.Removed
+            self.addedUsers[user] = .Removed
             //            }
             self.former.removeUpdate(rowFormer: cell)
         }
+        if addedUsers[user] == .Participating {
+            destVC.owner = { user in
+                self.addedUsers[user] = .Owner
+                self.reloadParticipants()
+                self.former.reload(sectionFormer: self.sectionParticipants)
+            }
+        }
+        
         destVC.modalPresentationStyle = .popover
         destVC.preferredContentSize = CGSize(width: self.view.frame.width, height: 43)
         let popoverPC = destVC.popoverPresentationController
@@ -286,7 +336,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         popoverPC?.sourceRect = CGRect(x: cell.cell.frame.width / 2, y: cell.cell.frame.height, width: 1, height: 1)
         self.present(destVC, animated: true, completion: nil)
     }
-    
+
     fileprivate func delete() {
         let parameters = ["id": calendar!.id!]
         
@@ -294,13 +344,23 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
             switch status {
             case .success:
                 SpinnerManager.showWhistle("kCalendarSuccess")
+                print(DataSync.dataStack().viewContext)
+                print(DataSync.dataStack().mainContext)
                 self.calendar?.delete()
-                Calendar.count()
+                self.calendar?.save()
+                print(self.calendar?.name)
+                print(self.calendar?.owners?.count)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
                 if self.presentingViewController is UITabBarController {
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     self.navigationController!.popViewController(animated: true)
                 }
+                //                do {
+                //                    try DataSync.dataStack().mainContext.save()
+                //                } catch (let error) {
+                //                    print(error)
+            //                }
             case .error(let error):
                 SpinnerManager.showWhistle("kCalendarError", success: false)
                 print(error)
@@ -335,7 +395,6 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
             switch status {
             case .success:
                 SpinnerManager.showWhistle("kCalendarSuccess")
-                self.calendar?.save()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
                 self.dismiss(animated: true, completion: nil)
             case .error(let error):
@@ -389,7 +448,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
     
     @IBAction func done(_ sender: UIBarButtonItem) {
         let isPresentingInAddEventMode = presentingViewController is UITabBarController
-        
+
         if isPresentingInAddEventMode {
             create()
         } else {
@@ -401,12 +460,12 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         let isPresentingInAddEventMode = presentingViewController is UITabBarController
         
         if isPresentingInAddEventMode {
-            calendar!.delete()
             dismiss(animated: true, completion: nil)
         } else {
-            let changedValues = calendar!.changedValuesForCurrentEvent()
-            for (key, value) in changedValues {
-                calendar!.setValue(value, forKey: key)
+            let changedValues = calendar!.changedValues()
+            for (key, _) in changedValues {
+                let oldValues = calendar?.committedValues(forKeys: [key])
+                calendar!.setValue(oldValues?[key], forKey: key)
             }
             navigationController!.popViewController(animated: true)
         }

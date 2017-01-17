@@ -20,7 +20,7 @@ class LoadingViewController: UIViewController {
         // Do any additional setup after loading the view.
         projectLabel.adjustsFontSizeToFitWidth = true
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,7 +48,7 @@ class LoadingViewController: UIViewController {
         } else {
             storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
         }
-        //       storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
+//        storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil) // COMMENT
         if let viewController = storyboard.instantiateInitialViewController() {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Calendar" representedClassName=".Calendar" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES">
@@ -16,7 +16,11 @@
         <relationship name="refusedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="refusedCalendars" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Event" representedClassName=".Event" syncable="YES">
-        <attribute name="dateEnd" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateEnd" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="hyper.formatDate" value="&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;"/>
+            </userInfo>
+        </attribute>
         <attribute name="dateStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES">
             <userInfo>
@@ -36,6 +40,9 @@
         <relationship name="owners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="ownedEvents" inverseEntity="User" syncable="YES"/>
         <relationship name="participatingUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="events" inverseEntity="User" syncable="YES"/>
         <relationship name="refusedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="refusedEvents" inverseEntity="User" syncable="YES"/>
+        <userInfo>
+            <entry key="hyper.formatDate" value="&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;"/>
+        </userInfo>
     </entity>
     <entity name="Owner" representedClassName=".Owner" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
@@ -91,7 +98,7 @@
     </entity>
     <elements>
         <element name="Calendar" positionX="-14123" positionY="-2790" width="128" height="178"/>
-        <element name="Event" positionX="-14121" positionY="-2556" width="128" height="223"/>
+        <element name="Event" positionX="-14121" positionY="-2556" width="128" height="225"/>
         <element name="Owner" positionX="-14652" positionY="-2601" width="126" height="118"/>
         <element name="User" positionX="-14384" positionY="-2700" width="128" height="418"/>
     </elements>

@@ -11,7 +11,7 @@ import SwiftyJSON
 
 // MARK: Singleton
 class CalendarManager {
-    
+
     static let shared = CalendarManager()
     fileprivate init() {colors = [:]}
     
@@ -140,6 +140,7 @@ class CalendarManager {
                     if let value = response.result.value {
                         let json = JSON(value)
                         DataSync.syncCalendars(json) {
+                            
                             completionHandler(.success(nil))
                         }
                     }
@@ -257,7 +258,7 @@ class CalendarManager {
             }
         }
     }
-    
+
     func delete(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
         RouterWrapper.shared.request(.deleteCalendar(parameters)) { (response) in
             switch response.result {

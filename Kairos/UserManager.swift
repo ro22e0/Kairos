@@ -20,7 +20,7 @@ class UserManager {
     var current: Owner {
         return Owner.all().first as! Owner
     }
-    
+
     fileprivate func syncOwner(_ data: JSON, completionHandler: @escaping (StatusRequest) -> Void) {
         //        if let owner = Owner.all().first as? Owner {
         //            if owner.id != data["id"].number {
@@ -72,7 +72,7 @@ class UserManager {
                         DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
                             let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
-                            try! DataSync.dataStack().mainContext.save()
+//                            try! DataSync.dataStack().mainContext.save()
                             completionHandler(.success(nil))
                         })
                     default:
@@ -222,21 +222,5 @@ class UserManager {
         print(events)
         
         return events
-    }
-    
-    func getEvents(forDate date: Date) -> [Event] {
-        let events = self.getEvents()
-        var fEvents = [Event]()
-        
-        for e in events {
-            let dateStart = FSCalendar().date(byIgnoringTimeComponentsOf: e.dateStart! as Date)
-            let dateEnd = FSCalendar().date(byIgnoringTimeComponentsOf: e.dateEnd! as Date)
-            
-            if (dateStart.compare(date) == .orderedAscending || dateStart.compare(FSCalendar().date(byIgnoringTimeComponentsOf: date)) == .orderedSame) && (dateEnd.compare(date) == .orderedDescending || dateEnd.compare(FSCalendar().date(byIgnoringTimeComponentsOf: date)) == .orderedSame) {
-                fEvents.append(e)
-            }
-        }
-        
-        return fEvents
     }
 }

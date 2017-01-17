@@ -9,6 +9,7 @@
 import UIKit
 import FSCalendar
 import SwiftRecord
+import DynamicColor
 import DZNEmptyDataSet
 
 private let SWIPE_ANIMATION_DURATION = 0.3
@@ -22,6 +23,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     
     // MARK: - Class Properties
+    var allEvents = [Event]()
     var events = [Event]()
     
     // MARK: - Methods
@@ -33,21 +35,32 @@ class CalendarViewController: UIViewController {
             FriendManager.shared.fetch()
             CalendarManager.shared.fetch()
             DataSync.fetchCalendarColors()
-//            DataSync.fetchEvents()
+            EventManager.shared.fetch()
         }
-    
+        
         // Do any additional setup after loading the view.
+        eventTableView.tableFooterView = UIView()
+        
         calendarView.scrollDirection = .horizontal
         calendarView.placeholderType = .fillHeadTail
         calendarView.clipsToBounds = true
-        calendarView.appearance.caseOptions = [.headerUsesUpperCase, .weekdayUsesSingleUpperCase]
+        calendarView.appearance.caseOptions = [.weekdayUsesSingleUpperCase]
         calendarView.appearance.headerMinimumDissolvedAlpha = 0.0
         //        calendarView.locale = NSLocale.currentLocale()
         //        calendarView.calendar.timeZone = NSTimeZone.systemTimeZone()
-        
-        calendarView.select(calendarView.today!)
-        
-        let _ = ["title":"Apple Special Event", "location":"apple.com/apple-events/april-2016/", "notes":"New products !", "startDate":Date(), "endDate": Date()] as [String : Any]
+        allEvents = EventManager.shared.events(withStatus: .Participating)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.EventDidChange.rawValue), object: nil)
+        //        let _ = ["title":"Apple Special Event", "location":"apple.com/apple-events/april-2016/", "notes":"New products !", "startDate":Date(), "endDate": Date()] as [String : Any]
+    }
+
+    ///  Reload data notification handler
+    ///
+    ///  - parameter notification: The notification
+    @objc func reloadData(_ notification: Notification) {
+        events.removeAll()
+        allEvents = EventManager.shared.events(withStatus: .Participating)
+        calendarView.reloadData()
+        eventTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,6 +70,21 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    func events(forDate date: Date) -> [Event] {
+        var filteredEvents = [Event]()
+        let current = NSCalendar.current
+        
+        for e in allEvents {
+            let dateStart = current.date(bySettingHour: 0, minute: 0, second: 0, of: e.dateStart as! Date)
+            let dateEnd = current.date(bySettingHour: 23, minute: 59, second: 59, of: e.dateEnd as! Date)
+            let isBetween = (dateStart!...dateEnd!).contains(date)
+            if isBetween {
+                filteredEvents.append(e)
+            }
+        }
+        return filteredEvents
     }
     
     // MARK: - Actions
@@ -107,14 +135,18 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = eventTableView.dequeueReusableCell(withIdentifier: "eventCell") as! EventTableViewCell
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        
-        cell.startTimeLabel.text = formatter.string(from: events[indexPath.row].dateStart! as Date)
-        cell.endTimeLabel.text = formatter.string(from: events[indexPath.row].dateEnd! as Date)
-        cell.colorView.backgroundColor = .blue
-        cell.titleLabel.text = events[indexPath.row].title
-        cell.locationLabel.text = events[indexPath.row].location
+        let event = events[indexPath.row]
+
+        cell.startTimeLabel.text = String.noDateShortTime(event.dateStart! as Date)
+        cell.endTimeLabel.text = String.noDateShortTime(event.dateEnd! as Date)
+        let hexColor = CalendarManager.shared.colors[event.calendar!.color!]
+        let color = DynamicColor(hexString: hexColor!)
+        cell.lineColorView.backgroundColor = color
+        cell.roundColorView.backgroundColor = color
+        cell.roundColorView.round()
+        cell.titleLabel.text = event.title
+        cell.locationLabel.text = event.location
+        cell.participantLabel.text = EventManager.shared.allUsers(forEvent: event).count.description
         
         return cell
     }
@@ -139,21 +171,21 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        return 0
+        return events(forDate: date).count
         //UserManager.shared.getEvents(forDate: date).count
     }
     
     // MARK: FSCalendarDelegate
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-//        if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.beginingOfMonthOfDate(calendar.currentPage), toCalendarUnit: .Month) {
-//            calendarView.selectDate(calendar.beginingOfMonthOfDate(calendar.currentPage))
-//        }
+        //        if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.beginingOfMonthOfDate(calendar.currentPage), toCalendarUnit: .Month) {
+        //                    calendarView.select(calendar.minimumDate)
+        //        }
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date) {
         print("selected date: ", date)
-        self.events = UserManager.shared.getEvents(forDate: calendarView.selectedDate)
+        events = events(forDate: calendarView.selectedDate)
         self.eventTableView.reloadData()
     }
     
@@ -163,9 +195,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     }
     
     // MARK: FSCalendarDelegateAppearance
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventColorsFor date: Date) -> [Any]? {
-        return []
-    }
+    
 }
 
 extension CalendarViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {

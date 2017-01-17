@@ -47,6 +47,7 @@ class CalendarDetailsTableViewController: UITableViewController {
     ///
     ///  - parameter notification: The notification
     @objc func reloadData(_ notification: Notification) {
+        self.calendar = Calendar.find("id = %@", args: self.calendar?.id) as? Calendar
         if let calendar = self.calendar, calendar.userStatus != UserStatus.Refused.rawValue {
             self.former.removeAll()
             self.configure()
@@ -71,7 +72,7 @@ class CalendarDetailsTableViewController: UITableViewController {
         
         //        self.tableView.rowHeight = UITableViewAutomaticDimension
         //        self.tableView.estimatedRowHeight = 44
-        
+
         let cm = CalendarManager.shared
         var rows = [RowFormer]()
         
@@ -105,6 +106,7 @@ class CalendarDetailsTableViewController: UITableViewController {
             }.onSelected { [weak self] _ in
                 let storyboard = UIStoryboard(name: FriendsStoryboardID, bundle: nil)
                 let destVC = storyboard.instantiateViewController(withIdentifier: "FriendsInviteTableViewController") as! FriendsInviteTableViewController
+                destVC.friends = FriendManager.shared.friends()
                 destVC.onSelected = { user, done in
                     self?.invite(user, done: done)
                 }

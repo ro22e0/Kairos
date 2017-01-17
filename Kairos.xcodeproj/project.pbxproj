@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		01F6BF2D442DBB5D0DA2A7E1 /* Pods_Kairos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C48A9B6F70D6FD5B0F52CF /* Pods_Kairos.framework */; };
 		7EC8C50412FB335B18CC9ED4 /* Pods_KairosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079B844B84C39AB6C294AC82 /* Pods_KairosTests.framework */; };
+		AC3F80021E2CC061009DA485 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3F80011E2CC061009DA485 /* EventManager.swift */; };
+		AC4A94B91E2E587600BA59B5 /* EventParticipantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94B81E2E587600BA59B5 /* EventParticipantTableViewController.swift */; };
+		AC4A94BB1E2E5D4C00BA59B5 /* UserEventActionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94BA1E2E5D4C00BA59B5 /* UserEventActionTableViewController.swift */; };
+		AC4A94BD1E2E704600BA59B5 /* ProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94BC1E2E704600BA59B5 /* ProjectTableViewController.swift */; };
+		AC4A94BF1E2E817F00BA59B5 /* ProjectDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94BE1E2E817F00BA59B5 /* ProjectDetailsTableViewController.swift */; };
+		AC4A94C11E2E818E00BA59B5 /* EditProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94C01E2E818E00BA59B5 /* EditProjectTableViewController.swift */; };
+		AC4A94C31E2E81E800BA59B5 /* TaskDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94C21E2E81E800BA59B5 /* TaskDetailsTableViewController.swift */; };
+		AC4A94C51E2E821100BA59B5 /* EditTaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94C41E2E821100BA59B5 /* EditTaskTableViewController.swift */; };
+		AC9D1E5E1E2D7B3700F1D29D /* EventHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9D1E5C1E2D7B3700F1D29D /* EventHeaderCell.swift */; };
+		AC9D1E5F1E2D7B3700F1D29D /* EventHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9D1E5D1E2D7B3700F1D29D /* EventHeaderCell.xib */; };
+		AC9D1E6A1E2DA06700F1D29D /* EventDateDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9D1E681E2DA06700F1D29D /* EventDateDetailsCell.swift */; };
+		AC9D1E6B1E2DA06700F1D29D /* EventDateDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9D1E691E2DA06700F1D29D /* EventDateDetailsCell.xib */; };
 		ACFEF0CE1E28ED2F00381ECA /* Owner+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFEF0C61E28ED2F00381ECA /* Owner+CoreDataClass.swift */; };
 		ACFEF0CF1E28ED2F00381ECA /* Owner+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFEF0C71E28ED2F00381ECA /* Owner+CoreDataProperties.swift */; };
 		ACFEF0D01E28ED2F00381ECA /* Event+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACFEF0C81E28ED2F00381ECA /* Event+CoreDataClass.swift */; };
@@ -130,6 +142,18 @@
 		12D6BC32167E329CCB833231 /* Pods-KairosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KairosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KairosTests/Pods-KairosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3223CBE69C2D58368F9D6CD2 /* Pods-Kairos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kairos.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kairos/Pods-Kairos.debug.xcconfig"; sourceTree = "<group>"; };
 		478919BFCC2BBB3FC57340F6 /* Pods-Kairos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kairos.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kairos/Pods-Kairos.release.xcconfig"; sourceTree = "<group>"; };
+		AC3F80011E2CC061009DA485 /* EventManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		AC4A94B81E2E587600BA59B5 /* EventParticipantTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventParticipantTableViewController.swift; sourceTree = "<group>"; };
+		AC4A94BA1E2E5D4C00BA59B5 /* UserEventActionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventActionTableViewController.swift; sourceTree = "<group>"; };
+		AC4A94BC1E2E704600BA59B5 /* ProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewController.swift; sourceTree = "<group>"; };
+		AC4A94BE1E2E817F00BA59B5 /* ProjectDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailsTableViewController.swift; sourceTree = "<group>"; };
+		AC4A94C01E2E818E00BA59B5 /* EditProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProjectTableViewController.swift; sourceTree = "<group>"; };
+		AC4A94C21E2E81E800BA59B5 /* TaskDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsTableViewController.swift; sourceTree = "<group>"; };
+		AC4A94C41E2E821100BA59B5 /* EditTaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskTableViewController.swift; sourceTree = "<group>"; };
+		AC9D1E5C1E2D7B3700F1D29D /* EventHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeaderCell.swift; sourceTree = "<group>"; };
+		AC9D1E5D1E2D7B3700F1D29D /* EventHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventHeaderCell.xib; sourceTree = "<group>"; };
+		AC9D1E681E2DA06700F1D29D /* EventDateDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDateDetailsCell.swift; sourceTree = "<group>"; };
+		AC9D1E691E2DA06700F1D29D /* EventDateDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDateDetailsCell.xib; sourceTree = "<group>"; };
 		ACFEF0C61E28ED2F00381ECA /* Owner+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Owner+CoreDataClass.swift"; sourceTree = "<group>"; };
 		ACFEF0C71E28ED2F00381ECA /* Owner+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Owner+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		ACFEF0C81E28ED2F00381ECA /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -334,6 +358,10 @@
 				DA3603C01CC26C3300A89B5A /* EventInfosTableViewCell.swift */,
 				DA3603C21CC26C4700A89B5A /* EventCalendarTableViewCell.swift */,
 				DA3603C41CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift */,
+				AC9D1E5C1E2D7B3700F1D29D /* EventHeaderCell.swift */,
+				AC9D1E5D1E2D7B3700F1D29D /* EventHeaderCell.xib */,
+				AC9D1E681E2DA06700F1D29D /* EventDateDetailsCell.swift */,
+				AC9D1E691E2DA06700F1D29D /* EventDateDetailsCell.xib */,
 			);
 			name = Details;
 			sourceTree = "<group>";
@@ -472,6 +500,11 @@
 		DA847C281D14075400ED2750 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				AC4A94BC1E2E704600BA59B5 /* ProjectTableViewController.swift */,
+				AC4A94BE1E2E817F00BA59B5 /* ProjectDetailsTableViewController.swift */,
+				AC4A94C01E2E818E00BA59B5 /* EditProjectTableViewController.swift */,
+				AC4A94C21E2E81E800BA59B5 /* TaskDetailsTableViewController.swift */,
+				AC4A94C41E2E821100BA59B5 /* EditTaskTableViewController.swift */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -483,6 +516,8 @@
 				DA3603C61CC26DA000A89B5A /* EventDetailsTableViewController.swift */,
 				DA52AAE21CD7EC5900464096 /* EventTableViewController.swift */,
 				DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */,
+				AC4A94B81E2E587600BA59B5 /* EventParticipantTableViewController.swift */,
+				AC4A94BA1E2E5D4C00BA59B5 /* UserEventActionTableViewController.swift */,
 				DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */,
 				DA31B7731D9514D9004D5E81 /* CalendarEditTableViewController.swift */,
 				DAFA00241DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift */,
@@ -554,6 +589,7 @@
 				DA6853321CE25E2400B839F6 /* UserManager.swift */,
 				DA0019051D9FEDEC00CA11F5 /* FriendManager.swift */,
 				DA0E144A1DA8125200865C20 /* CalendarManager.swift */,
+				AC3F80011E2CC061009DA485 /* EventManager.swift */,
 				DAC801811CA1F0330092A717 /* SpinnerManager.swift */,
 				DA6853471CE2707600B839F6 /* RouterWrapper.swift */,
 				DA83262F1CE3CCFF00C09F31 /* DataSync.swift */,
@@ -722,11 +758,13 @@
 				DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */,
 				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
 				DAFA00291DA852800039AD4D /* CalendarHeaderCell.xib in Resources */,
+				AC9D1E5F1E2D7B3700F1D29D /* EventHeaderCell.xib in Resources */,
 				DAA816601C9C207C00EF1560 /* GoogleService-Info.plist in Resources */,
 				DAC801881CA346B70092A717 /* Settings.storyboard in Resources */,
 				DA612CB41CA472F90027D7FB /* Profile.storyboard in Resources */,
 				DA799DF81D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib in Resources */,
 				DA7912FE1CEFCDA100661753 /* BlockUserTableViewCell.xib in Resources */,
+				AC9D1E6B1E2DA06700F1D29D /* EventDateDetailsCell.xib in Resources */,
 				DA6853311CE25D6700B839F6 /* SentInvitationTableViewCell.xib in Resources */,
 				DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */,
 				DA5CDDE21D8ACF5000B406A1 /* CollaboratorTableViewCell.xib in Resources */,
@@ -948,6 +986,7 @@
 			files = (
 				DA3F3ACF1C9AFC2A00E82FC6 /* Common.swift in Sources */,
 				DA52AAE31CD7EC5900464096 /* EventTableViewController.swift in Sources */,
+				AC4A94BF1E2E817F00BA59B5 /* ProjectDetailsTableViewController.swift in Sources */,
 				DA2EC0291DA90FC100BCA895 /* FriendsInviteTableViewController.swift in Sources */,
 				DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */,
 				DA7912FD1CEFCDA100661753 /* BlockUserTableViewCell.swift in Sources */,
@@ -958,6 +997,7 @@
 				DA6853301CE25D6700B839F6 /* SentInvitationTableViewCell.swift in Sources */,
 				DAA2D4791DA3079700D5E6A7 /* AddFriendsTableViewController.swift in Sources */,
 				DA18745D1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift in Sources */,
+				AC3F80021E2CC061009DA485 /* EventManager.swift in Sources */,
 				DA6853331CE25E2400B839F6 /* UserManager.swift in Sources */,
 				DA3603C71CC26DA000A89B5A /* EventDetailsTableViewController.swift in Sources */,
 				DA6853461CE260C200B839F6 /* Kairos.xcdatamodeld in Sources */,
@@ -965,6 +1005,7 @@
 				DA11A9F61D986A6700218FF3 /* RequestManager.swift in Sources */,
 				DAFA00251DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift in Sources */,
 				DADC45DC1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift in Sources */,
+				AC4A94B91E2E587600BA59B5 /* EventParticipantTableViewController.swift in Sources */,
 				DA18745F1CDB78A9008E7C38 /* EventNotesTableViewCell.swift in Sources */,
 				DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */,
 				DAE097741C9DF0FA00D6B462 /* DefinePasswordViewController.swift in Sources */,
@@ -996,6 +1037,7 @@
 				DADC45E01D9FBE0A003CC4D1 /* ChangePasswordViewController.swift in Sources */,
 				DA1D4BE11D84111C00B11AD1 /* CalendarFilterTableViewController.swift in Sources */,
 				DA3603C51CC26C5A00A89B5A /* EventDescriptionTableViewCell.swift in Sources */,
+				AC4A94C51E2E821100BA59B5 /* EditTaskTableViewController.swift in Sources */,
 				DAE380CE1CB2F5B3002DB874 /* EventTableViewCell.swift in Sources */,
 				DA799DF71D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift in Sources */,
 				DA3F3ACB1C9AEA5200E82FC6 /* LoadingViewController.swift in Sources */,
@@ -1003,7 +1045,11 @@
 				DAECFECD1DA0578C00D3F724 /* CustomTextFieldTableViewCell.swift in Sources */,
 				DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */,
 				DA6853481CE2707600B839F6 /* RouterWrapper.swift in Sources */,
+				AC4A94BB1E2E5D4C00BA59B5 /* UserEventActionTableViewController.swift in Sources */,
 				DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */,
+				AC4A94C11E2E818E00BA59B5 /* EditProjectTableViewController.swift in Sources */,
+				AC9D1E6A1E2DA06700F1D29D /* EventDateDetailsCell.swift in Sources */,
+				AC9D1E5E1E2D7B3700F1D29D /* EventHeaderCell.swift in Sources */,
 				DA1E12011D784AC90068207F /* EditProfileViewController.swift in Sources */,
 				DA668F3E1CA4AEA000230912 /* InvitationTableViewCell.swift in Sources */,
 				DADD55E41CA60CE200C44D40 /* UserTableViewCell.swift in Sources */,
@@ -1015,6 +1061,7 @@
 				DAA6B6B71D99CAD600D68016 /* CompleteProfileViewController.swift in Sources */,
 				DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */,
 				DA0019061D9FEDEC00CA11F5 /* FriendManager.swift in Sources */,
+				AC4A94BD1E2E704600BA59B5 /* ProjectTableViewController.swift in Sources */,
 				DAFA00281DA852800039AD4D /* CalendarHeaderCell.swift in Sources */,
 				DA5CDDE11D8ACF5000B406A1 /* CollaboratorTableViewCell.swift in Sources */,
 				ACFEF0CE1E28ED2F00381ECA /* Owner+CoreDataClass.swift in Sources */,
@@ -1023,6 +1070,7 @@
 				DA4041701DE769450043A8F0 /* ColorSelectionViewController.swift in Sources */,
 				DA0E144B1DA8125200865C20 /* CalendarManager.swift in Sources */,
 				DA5CDDE61D8AD94100B406A1 /* CalendarDeleteTableViewCell.swift in Sources */,
+				AC4A94C31E2E81E800BA59B5 /* TaskDetailsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,6 +1205,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TWPS85FDC4;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Kairos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1178,6 +1227,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = TWPS85FDC4;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Kairos/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
