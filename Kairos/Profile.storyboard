@@ -22,7 +22,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fullname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zod-1Q-CHr">
-                                    <rect key="frame" x="138.5" y="208" width="97" height="48"/>
+                                    <rect key="frame" x="139" y="208" width="97" height="48"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PRW-oG-ROf">
-                                                    <rect key="frame" x="8" y="4.5" width="35" height="35"/>
+                                                    <rect key="frame" x="8" y="5" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="PRW-oG-ROf" secondAttribute="height" multiplier="1:1" id="Brg-hQ-xGO"/>
                                                         <constraint firstAttribute="height" constant="35" id="eSp-c8-e5a"/>
@@ -87,7 +87,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7oB-GW-xK6">
-                                                    <rect key="frame" x="8" y="4.5" width="35" height="35"/>
+                                                    <rect key="frame" x="8" y="5" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="7oB-GW-xK6" secondAttribute="height" multiplier="1:1" id="C9j-YP-r1S"/>
                                                         <constraint firstAttribute="height" constant="35" id="mjb-3y-1dh"/>
@@ -123,7 +123,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qu9-1w-KmF">
-                                                    <rect key="frame" x="8" y="4.5" width="35" height="35"/>
+                                                    <rect key="frame" x="8" y="5" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="qu9-1w-KmF" secondAttribute="height" multiplier="1:1" id="6Ui-mY-ub9"/>
                                                         <constraint firstAttribute="height" constant="35" id="XDk-9Z-do1"/>
@@ -174,7 +174,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QNq-tY-o4c">
-                                                    <rect key="frame" x="8" y="4.5" width="35" height="35"/>
+                                                    <rect key="frame" x="8" y="5" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="QNq-tY-o4c" secondAttribute="height" multiplier="1:1" id="EfK-Ag-cbt"/>
                                                         <constraint firstAttribute="height" constant="35" id="tca-Gd-FOa"/>
@@ -220,7 +220,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dvZ-re-7wX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <state key="normal" title="Sign out">
                                                         <color key="titleColor" red="0.9107572115" green="0.03408877062" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
