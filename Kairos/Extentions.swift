@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import DynamicColor
 
 extension String {
 
@@ -49,6 +50,15 @@ extension String {
 //        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         return dateFormatter.string(from: date)
     }
+
+    static func shortDateNoTime(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .current
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .short
+        //        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        return dateFormatter.string(from: date)
+    }
     
     static func fullDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -61,6 +71,15 @@ extension String {
 }
 
 extension UIColor {
+    
+    class func orangeTint() -> UIColor {
+        return DynamicColor(hexString: "F27242")
+    }
+    
+    class func background() -> UIColor {
+        return DynamicColor(hexString: "F8F8F6")
+    }
+
     class func formerColor() -> UIColor {
         return UIColor(red: 0.14, green: 0.16, blue: 0.22, alpha: 1)
     }

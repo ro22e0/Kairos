@@ -479,5 +479,133 @@ struct DataSync {
         }
     }
 
+    // MARK: - Projects
+    static func syncProjects(_ json: JSON, completionHandler: @escaping ()->()) {
+        let data = json.dictionaryObject
+        DataSync.sync(entity: "Project", predicate: nil, data: [data!], completion: { error in
+            //          try! self.dataStack().mainContext.save()
+            let c = Project.all().first as! Project
+            print(c)
+            print(NSDate(), "done")
+            completionHandler()
+        })
+    }
     
+    static func fetchProjects(_ completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.getProjects) { (response) in
+            print(response.response) // URL response
+            switch response.result {
+            case .success:
+                UserManager.shared.setCredentials(response.response!)
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    print(json)
+                    
+                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+                        return Project.query(predicate)
+                    })
+                    let data = DataSync.transformJson(json)
+                    DataSync.sync(entity: "Project", predicate: nil, data: data, completion: { error in
+                        //                        Calendar.save()
+                        try! self.dataStack().mainContext.save()
+                        let c = Project.all().first as? Project
+                        print(c)
+                        print(NSDate(), "done")
+                        completionHandler(.success(nil))
+                    })
+                    
+                    //                    deleteObject(json.array!, query: Calendar.query)
+                    
+                    //                    self.syncCalendars(json)
+                    //                    completionHandler(.success(nil))
+                    
+                    //                    let completion: ((NSError?) -> Void) = { error in
+                    //                        print(NSDate(), "done")
+                    //
+                    //                        for c in json.array! {
+                    //                            var data = [[String : Any]]()
+                    //                            data += c["refused_users"].object as! [[String : Any]]
+                    //                            data += c["participating_users"].object as! [[String : Any]]
+                    //                            data += c["invited_users"].object as! [[String : Any]]
+                    //                            data += c["owners"].object as! [[String : Any]]
+                    //
+                    //                            self.sync(entity: "User", predicate: nil, data: data, completion: { error in
+                    //                                print(NSDate(), "done")
+                    //                            })
+                    //                        }
+                    //                    }
+                    //                    self.sync(entity: "Calendar", predicate: nil, data: json.object as! [[String : Any]], completion: completion)
+                }
+            case .failure(let error):
+                completionHandler(.error("error"))
+                print(error)
+            }
+        }
+    }
+
+    // MARK: - Tasks
+    static func syncTasks(_ json: JSON, completionHandler: @escaping ()->()) {
+        let data = json.dictionaryObject
+        DataSync.sync(entity: "Task", predicate: nil, data: [data!], completion: { error in
+            //          try! self.dataStack().mainContext.save()
+            let c = Task.all().first as? Task
+            print(c)
+            print(NSDate(), "done")
+            completionHandler()
+        })
+    }
+
+    static func fetchTasks(_ completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.getTasks) { (response) in
+            print(response.response) // URL response
+            switch response.result {
+            case .success:
+                UserManager.shared.setCredentials(response.response!)
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    print(json)
+                    
+                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+                        return Task.query(predicate)
+                    })
+                    let data = DataSync.transformJson(json)
+                    DataSync.sync(entity: "Task", predicate: nil, data: data, completion: { error in
+                        //                        Calendar.save()
+                        try! self.dataStack().mainContext.save()
+                        let c = Task.all().first as? Task
+                        print(c)
+                        print(NSDate(), "done")
+                        completionHandler(.success(nil))
+                    })
+                    
+                    //                    deleteObject(json.array!, query: Calendar.query)
+                    
+                    //                    self.syncCalendars(json)
+                    //                    completionHandler(.success(nil))
+                    
+                    //                    let completion: ((NSError?) -> Void) = { error in
+                    //                        print(NSDate(), "done")
+                    //
+                    //                        for c in json.array! {
+                    //                            var data = [[String : Any]]()
+                    //                            data += c["refused_users"].object as! [[String : Any]]
+                    //                            data += c["participating_users"].object as! [[String : Any]]
+                    //                            data += c["invited_users"].object as! [[String : Any]]
+                    //                            data += c["owners"].object as! [[String : Any]]
+                    //
+                    //                            self.sync(entity: "User", predicate: nil, data: data, completion: { error in
+                    //                                print(NSDate(), "done")
+                    //                            })
+                    //                        }
+                    //                    }
+                    //                    self.sync(entity: "Calendar", predicate: nil, data: json.object as! [[String : Any]], completion: completion)
+                }
+            case .failure(let error):
+                completionHandler(.error("error"))
+                print(error)
+            }
+        }
+    }
 }

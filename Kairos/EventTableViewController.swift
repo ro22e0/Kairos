@@ -42,7 +42,6 @@ class EventTableViewController: FormViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         //        eventStartDateCell = EventStartDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
         //        eventEndDateCell = EventEndDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
-        
         if self.event == nil {
             self.saveButton.title = "Save"
             self.navigationItem.title = "New Event"
@@ -61,7 +60,6 @@ class EventTableViewController: FormViewController {
             }
         }
         configure()
-        
         let queue = DispatchQueue.init(label: "fill_users")
         queue.async {
             let em = EventManager.shared
@@ -77,7 +75,6 @@ class EventTableViewController: FormViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: kEventWillSaveNotification), object: nil, userInfo:["event": event!])
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,6 +89,8 @@ class EventTableViewController: FormViewController {
     fileprivate func configure() {
         title = "Add Event"
         tableView.contentInset.top = 10
+        tableView.backgroundColor = .background()
+        tableView.bounces = false
         //        tableView.contentInset.bottom = 30
         //        tableView.contentOffset.y = -10
         
@@ -197,7 +196,7 @@ class EventTableViewController: FormViewController {
                 $0.subText = self.selectedCalendar?.name
         }
         rows.append(calendarRow!)
-        
+    
         peoplesRow = LabelRowFormer<FormLabelCell>() {
             $0.formTextLabel()?.textColor = .formerColor()
             $0.formTextLabel()?.font = .boldSystemFont(ofSize: 15)
@@ -250,7 +249,9 @@ class EventTableViewController: FormViewController {
         // Create Headers
         
         let createHeader: (() -> ViewFormer) = {
-            return CustomViewFormer<FormHeaderFooterView>()
+            return CustomViewFormer<FormHeaderFooterView>() {
+                $0.contentView.backgroundColor = .background()
+                }
                 .configure {
                     $0.viewHeight = 20
             }
@@ -316,11 +317,11 @@ class EventTableViewController: FormViewController {
         EventManager.shared.create(parameters) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kEventCreated", success: true)
+                Spinner.showWhistle("kEventCreated", success: true)
                 //                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
                 self.dismiss(animated: true, completion: nil)
             case .error(let error):
-                SpinnerManager.showWhistle("kFail", success: false)
+                Spinner.showWhistle("kFail", success: false)
                 print(error)
             }
         }
@@ -336,7 +337,7 @@ class EventTableViewController: FormViewController {
         EventManager.shared.update(parameters) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kCalendarSuccess")
+                Spinner.showWhistle("kCalendarSuccess")
                 //                for userId in removed {
                 //                    if let user = User.find("id == %@", args: userId) as? User {
                 //                        EventManager.shared.delete(user: user, fromEvent: event!)
@@ -346,7 +347,7 @@ class EventTableViewController: FormViewController {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.EventDidChange.rawValue), object: nil)
                 self.navigationController!.popViewController(animated: true)
             case .error(let error):
-                SpinnerManager.showWhistle("kCalendarError", success: false)
+                Spinner.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }
@@ -360,7 +361,7 @@ class EventTableViewController: FormViewController {
         EventManager.shared.delete(parameters) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kEventSuccess")
+                Spinner.showWhistle("kEventSuccess")
                 print(DataSync.dataStack().viewContext)
                 print(DataSync.dataStack().mainContext)
                 self.event?.delete()
@@ -379,7 +380,7 @@ class EventTableViewController: FormViewController {
                 //                    print(error)
             //                }
             case .error(let error):
-                SpinnerManager.showWhistle("kEventError", success: false)
+                Spinner.showWhistle("kEventError", success: false)
                 print(error)
             }
         }

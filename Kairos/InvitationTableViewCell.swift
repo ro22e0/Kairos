@@ -33,9 +33,9 @@ class InvitationTableViewCell: UITableViewCell {
         FriendManager.shared.accept(parameters) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kFriendSuccess")
+                Spinner.showWhistle("kFriendSuccess")
             case .error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
+                Spinner.showWhistle("kFriendError", success: false)
                 print(error)
             }
         }
@@ -49,9 +49,9 @@ class InvitationTableViewCell: UITableViewCell {
             switch status {
             case .success:
                 friend.delete()
-                SpinnerManager.showWhistle("kFriendSuccess")
+                Spinner.showWhistle("kFriendSuccess")
             case .error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
+                Spinner.showWhistle("kFriendError", success: false)
                 print(error)
             }
         }    }

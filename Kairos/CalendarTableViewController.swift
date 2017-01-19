@@ -35,12 +35,10 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         if self.calendar == nil {
-            self.saveButton.title = "Save"
             self.navigationItem.title = "New Calendar"
             self.calendar = Calendar.temporary()
         } else {
-            self.navigationItem.title = "Update Calendar"
-            self.saveButton.title = "Save"
+            self.navigationItem.title = "Edit Calendar"
             deleteRow = LabelRowFormer<FormLabelCell>() {
                 $0.titleLabel.textAlignment = .center
                 $0.titleLabel.textColor = .red
@@ -60,17 +58,17 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
     }
     
     func configure() {
-        self.title = "Edit Calendar"
         self.tableView.tableFooterView = UIView()
+        tableView.backgroundColor = .background()
         
         //        self.tableView.rowHeight = UITableViewAutomaticDimension
         //        self.tableView.estimatedRowHeight = 44
         
         let nameRow = TextFieldRowFormer<FormTextFieldCell>() {
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFont(ofSize: 15)
+            $0.textField.font = .systemFont(ofSize: 17)
             }.configure {
-                $0.placeholder = "Name"
+                $0.placeholder = "Calendar Name"
                 $0.text = calendar?.name
             }.onTextChanged { (text) in
                 self.calendar?.name = text
@@ -134,10 +132,13 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
                 popoverPC?.sourceRect = CGRect(x: cell.cell.frame.width / 2, y: cell.cell.frame.height, width: 1, height: 1)
                 self!.present(destVC, animated: true, completion: nil)
         }
+
         // Create Headers
         
         let createHeader: ((String) -> ViewFormer) = { text in
-            return LabelViewFormer<FormLabelHeaderView>()
+            return LabelViewFormer<FormLabelHeaderView>() {
+                $0.contentView.backgroundColor = .clear
+                }
                 .configure {
                     $0.viewHeight = 40
                     $0.text = text
@@ -240,13 +241,13 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
                 }.onSelected{ [weak self] cell in
                     self!.selectedUser(user, cell: cell)
             }
-            SpinnerManager.showWhistle("kCalendarSuccess")
+            Spinner.showWhistle("kCalendarSuccess")
             done("Invited")
             former.insertUpdate(rowFormer: participant, above: addPerson, rowAnimation: .automatic)
             former.reload(sectionFormer: sectionParticipants)
             // }
         } else {
-            SpinnerManager.showWhistle("kCalendarAlreadyAdded", success: false)
+            Spinner.showWhistle("kCalendarAlreadyAdded", success: false)
             done("Already added")
         }
     }
@@ -343,7 +344,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         CalendarManager.shared.delete(parameters) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kCalendarSuccess")
+                Spinner.showWhistle("kCalendarSuccess")
                 print(DataSync.dataStack().viewContext)
                 print(DataSync.dataStack().mainContext)
                 self.calendar?.delete()
@@ -362,7 +363,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
                 //                    print(error)
             //                }
             case .error(let error):
-                SpinnerManager.showWhistle("kCalendarError", success: false)
+                Spinner.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }
@@ -394,11 +395,11 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         CalendarManager.shared.create(parameters as [String : Any]) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kCalendarSuccess")
+                Spinner.showWhistle("kCalendarSuccess")
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
                 self.dismiss(animated: true, completion: nil)
             case .error(let error):
-                SpinnerManager.showWhistle("kCalendarError", success: false)
+                Spinner.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }
@@ -430,7 +431,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         CalendarManager.shared.update(parameters as [String : Any]) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kCalendarSuccess")
+                Spinner.showWhistle("kCalendarSuccess")
                 for userId in removed {
                     if let user = User.find("id == %@", args: userId) as? User {
                         CalendarManager.shared.delete(user: user, fromCalendar: self.calendar!)
@@ -440,7 +441,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
                 self.navigationController!.popViewController(animated: true)
             case .error(let error):
-                SpinnerManager.showWhistle("kCalendarError", success: false)
+                Spinner.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }

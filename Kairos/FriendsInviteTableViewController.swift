@@ -87,7 +87,8 @@ class FriendsInviteTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserTableViewCell
         
         // Configure the cell...
-        cell.nameLabel.text = friends[indexPath.row].name
+        let friend = friends[indexPath.row]
+        cell.nameLabel.text = friend.name
         
         //        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [User]
         //        if let number = mutualFriends?.count where number > 0 {
@@ -96,12 +97,13 @@ class FriendsInviteTableViewController: UITableViewController {
         //        } else {
         cell.mutualFriendsLabel.isHidden = true
         //        }
+        cell.profilePictureImageView.setImageWith(friend.name, color: .orangeTint(), circular: true)
         cell.onSelected = { user, done in
             self.onSelected!(user) { text in
                 done(text)
             }
         }
-        cell.tag = Int(friends[indexPath.row].id!)
+        cell.tag = Int(friend.id!)
         return cell
     }
     

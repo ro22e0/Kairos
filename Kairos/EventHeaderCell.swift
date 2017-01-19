@@ -56,10 +56,10 @@ class EventHeaderCell: UITableViewCell, LabelFormableRow {
             case .success:
                 self.acceptButton.isEnabled = false
                 self.declineButton.isEnabled = true
-                SpinnerManager.showWhistle("kEventSuccess")
+                Spinner.showWhistle("kEventSuccess")
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.EventStatusChange.rawValue), object: nil)
             case .error(let error):
-                SpinnerManager.showWhistle("kEventError", success: false)
+                Spinner.showWhistle("kEventError", success: false)
                 print(error)
             }
         }
@@ -74,10 +74,10 @@ class EventHeaderCell: UITableViewCell, LabelFormableRow {
             case .success:
                 self.declineButton.isEnabled = false
                 self.acceptButton.isEnabled = true
-                SpinnerManager.showWhistle("kEventSuccess")
+                Spinner.showWhistle("kEventSuccess")
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.EventStatusChange.rawValue), object: nil)
             case .error(let error):
-                SpinnerManager.showWhistle("kEventError", success: false)
+                Spinner.showWhistle("kEventError", success: false)
                 print(error)
             }
         }

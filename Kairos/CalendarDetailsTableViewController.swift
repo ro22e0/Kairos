@@ -66,7 +66,7 @@ class CalendarDetailsTableViewController: UITableViewController {
             editButton.isEnabled = false
             editButton.tintColor = .clear
         }
-        
+
         self.title = "Calendar Details"
         self.tableView.tableFooterView = UIView()
         
@@ -159,18 +159,18 @@ class CalendarDetailsTableViewController: UITableViewController {
         
         if addedUsers.contains(user) {
             done("Already Added")
-            SpinnerManager.showWhistle("kCalendarAlreadyAdded")
+            Spinner.showWhistle("kCalendarAlreadyAdded")
             return
         }
 
         CalendarManager.shared.invite(parameters) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kCalendarSuccess")
+                Spinner.showWhistle("kCalendarSuccess")
                 done("Invited")
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
             case .error(let error):
-                SpinnerManager.showWhistle("kCalendarError", success: false)
+                Spinner.showWhistle("kCalendarError", success: false)
                 print(error)
             }
         }

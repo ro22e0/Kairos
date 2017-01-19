@@ -47,10 +47,10 @@ class AddFriendsTableViewController: UITableViewController {
         FriendManager.shared.invite(parameters) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kFriendSuccess")
+                Spinner.showWhistle("kFriendSuccess")
                 done()
             case .error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
+                Spinner.showWhistle("kFriendError", success: false)
                 print(error)
             }
         }

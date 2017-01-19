@@ -60,7 +60,7 @@ class SignUpViewController: UIViewController {
         
         if success {
             let user = userInfo["user"] as! GIDGoogleUser
-            SpinnerManager.showWithAnimation("Retrieving informations...")
+            Spinner.showWithAnimation("Retrieving informations...")
             googleFetch(user, completion: { () -> Void in
                 self.performSegue(withIdentifier: "kShowDefinePasswordSegue", sender: self)
             })
@@ -100,13 +100,13 @@ class SignUpViewController: UIViewController {
         let permissions = ["public_profile", "email"]
         loginManager.logIn(withReadPermissions: permissions, from: self) { (result, error) -> Void in
             if error != nil {
-                SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
+                Spinner.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 print(error?.localizedDescription)
             } else if !(result?.isCancelled)! {
                 self.userInfos = ["type": LoginSDK.Facebook.rawValue, "data": result]
-                SpinnerManager.showWithAnimation("Retrieving informations...")
+                Spinner.showWithAnimation("Retrieving informations...")
                 self.facebookFetch(result!, completion: { () -> Void in
                     self.performSegue(withIdentifier: "kShowDefinePasswordSegue", sender: self)
                 })
@@ -136,7 +136,7 @@ class SignUpViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
+                Spinner.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 print(error)
@@ -168,7 +168,7 @@ class SignUpViewController: UIViewController {
                     }
                 }
             } else {
-                SpinnerManager.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
+                Spinner.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 print(error)
@@ -198,7 +198,7 @@ class SignUpViewController: UIViewController {
             case .reachable(.ethernetOrWiFi):
                 request?.resume()
             case .notReachable:
-                SpinnerManager.showSpinner("The Internet connection appears to be offline", subtitle: "Tap to dismiss", completion: { () -> () in
+                Spinner.showSpinner("The Internet connection appears to be offline", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
                 request?.cancel()

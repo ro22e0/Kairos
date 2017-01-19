@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Calendar" representedClassName=".Calendar" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES">
@@ -9,7 +9,7 @@
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userStatus" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="event" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="calendar" inverseEntity="Event" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="calendar" inverseEntity="Event" syncable="YES"/>
         <relationship name="invitedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="invitedCalendars" inverseEntity="User" syncable="YES"/>
         <relationship name="owners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="ownedCalendars" inverseEntity="User" syncable="YES"/>
         <relationship name="participatingUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="calendars" inverseEntity="User" syncable="YES"/>
@@ -21,7 +21,11 @@
                 <entry key="hyper.formatDate" value="&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;"/>
             </userInfo>
         </attribute>
-        <attribute name="dateStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="hyper.formatDate" value="&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;"/>
+            </userInfo>
+        </attribute>
         <attribute name="id" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES">
             <userInfo>
                 <entry key="hyper.isPrimaryKey" value="true"/>
@@ -35,14 +39,11 @@
         </attribute>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userStatus" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="calendar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Calendar" inverseName="event" inverseEntity="Calendar" syncable="YES"/>
+        <relationship name="calendar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Calendar" inverseName="events" inverseEntity="Calendar" syncable="YES"/>
         <relationship name="invitedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="invitedEvents" inverseEntity="User" syncable="YES"/>
         <relationship name="owners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="ownedEvents" inverseEntity="User" syncable="YES"/>
         <relationship name="participatingUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="events" inverseEntity="User" syncable="YES"/>
         <relationship name="refusedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="refusedEvents" inverseEntity="User" syncable="YES"/>
-        <userInfo>
-            <entry key="hyper.formatDate" value="&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;"/>
-        </userInfo>
     </entity>
     <entity name="Owner" representedClassName=".Owner" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
@@ -63,6 +64,54 @@
             </userInfo>
         </relationship>
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="owner" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Project" representedClassName="Project" syncable="YES">
+        <attribute name="dateEnd" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="hyper.formatDate" value="&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;"/>
+            </userInfo>
+        </attribute>
+        <attribute name="dateStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="hyper.formatDate" value="&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;"/>
+            </userInfo>
+        </attribute>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="hyper.remoteKey" value="description"/>
+            </userInfo>
+        </attribute>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="invitedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="invitedProjects" inverseEntity="User" syncable="YES"/>
+        <relationship name="owners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="ownedProjects" inverseEntity="User" syncable="YES"/>
+        <relationship name="participatingUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="projects" inverseEntity="User" syncable="YES"/>
+        <relationship name="refusedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="refusedProjects" inverseEntity="User" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="project" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <entity name="Task" representedClassName="Task" syncable="YES">
+        <attribute name="dateEnd" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="hyper.formatDate" value="&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;"/>
+            </userInfo>
+        </attribute>
+        <attribute name="dateStart" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="hyper.formatDate" value="&quot;yyyy-MM-dd'T'HH:mm:ss.SSS'Z'&quot;"/>
+            </userInfo>
+        </attribute>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="hyper.remoteKey" value="description"/>
+            </userInfo>
+        </attribute>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="childTasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="parent" inverseEntity="Task" syncable="YES"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="childTasks" inverseEntity="Task" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="tasks" inverseEntity="Project" syncable="YES"/>
+        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="tasks" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName=".User" syncable="YES">
         <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
@@ -87,19 +136,26 @@
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Owner" inverseName="friends" inverseEntity="Owner" syncable="YES"/>
         <relationship name="invitedCalendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="invitedUsers" inverseEntity="Calendar" syncable="YES"/>
         <relationship name="invitedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="invitedUsers" inverseEntity="Event" syncable="YES"/>
+        <relationship name="invitedProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="invitedUsers" inverseEntity="Project" syncable="YES"/>
         <relationship name="mutualFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="mutualFriends" inverseEntity="User" syncable="YES"/>
         <relationship name="ownedCalendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="owners" inverseEntity="Calendar" syncable="YES"/>
         <relationship name="ownedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="owners" inverseEntity="Event" syncable="YES"/>
+        <relationship name="ownedProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="owners" inverseEntity="Project" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="user" inverseEntity="Owner" syncable="YES"/>
         <relationship name="pendingFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Owner" inverseName="pendingFriends" inverseEntity="Owner" syncable="YES"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="participatingUsers" inverseEntity="Project" syncable="YES"/>
         <relationship name="refusedCalendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="refusedUsers" inverseEntity="Calendar" syncable="YES"/>
         <relationship name="refusedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="refusedUsers" inverseEntity="Event" syncable="YES"/>
+        <relationship name="refusedProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="refusedUsers" inverseEntity="Project" syncable="YES"/>
         <relationship name="requestedFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Owner" inverseName="requestedFriends" inverseEntity="Owner" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="users" inverseEntity="Task" syncable="YES"/>
     </entity>
     <elements>
         <element name="Calendar" positionX="-14123" positionY="-2790" width="128" height="178"/>
-        <element name="Event" positionX="-14121" positionY="-2556" width="128" height="225"/>
+        <element name="Event" positionX="-14121" positionY="-2556" width="128" height="223"/>
         <element name="Owner" positionX="-14652" positionY="-2601" width="126" height="118"/>
-        <element name="User" positionX="-14384" positionY="-2700" width="128" height="418"/>
+        <element name="User" positionX="-14384" positionY="-2700" width="128" height="493"/>
+        <element name="Project" positionX="-14301" positionY="-2848" width="128" height="208"/>
+        <element name="Task" positionX="-14265" positionY="-2619" width="128" height="180"/>
     </elements>
 </model>

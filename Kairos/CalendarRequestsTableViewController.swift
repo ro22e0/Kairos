@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class CalendarRequestsTableViewController: UITableViewController {
     
     fileprivate let cellID = "cellHeaderCalendar"
     
     var requestedCalendars = [Calendar]()
-    var refusedCalendar = [Calendar]()
+    var refusedCalendars = [Calendar]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +27,8 @@ class CalendarRequestsTableViewController: UITableViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.CalendarStatusChange.rawValue), object: nil)
         self.requestedCalendars = CalendarManager.shared.calendars(withStatus: .Invited)
-        self.refusedCalendar = CalendarManager.shared.calendars(withStatus: .Refused)
-
+        self.refusedCalendars = CalendarManager.shared.calendars(withStatus: .Refused)
+        
         configureView()
     }
     
@@ -41,9 +42,9 @@ class CalendarRequestsTableViewController: UITableViewController {
     ///  - parameter notification: The notification
     @objc func reloadData(_ notification: Notification) {
         self.requestedCalendars = CalendarManager.shared.calendars(withStatus: .Invited)
-        self.refusedCalendar = CalendarManager.shared.calendars(withStatus: .Refused)
+        self.refusedCalendars = CalendarManager.shared.calendars(withStatus: .Refused)
         
-        DispatchQueue.main.async { 
+        DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
@@ -66,7 +67,7 @@ class CalendarRequestsTableViewController: UITableViewController {
         if section == 0 {
             return requestedCalendars.count
         }
-        return refusedCalendar.count
+        return refusedCalendars.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,7 +81,7 @@ class CalendarRequestsTableViewController: UITableViewController {
             cell.acceptButton.isEnabled = true
             cell.declineButton.isEnabled = true
         } else {
-            calendar = refusedCalendar[indexPath.row]
+            calendar = refusedCalendars[indexPath.row]
             cell.declineButton.isEnabled = false
             cell.acceptButton.isEnabled = true
         }
@@ -92,14 +93,29 @@ class CalendarRequestsTableViewController: UITableViewController {
         
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return "REQUESTED"
+            return requestedCalendars.isEmpty ? 0 : 30
         }
-        return "REFUSED"
+        return refusedCalendars.isEmpty ? 0 : 30
     }
 
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
+        headerView.backgroundColor = .background()
+        let label = UILabel(frame: CGRect(x: 5, y: 0, width: tableView.bounds.size.width, height: 30))
+        label.font = .boldSystemFont(ofSize: 17)
+        headerView.addSubview(label)
+        if section == 0 {
+            label.text = "REQUESTED"
+            return requestedCalendars.isEmpty ? nil : headerView
+        }
+        label.text = "REFUSED"
+        return refusedCalendars.isEmpty ? nil : headerView
+    }
+    
     /*
      // Override to support conditional editing of the table view.
      override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -147,5 +163,11 @@ class CalendarRequestsTableViewController: UITableViewController {
     
     @IBAction func done(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension CalendarRequestsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        return NSAttributedString(string: "No Notification")
     }
 }

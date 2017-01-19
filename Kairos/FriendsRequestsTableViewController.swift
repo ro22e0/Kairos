@@ -96,9 +96,9 @@ class FriendsRequestsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "REQUESTED"
+            return requestedFriends.isEmpty ? nil : "REQUESTED"
         }
-        return "INVITED"
+        return pendingFriends.isEmpty ? nil : "INVITED"
     }
     
     /*

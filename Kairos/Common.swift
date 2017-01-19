@@ -24,6 +24,7 @@ enum StoryboardID: String {
 // Detele replace by StoryboardID enum
 let MainStoryboardID = "Main"
 let CalendarStoryboardID = "Calendar"
+let ProjectStoryboardID = "Project"
 let LoginStoryboardID = "Login"
 let BoardStoryboardID = "Board"
 let MenuStoryboardID = "Menu"
@@ -41,6 +42,9 @@ enum Notifications: String {
     case CalendarStatusChange
     case EventDidChange
     case EventStatusChange
+    case ProjectDidChange
+    case ProjectStatusChange
+    case TaskDidChange
 }
 
 let userLoginKey = "userLoginKey"

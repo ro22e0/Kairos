@@ -28,8 +28,7 @@ class EditProfileViewController: FormViewController {
     }
     
     fileprivate func configure() {
-        tableView.contentInset.top = 40
-        tableView.contentInset.bottom = 40
+        tableView.backgroundColor = .background()
         
         // Create RowFomers
         let imageRow = LabelRowFormer<ProfileImagePickerTableViewCell>(instantiateType: .Nib(nibName: "ProfileImagePickerTableViewCell")) {
@@ -135,7 +134,9 @@ class EditProfileViewController: FormViewController {
         // Create Headers
         
         let createHeader: ((String) -> ViewFormer) = { text in
-            return LabelViewFormer<FormLabelHeaderView>()
+            return LabelViewFormer<FormLabelHeaderView>() {
+                $0.contentView.backgroundColor = .clear
+                }
                 .configure {
                     $0.viewHeight = 40
                     $0.text = text

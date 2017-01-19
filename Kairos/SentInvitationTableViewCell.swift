@@ -32,9 +32,9 @@ class SentInvitationTableViewCell: UITableViewCell {
             switch status {
             case .success:
                 friend.delete()
-                SpinnerManager.showWhistle("kFriendSuccess")
+                Spinner.showWhistle("kFriendSuccess")
             case .error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
+                Spinner.showWhistle("kFriendError", success: false)
                 print(error)
             }
         }
