@@ -131,13 +131,13 @@ class EventParticipantTableViewController: UITableViewController, UIPopoverPrese
                 }.onSelected{ [weak self] cell in
                     self!.selectedUser(user, cell: cell)
             }
-            SpinnerManager.showWhistle("kEventSuccess")
+            Spinner.showWhistle("kEventSuccess")
             done("Invited")
             former.insertUpdate(rowFormer: participant, above: addPerson, rowAnimation: .automatic)
             former.reload(sectionFormer: sectionParticipants)
             // }
         } else {
-            SpinnerManager.showWhistle("kEventAlreadyAdded", success: false)
+            Spinner.showWhistle("kEventAlreadyAdded", success: false)
             done("Already added")
         }
     }

@@ -2,7 +2,7 @@
 //  Calendar+CoreDataProperties.swift
 //  Kairos
 //
-//  Created by rba3555 on 13/01/2017.
+//  Created by rba3555 on 17/01/2017.
 //  Copyright © 2017 Kairos-app. All rights reserved.
 //
 
@@ -20,7 +20,7 @@ extension Calendar {
     @NSManaged public var id: NSNumber?
     @NSManaged public var name: String?
     @NSManaged public var userStatus: String?
-    @NSManaged public var event: NSSet?
+    @NSManaged public var events: NSSet?
     @NSManaged public var invitedUsers: NSSet?
     @NSManaged public var owners: NSSet?
     @NSManaged public var participatingUsers: NSSet?
@@ -28,20 +28,20 @@ extension Calendar {
 
 }
 
-// MARK: Generated accessors for event
+// MARK: Generated accessors for events
 extension Calendar {
 
-    @objc(addEventObject:)
-    @NSManaged public func addToEvent(_ value: Event)
+    @objc(addEventsObject:)
+    @NSManaged public func addToEvents(_ value: Event)
 
-    @objc(removeEventObject:)
-    @NSManaged public func removeFromEvent(_ value: Event)
+    @objc(removeEventsObject:)
+    @NSManaged public func removeFromEvents(_ value: Event)
 
-    @objc(addEvent:)
-    @NSManaged public func addToEvent(_ values: NSSet)
+    @objc(addEvents:)
+    @NSManaged public func addToEvents(_ values: NSSet)
 
-    @objc(removeEvent:)
-    @NSManaged public func removeFromEvent(_ values: NSSet)
+    @objc(removeEvents:)
+    @NSManaged public func removeFromEvents(_ values: NSSet)
 
 }
 

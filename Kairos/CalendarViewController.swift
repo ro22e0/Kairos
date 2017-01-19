@@ -36,23 +36,28 @@ class CalendarViewController: UIViewController {
             CalendarManager.shared.fetch()
             DataSync.fetchCalendarColors()
             EventManager.shared.fetch()
+            ProjectManager.shared.fetch()
+//            TaskManager.shared.fetch()
         }
         
         // Do any additional setup after loading the view.
         eventTableView.tableFooterView = UIView()
         
         calendarView.scrollDirection = .horizontal
-        calendarView.placeholderType = .fillHeadTail
+        calendarView.placeholderType = .none
         calendarView.clipsToBounds = true
-        calendarView.appearance.caseOptions = [.weekdayUsesSingleUpperCase]
-        calendarView.appearance.headerMinimumDissolvedAlpha = 0.0
+        calendarView.appearance.caseOptions = [.weekdayUsesUpperCase, .headerUsesUpperCase]
+        calendarView.appearance.headerTitleFont = .systemFont(ofSize: 26, weight: UIFontWeightLight)
+        calendarView.appearance.weekdayFont = .systemFont(ofSize: 14, weight: UIFontWeightLight)
+
+//        calendarView.appearance.headerMinimumDissolvedAlpha = 0.0
         //        calendarView.locale = NSLocale.currentLocale()
         //        calendarView.calendar.timeZone = NSTimeZone.systemTimeZone()
         allEvents = EventManager.shared.events(withStatus: .Participating)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.EventDidChange.rawValue), object: nil)
         //        let _ = ["title":"Apple Special Event", "location":"apple.com/apple-events/april-2016/", "notes":"New products !", "startDate":Date(), "endDate": Date()] as [String : Any]
     }
-
+    
     ///  Reload data notification handler
     ///
     ///  - parameter notification: The notification
@@ -91,6 +96,8 @@ class CalendarViewController: UIViewController {
     
     @IBAction func setTodaySelected(_ sender: Any) {
         calendarView.select(calendarView.today!)
+        events.removeAll()
+        eventTableView.reloadData()
     }
     
     func modeWeek() {
@@ -134,7 +141,7 @@ extension CalendarViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = eventTableView.dequeueReusableCell(withIdentifier: "eventCell") as! EventTableViewCell
-        
+
         let event = events[indexPath.row]
 
         cell.startTimeLabel.text = String.noDateShortTime(event.dateStart! as Date)
@@ -178,9 +185,9 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegate, FSCa
     // MARK: FSCalendarDelegate
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        //        if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.beginingOfMonthOfDate(calendar.currentPage), toCalendarUnit: .Month) {
-        //                    calendarView.select(calendar.minimumDate)
-        //        }
+//        if !calendar.isDate(calendar.selectedDate, equalToDate: calendar.beginingOfMonthOfDate(calendar.currentPage), toCalendarUnit: .Month) {
+//            calendarView.select(calendar.minimumDate)
+//        }
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date) {

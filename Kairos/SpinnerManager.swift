@@ -1,5 +1,5 @@
 //
-//  SpinnerManager.swift
+//  Spinner.swift
 //  Kairos
 //
 //  Created by Ronaël Bajazet on 22/03/2016.
@@ -12,7 +12,7 @@ import Whisper
 
 private let font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightThin)
 
-struct SpinnerManager {
+struct Spinner {
 
     static func delay(_ seconds: Double, completion: @escaping ()->()) {
         let popTime = DispatchTime.now() + Double(Int64(Double(NSEC_PER_SEC) * seconds)) / Double(NSEC_PER_SEC)

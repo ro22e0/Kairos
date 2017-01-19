@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UIImageView_Letters
 
 class ProfileTableViewController: UITableViewController {
     
@@ -34,13 +35,11 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func configure() {
-        if self.user.user!.image != nil {
-            self.profileImage.image = UIImage(data: self.user.user!.image! as Data)
-//            self.profileImage.addBorder(UIColor.whiteColor().CGColor)
-        } else {
-//            self.profileImage.backgroundColor = .whiteColor()
-        }
-        self.profileImage.round()
+//        if self.user.user!.image != nil {
+//            self.profileImage.image = UIImage(data: self.user.user!.image! as Data)
+//        } else {
+            self.profileImage.setImageWith(user.user?.name, color: .orangeTint(), circular: true)
+//        }
         self.nameLabel.text = self.user.user!.name
     }
     

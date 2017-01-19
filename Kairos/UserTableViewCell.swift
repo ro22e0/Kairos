@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UIImageView_Letters
 
 class UserTableViewCell: UITableViewCell {
     

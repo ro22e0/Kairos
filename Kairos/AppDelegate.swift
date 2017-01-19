@@ -14,26 +14,41 @@ import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
 import SwiftRecord
+import DynamicColor
 import Sync
 import DATAStack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.NS
         
+        UINavigationBar.appearance().tintColor = .orangeTint()
+        UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().titleTextAttributes = [
-            NSFontAttributeName: UIFont.systemFont(ofSize: 20, weight: UIFontWeightLight)
+            NSFontAttributeName: UIFont.systemFont(ofSize: 20, weight: UIFontWeightLight),
+            NSForegroundColorAttributeName: UIColor.orangeTint()
         ]
-
+        UINavigationBar.appearance().isTranslucent = false
+        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().tintColor = .orangeTint()
+        UITabBar.appearance().isTranslucent = false
+        
+        UIButton.appearance().tintColor = .orangeTint()
+        UIBarButtonItem.appearance().setTitleTextAttributes([
+            NSFontAttributeName: UIFont.systemFont(ofSize: 16, weight: UIFontWeightRegular)
+            ], for: .normal)
+        
+        //        UINavigationBar.appearance()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeNotification), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.dataStack.mainContext)
-
+        
         SwiftRecord.generateRelationships = true
         SwiftRecord.sharedRecord.managedObjectContext = self.dataStack.mainContext
-
+        
         // Fabric
         Fabric.with([Crashlytics.self])
         
@@ -43,8 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
         
         // JLToast
-//        JLToastView.setDefaultValue(13, forAttributeName: JLToastViewCornerRadiusAttributeName, userInterfaceIdiom: .Unspecified)
-//        JLToastView.setDefaultValue(UIFont.systemFontOfSize(12, weight: UIFontWeightLight), forAttributeName: JLToastViewFontAttributeName, userInterfaceIdiom: .Unspecified)
+        //        JLToastView.setDefaultValue(13, forAttributeName: JLToastViewCornerRadiusAttributeName, userInterfaceIdiom: .Unspecified)
+        //        JLToastView.setDefaultValue(UIFont.systemFontOfSize(12, weight: UIFontWeightLight), forAttributeName: JLToastViewFontAttributeName, userInterfaceIdiom: .Unspecified)
         
         // Alamofire network manager
         NetworkActivityIndicatorManager.shared.isEnabled = true
@@ -87,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - Core Data stack
-
+    
     var dataStack: DATAStack = {
         let dataStack = DATAStack(modelName: "Kairos")
         
@@ -100,11 +115,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let insertedObjects = notification.userInfo![NSInsertedObjectsKey]
         print(insertedObjects)
     }
-
+    
     // MARK: - Core Data Saving support
-
+    
     func saveContext() {
-       try! self.dataStack.mainContext.save()
+        try! self.dataStack.mainContext.save()
     }
 }
 
@@ -131,7 +146,7 @@ extension AppDelegate: GIDSignInDelegate {
     
     // MARK: - GIDSignInDelegate
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
-                withError error: Error!) {
+              withError error: Error!) {
         if (error == nil) {
             // Perform any operations on signed in user here.
             NotificationCenter.default.post(name: Notification.Name(rawValue: kUSER_GOOGLE_AUTH_NOTIFICATION), object: nil, userInfo:["success": true, "user": user])
@@ -141,7 +156,7 @@ extension AppDelegate: GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user:GIDGoogleUser!,
-                withError error: NSError!) {
+              withError error: NSError!) {
         // Perform any operations when the user disconnects from app here.
         // [START_EXCLUDE]
         NotificationCenter.default.post(

@@ -19,7 +19,7 @@ target 'Kairos' do
   pod 'DZNEmptyDataSet'
   pod 'DynamicColor'
   pod 'SwiftRecord'
-  
+  pod 'UIImageView-Letters'
   # pod 'DatePickerCell'
   # pod 'UITextField+Shake', '~> 1.1'
 end

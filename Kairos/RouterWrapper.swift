@@ -28,7 +28,7 @@ public enum Router: URLRequestConvertible {
      
      - returns: A `String` baseURL.
      */
-    static let baseURLString = "https://kairos-api-ro22e0.c9users.io/api/v1"
+    static let baseURLString = "http://kairos-api-ro22e0.c9users.io/api/v1"
     
     /**
      Determine if the request need credentials in headers.
@@ -77,26 +77,12 @@ public enum Router: URLRequestConvertible {
     case removeFriend(Parameters)
     
     
-    case getEvents
-    
-    case getEvent(Parameters)
-    
-    case createEvent(Parameters)
-    
-    case updateEvent(Parameters)
-    
-    case deleteEvent(Parameters)
-    
-    
     case getCalendarColors
     case getCalendars
-    
     case getCalendar(Parameters)
-    
+
     case createCalendar(Parameters)
-    
     case updateCalendar(Parameters)
-    
     case deleteCalendar(Parameters)
     
     case inviteCalendar(Parameters)
@@ -105,11 +91,43 @@ public enum Router: URLRequestConvertible {
     case ownerCalendar(Parameters)
     case removeCalendar(Parameters)
 
+    
+    case getEvents
+    case getEvent(Parameters)
+    
+    case createEvent(Parameters)
+    case updateEvent(Parameters)
+    case deleteEvent(Parameters)
+
     case inviteEvent(Parameters)
     case acceptEvent(Parameters)
     case refuseEvent(Parameters)
     case ownerEvent(Parameters)
     case removeEvent(Parameters)
+
+
+    case getProjects
+    case getProject(Parameters)
+
+    case createProject(Parameters)
+    case updateProject(Parameters)
+    case deleteProject(Parameters)
+
+    case inviteProject(Parameters)
+    case acceptProject(Parameters)
+    case refuseProject(Parameters)
+    case ownerProject(Parameters)
+    case removeProject(Parameters)
+    
+    case getTasks
+    case getTask(Parameters)
+    
+    case createTask(Parameters)
+    case updateTask(Parameters)
+    case deleteTask(Parameters)
+    
+    case inviteTask(Parameters)
+    case removeTask(Parameters)
     
     /**
      The method use for the request.
@@ -118,13 +136,13 @@ public enum Router: URLRequestConvertible {
      */
     var method: HTTPMethod {
         switch self {
-        case .createUser, .authenticate, .inviteFriend, .createCalendar, .createEvent:
+        case .createUser, .authenticate, .inviteFriend, .createCalendar, .createEvent, .createProject, .createTask:
             return .POST
-        case .getFriends, .getUsers, .getEvents, .getEvent, .getCalendars, .getCalendar, .getCalendarColors:
+        case .getFriends, .getUsers, .getEvents, .getEvent, .getCalendars, .getCalendar, .getCalendarColors, .getProjects, .getProject, .getTasks, .getTask:
             return .GET
-        case .updateUser, .acceptFriend, .declineFriend, .updateEvent, .updateCalendar, .inviteCalendar, .acceptCalendar, .refuseCalendar, .ownerCalendar, .removeCalendar, .inviteEvent, .acceptEvent, .refuseEvent, .ownerEvent, .removeEvent:
+        case .updateUser, .acceptFriend, .declineFriend, .updateEvent, .updateCalendar, .inviteCalendar, .acceptCalendar, .refuseCalendar, .ownerCalendar, .removeCalendar, .inviteEvent, .acceptEvent, .refuseEvent, .ownerEvent, .removeEvent, .updateProject, .inviteProject, .acceptProject, .refuseProject, .ownerProject, .removeProject, .updateTask, .inviteTask, .removeTask:
             return .PUT
-        case .removeFriend, .cancelFriend, .deleteEvent, .deleteCalendar, .signOut:
+        case .removeFriend, .cancelFriend, .deleteEvent, .deleteCalendar, .deleteProject, .deleteTask, .signOut:
             return .DELETE
         }
     }
@@ -197,6 +215,39 @@ public enum Router: URLRequestConvertible {
             return "/calendars/\(parameters["id"]!)/set_owner"
         case .removeCalendar(let parameters):
             return "/calendars/\(parameters["id"]!)/remove"
+            
+        case .createProject, .getProjects:
+            return "/projects"
+        case .updateProject(let parameters):
+            return "/projects/\(parameters["id"]!)"
+        case .getProject(let parameters):
+            return "/projects/\(parameters["id"]!)"
+        case .deleteProject(let parameters):
+            return "/projects/\(parameters["id"]!)"
+        case .inviteProject(let parameters):
+            return "/projects/\(parameters["id"]!)/invite"
+        case .acceptProject(let parameters):
+            return "/projects/\(parameters["id"]!)/accept"
+        case .refuseProject(let parameters):
+            return "/projects/\(parameters["id"]!)/refuse"
+        case .ownerProject(let parameters):
+            return "/projects/\(parameters["id"]!)/set_owner"
+        case .removeProject(let parameters):
+            return "/projects/\(parameters["id"]!)/remove"
+            
+        case .createTask, .getTasks:
+            return "/tasks"
+        case .updateTask(let parameters):
+            return "/tasks/\(parameters["id"]!)"
+        case .getTask(let parameters):
+            return "/tasks/\(parameters["id"]!)"
+        case .deleteTask(let parameters):
+            return "/tasks/\(parameters["id"]!)"
+        case .inviteTask(let parameters):
+            return "/tasks/\(parameters["id"]!)/add"
+        case .removeTask(let parameters):
+            return "/tasks/\(parameters["id"]!)/remove"
+
         case .signOut:
             return "/auth/sign_out"
         }
@@ -260,6 +311,29 @@ public enum Router: URLRequestConvertible {
             urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
         case .removeCalendar(let parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .createProject(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .updateProject(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .inviteProject(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .ownerProject(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .removeProject(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .createTask(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .updateTask(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case .inviteTask(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .removeProject(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
+        case .getTask(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["project_id": parameters["project_id"]!])
+        case .deleteTask(let parameters):
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: ["project_id": parameters["project_id"]!])
+
         default:
             break;
         }

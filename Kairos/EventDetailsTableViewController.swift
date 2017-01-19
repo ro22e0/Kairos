@@ -199,18 +199,18 @@ class EventDetailsTableViewController: UITableViewController {
         
         if addedUsers.contains(user) {
             done("Already Added")
-            SpinnerManager.showWhistle("kEventAlreadyAdded")
+            Spinner.showWhistle("kEventAlreadyAdded")
             return
         }
         
         EventManager.shared.invite(parameters) { (status) in
             switch status {
             case .success:
-                SpinnerManager.showWhistle("kEventSuccess")
+                Spinner.showWhistle("kEventSuccess")
                 done("Invited")
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.EventDidChange.rawValue), object: nil)
             case .error(let error):
-                SpinnerManager.showWhistle("kEventError", success: false)
+                Spinner.showWhistle("kEventError", success: false)
                 print(error)
             }
         }
@@ -347,17 +347,17 @@ class EventDetailsTableViewController: UITableViewController {
 //            case .success:
 //                switch response.response!.statusCode {
 //                case 200...203:
-//                    SpinnerManager.showWhistle("kEventDeleted", success: true)
+//                    Spinner.showWhistle("kEventDeleted", success: true)
 //                    UserManager.shared.setCredentials(response.response!)
 //                    self.event?.delete()
 //                    self.dismiss(animated: true, completion: nil)
 //                    break;
 //                default:
-//                    SpinnerManager.showWhistle("kFail", success: false)
+//                    Spinner.showWhistle("kFail", success: false)
 //                    break;
 //                }
 //            case .failure(let error):
-//                SpinnerManager.showWhistle("kFail", success: false)
+//                Spinner.showWhistle("kFail", success: false)
 //                print(error.localizedDescription)
 //            }
 //        }

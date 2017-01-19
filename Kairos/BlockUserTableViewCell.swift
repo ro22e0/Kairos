@@ -31,9 +31,9 @@ class BlockUserTableViewCell: UITableViewCell {
 //            switch response.result {
 //            case .success:
 //                friend.status = FriendStatus.Blocked.hashValue
-//                SpinnerManager.showWhistle("kFriendBlocked", success: false)
+//                Spinner.showWhistle("kFriendBlocked", success: false)
 //            case .failure(let error):
-//                SpinnerManager.showWhistle("kFail", success: false)
+//                Spinner.showWhistle("kFail", success: false)
 //                print(error.localizedDescription)
 //            }
 //            self.viewController()?.dismissViewControllerAnimated(true, completion: nil)

@@ -109,6 +109,11 @@
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
+		<key>UIImageView-Letters.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>25</integer>
+		</dict>
 		<key>Whisper.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -127,6 +132,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0AC27DF9045D65A31DEF3977D8637A53</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
@@ -142,7 +152,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>16A14FED1A994402CB38051E8E1679A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1C9AF2B5372F4B57F37A4907E6A59F73</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>261C8F88891816B07C86E79DC04BC12B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EF01E65E91970CC8C54B0908FE7846E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>425C35A52F0D2D17982691F709A8FA0C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -163,6 +193,11 @@
 			<true/>
 		</dict>
 		<key>561733B9DA17280AFB4EECE83FDBB1A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>662E7435DBF2E4F875F21CAF0DA2224A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -192,6 +227,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8D73A550C7E6052313B252F14711975C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>901B0ACD9C63A5E778D3CAC353EDB518</key>
 		<dict>
 			<key>primary</key>
@@ -217,6 +257,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>BEA761B96BF4F012AE076E71AD63D688</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BEF7E6E85DB5CDE5D7A18F4F2EB8494B</key>
 		<dict>
 			<key>primary</key>
@@ -237,7 +282,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CCF3E1B9BE809DC3B10FDDF3C6054B46</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D386C75EFD4F03725E4EFB866B600B9A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F507AC989AD91E0E32EEE14D8B138C77</key>
 		<dict>
 			<key>primary</key>
 			<true/>

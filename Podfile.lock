@@ -70,6 +70,7 @@ PODS:
     - DATAStack (~> 6.1.2)
     - SYNCPropertyMapper (~> 5.1.2)
   - SYNCPropertyMapper (5.1.2)
+  - UIImageView-Letters (1.1.4)
   - Whisper (4.0.0)
   - XLPagerTabStrip (6.0.0)
 
@@ -88,6 +89,7 @@ DEPENDENCIES:
   - SwiftSpinner
   - SwiftyJSON
   - Sync
+  - UIImageView-Letters
   - Whisper
   - XLPagerTabStrip
 
@@ -121,9 +123,10 @@ SPEC CHECKSUMS:
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
   Sync: b946c2ab9c51153f075bcaec828215d071ddf6db
   SYNCPropertyMapper: e4cf0f851aa3a1307a42985ab8600787b3382427
+  UIImageView-Letters: f62db28076797adf3560ab7410647dc6899b9eef
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: c0712bbfb3e8d88c85ddeae6e202e12417a29a11
+PODFILE CHECKSUM: 4480b2e3783f9c686864212c2d3ad5ba597c0b11
 
 COCOAPODS: 1.1.1
