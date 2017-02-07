@@ -31,6 +31,8 @@ let MenuStoryboardID = "Menu"
 let FriendsStoryboardID = "Friends"
 let ProfileStoryboardID = "Profile"
 let SettingsStoryboardID = "Settings"
+let ChatStoryboardID = "Chat"
+let FileStoryboardID = "File"
 
 let kUSER_GOOGLE_AUTH_NOTIFICATION = "kUserGoogleAuth"
 

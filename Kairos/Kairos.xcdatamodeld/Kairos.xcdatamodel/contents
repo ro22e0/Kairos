@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2555" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16A323" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Calendar" representedClassName=".Calendar" syncable="YES">
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES">
@@ -14,6 +14,16 @@
         <relationship name="owners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="ownedCalendars" inverseEntity="User" syncable="YES"/>
         <relationship name="participatingUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="calendars" inverseEntity="User" syncable="YES"/>
         <relationship name="refusedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="refusedCalendars" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="ChatRoom" representedClassName=".ChatRoom" syncable="YES">
+        <attribute name="chatType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unread" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Message" inverseName="chatRoom" inverseEntity="Message" syncable="YES"/>
+        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="chatRooms" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Event" representedClassName=".Event" syncable="YES">
         <attribute name="dateEnd" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES">
@@ -44,6 +54,13 @@
         <relationship name="owners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="ownedEvents" inverseEntity="User" syncable="YES"/>
         <relationship name="participatingUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="events" inverseEntity="User" syncable="YES"/>
         <relationship name="refusedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="refusedEvents" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Message" representedClassName=".Message" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="chatRoom" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatRoom" inverseName="messages" inverseEntity="ChatRoom" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="sentMessages" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Owner" representedClassName=".Owner" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
@@ -132,6 +149,7 @@
         <attribute name="provider" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="school" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="calendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="participatingUsers" inverseEntity="Calendar" syncable="YES"/>
+        <relationship name="chatRooms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChatRoom" inverseName="users" inverseEntity="ChatRoom" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="participatingUsers" inverseEntity="Event" syncable="YES"/>
         <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Owner" inverseName="friends" inverseEntity="Owner" syncable="YES"/>
         <relationship name="invitedCalendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="invitedUsers" inverseEntity="Calendar" syncable="YES"/>
@@ -148,14 +166,17 @@
         <relationship name="refusedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="refusedUsers" inverseEntity="Event" syncable="YES"/>
         <relationship name="refusedProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="refusedUsers" inverseEntity="Project" syncable="YES"/>
         <relationship name="requestedFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Owner" inverseName="requestedFriends" inverseEntity="Owner" syncable="YES"/>
+        <relationship name="sentMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="user" inverseEntity="Message" syncable="YES"/>
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="users" inverseEntity="Task" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Calendar" positionX="-14123" positionY="-2790" width="128" height="178"/>
-        <element name="Event" positionX="-14121" positionY="-2556" width="128" height="223"/>
+        <element name="Calendar" positionX="-14058" positionY="-2817" width="128" height="178"/>
+        <element name="ChatRoom" positionX="-14499" positionY="-2196" width="128" height="165"/>
+        <element name="Event" positionX="-14060" positionY="-2547" width="128" height="223"/>
+        <element name="Message" positionX="-14436" positionY="-2781" width="128" height="120"/>
         <element name="Owner" positionX="-14652" positionY="-2601" width="126" height="118"/>
-        <element name="User" positionX="-14384" positionY="-2700" width="128" height="493"/>
-        <element name="Project" positionX="-14301" positionY="-2848" width="128" height="208"/>
-        <element name="Task" positionX="-14265" positionY="-2619" width="128" height="180"/>
+        <element name="Project" positionX="-14276" positionY="-2943" width="128" height="208"/>
+        <element name="Task" positionX="-14213" positionY="-2277" width="128" height="180"/>
+        <element name="User" positionX="-14463" positionY="-2779" width="128" height="523"/>
     </elements>
 </model>

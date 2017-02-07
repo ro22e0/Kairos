@@ -15,6 +15,8 @@ class ProjectRequestCell: UITableViewCell {
     @IBOutlet weak var membersLabel: UILabel!
     @IBOutlet weak var declineButton: UIButton!
     @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var dateStartLabel: UILabel!
+    @IBOutlet weak var dateEndLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

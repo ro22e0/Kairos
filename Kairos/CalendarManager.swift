@@ -71,21 +71,6 @@ class CalendarManager {
         return calendars
     }
     
-    func userIsIn(_ calendar: Calendar, user: User) -> Bool {
-        //            let users = calendar.calendarUsers?.allObjects as? [UserCalendar]
-        //            var isIn = false
-        //            isIn = (users?.contains({ (u) -> Bool in
-        //                return u.userId == user.id
-        //            }))!
-        //    //        users?.forEach({ (u) in
-        //    //            if u.userId == user.id {
-        //    //                isIn = true
-        //    //            }
-        //    //        })
-        //            return isIn
-        return true
-    }
-    
     func allUsers(forCalendar calendar: Calendar) -> [User] {
         var users: [User] = calendar.invitedUsers?.allObjects as! [User]
         users += calendar.owners?.allObjects as! [User]

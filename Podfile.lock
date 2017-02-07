@@ -63,6 +63,11 @@ PODS:
   - GTMSessionFetcher/Full (1.1.7):
     - GTMSessionFetcher/Core (= 1.1.7)
   - IQKeyboardManagerSwift (4.0.7)
+  - JSQMessagesViewController (7.3.4):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - Socket.IO-Client-Swift (8.2.0)
+  - Starscream (2.0.2)
   - SwiftRecord (0.0.5)
   - SwiftSpinner (1.1.0)
   - SwiftyJSON (3.1.1)
@@ -85,6 +90,9 @@ DEPENDENCIES:
   - FSCalendar
   - Google/SignIn
   - IQKeyboardManagerSwift
+  - JSQMessagesViewController
+  - Socket.IO-Client-Swift
+  - Starscream
   - SwiftRecord
   - SwiftSpinner
   - SwiftyJSON
@@ -118,6 +126,10 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   IQKeyboardManagerSwift: 58bbcf46b5cf9fd4ed625d28a60cb2fbae4ab0f4
+  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  Socket.IO-Client-Swift: 900cf511777045c80d1ce1f11f71261e87765dd1
+  Starscream: 6c135a34e0a6e60cedaa0b30db67a4c05cf7cd38
   SwiftRecord: f7fed44d27ef7703afd4a87ebf0d57cb26aacf12
   SwiftSpinner: c03815614599b91eea46594bd52ba742849d0414
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
@@ -127,6 +139,6 @@ SPEC CHECKSUMS:
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 4480b2e3783f9c686864212c2d3ad5ba597c0b11
+PODFILE CHECKSUM: c7b392588905a7bcca404ddc25cf9aae7c09df4c
 
 COCOAPODS: 1.1.1

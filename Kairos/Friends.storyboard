@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3SN-Wk-4fd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3SN-Wk-4fd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,7 +12,7 @@
         <scene sceneID="gAi-4L-biS">
             <objects>
                 <navigationController storyboardIdentifier="FriendsRequestsTableViewController" id="iDa-TV-wZV" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WP7-GN-De1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WP7-GN-De1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -100,7 +100,7 @@
             </objects>
             <point key="canvasLocation" x="3247" y="409"/>
         </scene>
-        <!--Add Friends Table View Controller-->
+        <!--Add New Friend-->
         <scene sceneID="6gH-gN-0sW">
             <objects>
                 <tableViewController id="Uhw-4Q-aJQ" customClass="AddFriendsTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
@@ -114,8 +114,13 @@
                             <outlet property="delegate" destination="Uhw-4Q-aJQ" id="nao-pG-X3f"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="56q-P6-4F2">
+                    <navigationItem key="navigationItem" title="Add New Friend" id="56q-P6-4F2">
                         <barButtonItem key="backBarButtonItem" title=" " id="2JX-LP-5fd"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="mpc-eZ-Oh3">
+                            <connections>
+                                <action selector="done:" destination="Uhw-4Q-aJQ" id="6Lr-XX-bTp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdf-pM-tbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -127,7 +132,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AddFriendsTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="0tU-hL-e8K" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DUg-18-Yp6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DUg-18-Yp6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

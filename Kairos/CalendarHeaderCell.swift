@@ -21,6 +21,7 @@ class CalendarHeaderCell: UITableViewCell, LabelFormableRow {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        colorImageView.round()
         self.acceptButton.setImage(UIImage(named: "Checkmark"), for: UIControlState())
         self.acceptButton.setImage(UIImage(named: "Checkmark Filled"), for: .disabled)
         self.declineButton.setImage(UIImage(named: "Delete"), for: UIControlState())

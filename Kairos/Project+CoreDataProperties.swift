@@ -27,7 +27,7 @@ extension Project {
     @NSManaged public var participatingUsers: NSSet?
     @NSManaged public var refusedUsers: NSSet?
     @NSManaged public var tasks: NSSet?
-
+    
 }
 
 // MARK: Generated accessors for invitedUsers

@@ -26,7 +26,7 @@ struct Spinner {
         SwiftSpinner.setTitleFont(font)
         SwiftSpinner.show(title)
     }
-    
+
     static func showSpinner(_ title: String, subtitle: String, completion: @escaping ()->()) {
         SwiftSpinner.setTitleFont(font)
         SwiftSpinner.show(title, animated: false).addTapHandler({ completion() }, subtitle: subtitle)
@@ -46,5 +46,13 @@ struct Spinner {
         }
 
         show(whistle: murmur, action: .show(1.5))
+    }
+    
+    static func shout(message: Message) {
+        let anno = Announcement(title: "My title", subtitle: "My subtitle", image: UIImage(), duration: 3.0)
+
+        if let rootViewController = UIApplication.topViewController()?.navigationController {
+            show(shout: anno, to: rootViewController)
+        }
     }
 }

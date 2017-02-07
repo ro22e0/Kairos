@@ -15,7 +15,7 @@ class TaskManager {
     
     static let shared = TaskManager()
     fileprivate init() {}
-    
+
     func fetch(_ handler: (() -> Void)? = nil) {
         DataSync.fetchTasks() { (status) in
             switch status {

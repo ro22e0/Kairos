@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <development version="7000" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Loading View Controller-->
@@ -14,39 +19,38 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="aAv-hl-DaY">
-                                <rect key="frame" x="20" y="174" width="280" height="133"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="aAv-hl-DaY">
+                                <rect key="frame" x="20" y="173.5" width="335" height="320"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KAIROS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nT5-MS-Ydr">
-                                        <rect key="frame" x="0.0" y="0.0" width="280" height="96"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="eGa-Wb-Ucb">
+                                        <rect key="frame" x="56" y="0.0" width="223" height="223"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="96" id="f8g-ws-S5H"/>
+                                            <constraint firstAttribute="width" secondItem="eGa-Wb-Ucb" secondAttribute="height" multiplier="1:1" id="wxV-j1-v1T"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="90"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </imageView>
                                     <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="AO0-UQ-igC">
-                                        <rect key="frame" x="122" y="96" width="37" height="37"/>
-                                        <color key="color" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="149" y="283" width="37" height="37"/>
+                                        <color key="color" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                     </activityIndicatorView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="eGa-Wb-Ucb" firstAttribute="width" secondItem="aAv-hl-DaY" secondAttribute="width" multiplier="2:3" id="GZd-Ff-Fy8"/>
+                                </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="aAv-hl-DaY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="8W2-hg-WIh"/>
-                            <constraint firstAttribute="trailing" secondItem="aAv-hl-DaY" secondAttribute="trailing" constant="20" id="ZBi-3j-tq3"/>
+                            <constraint firstAttribute="trailing" secondItem="aAv-hl-DaY" secondAttribute="trailing" constant="20" id="btN-Y0-pXB"/>
                             <constraint firstItem="aAv-hl-DaY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i1c-5F-kCb"/>
                             <constraint firstItem="aAv-hl-DaY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="zfW-Ye-4Q6"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="loadingActivityIndicator" destination="AO0-UQ-igC" id="Gfs-Zm-GLH"/>
-                        <outlet property="projectLabel" destination="nT5-MS-Ydr" id="aBT-Vy-NJu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -54,9 +58,12 @@
             <point key="canvasLocation" x="313" y="538"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo" width="596" height="842"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
 </document>

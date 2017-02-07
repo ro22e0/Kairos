@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  Kairos
 //
-//  Created by rba3555 on 17/01/2017.
+//  Created by Ronaël Bajazet on 19/01/2017.
 //  Copyright © 2017 Kairos-app. All rights reserved.
 //
 
@@ -33,19 +33,21 @@ extension User {
     @NSManaged public var friends: NSSet?
     @NSManaged public var invitedCalendars: NSSet?
     @NSManaged public var invitedEvents: NSSet?
+    @NSManaged public var invitedProjects: NSSet?
     @NSManaged public var mutualFriends: NSSet?
     @NSManaged public var ownedCalendars: NSSet?
     @NSManaged public var ownedEvents: NSSet?
+    @NSManaged public var ownedProjects: NSSet?
     @NSManaged public var owner: Owner?
     @NSManaged public var pendingFriends: NSSet?
+    @NSManaged public var projects: NSSet?
     @NSManaged public var refusedCalendars: NSSet?
     @NSManaged public var refusedEvents: NSSet?
+    @NSManaged public var refusedProjects: NSSet?
     @NSManaged public var requestedFriends: NSSet?
     @NSManaged public var tasks: NSSet?
-    @NSManaged public var projects: NSSet?
-    @NSManaged public var invitedProjects: NSSet?
-    @NSManaged public var ownedProjects: NSSet?
-    @NSManaged public var refusedProjects: NSSet?
+    @NSManaged public var chatRooms: NSSet?
+    @NSManaged public var sentMessages: NSSet?
 
 }
 
@@ -134,6 +136,23 @@ extension User {
 
 }
 
+// MARK: Generated accessors for invitedProjects
+extension User {
+
+    @objc(addInvitedProjectsObject:)
+    @NSManaged public func addToInvitedProjects(_ value: Project)
+
+    @objc(removeInvitedProjectsObject:)
+    @NSManaged public func removeFromInvitedProjects(_ value: Project)
+
+    @objc(addInvitedProjects:)
+    @NSManaged public func addToInvitedProjects(_ values: NSSet)
+
+    @objc(removeInvitedProjects:)
+    @NSManaged public func removeFromInvitedProjects(_ values: NSSet)
+
+}
+
 // MARK: Generated accessors for mutualFriends
 extension User {
 
@@ -185,6 +204,23 @@ extension User {
 
 }
 
+// MARK: Generated accessors for ownedProjects
+extension User {
+
+    @objc(addOwnedProjectsObject:)
+    @NSManaged public func addToOwnedProjects(_ value: Project)
+
+    @objc(removeOwnedProjectsObject:)
+    @NSManaged public func removeFromOwnedProjects(_ value: Project)
+
+    @objc(addOwnedProjects:)
+    @NSManaged public func addToOwnedProjects(_ values: NSSet)
+
+    @objc(removeOwnedProjects:)
+    @NSManaged public func removeFromOwnedProjects(_ values: NSSet)
+
+}
+
 // MARK: Generated accessors for pendingFriends
 extension User {
 
@@ -199,6 +235,23 @@ extension User {
 
     @objc(removePendingFriends:)
     @NSManaged public func removeFromPendingFriends(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for projects
+extension User {
+
+    @objc(addProjectsObject:)
+    @NSManaged public func addToProjects(_ value: Project)
+
+    @objc(removeProjectsObject:)
+    @NSManaged public func removeFromProjects(_ value: Project)
+
+    @objc(addProjects:)
+    @NSManaged public func addToProjects(_ values: NSSet)
+
+    @objc(removeProjects:)
+    @NSManaged public func removeFromProjects(_ values: NSSet)
 
 }
 
@@ -236,6 +289,23 @@ extension User {
 
 }
 
+// MARK: Generated accessors for refusedProjects
+extension User {
+
+    @objc(addRefusedProjectsObject:)
+    @NSManaged public func addToRefusedProjects(_ value: Project)
+
+    @objc(removeRefusedProjectsObject:)
+    @NSManaged public func removeFromRefusedProjects(_ value: Project)
+
+    @objc(addRefusedProjects:)
+    @NSManaged public func addToRefusedProjects(_ values: NSSet)
+
+    @objc(removeRefusedProjects:)
+    @NSManaged public func removeFromRefusedProjects(_ values: NSSet)
+
+}
+
 // MARK: Generated accessors for requestedFriends
 extension User {
 
@@ -270,70 +340,36 @@ extension User {
 
 }
 
-// MARK: Generated accessors for projects
+// MARK: Generated accessors for chatRooms
 extension User {
 
-    @objc(addProjectsObject:)
-    @NSManaged public func addToProjects(_ value: Project)
+    @objc(addChatRoomsObject:)
+    @NSManaged public func addToChatRooms(_ value: ChatRoom)
 
-    @objc(removeProjectsObject:)
-    @NSManaged public func removeFromProjects(_ value: Project)
+    @objc(removeChatRoomsObject:)
+    @NSManaged public func removeFromChatRooms(_ value: ChatRoom)
 
-    @objc(addProjects:)
-    @NSManaged public func addToProjects(_ values: NSSet)
+    @objc(addChatRooms:)
+    @NSManaged public func addToChatRooms(_ values: NSSet)
 
-    @objc(removeProjects:)
-    @NSManaged public func removeFromProjects(_ values: NSSet)
+    @objc(removeChatRooms:)
+    @NSManaged public func removeFromChatRooms(_ values: NSSet)
 
 }
 
-// MARK: Generated accessors for invitedProjects
+// MARK: Generated accessors for sentMessages
 extension User {
 
-    @objc(addInvitedProjectsObject:)
-    @NSManaged public func addToInvitedProjects(_ value: Project)
+    @objc(addSentMessagesObject:)
+    @NSManaged public func addToSentMessages(_ value: Message)
 
-    @objc(removeInvitedProjectsObject:)
-    @NSManaged public func removeFromInvitedProjects(_ value: Project)
+    @objc(removeSentMessagesObject:)
+    @NSManaged public func removeFromSentMessages(_ value: Message)
 
-    @objc(addInvitedProjects:)
-    @NSManaged public func addToInvitedProjects(_ values: NSSet)
+    @objc(addSentMessages:)
+    @NSManaged public func addToSentMessages(_ values: NSSet)
 
-    @objc(removeInvitedProjects:)
-    @NSManaged public func removeFromInvitedProjects(_ values: NSSet)
-
-}
-
-// MARK: Generated accessors for ownedProjects
-extension User {
-
-    @objc(addOwnedProjectsObject:)
-    @NSManaged public func addToOwnedProjects(_ value: Project)
-
-    @objc(removeOwnedProjectsObject:)
-    @NSManaged public func removeFromOwnedProjects(_ value: Project)
-
-    @objc(addOwnedProjects:)
-    @NSManaged public func addToOwnedProjects(_ values: NSSet)
-
-    @objc(removeOwnedProjects:)
-    @NSManaged public func removeFromOwnedProjects(_ values: NSSet)
-
-}
-
-// MARK: Generated accessors for refusedProjects
-extension User {
-
-    @objc(addRefusedProjectsObject:)
-    @NSManaged public func addToRefusedProjects(_ value: Project)
-
-    @objc(removeRefusedProjectsObject:)
-    @NSManaged public func removeFromRefusedProjects(_ value: Project)
-
-    @objc(addRefusedProjects:)
-    @NSManaged public func addToRefusedProjects(_ values: NSSet)
-
-    @objc(removeRefusedProjects:)
-    @NSManaged public func removeFromRefusedProjects(_ values: NSSet)
+    @objc(removeSentMessages:)
+    @NSManaged public func removeFromSentMessages(_ values: NSSet)
 
 }

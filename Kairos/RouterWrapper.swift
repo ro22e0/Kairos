@@ -28,7 +28,7 @@ public enum Router: URLRequestConvertible {
      
      - returns: A `String` baseURL.
      */
-    static let baseURLString = "http://kairos-api-ro22e0.c9users.io/api/v1"
+    static let baseURLString = "https://apikairos-formule3.c9users.io/api/v1" //"http://kairos-api-ro22e0.c9users.io/api/v1" //"http://163.5.84.248" //
     
     /**
      Determine if the request need credentials in headers.
@@ -129,6 +129,9 @@ public enum Router: URLRequestConvertible {
     case inviteTask(Parameters)
     case removeTask(Parameters)
     
+    case getChatRooms
+    case deleteChatRoom(Parameters)
+    
     /**
      The method use for the request.
      
@@ -138,11 +141,11 @@ public enum Router: URLRequestConvertible {
         switch self {
         case .createUser, .authenticate, .inviteFriend, .createCalendar, .createEvent, .createProject, .createTask:
             return .POST
-        case .getFriends, .getUsers, .getEvents, .getEvent, .getCalendars, .getCalendar, .getCalendarColors, .getProjects, .getProject, .getTasks, .getTask:
+        case .getFriends, .getUsers, .getEvents, .getEvent, .getCalendars, .getCalendar, .getCalendarColors, .getProjects, .getProject, .getTasks, .getTask, .getChatRooms:
             return .GET
         case .updateUser, .acceptFriend, .declineFriend, .updateEvent, .updateCalendar, .inviteCalendar, .acceptCalendar, .refuseCalendar, .ownerCalendar, .removeCalendar, .inviteEvent, .acceptEvent, .refuseEvent, .ownerEvent, .removeEvent, .updateProject, .inviteProject, .acceptProject, .refuseProject, .ownerProject, .removeProject, .updateTask, .inviteTask, .removeTask:
             return .PUT
-        case .removeFriend, .cancelFriend, .deleteEvent, .deleteCalendar, .deleteProject, .deleteTask, .signOut:
+        case .removeFriend, .cancelFriend, .deleteEvent, .deleteCalendar, .deleteProject, .deleteTask, .signOut, .deleteChatRoom:
             return .DELETE
         }
     }
@@ -194,7 +197,7 @@ public enum Router: URLRequestConvertible {
             return "/events/\(parameters["id"]!)/set_owner"
         case .removeEvent(let parameters):
             return "/events/\(parameters["id"]!)/remove"
-            
+
         case .createCalendar, .getCalendars:
             return "/calendars"
         case .getCalendarColors:
@@ -247,6 +250,12 @@ public enum Router: URLRequestConvertible {
             return "/tasks/\(parameters["id"]!)/add"
         case .removeTask(let parameters):
             return "/tasks/\(parameters["id"]!)/remove"
+            
+        case .getChatRooms:
+            return "/chat_rooms"
+        case .deleteChatRoom(let parameters):
+            return "/chat_rooms/\(parameters["id"]!)/remove"
+
 
         case .signOut:
             return "/auth/sign_out"
@@ -327,7 +336,7 @@ public enum Router: URLRequestConvertible {
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case .inviteTask(let parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
-        case .removeProject(let parameters):
+        case .removeTask(let parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: ["user_id": parameters["user_id"]!])
         case .getTask(let parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: ["project_id": parameters["project_id"]!])
@@ -391,7 +400,6 @@ class RouterWrapper: NSObject, URLSessionTaskDelegate {
                 break
             }
         }
-        manager!.startListening()
         self.manager.request(request).responseJSON(completionHandler: completionHandler)
         //RouterWrapper.shared.manager.request(request).responseJSON(queue: queue, options: .AllowFragments, completionHandler: completionHandler)
     }

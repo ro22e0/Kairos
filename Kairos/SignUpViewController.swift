@@ -103,9 +103,9 @@ class SignUpViewController: UIViewController {
                 Spinner.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
-                print(error?.localizedDescription)
-            } else if !(result?.isCancelled)! {
-                self.userInfos = ["type": LoginSDK.Facebook.rawValue, "data": result]
+                print(error!.localizedDescription)
+            } else if !result!.isCancelled {
+                self.userInfos = ["type": LoginSDK.Facebook.rawValue, "data": result!]
                 Spinner.showWithAnimation("Retrieving informations...")
                 self.facebookFetch(result!, completion: { () -> Void in
                     self.performSegue(withIdentifier: "kShowDefinePasswordSegue", sender: self)
@@ -117,7 +117,6 @@ class SignUpViewController: UIViewController {
     }
     
     fileprivate func googleFetch(_ user: GIDGoogleUser, completion: @escaping () -> Void) {
-        let manager = NetworkReachabilityManager(host: "www.apple.com")
         self.manager!.startRequestsImmediately = false
         
         let parameters = ["access_token": user.authentication.accessToken]
@@ -141,21 +140,14 @@ class SignUpViewController: UIViewController {
                 })
                 print(error)
             }
-            manager?.stopListening()
         }
-        debugPrint(request)
-        
-        networkManager(manager, request: request)
         request?.resume()
     }
     
     fileprivate func facebookFetch(_ result: FBSDKLoginManagerLoginResult, completion: @escaping () -> Void) {
-        let manager = NetworkReachabilityManager(host: "www.apple.com")
-        networkManager(manager, request: nil)
-        
         let parameters = ["fields": "email,first_name,last_name"]
         let request = FBSDKGraphRequest(graphPath: "me", parameters: parameters)
-        request?.start(completionHandler: { (connection, result, error) in
+        request!.start(completionHandler: { (connection, result, error) in
             if error == nil {
                 if let value = result as? NSDictionary {
                     let json = JSON(value)
@@ -171,9 +163,7 @@ class SignUpViewController: UIViewController {
                 Spinner.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
                     SwiftSpinner.hide()
                 })
-                print(error)
             }
-            manager?.stopListening()
         })
     }
     
@@ -206,7 +196,6 @@ class SignUpViewController: UIViewController {
                 break
             }
         }
-        manager?.startListening()
     }
     
     /*

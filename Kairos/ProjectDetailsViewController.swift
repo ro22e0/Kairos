@@ -33,11 +33,6 @@ class ProjectDetailsViewController: ButtonBarPagerTabStripViewController {
         customizeBar()
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.ProjectDidChange.rawValue), object: nil)
         configureDetailsView()
     }
@@ -129,8 +124,9 @@ class ProjectDetailsViewController: ButtonBarPagerTabStripViewController {
                 let destVC = navController.viewControllers[0] as! EditTaskTableViewController
                 destVC.project = project
             case "showTaskDetails":
-                let destVC = segue.destination as! TaskDetailsTableViewController
+                let destVC = segue.destination as! TaskDetailsViewController
                 destVC.task = selectedTask
+                destVC.project = project
             default:
                 break
             }

@@ -29,19 +29,12 @@ class EventTableViewController: FormViewController {
     fileprivate var deleteRow: RowFormer?
     fileprivate var calendarRow: RowFormer?
     fileprivate var peoplesRow: RowFormer?
-    
+
     fileprivate var addedUsers = [User: UserStatus]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        //        eventStartDateCell = EventStartDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
-        //        eventEndDateCell = EventEndDateTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
+
         if self.event == nil {
             self.saveButton.title = "Save"
             self.navigationItem.title = "New Event"
@@ -91,14 +84,11 @@ class EventTableViewController: FormViewController {
         tableView.contentInset.top = 10
         tableView.backgroundColor = .background()
         tableView.bounces = false
-        //        tableView.contentInset.bottom = 30
-        //        tableView.contentOffset.y = -10
-        
+
         // Create RowFomers
-        
         let titleRow = TextFieldRowFormer<FormTextFieldCell>() {
             $0.textField.textColor = .formerSubColor()
-            $0.textField.font = .systemFont(ofSize: 15)
+            $0.textField.font = .systemFont(ofSize: 20)
             }.configure {
                 $0.placeholder = "Event title"
                 $0.text = event?.title
@@ -127,7 +117,7 @@ class EventTableViewController: FormViewController {
             $0.selectionStyle = .none
         }
         rows.append(allDayRow)
-        
+
         let startRow = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
             $0.titleLabel.text = "Start date"
             $0.titleLabel.textColor = .formerColor()
@@ -143,7 +133,7 @@ class EventTableViewController: FormViewController {
                 $0.datePicker.datePickerMode = .dateAndTime
             }.displayTextFromDate(String.mediumDateShortTime)
         rows.append(startRow)
-
+        
         let endRow = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
             $0.titleLabel.text = "End date"
             $0.titleLabel.textColor = .formerColor()
@@ -188,7 +178,7 @@ class EventTableViewController: FormViewController {
             }.configure {
                 $0.text = "Calendar"
                 $0.cell.accessoryType = .disclosureIndicator
-                $0.subText = event?.calendar?.name ?? "None"
+                $0.subText = event?.calendar?.name == nil ? "None" : event!.calendar!.name
                 self.selectedCalendar = event?.calendar
             }.onSelected { _ in
                 self.performSegue(withIdentifier: "showEventCalendar", sender: self)
@@ -196,7 +186,7 @@ class EventTableViewController: FormViewController {
                 $0.subText = self.selectedCalendar?.name
         }
         rows.append(calendarRow!)
-    
+        
         peoplesRow = LabelRowFormer<FormLabelCell>() {
             $0.formTextLabel()?.textColor = .formerColor()
             $0.formTextLabel()?.font = .boldSystemFont(ofSize: 15)
@@ -285,8 +275,6 @@ class EventTableViewController: FormViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         switch segue.identifier! {
         case "showEventParticipants":
             let destVC = segue.destination as! EventParticipantTableViewController
@@ -318,7 +306,7 @@ class EventTableViewController: FormViewController {
             switch status {
             case .success:
                 Spinner.showWhistle("kEventCreated", success: true)
-                //                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
                 self.dismiss(animated: true, completion: nil)
             case .error(let error):
                 Spinner.showWhistle("kFail", success: false)
@@ -338,11 +326,6 @@ class EventTableViewController: FormViewController {
             switch status {
             case .success:
                 Spinner.showWhistle("kCalendarSuccess")
-                //                for userId in removed {
-                //                    if let user = User.find("id == %@", args: userId) as? User {
-                //                        EventManager.shared.delete(user: user, fromEvent: event!)
-                //                    }
-                //                }
                 self.event?.save()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.EventDidChange.rawValue), object: nil)
                 self.navigationController!.popViewController(animated: true)
@@ -368,17 +351,17 @@ class EventTableViewController: FormViewController {
                 self.event?.save()
                 print(self.event?.title)
                 print(self.event?.owners?.count)
-                //                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.EventDidChange.rawValue), object: nil)
                 if self.presentingViewController is UITabBarController {
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     self.navigationController!.popViewController(animated: true)
                 }
-                //                do {
-                //                    try DataSync.dataStack().mainContext.save()
-                //                } catch (let error) {
-                //                    print(error)
-            //                }
+                do {
+                    try DataSync.dataStack().mainContext.save()
+                } catch (let error) {
+                    print(error)
+                }
             case .error(let error):
                 Spinner.showWhistle("kEventError", success: false)
                 print(error)

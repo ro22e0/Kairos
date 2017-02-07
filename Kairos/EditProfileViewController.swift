@@ -181,8 +181,8 @@ class EditProfileViewController: FormViewController {
             switch status {
             case .success:
                 print("yeah")
-                self.user.save()
-                self.navigationController?.popViewController(animated: true)
+                _ = self.user.save()
+                _ = self.navigationController?.popViewController(animated: true)
             case .error(let error):
                 print(error)
             }
@@ -198,7 +198,7 @@ class EditProfileViewController: FormViewController {
                 user.user!.setValue(value, forKey: key)
             }
         }
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }
 

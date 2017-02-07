@@ -66,7 +66,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         
         let nameRow = TextFieldRowFormer<FormTextFieldCell>() {
             $0.textField.textColor = .formerColor()
-            $0.textField.font = .systemFont(ofSize: 17)
+            $0.textField.font = .systemFont(ofSize: 20)
             }.configure {
                 $0.placeholder = "Calendar Name"
                 $0.text = calendar?.name

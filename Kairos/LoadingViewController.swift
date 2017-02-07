@@ -12,15 +12,13 @@ class LoadingViewController: UIViewController {
     
     // MARK: - UI Properties
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var projectLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        projectLabel.adjustsFontSizeToFitWidth = true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -29,14 +27,14 @@ class LoadingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //        UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
-        //            self.loadingActivityIndicator.startAnimating()
-        //            self.loadingActivityIndicator.alpha = 1.0
-        //            }) { (completed) -> Void in
-        //                if completed {
-        self.checkStart()
-        //                }
-        //        }
+        UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseInOut, animations: { () -> Void in
+            self.loadingActivityIndicator.startAnimating()
+            self.loadingActivityIndicator.alpha = 1.0
+        }) { (completed) -> Void in
+            if completed {
+                self.checkStart()
+            }
+        }
     }
     
     // MARK: - Methods
@@ -48,7 +46,7 @@ class LoadingViewController: UIViewController {
         } else {
             storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
         }
-//        storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil) // COMMENT
+        // storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil) // COMMENT
         if let viewController = storyboard.instantiateInitialViewController() {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             

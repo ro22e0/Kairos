@@ -18,12 +18,7 @@ class CalendarDetailsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.CalendarDidChange.rawValue), object: nil)
         configure()
     }
@@ -69,9 +64,6 @@ class CalendarDetailsTableViewController: UITableViewController {
 
         self.title = "Calendar Details"
         self.tableView.tableFooterView = UIView()
-        
-        //        self.tableView.rowHeight = UITableViewAutomaticDimension
-        //        self.tableView.estimatedRowHeight = 44
 
         let cm = CalendarManager.shared
         var rows = [RowFormer]()
@@ -79,7 +71,11 @@ class CalendarDetailsTableViewController: UITableViewController {
         let participants = cm.allUsers(forCalendar: calendar!)
         let calendarHeader = LabelRowFormer<CalendarHeaderCell>(instantiateType: .Nib(nibName: "CalendarHeaderCell")) {
             $0.acceptButton.isEnabled = false
-            $0.eventLabel.text = "No events"
+            if let count = self.calendar?.events?.count, count > 0 {
+                $0.eventLabel.text = String(count) + " events"
+            } else {
+                $0.eventLabel.text = "No events"
+            }
             $0.participantLabel.text = String(participants.count) + " participants"
             if let color = self.calendar?.color {
                 $0.colorImageView.backgroundColor = DynamicColor(hexString: CalendarManager.shared.colors[color]!)
@@ -175,51 +171,6 @@ class CalendarDetailsTableViewController: UITableViewController {
             }
         }
     }
-    
-    /*
-     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
     
     // MARK: - Navigation
     

@@ -35,6 +35,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
         if self.task == nil {
             self.navigationItem.title = "New Task"
             self.task = Task.temporary()
+            set(users: [UserManager.shared.current.user!])
         } else {
             self.navigationItem.title = "Edit Task"
             deleteRow = LabelRowFormer<FormLabelCell>() {

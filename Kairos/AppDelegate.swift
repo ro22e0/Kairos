@@ -26,6 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.NS
         
+        // Fetch update
+        let defautls = UserDefaults.standard
+        if let _ = defautls.value(forKey: userLoginKey) as? Bool {
+            UserManager.shared.fetchAll()
+        }
+
         UINavigationBar.appearance().tintColor = .orangeTint()
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().titleTextAttributes = [

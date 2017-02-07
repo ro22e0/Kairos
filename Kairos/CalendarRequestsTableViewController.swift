@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DynamicColor
 import DZNEmptyDataSet
 
 class CalendarRequestsTableViewController: UITableViewController {
@@ -86,7 +87,16 @@ class CalendarRequestsTableViewController: UITableViewController {
             cell.acceptButton.isEnabled = true
         }
         let participants = CalendarManager.shared.allUsers(forCalendar: calendar)
-        cell.eventLabel.text = "No events"
+        if let count = calendar.events?.count, count > 0 {
+            cell.eventLabel.text = String(count) + " events"
+        } else {
+            cell.eventLabel.text = "No events"
+        }
+        if let calendarColor = calendar.color {
+            let hexColor = CalendarManager.shared.colors[calendarColor]
+            let color = DynamicColor(hexString: hexColor!)
+            cell.colorImageView.backgroundColor = color
+        }
         cell.titleLabel.text = calendar.name
         cell.participantLabel.text = String(participants.count) + " participants"
         cell.tag = calendar.id!.intValue
@@ -115,52 +125,7 @@ class CalendarRequestsTableViewController: UITableViewController {
         label.text = "REFUSED"
         return refusedCalendars.isEmpty ? nil : headerView
     }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+  
     @IBAction func done(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }

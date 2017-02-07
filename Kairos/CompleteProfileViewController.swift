@@ -157,30 +157,31 @@ class CompleteProfileViewController: FormViewController {
     }
     
     @IBAction func done(_ sender: Any) {
-        let parameters = user.dictionaryWithValues(forKeys: ["id", "name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
+        let parameters = user.user!.dictionaryWithValues(forKeys: ["id", "name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
         UserManager.shared.update(parameters as [String : Any]) { (status) in
             switch status {
             case .success:
                 print("yeah")
-                self.user.save()
-                self.setRootVC(BoardStoryboardID)
+                _ = self.user.save()
+                self.setRootVC(StoryboardID.Board.rawValue)
             case .error(let error):
                 print(error)
             }
         }
     }
-    
+
     @IBAction func skip(_ sender: Any) {
-        let changedValues = user.committedValues(forKeys: ["name", "nickname", "image", "imageData", "email", "school", "promotion", "location", "company", "job"])
+        let changedValues = user.user!.committedValues(forKeys: ["name", "nickname", "image", "email", "school", "promotion", "location", "company", "job"])
         for (key, value) in changedValues {
             if value is NSNull {
-                user.setValue(nil, forKey: key)
+                user.user!.setValue(nil, forKey: key)
             } else {
-                user.setValue(value, forKey: key)
+                user.user!.setValue(value, forKey: key)
             }
         }
-        self.setRootVC(BoardStoryboardID)
+        self.setRootVC(StoryboardID.Board.rawValue)
     }
+
     /*
      // MARK: - Navigation
      

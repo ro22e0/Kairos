@@ -20,6 +20,9 @@ target 'Kairos' do
   pod 'DynamicColor'
   pod 'SwiftRecord'
   pod 'UIImageView-Letters'
+  pod 'JSQMessagesViewController'
+  pod 'Starscream'
+  pod 'Socket.IO-Client-Swift'
   # pod 'DatePickerCell'
   # pod 'UITextField+Shake', '~> 1.1'
 end

@@ -22,18 +22,6 @@ class UserManager {
     }
 
     fileprivate func syncOwner(_ data: JSON, completionHandler: @escaping (StatusRequest) -> Void) {
-        //        if let owner = Owner.all().first as? Owner {
-        //            if owner.id != data["id"].number {
-        //                DataSync.deleteAll()
-        //            }
-        //        }
-        //        let owner = Owner.findOrCreate(["id": data["id"].number!]) as! Owner
-        //
-        //        owner.name = data["name"].stringValue
-        //        owner.nickname = data["nickname"].stringValue
-        //        owner.email = data["email"].stringValue
-        //        owner.image = data["image"].rawValue as? NSData
-        //        Owner.save()
         if let owner = Owner.all().first as? Owner {
             if owner.id != data["id"].number {
                 DataSync.deleteAll()
@@ -56,11 +44,6 @@ class UserManager {
                     let json = JSON(value)
                     switch response.response!.statusCode {
                     case 200:
-                        //                        self.syncOwner(json["data"])
-                        //                        let defautls = NSUserDefaults.standardUserDefaults()
-                        //                        defautls.setValue(true, forKey: userLoginKey)
-                        //                        self.setCredentials(response.response!)
-                        //                        completionHandler(.success(nil))
                         if let owner = Owner.all().first as? Owner {
                             if owner.id != json["data"]["id"].number {
                                 DataSync.deleteAll()
@@ -72,7 +55,7 @@ class UserManager {
                         DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
                             let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
-//                            try! DataSync.dataStack().mainContext.save()
+                            try! DataSync.dataStack().mainContext.save()
                             completionHandler(.success(nil))
                         })
                     default:
@@ -89,6 +72,7 @@ class UserManager {
         RouterWrapper.shared.request(.createUser(parameters)) { (response) in
             switch response.result {
             case .success:
+                self.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value)
                     switch response.response!.statusCode {
@@ -107,13 +91,6 @@ class UserManager {
                             try! DataSync.dataStack().mainContext.save()
                             completionHandler(.success(nil))
                         })
-                        
-                        //                        DataSync.sync(entity: "Owner", predicate: nil, data: [json["data"].dictionaryObject!], completion: { error in
-                        //                            let defautls = NSUserDefaults.standardUserDefaults()
-                        //                            defautls.setValue(true, forKey: userLoginKey)
-                        //                            self.setCredentials(response.response!)
-                        //                            completionHandler(.success(nil))
-                    //                            }, all: true)
                     default:
                         completionHandler(.error("The operation can't be completed"))
                     }
@@ -174,16 +151,16 @@ class UserManager {
         let token = defautls.value(forKey: userTokenKey) as? String
         let client = defautls.value(forKey: userClientKey) as? String
         let uid = defautls.value(forKey: userUIDKey) as? String
-        
+
         return ["access-token": token!, "client": client!, "uid": uid!]
     }
-    
+
     func all() -> [User] {
         let users = User.all() as! [User]
         
         return users
     }
-    
+
     func all(filtered text: String) -> [User] {
         let namePred = NSPredicate(format: "name contains[c] %@ AND self != %@", text, self.current)
         let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@", text, self.current)
@@ -206,6 +183,24 @@ class UserManager {
                 }
             case .error(let error):
                 print(error)
+            }
+        }
+    }
+    
+    func fetchAll(_ handler: (() -> Void)? = nil) {
+        DataSync.fetchUsers { (status) in
+            FriendManager.shared.fetch()
+            CalendarManager.shared.fetch() {
+                DataSync.fetchCalendarColors()
+                EventManager.shared.fetch()
+            }
+            ProjectManager.shared.fetch()
+            TaskManager.shared.fetch()
+            ChatRoomManager.shared.fetch() {
+                let chatRooms = ChatRoomManager.shared.chatRooms()
+                for chatRoom in chatRooms {
+                    ChatRoomManager.shared.listen(for: chatRoom)
+                }
             }
         }
     }

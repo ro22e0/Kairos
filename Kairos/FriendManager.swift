@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 class FriendManager {
     
@@ -129,7 +130,12 @@ class FriendManager {
             case .success:
                 switch response.response!.statusCode {
                 case 200...203:
-                    completionHandler(.success(nil))
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        DataSync.syncFriends(json) {
+                            completionHandler(.success(nil))
+                        }
+                    }
                 default:
                     completionHandler(.error("kFail"))
                 }

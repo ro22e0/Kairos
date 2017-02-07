@@ -16,16 +16,14 @@ class SignInViewController: UIViewController {
     // MARK: - UI Properties
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    
     // MARK: - Class Properties
     var manager: SessionManager?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-            emailTextField.text = "bernolt@mail.com"
-            passwordTextField.text = "qwerty123"
         self.navigationItem.backBarButtonItem?.title = ""
-
+        
         let configuration = URLSessionConfiguration.default
         self.manager = SessionManager(configuration: configuration)
     }
@@ -47,7 +45,9 @@ class SignInViewController: UIViewController {
         UserManager.shared.signIn(parameters as [String : Any]) { (status) in
             switch status {
             case .success:
-                self.setRootVC(BoardStoryboardID)
+                UserManager.shared.fetchAll() {
+                    self.setRootVC(BoardStoryboardID)
+                }
             case .error: break
             }
         }

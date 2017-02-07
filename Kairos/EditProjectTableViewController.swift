@@ -80,7 +80,7 @@ class EditProjectTableViewController: UITableViewController, UIPopoverPresentati
             }.configure {
                 $0.placeholder = "Description"
                 $0.text = project?.notes
-                $0.rowHeight = 100
+                $0.rowHeight = 80
             }.onTextChanged { (text) in
                 self.project?.notes = text
         }
@@ -95,6 +95,8 @@ class EditProjectTableViewController: UITableViewController, UIPopoverPresentati
             }.configure {
                 if let date = project?.dateStart {
                     $0.date = date as Date
+                } else {
+                    self.project?.dateStart = $0.date as NSDate?
                 }
             }.inlineCellSetup {
                 $0.datePicker.datePickerMode = .date
@@ -110,6 +112,8 @@ class EditProjectTableViewController: UITableViewController, UIPopoverPresentati
             }.configure {
                 if let date = project?.dateEnd {
                     $0.date = date as Date
+                } else {
+                    self.project?.dateEnd = $0.date as NSDate?
                 }
             }.inlineCellSetup {
                 $0.datePicker.datePickerMode = .date
