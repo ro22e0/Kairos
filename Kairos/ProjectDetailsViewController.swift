@@ -124,7 +124,7 @@ class ProjectDetailsViewController: ButtonBarPagerTabStripViewController {
                 let destVC = navController.viewControllers[0] as! EditTaskTableViewController
                 destVC.project = project
             case "showTaskDetails":
-                let destVC = segue.destination as! TaskDetailsViewController
+                let destVC = segue.destination as! TaskDetailsTableViewController
                 destVC.task = selectedTask
                 destVC.project = project
             default:

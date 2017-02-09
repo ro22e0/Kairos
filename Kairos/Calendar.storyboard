@@ -840,8 +840,8 @@
         <image name="participant" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hd2-QE-47j"/>
         <segue reference="biZ-Ui-IUl"/>
-        <segue reference="WjU-w8-vSq"/>
+        <segue reference="Jbv-4C-T54"/>
+        <segue reference="hd2-QE-47j"/>
     </inferredMetricsTieBreakers>
 </document>

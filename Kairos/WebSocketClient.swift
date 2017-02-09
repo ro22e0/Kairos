@@ -54,6 +54,7 @@ class WebSocketClient: WebSocketDelegate {
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         print("websocket is disconnected: \(error?.localizedDescription)")
+        connect()
     }
     
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {

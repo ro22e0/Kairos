@@ -77,7 +77,7 @@ class EventDetailsTableViewController: UITableViewController {
         var rows = [RowFormer]()
         
         let participants = em.allUsers(forEvent: event!)
-        let calendarHeader = LabelRowFormer<EventHeaderCell>(instantiateType: .Nib(nibName: "EventHeaderCell")) {
+        let eventHeader = LabelRowFormer<EventHeaderCell>(instantiateType: .Nib(nibName: "EventHeaderCell")) {
             $0.acceptButton.isEnabled = false
             $0.calendarLabel.text = self.event?.calendar?.name
             $0.participantLabel.text = String(participants.count)
@@ -159,7 +159,7 @@ class EventDetailsTableViewController: UITableViewController {
             }
         }()
         
-        let sectionHeader = SectionFormer(rowFormer: calendarHeader).set(headerViewFormer: nil)
+        let sectionHeader = SectionFormer(rowFormer: eventHeader).set(headerViewFormer: nil)
         let sectionDates = SectionFormer(rowFormer: datesRow).set(headerViewFormer: createEmptyHeader)
         let sectionDesc = SectionFormer(rowFormer: noteRow).set(headerViewFormer: createHeader("Description"))
         let sectionLocation = SectionFormer(rowFormer: locationRow).set(headerViewFormer: createHeader("Location"))

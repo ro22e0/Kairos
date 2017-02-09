@@ -31,7 +31,7 @@
 		AC4A94BD1E2E704600BA59B5 /* ProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94BC1E2E704600BA59B5 /* ProjectTableViewController.swift */; };
 		AC4A94BF1E2E817F00BA59B5 /* ProjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94BE1E2E817F00BA59B5 /* ProjectDetailsViewController.swift */; };
 		AC4A94C11E2E818E00BA59B5 /* EditProjectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94C01E2E818E00BA59B5 /* EditProjectTableViewController.swift */; };
-		AC4A94C31E2E81E800BA59B5 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94C21E2E81E800BA59B5 /* TaskDetailsViewController.swift */; };
+		AC4A94C31E2E81E800BA59B5 /* TaskDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94C21E2E81E800BA59B5 /* TaskDetailsTableViewController.swift */; };
 		AC4A94C51E2E821100BA59B5 /* EditTaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A94C41E2E821100BA59B5 /* EditTaskTableViewController.swift */; };
 		AC5C596F1E2FC2D300D51C69 /* ProjectMembersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C596E1E2FC2D300D51C69 /* ProjectMembersTableViewController.swift */; };
 		AC5C59711E300E9200D51C69 /* UserProjectActionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C59701E300E9200D51C69 /* UserProjectActionTableViewController.swift */; };
@@ -64,6 +64,10 @@
 		DA18745D1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18745C1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift */; };
 		DA18745F1CDB78A9008E7C38 /* EventNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18745E1CDB78A9008E7C38 /* EventNotesTableViewCell.swift */; };
 		DA1874611CDB8029008E7C38 /* BaseEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1874601CDB8029008E7C38 /* BaseEventTableViewCell.swift */; };
+		DA1AF0C51E4C8BC00074CDB9 /* TaskDateDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AF0C31E4C8BC00074CDB9 /* TaskDateDetailsCell.swift */; };
+		DA1AF0C61E4C8BC00074CDB9 /* TaskDateDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA1AF0C41E4C8BC00074CDB9 /* TaskDateDetailsCell.xib */; };
+		DA1AF0CB1E4C93960074CDB9 /* UserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AF0C91E4C93960074CDB9 /* UserListCell.swift */; };
+		DA1AF0CC1E4C93960074CDB9 /* UserListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA1AF0CA1E4C93960074CDB9 /* UserListCell.xib */; };
 		DA1D4BE11D84111C00B11AD1 /* CalendarFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */; };
 		DA1D4BE31D841F7E00B11AD1 /* CalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */; };
 		DA1E11FF1D78440E0068207F /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E11FE1D78440E0068207F /* SignOutViewController.swift */; };
@@ -199,7 +203,7 @@
 		AC4A94BC1E2E704600BA59B5 /* ProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewController.swift; sourceTree = "<group>"; };
 		AC4A94BE1E2E817F00BA59B5 /* ProjectDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailsViewController.swift; sourceTree = "<group>"; };
 		AC4A94C01E2E818E00BA59B5 /* EditProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProjectTableViewController.swift; sourceTree = "<group>"; };
-		AC4A94C21E2E81E800BA59B5 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
+		AC4A94C21E2E81E800BA59B5 /* TaskDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsTableViewController.swift; sourceTree = "<group>"; };
 		AC4A94C41E2E821100BA59B5 /* EditTaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskTableViewController.swift; sourceTree = "<group>"; };
 		AC5C596E1E2FC2D300D51C69 /* ProjectMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectMembersTableViewController.swift; sourceTree = "<group>"; };
 		AC5C59701E300E9200D51C69 /* UserProjectActionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProjectActionTableViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +237,10 @@
 		DA18745C1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EventEndDateTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA18745E1CDB78A9008E7C38 /* EventNotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventNotesTableViewCell.swift; sourceTree = "<group>"; };
 		DA1874601CDB8029008E7C38 /* BaseEventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseEventTableViewCell.swift; sourceTree = "<group>"; };
+		DA1AF0C31E4C8BC00074CDB9 /* TaskDateDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDateDetailsCell.swift; sourceTree = "<group>"; };
+		DA1AF0C41E4C8BC00074CDB9 /* TaskDateDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskDateDetailsCell.xib; sourceTree = "<group>"; };
+		DA1AF0C91E4C93960074CDB9 /* UserListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListCell.swift; sourceTree = "<group>"; };
+		DA1AF0CA1E4C93960074CDB9 /* UserListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserListCell.xib; sourceTree = "<group>"; };
 		DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarFilterTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA1D4BE21D841F7E00B11AD1 /* CalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA1E11FE1D78440E0068207F /* SignOutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +394,8 @@
 				AC6BF41C1E30567000EC353C /* TaskTableViewCell.xib */,
 				DA4D52F91E41340900ED7F55 /* TaskHeaderCell.swift */,
 				DA4D52FA1E41340900ED7F55 /* TaskHeaderCell.xib */,
+				DA1AF0C31E4C8BC00074CDB9 /* TaskDateDetailsCell.swift */,
+				DA1AF0C41E4C8BC00074CDB9 /* TaskDateDetailsCell.xib */,
 			);
 			name = Project;
 			sourceTree = "<group>";
@@ -404,6 +414,7 @@
 		DA05BED31E30E09400DF1BE5 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				DA2DA32B1E31995300F86C68 /* WebSocketClient.swift */,
 				DA05BED61E30E3FE00DF1BE5 /* ChatTableViewController.swift */,
 				DA05BED41E30E0D300DF1BE5 /* RoomViewController.swift */,
 			);
@@ -593,6 +604,8 @@
 				DA40416C1DE75DA60043A8F0 /* LabelColorCell.xib */,
 				DA6FDEF71E43996500B516F8 /* UserCollectionViewCell.swift */,
 				DA6FDEF81E43996500B516F8 /* UserCollectionViewCell.xib */,
+				DA1AF0C91E4C93960074CDB9 /* UserListCell.swift */,
+				DA1AF0CA1E4C93960074CDB9 /* UserListCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -628,7 +641,7 @@
 				AC4A94C01E2E818E00BA59B5 /* EditProjectTableViewController.swift */,
 				AC5C59701E300E9200D51C69 /* UserProjectActionTableViewController.swift */,
 				AC2C9A441E2F76210039ADB6 /* TaskTableViewController.swift */,
-				AC4A94C21E2E81E800BA59B5 /* TaskDetailsViewController.swift */,
+				AC4A94C21E2E81E800BA59B5 /* TaskDetailsTableViewController.swift */,
 				AC4A94C41E2E821100BA59B5 /* EditTaskTableViewController.swift */,
 				AC6BF4191E30429600EC353C /* UserTaskActionTableViewController.swift */,
 			);
@@ -719,7 +732,6 @@
 				AC3B67841E2E9CD100BFCB84 /* ProjectManager.swift */,
 				AC2C9A461E2F81900039ADB6 /* TaskManager.swift */,
 				DA2DA3251E316D8E00F86C68 /* ChatRoomManager.swift */,
-				DA2DA32B1E31995300F86C68 /* WebSocketClient.swift */,
 				DAC801811CA1F0330092A717 /* SpinnerManager.swift */,
 				DA6853471CE2707600B839F6 /* RouterWrapper.swift */,
 				DA83262F1CE3CCFF00C09F31 /* DataSync.swift */,
@@ -884,7 +896,9 @@
 				DAFA00231DA83B040039AD4D /* CalendarTableViewCell.xib in Resources */,
 				DA68533D1CE25E5E00B839F6 /* User-Info.plist in Resources */,
 				DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */,
+				DA1AF0CC1E4C93960074CDB9 /* UserListCell.xib in Resources */,
 				DA7913041CEFCF6E00661753 /* UserActionTableViewCell.xib in Resources */,
+				DA1AF0C61E4C8BC00074CDB9 /* TaskDateDetailsCell.xib in Resources */,
 				DA05BED11E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib in Resources */,
 				DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */,
 				DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */,
@@ -1139,6 +1153,7 @@
 				DA18745D1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift in Sources */,
 				AC3F80021E2CC061009DA485 /* EventManager.swift in Sources */,
 				DA6853331CE25E2400B839F6 /* UserManager.swift in Sources */,
+				DA1AF0C51E4C8BC00074CDB9 /* TaskDateDetailsCell.swift in Sources */,
 				DA3603C71CC26DA000A89B5A /* EventDetailsTableViewController.swift in Sources */,
 				DA6853461CE260C200B839F6 /* Kairos.xcdatamodeld in Sources */,
 				DA7912F91CEFCBF800661753 /* FriendActionPopoverTableViewController.swift in Sources */,
@@ -1206,6 +1221,7 @@
 				AC3B67851E2E9CD100BFCB84 /* ProjectManager.swift in Sources */,
 				AC9D1E5E1E2D7B3700F1D29D /* EventHeaderCell.swift in Sources */,
 				DA1E12011D784AC90068207F /* EditProfileViewController.swift in Sources */,
+				DA1AF0CB1E4C93960074CDB9 /* UserListCell.swift in Sources */,
 				DA668F3E1CA4AEA000230912 /* InvitationTableViewCell.swift in Sources */,
 				AC3B67981E2EBBA500BFCB84 /* ProjectRequestsTableViewController.swift in Sources */,
 				DADD55E41CA60CE200C44D40 /* UserTableViewCell.swift in Sources */,
@@ -1234,7 +1250,7 @@
 				DA0E144B1DA8125200865C20 /* CalendarManager.swift in Sources */,
 				AC3B67941E2EB2CF00BFCB84 /* Task+CoreDataProperties.swift in Sources */,
 				DA5CDDE61D8AD94100B406A1 /* CalendarDeleteTableViewCell.swift in Sources */,
-				AC4A94C31E2E81E800BA59B5 /* TaskDetailsViewController.swift in Sources */,
+				AC4A94C31E2E81E800BA59B5 /* TaskDetailsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
