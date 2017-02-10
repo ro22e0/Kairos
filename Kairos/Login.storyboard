@@ -13,7 +13,7 @@
         <scene sceneID="nOF-ME-VVu">
             <objects>
                 <navigationController id="Yqy-r2-YPs" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ncE-nt-JTK">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ncE-nt-JTK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -45,7 +45,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="rrg-Sr-Uek">
-                                <rect key="frame" x="112" y="609" width="151" height="28"/>
+                                <rect key="frame" x="111.5" y="609" width="152" height="28"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an account ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aL4-u3-vaM">
                                         <rect key="frame" x="0.0" y="0.0" width="110" height="28"/>
@@ -54,8 +54,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rjx-zI-C0J">
-                                        <rect key="frame" x="114" y="0.0" width="37" height="28"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <rect key="frame" x="114" y="0.0" width="38" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                         <state key="normal" title="Log in">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -84,10 +84,10 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage your team projects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGC-a0-4X6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage your team projects." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGC-a0-4X6">
                                                 <rect key="frame" x="0.0" y="76" width="335" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -98,9 +98,9 @@
                                             <constraint firstAttribute="height" constant="40" id="A9P-Nh-g27"/>
                                             <constraint firstAttribute="width" constant="240" id="rgi-Xy-O0U"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="18"/>
-                                        <state key="normal" title="Get Started" backgroundImage="Button Background">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <state key="normal" title="Get Started">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="y9t-uh-Qvg" kind="show" id="bdM-Pk-lNd"/>
@@ -112,7 +112,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Ygh-2D-QXn" firstAttribute="top" secondItem="rrg-Sr-Uek" secondAttribute="bottom" constant="30" id="3Zr-TK-S4P"/>
                             <constraint firstAttribute="trailing" secondItem="x9j-2M-wnp" secondAttribute="trailing" constant="20" id="U8K-qQ-fyx"/>
@@ -197,10 +197,10 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7od-tw-X1G">
-                                        <rect key="frame" x="117" y="384" width="61" height="40"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <rect key="frame" x="114.5" y="384" width="66" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <state key="normal" title="Sign Up">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="SignUp:" destination="y9t-uh-Qvg" eventType="touchUpInside" id="yiW-aZ-qkV"/>
@@ -251,11 +251,11 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="PFj-g6-8x4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="yUS-Vv-1Ox" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v95-aB-fBS" secondAttribute="bottom" constant="2" id="8mg-Pb-bsu"/>
@@ -305,7 +305,7 @@
                                     <constraint firstAttribute="width" secondItem="21o-A8-dnU" secondAttribute="height" multiplier="1:1" id="a80-Je-U9k"/>
                                 </constraints>
                                 <state key="normal" image="Close">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="cancel:" destination="dvp-py-pNh" eventType="touchUpInside" id="1ha-FB-Is3"/>
@@ -347,7 +347,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="ZEb-cA-r7L"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                                <state key="normal" title="Done" backgroundImage="Button Background">
+                                                <state key="normal" title="Done">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -357,7 +357,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="8eI-XH-Sf6" firstAttribute="centerX" secondItem="aL1-lQ-eP5" secondAttribute="centerX" priority="750" id="62Q-xP-Paa"/>
                                     <constraint firstItem="8eI-XH-Sf6" firstAttribute="centerY" secondItem="aL1-lQ-eP5" secondAttribute="centerY" id="8iB-pH-tY9"/>
@@ -389,7 +389,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQN-0N-ju4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="aMO-11-8Ec" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1800" y="-167"/>
+            <point key="canvasLocation" x="1876" y="-154"/>
         </scene>
         <!--Sign In-->
         <scene sceneID="tZu-zV-jXp">
@@ -410,7 +410,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                 <state key="normal" title="Privacy policy | Terms of use">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="LuB-Uh-0dW">
@@ -462,9 +462,9 @@
                                             <constraint firstAttribute="width" constant="240" id="jHv-q5-D1w"/>
                                             <constraint firstAttribute="height" constant="40" id="mmu-5l-6uv"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="18"/>
-                                        <state key="normal" title="Log In" backgroundImage="Button Background">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                        <state key="normal" title="Log In">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="SignIn:" destination="BKF-Pf-PsI" eventType="touchUpInside" id="tdk-UL-lzR"/>
@@ -476,7 +476,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="7e0-Te-nC1" firstAttribute="centerX" secondItem="4EJ-WG-5zJ" secondAttribute="centerX" id="0mM-Ba-Npt"/>
                             <constraint firstAttribute="trailing" secondItem="LuB-Uh-0dW" secondAttribute="trailing" constant="40" id="7EQ-hG-EBx"/>
@@ -520,10 +520,10 @@
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="4WD-VT-mZP">
                                 <rect key="frame" x="0.0" y="64" width="375" height="573"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="4WD-VT-mZP" firstAttribute="leading" secondItem="Hcd-G4-1B5" secondAttribute="leading" id="Dtj-Ih-Gsr"/>
                             <constraint firstItem="NaY-OU-FRj" firstAttribute="top" secondItem="4WD-VT-mZP" secondAttribute="bottom" id="Zpr-Vd-msv"/>
@@ -546,14 +546,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iWg-RM-CyH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2520" y="534"/>
+            <point key="canvasLocation" x="2596" y="512"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lxU-gH-30a">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DMo-hO-X6i" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="En9-cz-1md">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="En9-cz-1md">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -564,11 +564,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s4Y-kC-6ru" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1800" y="534"/>
+            <point key="canvasLocation" x="1876" y="512"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Button Background" width="243" height="40"/>
         <image name="Close" width="25" height="25"/>
         <image name="Logo" width="596" height="842"/>
     </resources>

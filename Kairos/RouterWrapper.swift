@@ -28,7 +28,7 @@ public enum Router: URLRequestConvertible {
      
      - returns: A `String` baseURL.
      */
-    static let baseURLString = "https://apikairos-formule3.c9users.io/api/v1" //"http://kairos-api-ro22e0.c9users.io/api/v1" //"http://163.5.84.248" //
+    static let baseURLString = "http://apikairos-formule3.c9users.io/api/v1" //"http://kairos-api-ro22e0.c9users.io/api/v1" //"http://163.5.84.248" //
     
     /**
      Determine if the request need credentials in headers.

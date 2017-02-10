@@ -17,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="fpX-50-M9I">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="fpX-50-M9I">
+                        <rect key="frame" x="6" y="0.0" width="268" height="43"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tNe-9T-jGi">
                             <size key="itemSize" width="50" height="50"/>
@@ -27,12 +27,20 @@
                             <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUL-IS-I7S">
+                        <rect key="frame" x="286" y="11" width="22" height="22"/>
+                        <connections>
+                            <action selector="showUsersList:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5u2-QY-9BB"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="KUL-IS-I7S" secondAttribute="trailing" constant="12" id="IJD-RB-rwK"/>
                     <constraint firstAttribute="bottom" secondItem="fpX-50-M9I" secondAttribute="bottom" id="Ugb-bu-jqI"/>
-                    <constraint firstAttribute="trailing" secondItem="fpX-50-M9I" secondAttribute="trailing" id="fIt-b9-a4h"/>
+                    <constraint firstItem="KUL-IS-I7S" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aH6-BZ-mig"/>
                     <constraint firstItem="fpX-50-M9I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="k93-ZX-vVY"/>
-                    <constraint firstItem="fpX-50-M9I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uea-hA-r6X"/>
+                    <constraint firstItem="KUL-IS-I7S" firstAttribute="leading" secondItem="fpX-50-M9I" secondAttribute="trailing" constant="12" id="lNb-fp-I9L"/>
+                    <constraint firstItem="fpX-50-M9I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="uea-hA-r6X"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -41,7 +41,7 @@ class LoadingViewController: UIViewController {
     func checkStart() {
         var storyboard: UIStoryboard
         let defautls = UserDefaults.standard
-        if let userHasLogged = defautls.value(forKey: userLoginKey) as? Bool {
+        if let userHasLogged = defautls.bool(forKey: userLoginKey) as? Bool {
             storyboard = userHasLogged ? UIStoryboard(name: BoardStoryboardID, bundle: nil) : UIStoryboard(name: LoginStoryboardID, bundle: nil)
         } else {
             storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)

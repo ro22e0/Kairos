@@ -60,7 +60,9 @@ class TaskManager {
         var tasks = [Task]()
         
         if let allTasks = project.tasks?.allObjects as? [Task] {
-            tasks = allTasks
+            tasks = allTasks.filter({ (task) -> Bool in
+                return task.parent == nil
+            })
         }
         
         if let user = user {

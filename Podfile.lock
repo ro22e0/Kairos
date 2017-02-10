@@ -85,6 +85,7 @@ DEPENDENCIES:
   - Crashlytics
   - DynamicColor
   - DZNEmptyDataSet
+  - Fabric
   - FBSDKLoginKit
   - Former
   - FSCalendar
@@ -139,6 +140,6 @@ SPEC CHECKSUMS:
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: c7b392588905a7bcca404ddc25cf9aae7c09df4c
+PODFILE CHECKSUM: 517c334444802fa38f05b15064ab7ee2d8008b17
 
 COCOAPODS: 1.1.1

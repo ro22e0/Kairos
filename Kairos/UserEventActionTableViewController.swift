@@ -50,7 +50,7 @@ class UserEventActionTableViewController: UITableViewController {
                     $0.rowHeight = 44
                 }.onSelected { cell in
                     remove(self.user!)
-                    cell.cell.done()
+                    cell.cell.done?()
             }
             rows.append(removeCell)
         }
@@ -63,7 +63,7 @@ class UserEventActionTableViewController: UITableViewController {
                     $0.rowHeight = 44
                 }.onSelected { cell in
                     owner(self.user!)
-                    cell.cell.done()
+                    cell.cell.done?()
             }
             rows.append(ownerCell)
         }

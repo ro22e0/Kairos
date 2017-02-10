@@ -13,7 +13,7 @@ class UserActionTableViewCell: UITableViewCell, LabelFormableRow {
 
     @IBOutlet weak var titleLabel: UILabel!
 
-    var done: (() -> Void)!
+    var done: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()

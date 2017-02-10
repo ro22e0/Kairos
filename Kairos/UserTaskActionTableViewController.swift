@@ -51,7 +51,7 @@ class UserTaskActionTableViewController: UITableViewController {
                     $0.rowHeight = 44
                 }.onSelected { cell in
                     remove(self.user!)
-                    cell.cell.done()
+                    cell.cell.done?()
             }
             rows.append(removeCell)
         }

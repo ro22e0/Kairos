@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Fetch update
         let defautls = UserDefaults.standard
-        if let _ = defautls.value(forKey: userLoginKey) as? Bool {
+        if let isLogged = defautls.value(forKey: userLoginKey) as? Bool, isLogged { // TODO
             UserManager.shared.fetchAll()
         }
 
@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
         GIDSignIn.sharedInstance().delegate = self
-        
+
         // Configure FBSDK
         FBSDKLoginButton.classForCoder()
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -132,7 +132,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: GIDSignInDelegate {
     func application(_ application: UIApplication,
                      open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        if GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation) {
+        if GIDSignIn.sharedInstance().handle(url,
+                                                 sourceApplication: sourceApplication,
+                                                 annotation: annotation){
             return true
         } else if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
             return true
@@ -142,7 +144,10 @@ extension AppDelegate: GIDSignInDelegate {
     
     func application(_ application: UIApplication,
                      open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
-        if GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?, annotation: options[UIApplicationOpenURLOptionsKey.annotation]) {
+        
+        if GIDSignIn.sharedInstance().handle(url,
+                                                sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                annotation: options[UIApplicationOpenURLOptionsKey.annotation]) {
             return true
         } else if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?, annotation: options[UIApplicationOpenURLOptionsKey.annotation]) {
             return true

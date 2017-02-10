@@ -38,7 +38,7 @@ class SignUpViewController: UIViewController {
         
         let configuration = URLSessionConfiguration.default
         self.manager = SessionManager(configuration: configuration)
-
+        
         GIDSignIn.sharedInstance().uiDelegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(SignUpViewController.handleGoogleSignUp(_:)), name:NSNotification.Name(rawValue: kUSER_GOOGLE_AUTH_NOTIFICATION), object: nil)
@@ -117,31 +117,13 @@ class SignUpViewController: UIViewController {
     }
     
     fileprivate func googleFetch(_ user: GIDGoogleUser, completion: @escaping () -> Void) {
-        self.manager!.startRequestsImmediately = false
-        
-        let parameters = ["access_token": user.authentication.accessToken]
-        let request = self.manager?.request("https://www.googleapis.com/oauth2/v3/userinfo", method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: nil)
-            .responseJSON { response in
-            switch response.result {
-            case .success:
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    self.userInfos = ["name": json["given_name"].stringValue + json["family_name"].stringValue, "email": json["email"].stringValue, "password": ""]
-                    SwiftSpinner.hide()
-                    if json["email"].stringValue != "" {
-                        completion()
-                    } else {
-                        GIDSignIn.sharedInstance().signIn()
-                    }
-                }
-            case .failure(let error):
-                Spinner.showSpinner("The operation can't be completed", subtitle: "Tap to dismiss", completion: { () -> () in
-                    SwiftSpinner.hide()
-                })
-                print(error)
-            }
+        self.userInfos = ["name": user.profile.name, "email": user.profile.email, "password": ""]
+        SwiftSpinner.hide()
+        if user.profile.email != "" {
+            completion()
+        } else {
+            GIDSignIn.sharedInstance().signIn()
         }
-        request?.resume()
     }
     
     fileprivate func facebookFetch(_ result: FBSDKLoginManagerLoginResult, completion: @escaping () -> Void) {
@@ -169,7 +151,7 @@ class SignUpViewController: UIViewController {
     
     fileprivate func SignUpRequest() {
         let parameters = ["name": userInfos!["name"]!,"email": userInfos!["email"]!, "password": userInfos!["password"]!, "password_confirmation": userInfos!["password"]!]
-
+        
         UserManager.shared.signUp(parameters as [String : Any]) { (status) in
             switch status {
             case .success:
@@ -211,16 +193,16 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: GIDSignInUIDelegate {
     // MARK: - GIDSignInUIDelegate
-
+    
     // Present a view that prompts the user to sign in with Google
     func sign(_ signIn: GIDSignIn!,
-                present viewController: UIViewController!) {
+              present viewController: UIViewController!) {
         self.present(viewController, animated: true, completion: nil)
     }
     
     // Dismiss the "Sign in with Google" view
     func sign(_ signIn: GIDSignIn!,
-                dismiss viewController: UIViewController!) {
+              dismiss viewController: UIViewController!) {
         self.dismiss(animated: true, completion: nil)
     }
 }

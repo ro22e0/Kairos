@@ -13,7 +13,7 @@ class UserListCell: UITableViewCell {
     // MARK: Public
     
     var users = [User]()
-    var onUserSelected: ((User) -> Void)?
+    var onInfoSelected: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,7 +28,11 @@ class UserListCell: UITableViewCell {
         selectionStyle = .none
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: "UserCell")
+        collectionView.register(UINib(nibName: "UserCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "userCell")
+    }
+    
+    @IBAction func showUsersList(_ sender: Any) {
+        onInfoSelected?()
     }
 }
 
@@ -43,18 +47,18 @@ extension UserListCell: UICollectionViewDelegateFlowLayout, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as? UserCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userCell", for: indexPath) as? UserCollectionViewCell
         let user = users[indexPath.item]
         
-//        cell?.imageView.setImageWith(user.name, color: .orangeTint(), circular: true)
-//        cell?.nameLabel.text = user.name
+        cell?.imageView.setImageWith(user.name!, color: .orangeTint(), circular: true)
+        cell?.nameLabel.text = user.name
         
         return cell!
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let user = users[indexPath.item]
-        _ = user.name!.size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 11)])
-        return CGSize(width: 25, height: 25)
+        let width = user.name!.size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 11)]).width
+        return CGSize(width: width, height: 40)
     }
 }

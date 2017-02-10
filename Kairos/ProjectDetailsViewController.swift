@@ -192,8 +192,10 @@ class ProjectDetailsViewController: ButtonBarPagerTabStripViewController {
         let allTasks = TaskTableViewController(style: .plain, itemInfo: "ALL TASKS")
         let tm = TaskManager.shared
         allTasks.tasks = tm.tasks(for: project!)
-        let myTasks = TaskTableViewController(style: .plain, itemInfo: "MY TASKS")
+        allTasks.project = project
+        let myTasks = TaskTableViewController(style: .plain, itemInfo: "ASSIGNED TO ME")
         myTasks.tasks = tm.tasks(for: project!, assignedTo: UserManager.shared.current.user)
+        myTasks.project = project
         return [allTasks, myTasks]
     }
 }

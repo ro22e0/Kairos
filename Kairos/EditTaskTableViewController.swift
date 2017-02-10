@@ -12,6 +12,7 @@ import Former
 class EditTaskTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
     
     var project: Project?
+    var parentTask: Task?
     var task: Task?
     
     fileprivate lazy var former: Former = Former(tableView: self.tableView)
@@ -35,14 +36,18 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
         if self.task == nil {
             self.navigationItem.title = "New Task"
             self.task = Task.temporary()
-            set(users: [UserManager.shared.current.user!])
+            if let parentTask = self.parentTask {
+                if let users = parentTask.users?.allObjects as? [User] {
+                    set(users: users)
+                }
+            } else {
+                set(users: [UserManager.shared.current.user!])
+            }
         } else {
             self.navigationItem.title = "Edit Task"
-            deleteRow = LabelRowFormer<FormLabelCell>() {
-                $0.titleLabel.textAlignment = .center
+            deleteRow = LabelRowFormer<UserActionTableViewCell>(instantiateType: .Nib(nibName: "UserActionTableViewCell")) {
                 $0.titleLabel.textColor = .red
-                }
-                .configure { row in
+                }.configure { row in
                     row.text = "Delete task"
                 }.onSelected { row in
                     self.delete()
@@ -63,6 +68,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
         
         //        self.tableView.rowHeight = UITableViewAutomaticDimension
         //        self.tableView.estimatedRowHeight = 44
+        var headerRows = [RowFormer]()
         
         let nameRow = TextFieldRowFormer<FormTextFieldCell>() {
             $0.textField.textColor = .formerColor()
@@ -73,6 +79,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
             }.onTextChanged { (text) in
                 self.task?.title = text
         }
+        headerRows.append(nameRow)
         
         let noteRow = TextViewRowFormer<FormTextViewCell>() {
             $0.textView.textColor = .formerSubColor()
@@ -85,7 +92,19 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
             }.onTextChanged { (text) in
                 self.task?.notes = text
         }
-
+        headerRows.append(noteRow)
+        
+        if let parentTask = self.parentTask {
+            let parentTaskRow = LabelRowFormer<FormLabelCell>()
+                .configure {
+                    $0.text = "Parent task"
+                    $0.subText = parentTask.title ?? "No Parent"
+                }.onSelected { [weak self] _ in
+                    self?.former.deselect(animated: true)
+            }
+            headerRows.append(parentTaskRow)
+        }
+        
         let startRow = InlineDatePickerRowFormer<FormInlineDatePickerCell>() {
             $0.titleLabel.text = "Start date"
             $0.titleLabel.textColor = .formerColor()
@@ -97,7 +116,11 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
                 if let date = task?.dateStart {
                     $0.date = date as Date
                 } else {
-                    $0.date = self.project!.dateStart! as Date
+                    if let parentTask = self.parentTask {
+                        $0.date = parentTask.dateStart! as Date
+                    } else {
+                        $0.date = self.project!.dateStart! as Date
+                    }
                     self.task?.dateStart = $0.date as NSDate?
                 }
             }.inlineCellSetup {
@@ -117,7 +140,11 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
                 if let date = task?.dateEnd {
                     $0.date = date as Date
                 } else {
-                    $0.date = self.project!.dateStart! as Date
+                    if let parentTask = self.parentTask {
+                        $0.date = parentTask.dateEnd! as Date
+                    } else {
+                        $0.date = self.project!.dateEnd! as Date
+                    }
                     self.task?.dateEnd = $0.date as NSDate?
                 }
             }.inlineCellSetup {
@@ -181,7 +208,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
         
         // Create SectionFormers
         
-        let sectionHeader = SectionFormer(rowFormers: [nameRow, noteRow]).set(headerViewFormer: createHeader("DETAILS"))
+        let sectionHeader = SectionFormer(rowFormers: headerRows).set(headerViewFormer: createHeader("DETAILS"))
         let sectionDates = SectionFormer(rowFormers: [startRow, endRow]).set(headerViewFormer: createHeader("PERIOD"))
         sectionMembers = SectionFormer(rowFormers: rows).set(headerViewFormer: createHeader("ASSIGNEES"))
         former.append(sectionFormer: sectionHeader, sectionDates, sectionMembers)
@@ -240,7 +267,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
         let isIn = addedUsers.contains { (u, status) -> Bool in
             return user == u && status != .Removed
         }
-
+        
         if !isIn {
             addedUsers[user] = .Participating
             //            if !TaskManager.shared.userIsIn(task!, user: user) {
@@ -346,7 +373,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
     }
     
     fileprivate func delete() {
-        let parameters = ["id": task!.id, "project_id": project!.id]
+        let parameters = ["id": task!.id!, "project_id": project!.id!]
         
         TaskManager.shared.delete(parameters) { (status) in
             switch status {
@@ -378,7 +405,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
     fileprivate func create() {
         var parameters = task!.dictionaryWithValues(forKeys: ["title"])
         parameters["project_id"] = project!.id
-        parameters["parent_id"] = nil
+        parameters["parent_id"] = parentTask?.id
         parameters["description"] = task!.notes
         parameters["date_start"] = String.formatDateApi(task!.dateStart! as Date)
         parameters["date_end"] = String.formatDateApi(task!.dateEnd! as Date)
@@ -414,7 +441,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
     fileprivate func update() {
         var parameters = task!.dictionaryWithValues(forKeys: ["id", "title"])
         parameters["project_id"] = project!.id
-        parameters["parent_id"] = nil
+        parameters["parent_id"] = parentTask?.id
         parameters["description"] = task!.notes
         parameters["date_start"] = String.formatDateApi(task!.dateStart! as Date)
         parameters["date_end"] = String.formatDateApi(task!.dateEnd! as Date)

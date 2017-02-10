@@ -11,6 +11,7 @@ target 'Kairos' do
   pod 'SwiftSpinner'
   pod 'IQKeyboardManagerSwift'
   pod 'XLPagerTabStrip'
+  pod 'Fabric'
   pod 'Crashlytics'
   pod 'FSCalendar'
   pod 'Whisper'

@@ -19,6 +19,7 @@ enum StoryboardID: String {
     case Friends
     case Profile
     case Settings
+    case Project
 }
 
 // Detele replace by StoryboardID enum

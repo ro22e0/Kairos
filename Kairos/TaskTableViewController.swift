@@ -13,6 +13,8 @@ import DZNEmptyDataSet
 class TaskTableViewController: UITableViewController, IndicatorInfoProvider  {
     
     var itemInfo = IndicatorInfo(title: "TASKS")
+    var project: Project?
+    var parentTask: Task?
     var tasks = [Task]()
     
     init(style: UITableViewStyle, itemInfo: IndicatorInfo) {
@@ -43,6 +45,14 @@ class TaskTableViewController: UITableViewController, IndicatorInfoProvider  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let project = self.project {
+            let tm = TaskManager.shared
+            tasks = tm.tasks(for: project)
+        } else {
+            if let tasks = parentTask?.childTasks?.allObjects as? [Task] {
+                self.tasks = tasks
+            }
+        }
         tableView.reloadData()
     }
     
@@ -65,7 +75,7 @@ class TaskTableViewController: UITableViewController, IndicatorInfoProvider  {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskTableViewCell
         
         let task = tasks[indexPath.row]
-
+        
         // Configure the cell...
         cell.titleLabel.text = task.title
         if let count = task.users?.count, count > 0 {
@@ -80,9 +90,9 @@ class TaskTableViewController: UITableViewController, IndicatorInfoProvider  {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let task = tasks[indexPath.row]
-
+        
         NotificationCenter.default.post(name: Notification.Name(rawValue: "ShowTaskDetails"), object: nil, userInfo:["task": task])
-
+        
     }
     
     /*

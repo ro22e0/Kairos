@@ -49,7 +49,7 @@ struct Spinner {
     }
     
     static func shout(message: Message) {
-        let anno = Announcement(title: "My title", subtitle: "My subtitle", image: UIImage(), duration: 3.0)
+        let anno = Announcement(title: message.user!.name!, subtitle: message.body!, image: UIImage(), duration: 3.0)
 
         if let rootViewController = UIApplication.topViewController()?.navigationController {
             show(shout: anno, to: rootViewController)

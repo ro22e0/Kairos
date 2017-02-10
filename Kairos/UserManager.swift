@@ -202,6 +202,7 @@ class UserManager {
                     ChatRoomManager.shared.listen(for: chatRoom)
                 }
             }
+            handler?()
         }
     }
     
