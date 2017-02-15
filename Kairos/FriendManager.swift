@@ -35,6 +35,8 @@ class FriendManager {
             friends = UserManager.shared.current.pendingFriends?.allObjects as? [User]
         case .Requested:
             friends = UserManager.shared.current.requestedFriends?.allObjects as? [User]
+        case .None:
+            break
         }
         return friends != nil ? friends! : [User]()
     }
@@ -58,26 +60,26 @@ class FriendManager {
         }
         return [User]()
     }
-    
-    func friendsToAdd(filtered text:String) -> [User] {
-        let currentUser = UserManager.shared.current
-        let friends = self.all()
-        var ids = [NSNumber]()
 
-        for f in friends {
-            ids.append(f.id!)
-        }
-
-        let namePred = NSPredicate(format: "name contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
-        let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
-        let emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
-        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: [namePred, nicknamePred, emailPred])
-        
-        if let users = User.query(compoundPred) as? [User] {
-            return users
-        }
-        return [User]()
-    }
+//    func friendsToAdd(filtered text:String) -> [User] {
+//        let currentUser = UserManager.shared.current
+//        let friends = self.all()
+//        var ids = [NSNumber]()
+//
+//        for f in friends {
+//            ids.append(f.id!)
+//        }
+//
+//        let namePred = NSPredicate(format: "name contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
+//        let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
+//        let emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
+//        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: [namePred, nicknamePred, emailPred])
+//        
+//        if let users = User.query(compoundPred) as? [User] {
+//            return users
+//        }
+//        return [User]()
+//    }
     
     func fetch(_ handler: (() -> Void)? = nil) {
         DataSync.fetchFriends { (status) in

@@ -155,9 +155,17 @@ class UserManager {
         return ["access-token": token!, "client": client!, "uid": uid!]
     }
 
-    func all() -> [User] {
-        let users = User.all() as! [User]
-        
+    func all(excludeFriends: Bool = false) -> [User] {
+        var users = [User]()
+
+        if excludeFriends {
+            let format = "friends.@count == 0 AND owner == %@"
+                + "AND pendingFriends.@count == 0 AND requestedFriends.@count == 0"
+            let predicate = NSPredicate(format: format, 0)
+            users = User.query(predicate) as! [User]
+        } else {
+            users = User.all() as! [User]
+        }
         return users
     }
 
@@ -173,6 +181,16 @@ class UserManager {
         }
         return [User]()
     }
+    
+    func filtered(users: [User], with text:String) -> [User] {
+        let namePred = NSPredicate(format: "name contains[c] %@", text)
+        let nicknamePred = NSPredicate(format: "nickname contains[c] %@", text)
+        let emailPred = NSPredicate(format: "email contains[c] %@", text)
+        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: [namePred, nicknamePred, emailPred])
+        let filteredUsers = users.filter({ compoundPred.evaluate(with: $0) })
+        return filteredUsers
+    }
+
     
     func fetch(_ handler: (() -> Void)? = nil) {
         DataSync.fetchUsers { (status) in

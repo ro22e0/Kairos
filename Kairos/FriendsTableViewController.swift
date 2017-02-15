@@ -9,6 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 import DZNEmptyDataSet
+import SwiftMessages
 
 class FriendsTableViewController: UITableViewController {
     
@@ -18,8 +19,10 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.friends = FriendManager.shared.friends()
-
+        FriendManager.shared.fetch() {
+            self.friends = FriendManager.shared.friends()
+            self.tableView.reloadData()
+        }
         configureView()
     }
     
@@ -27,7 +30,7 @@ class FriendsTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
-        tableView.register(UINib(nibName: "FriendTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "friendCell")
+        tableView.register(UINib(nibName: "UserTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "userCell")
         tableView.allowsSelection = false
     }
     
@@ -58,20 +61,29 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as! FriendTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserTableViewCell
         
-        cell.nameLabel.text = friends[indexPath.row].name
-        
-        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [User]
-        if let number = mutualFriends?.count, number > 0 {
-            cell.mutualFriendsLabel.isHidden = false
-            cell.mutualFriendsLabel.text = String(number)  + " mutual friends"
-        } else {
-            cell.mutualFriendsLabel.isHidden = true
-        }
-        cell.tag = Int(friends[indexPath.row].id!)
+        cell.configure(user: friends[indexPath.row])
         
         return cell
+    }
+    
+    @IBAction func moreAction(_ sender: Any) {
+        let view: FriendRequestsActions = try! SwiftMessages.viewFromNib()
+        view.configureDropShadow()
+        view.cancelAction = { SwiftMessages.hide() }
+        view.friendRequests = {
+            self.performSegue(withIdentifier: "showFriendRequestsSegue", sender: self)
+        }
+        view.outgoingRequest = {
+            self.performSegue(withIdentifier: "showOutgoingRequestsSegue", sender: self)
+        }
+        var config = SwiftMessages.defaultConfig
+        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        config.duration = .forever
+        config.presentationStyle = .bottom
+        config.dimMode = .gray(interactive: true)
+        SwiftMessages.show(config: config, view: view)
     }
     
     /*

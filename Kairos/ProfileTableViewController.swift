@@ -17,7 +17,7 @@ class ProfileTableViewController: UITableViewController {
     var user: Owner!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         self.user = UserManager.shared.current
         self.configure()
         // Uncomment the following line to preserve selection between presentations
@@ -28,12 +28,12 @@ class ProfileTableViewController: UITableViewController {
         //        RequestManager.fetchFriends()
         //        RequestManager.fetchUsers()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func configure() {
 //        if self.user.user!.image != nil {
 //            self.profileImage.image = UIImage(data: self.user.user!.image! as Data)

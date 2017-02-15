@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '85E2A6758262D21EE4D36668641A58A5'
+               BlueprintIdentifier = '4320872FBCFF32C446A5D443C5421738'
                BlueprintName = 'Pods-Kairos'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods-Kairos.framework'>

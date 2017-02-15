@@ -1,5 +1,5 @@
 //
-//  AddFriendsTableViewController.swift
+//  UsersTableViewController.swift
 //  Kairos
 //
 //  Created by Ronaël Bajazet on 03/10/2016.
@@ -9,24 +9,34 @@
 import UIKit
 import DZNEmptyDataSet
 
-class AddFriendsTableViewController: UITableViewController {
+class UsersTableViewController: UITableViewController {
     
     var searchController: UISearchController!
     var shouldShowSearchResults = false
     
     var users = [User]()
-
+    var filteredUsers = [User]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        users = UserManager.shared.all(excludeFriends: true)
+        
         configureSearchController()
-        configure()
+        configureView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
     }
-
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        searchController.isActive = false
+//        super.viewWillDisappear(animated)
+//    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -34,7 +44,7 @@ class AddFriendsTableViewController: UITableViewController {
     
     fileprivate func invite(_ user: User, done: @escaping ()->Void) -> Void {
         let parameters = ["user_id": user.id!]
-
+        
         FriendManager.shared.invite(parameters) { (status) in
             switch status {
             case .success:
@@ -46,30 +56,34 @@ class AddFriendsTableViewController: UITableViewController {
             }
         }
     }
-
-    func configure() {
+    
+    func configureView() {
         self.tableView.tableFooterView = UIView()
-
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "userCell")
         tableView.allowsSelection = false
     }
-
+    
     func configureSearchController() {
         // Initialize and perform a minimum configuration to the search controller.
         searchController = UISearchController(searchResultsController: nil)
-        searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search here..."
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.placeholder = "Name or email address"
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
-        searchController.hidesNavigationBarDuringPresentation = false
         self.definesPresentationContext = true
 
+        let searchBar = searchController.searchBar
+        searchBar.tintColor = .orangeTint()
+        searchBar.backgroundImage = UIImage()
+        searchBar.backgroundColor = .background()
+        
         // Place the search bar view to the tableview headerview.
-        self.navigationItem.titleView = searchController.searchBar
+        tableView.tableHeaderView = searchController.searchBar
     }
     
     // MARK: - Table view data source
@@ -79,28 +93,16 @@ class AddFriendsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shouldShowSearchResults ? self.users.count : 0
+        return shouldShowSearchResults ? filteredUsers.count : users.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserTableViewCell
-        
-        // Configure the cell...
-        cell.nameLabel.text = users[indexPath.row].name
 
-        let mutualFriends = users[indexPath.row].mutualFriends?.allObjects as? [User]
-        if let number = mutualFriends?.count, number > 0 {
-            cell.mutualFriendsLabel.isHidden = false
-            cell.mutualFriendsLabel.text = String(number) + " mutual friends"
-        } else {
-            cell.mutualFriendsLabel.isHidden = true
-        }
-        cell.onSelected = { user, done in
-            self.invite(user) {
-                done("Invited")
-            }
-        }
-        cell.tag = Int(users[indexPath.row].id!)
+        // Configure the cell...
+        let user = shouldShowSearchResults ? filteredUsers[indexPath.row] : users[indexPath.row]
+
+        cell.configure(user: user)
         
         return cell
     }
@@ -108,36 +110,44 @@ class AddFriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.0
     }
+
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let additionalSeparatorThickness = CGFloat(5)
+//        let frame = CGRect(x: 0, y: cell.frame.size.height - additionalSeparatorThickness, width: cell.frame.size.width, height: additionalSeparatorThickness)
+//        let additionalSeparator = UIView(frame: frame)
+//        additionalSeparator.backgroundColor = .background()
+//        cell.addSubview(additionalSeparator)
+//    }
     
     @IBAction func done(_ sender: Any) {
-                self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
-extension AddFriendsTableViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
-
-    func didPresentSearchController(_ searchController: UISearchController) {
-        searchController.searchBar.showsCancelButton = false
-    }
-
+extension UsersTableViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         shouldShowSearchResults = true
         tableView.reloadData()
     }
-
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        shouldShowSearchResults = false
     }
-
+    
     func updateSearchResults(for searchController: UISearchController) {
-        if shouldShowSearchResults {
-            let searchString = searchController.searchBar.text
-            self.users = FriendManager.shared.friendsToAdd(filtered: searchString!)
-            tableView.reloadData()
+        let searchString = searchController.searchBar.text
+        if searchString != "" {
+            shouldShowSearchResults = true
+            self.filteredUsers = UserManager.shared.filtered(users: users, with: searchString!)
+        } else {
+            shouldShowSearchResults = false
         }
+        tableView.reloadData()
     }
 }
 
-extension AddFriendsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+extension UsersTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         return NSAttributedString(string: "No friends to show.")
     }

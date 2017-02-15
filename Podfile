@@ -24,6 +24,7 @@ target 'Kairos' do
   pod 'JSQMessagesViewController'
   pod 'Starscream'
   pod 'Socket.IO-Client-Swift'
+  pod 'SwiftMessages'
   # pod 'DatePickerCell'
   # pod 'UITextField+Shake', '~> 1.1'
 end

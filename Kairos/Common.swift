@@ -64,6 +64,7 @@ enum FriendStatus: String {
     case Pending = "pending"
     case Requested = "requested"
     case Accepted = "accepted"
+    case None = "none"
 }
 
 enum UserStatus: String {

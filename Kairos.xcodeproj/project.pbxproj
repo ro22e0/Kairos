@@ -130,11 +130,13 @@
 		DA7913041CEFCF6E00661753 /* UserActionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7913021CEFCF6E00661753 /* UserActionTableViewCell.xib */; };
 		DA799DF71D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA799DF51D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift */; };
 		DA799DF81D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA799DF61D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib */; };
+		DA7C15001E527DEE00EEE31B /* FriendRequestsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7C14FF1E527DEE00EEE31B /* FriendRequestsActions.swift */; };
+		DA7C15041E527FDF00EEE31B /* FriendRequestsActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7C15031E527FDF00EEE31B /* FriendRequestsActions.xib */; };
 		DA8326301CE3CCFF00C09F31 /* DataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA83262F1CE3CCFF00C09F31 /* DataSync.swift */; };
 		DA8358C71CAB18A400CC9B29 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */; };
 		DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA847C291D14077300ED2750 /* Project.storyboard */; };
 		DA851C961CAE99C50025E1D4 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA851C951CAE99C50025E1D4 /* Calendar.storyboard */; };
-		DAA2D4791DA3079700D5E6A7 /* AddFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2D4781DA3079700D5E6A7 /* AddFriendsTableViewController.swift */; };
+		DAA2D4791DA3079700D5E6A7 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2D4781DA3079700D5E6A7 /* UsersTableViewController.swift */; };
 		DAA6B6B71D99CAD600D68016 /* CompleteProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA6B6B61D99CAD600D68016 /* CompleteProfileViewController.swift */; };
 		DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */; };
 		DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAAEE15B1C9ABE1F00D53AEC /* Main.storyboard */; };
@@ -302,11 +304,13 @@
 		DA7913021CEFCF6E00661753 /* UserActionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserActionTableViewCell.xib; sourceTree = "<group>"; };
 		DA799DF51D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImagePickerTableViewCell.swift; sourceTree = "<group>"; };
 		DA799DF61D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileImagePickerTableViewCell.xib; sourceTree = "<group>"; };
+		DA7C14FF1E527DEE00EEE31B /* FriendRequestsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRequestsActions.swift; sourceTree = "<group>"; };
+		DA7C15031E527FDF00EEE31B /* FriendRequestsActions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendRequestsActions.xib; sourceTree = "<group>"; };
 		DA83262F1CE3CCFF00C09F31 /* DataSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DataSync.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA847C291D14077300ED2750 /* Project.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Project.storyboard; sourceTree = "<group>"; };
 		DA851C951CAE99C50025E1D4 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
-		DAA2D4781DA3079700D5E6A7 /* AddFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddFriendsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DAA2D4781DA3079700D5E6A7 /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UsersTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DAA6B6B61D99CAD600D68016 /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CompleteProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DAA816621C9C218900EF1560 /* Kairos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kairos-Bridging-Header.h"; sourceTree = "<group>"; };
 		DAAEE1541C9ABE1F00D53AEC /* Kairos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kairos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -563,6 +567,15 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
+		DA7C15051E52835500EEE31B /* ActionSheets */ = {
+			isa = PBXGroup;
+			children = (
+				DA7C14FF1E527DEE00EEE31B /* FriendRequestsActions.swift */,
+				DA7C15031E527FDF00EEE31B /* FriendRequestsActions.xib */,
+			);
+			name = ActionSheets;
+			sourceTree = "<group>";
+		};
 		DA81BBD71D4A2DBF00C2C349 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -584,6 +597,7 @@
 		DA81BBD81D4A2DE000C2C349 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DA7C15051E52835500EEE31B /* ActionSheets */,
 				DA496AEE1CC92F08003DD41B /* Storyboards */,
 				DA81BBD91D4A2DEE00C2C349 /* Cells */,
 			);
@@ -772,7 +786,7 @@
 			children = (
 				DA668F3A1CA4AD7800230912 /* FriendsRequestsTableViewController.swift */,
 				DAEE7CBA1CA49A580019C8D4 /* FriendsTableViewController.swift */,
-				DAA2D4781DA3079700D5E6A7 /* AddFriendsTableViewController.swift */,
+				DAA2D4781DA3079700D5E6A7 /* UsersTableViewController.swift */,
 				DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */,
 				DA2EC0281DA90FC100BCA895 /* FriendsInviteTableViewController.swift */,
 			);
@@ -903,6 +917,7 @@
 				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
 				DAFA00291DA852800039AD4D /* CalendarHeaderCell.xib in Resources */,
 				AC9D1E5F1E2D7B3700F1D29D /* EventHeaderCell.xib in Resources */,
+				DA7C15041E527FDF00EEE31B /* FriendRequestsActions.xib in Resources */,
 				DAC801881CA346B70092A717 /* Settings.storyboard in Resources */,
 				DA6FDEFA1E43996500B516F8 /* UserCollectionViewCell.xib in Resources */,
 				DA612CB41CA472F90027D7FB /* Profile.storyboard in Resources */,
@@ -1142,11 +1157,12 @@
 				AC3B67901E2EB2CF00BFCB84 /* Project+CoreDataClass.swift in Sources */,
 				DA7913031CEFCF6E00661753 /* UserActionTableViewCell.swift in Sources */,
 				DA2EC02C1DA9102E00BCA895 /* FriendInviteTableViewCell.swift in Sources */,
+				DA7C15001E527DEE00EEE31B /* FriendRequestsActions.swift in Sources */,
 				DA11A9F81D9872D400218FF3 /* ModalSearchSegue.swift in Sources */,
 				DA40416D1DE75DA60043A8F0 /* LabelColorCell.swift in Sources */,
 				DA6853301CE25D6700B839F6 /* SentInvitationTableViewCell.swift in Sources */,
 				DA2DA3291E31709900F86C68 /* Message+CoreDataClass.swift in Sources */,
-				DAA2D4791DA3079700D5E6A7 /* AddFriendsTableViewController.swift in Sources */,
+				DAA2D4791DA3079700D5E6A7 /* UsersTableViewController.swift in Sources */,
 				DA18745D1CDB73BE008E7C38 /* EventEndDateTableViewCell.swift in Sources */,
 				AC3F80021E2CC061009DA485 /* EventManager.swift in Sources */,
 				DA6853331CE25E2400B839F6 /* UserManager.swift in Sources */,

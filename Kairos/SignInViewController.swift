@@ -24,6 +24,9 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.backBarButtonItem?.title = ""
         
+        emailTextField.text = "ronael.bajazet@gmail.com"
+        passwordTextField.text = "qwerty123"
+
         let configuration = URLSessionConfiguration.default
         self.manager = SessionManager(configuration: configuration)
     }

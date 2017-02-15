@@ -15,6 +15,7 @@ class UserTableViewCell: UITableViewCell {
     @IBOutlet weak var profilePictureImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var mutualFriendsLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     
     var onSelected: ((User, @escaping (String)->Void) -> Void)?
     
@@ -27,6 +28,21 @@ class UserTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func configure(user: User) {
+        self.nameLabel.text = user.name
+        
+        let mutualFriends = user.mutualFriends?.allObjects as? [User]
+        if let number = mutualFriends?.count, number > 0 {
+            mutualFriendsLabel.isHidden = false
+            mutualFriendsLabel.text = String(number)  + " mutual friends"
+        } else {
+            mutualFriendsLabel.isHidden = true
+        }
+        profilePictureImageView.setImageWith(user.name!, color: nil, circular: true)
+        emailLabel.text = user.email
+        tag = Int(user.id!)
     }
     
     @IBAction func invite(_ sender: UIButton) {
