@@ -17,13 +17,13 @@ class EventCalendarTableViewCell: BaseEventTableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    override func configure(event: Event) {
+    override func configure(_ event: Event) {
         super.configure(event)
 
         calendarLabel.text = event.calendar?.name

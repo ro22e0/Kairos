@@ -13,9 +13,10 @@ class UserCalendarActionTableViewController: UITableViewController {
     
     var user: User?
     var calendar: Calendar?
-    private lazy var former: Former = Former(tableView: self.tableView)
-
-    var remove: ((User) -> Void)!
+    fileprivate lazy var former: Former = Former(tableView: self.tableView)
+    
+    var remove: ((User) -> Void)?
+    var owner: ((User) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,34 +34,53 @@ class UserCalendarActionTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func configure() {
+    fileprivate func configure() {
         //        title = "Complete your profile"
         tableView.tableFooterView = UIView()
-        tableView.backgroundView?.backgroundColor = .whiteColor()
+        tableView.backgroundView?.backgroundColor = .white
         // Create RowFomers
         
-        let remove = LabelRowFormer<UserActionTableViewCell>(instantiateType: .Nib(nibName: "UserActionTableViewCell")) {
-            $0.titleLabel.textColor = .formerColor()
-            $0.titleLabel.font = .boldSystemFontOfSize(15)
-            }.configure {
-                $0.text = "Remove" + " " + self.user!.name!
-                $0.rowHeight = 44
-            }.onSelected { cell in
-                self.remove(self.user!)
-                cell.cell.done()
+        var rows = [RowFormer]()
+
+        if let remove = remove {
+            let removeCell = LabelRowFormer<UserActionTableViewCell>(instantiateType: .Nib(nibName: "UserActionTableViewCell")) {
+                $0.titleLabel.textColor = .formerColor()
+                $0.titleLabel.font = .boldSystemFont(ofSize: 15)
+                }.configure {
+                    $0.text = "Remove" + " " + self.user!.name!
+                    $0.rowHeight = 44
+                }.onSelected { cell in
+                    remove(self.user!)
+                    cell.cell.done?()
+            }
+            rows.append(removeCell)
         }
-        let section = SectionFormer(rowFormer: remove).set(headerViewFormer: nil)
+        if let owner = owner {
+            let ownerCell = LabelRowFormer<UserActionTableViewCell>(instantiateType: .Nib(nibName: "UserActionTableViewCell")) {
+                $0.titleLabel.textColor = .formerColor()
+                $0.titleLabel.font = .boldSystemFont(ofSize: 15)
+                }.configure {
+                    $0.text = "Grant" + " " + self.user!.name! + " as owner"
+                    $0.rowHeight = 44
+                }.onSelected { cell in
+                    owner(self.user!)
+                    cell.cell.done?()
+            }
+            rows.append(ownerCell)
+        }
+        
+        let section = SectionFormer(rowFormers: rows).set(headerViewFormer: nil)
         former.append(sectionFormer: section)
     }
     
     override var preferredContentSize: CGSize {
         get {
-            let height = self.tableView.rectForSection(0).height - 1
+            let height = self.tableView.rect(forSection: 0).height - 1
             return CGSize(width: super.preferredContentSize.width, height: height)
         }
         set { super.preferredContentSize = newValue }
     }
-
+    
     /*
      // Override to support conditional editing of the table view.
      override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -100,7 +120,7 @@ class UserCalendarActionTableViewController: UITableViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }

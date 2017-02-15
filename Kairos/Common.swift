@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SideMenu
 import CoreData
 import SwiftyJSON
 import UIKit
@@ -20,17 +19,21 @@ enum StoryboardID: String {
     case Friends
     case Profile
     case Settings
+    case Project
 }
 
 // Detele replace by StoryboardID enum
 let MainStoryboardID = "Main"
 let CalendarStoryboardID = "Calendar"
+let ProjectStoryboardID = "Project"
 let LoginStoryboardID = "Login"
 let BoardStoryboardID = "Board"
 let MenuStoryboardID = "Menu"
 let FriendsStoryboardID = "Friends"
 let ProfileStoryboardID = "Profile"
 let SettingsStoryboardID = "Settings"
+let ChatStoryboardID = "Chat"
+let FileStoryboardID = "File"
 
 let kUSER_GOOGLE_AUTH_NOTIFICATION = "kUserGoogleAuth"
 
@@ -39,6 +42,12 @@ let kCalendarWillSaveNotification = "CalendarWillSave"
 
 enum Notifications: String {
     case CalendarDidChange
+    case CalendarStatusChange
+    case EventDidChange
+    case EventStatusChange
+    case ProjectDidChange
+    case ProjectStatusChange
+    case TaskDidChange
 }
 
 let userLoginKey = "userLoginKey"
@@ -55,6 +64,7 @@ enum FriendStatus: String {
     case Pending = "pending"
     case Requested = "requested"
     case Accepted = "accepted"
+    case None = "none"
 }
 
 enum UserStatus: String {
@@ -66,6 +76,11 @@ enum UserStatus: String {
 }
 
 enum CustomStatus {
-    case Success
-    case Error(String)
+    case success
+    case error(String)
+}
+
+enum StatusRequest {
+    case success(Any?)
+    case error(String)
 }

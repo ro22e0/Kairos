@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l6p-VS-LE3">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Empty Data Set Delegate-->
+        <scene sceneID="Erh-AI-zaz">
+            <objects>
+                <tableViewController id="XIz-ZJ-wu1" customClass="ChatTableViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bNm-Po-65y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="XIz-ZJ-wu1" id="o2p-XH-9a7"/>
+                            <outlet property="delegate" destination="XIz-ZJ-wu1" id="7hn-ni-Qna"/>
+                            <outlet property="emptyDataSetDelegate" destination="XIz-ZJ-wu1" id="4BH-Fv-Dob"/>
+                            <outlet property="emptyDataSetSource" destination="XIz-ZJ-wu1" id="QxG-9P-jcb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Chat Rooms" id="Rdo-Cg-XL1">
+                        <barButtonItem key="backBarButtonItem" title=" " id="nfR-vm-Ekw"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="4vB-5O-7Zk" kind="show" identifier="showChatRoom" id="5W3-Vx-laR"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0T5-kf-LI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1034" y="357"/>
+        </scene>
+        <!--Room View Controller-->
+        <scene sceneID="wRH-7W-Qft">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="4vB-5O-7Zk" customClass="RoomViewController" customModule="Kairos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IxG-gy-aPY"/>
+                        <viewControllerLayoutGuide type="bottom" id="KLb-ms-LM1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iHs-4O-rOe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xYk-Gj-AMq">
+                        <barButtonItem key="backBarButtonItem" title=" " id="iJj-DB-0oZ"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EhT-aT-AQz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1862" y="357"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="vA3-r6-RB7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l6p-VS-LE3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Chat" id="On9-aA-BM5"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gby-kO-v6N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XIz-ZJ-wu1" kind="relationship" relationship="rootViewController" id="8yI-ia-6TR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="feb-ls-5ws" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="221.59999999999999" y="356.67166416791605"/>
+        </scene>
+    </scenes>
+</document>

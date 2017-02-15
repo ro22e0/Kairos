@@ -17,8 +17,8 @@ class FriendsRequestsTableViewController: UITableViewController {
     let pendingCellID = "sentInvitationCell"
     var itemInfo = IndicatorInfo(title: "View")
     
-    var requestedFriends = [Friend]()
-    var pendingFriends = [Friend]()
+    var requestedFriends = [User]()
+    var pendingFriends = [User]()
     
     // MARK: - Methods
     
@@ -31,11 +31,11 @@ class FriendsRequestsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         configureView()
-        self.pendingFriends = FriendManager.sharedInstance.friends(withStatus: .Pending)
-        self.requestedFriends = FriendManager.sharedInstance.friends(withStatus: .Requested)
+        self.pendingFriends = FriendManager.shared.friends(withStatus: .Pending)
+        self.requestedFriends = FriendManager.shared.friends(withStatus: .Requested)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
@@ -49,36 +49,36 @@ class FriendsRequestsTableViewController: UITableViewController {
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 74
-        self.navigationController?.navigationBar.translucent = false
-        tableView.registerNib(UINib(nibName: "InvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: requestCellID)
-        tableView.registerNib(UINib(nibName: "SentInvitationTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: pendingCellID)
+        self.navigationController?.navigationBar.isTranslucent = false
+        tableView.register(UINib(nibName: "InvitationTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: requestCellID)
+        tableView.register(UINib(nibName: "SentInvitationTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: pendingCellID)
         tableView.allowsSelection = false
     }
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return requestedFriends.count
         }
         return pendingFriends.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier(requestCellID, forIndexPath: indexPath) as! InvitationTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: requestCellID, for: indexPath) as! InvitationTableViewCell
             
             cell.nameLabel.text = requestedFriends[indexPath.row].name
-            let mutualFriends = requestedFriends[indexPath.row].mutualFriends?.allObjects as? [Friend]
-            if let number = mutualFriends?.count where number > 0 {
-                cell.mutualFriendsLabel.hidden = false
-                cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
+            let mutualFriends = requestedFriends[indexPath.row].mutualFriends?.allObjects as? [User]
+            if let number = mutualFriends?.count, number > 0 {
+                cell.mutualFriendsLabel.isHidden = false
+                cell.mutualFriendsLabel.text = String(number)  + " mutual friends"
             } else {
-                cell.mutualFriendsLabel.hidden = true
+                cell.mutualFriendsLabel.isHidden = true
             }
             
             cell.tag = Int(requestedFriends[indexPath.row].id!)
@@ -86,7 +86,7 @@ class FriendsRequestsTableViewController: UITableViewController {
             return cell
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(pendingCellID, forIndexPath: indexPath) as! SentInvitationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: pendingCellID, for: indexPath) as! SentInvitationTableViewCell
         
         cell.nameLabel.text = pendingFriends[indexPath.row].name
         cell.tag = Int(pendingFriends[indexPath.row].id!)
@@ -94,69 +94,24 @@ class FriendsRequestsTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "REQUESTED"
+            return requestedFriends.isEmpty ? nil : "REQUESTED"
         }
-        return "INVITED"
+        return pendingFriends.isEmpty ? nil : "INVITED"
     }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    @IBAction func done(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+
+    @IBAction func done(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension FriendsRequestsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         return NSAttributedString(string: "No requests")
     }
     
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         return NSAttributedString(string: "When you have friends requests, you'll see them here.")
     }
 }

@@ -17,19 +17,19 @@ class EventLocationTableViewCell: BaseEventTableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    override func configure(event: Event) {
+    override func configure(_ event: Event) {
         super.configure(event)
         
         locationTextField.text = event.location
     }
     
-    override func updateEvent(notification: NSNotification) {        
+    override func updateEvent(_ notification: Notification) {        
         let event = notification.userInfo!["event"] as! Event
         
         event.location = locationTextField.text

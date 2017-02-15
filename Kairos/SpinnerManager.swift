@@ -1,5 +1,5 @@
 //
-//  SpinnerManager.swift
+//  Spinner.swift
 //  Kairos
 //
 //  Created by Ronaël Bajazet on 22/03/2016.
@@ -8,44 +8,51 @@
 
 import Foundation
 import SwiftSpinner
-import SideMenu
 import Whisper
 
-private let font = UIFont.systemFontOfSize(20, weight: UIFontWeightThin)
+private let font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightThin)
 
-struct SpinnerManager {
+struct Spinner {
 
-    static func delay(seconds seconds: Double, completion: ()->()) {
-        let popTime = dispatch_time(DISPATCH_TIME_NOW, Int64(Double(NSEC_PER_SEC) * seconds))
+    static func delay(_ seconds: Double, completion: @escaping ()->()) {
+        let popTime = DispatchTime.now() + Double(Int64(Double(NSEC_PER_SEC) * seconds)) / Double(NSEC_PER_SEC)
         
-        dispatch_after(popTime, dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: popTime) {
             completion()
         }
     }
 
-    static func showWithAnimation(title: String) {
+    static func showWithAnimation(_ title: String) {
         SwiftSpinner.setTitleFont(font)
         SwiftSpinner.show(title)
     }
-    
-    static func showSpinner(title: String, subtitle: String, completion: ()->()) {
+
+    static func showSpinner(_ title: String, subtitle: String, completion: @escaping ()->()) {
         SwiftSpinner.setTitleFont(font)
         SwiftSpinner.show(title, animated: false).addTapHandler({ completion() }, subtitle: subtitle)
     }
 
-    static func updateTitle(title: String) {
+    static func updateTitle(_ title: String) {
         SwiftSpinner.sharedInstance.title = title
     }
     
-    static func showWhistle(title: String, success: Bool = true) {
+    static func showWhistle(_ title: String, success: Bool = true) {
         var murmur = Murmur(title: title)
 
         if success {
-            murmur.backgroundColor = .cyanColor()
+            murmur.backgroundColor = .cyan
         } else {
-            murmur.backgroundColor = .redColor()
+            murmur.backgroundColor = .red
         }
 
-        show(whistle: murmur, action: .Show(1.5))
+        show(whistle: murmur, action: .show(1.5))
+    }
+    
+    static func shout(message: Message) {
+        let anno = Announcement(title: message.user!.name!, subtitle: message.body!, image: UIImage(), duration: 3.0)
+
+        if let rootViewController = UIApplication.topViewController()?.navigationController {
+            show(shout: anno, to: rootViewController)
+        }
     }
 }

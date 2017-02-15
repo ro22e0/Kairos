@@ -20,38 +20,38 @@ class InvitationTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    @IBAction func accept(sender: UIButton) {
-        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+    @IBAction func accept(_ sender: UIButton) {
+        let friend = User.find("id == %@", args: self.tag) as! User
         let parameters = ["user_id": friend.id!]
         
-        FriendManager.sharedInstance.accept(parameters) { (status) in
+        FriendManager.shared.accept(parameters) { (status) in
             switch status {
-            case .Success:
-                SpinnerManager.showWhistle("kFriendSuccess")
-            case .Error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
+            case .success:
+                Spinner.showWhistle("kFriendSuccess")
+            case .error(let error):
+                Spinner.showWhistle("kFriendError", success: false)
                 print(error)
             }
         }
     }
     
-    @IBAction func decline(sender: UIButton) {
-        let friend = Friend.find("id == %@", args: self.tag) as! Friend
+    @IBAction func decline(_ sender: UIButton) {
+        let friend = User.find("id == %@", args: self.tag) as! User
         let parameters = ["user_id": friend.id!]
 
-        FriendManager.sharedInstance.refuse(parameters) { (status) in
+        FriendManager.shared.refuse(parameters) { (status) in
             switch status {
-            case .Success:
+            case .success:
                 friend.delete()
-                SpinnerManager.showWhistle("kFriendSuccess")
-            case .Error(let error):
-                SpinnerManager.showWhistle("kFriendError", success: false)
+                Spinner.showWhistle("kFriendSuccess")
+            case .error(let error):
+                Spinner.showWhistle("kFriendError", success: false)
                 print(error)
             }
         }    }

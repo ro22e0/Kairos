@@ -12,13 +12,11 @@ class LoadingViewController: UIViewController {
     
     // MARK: - UI Properties
     @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var projectLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        projectLabel.adjustsFontSizeToFitWidth = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -26,31 +24,31 @@ class LoadingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //        UIView.animateWithDuration(1.5, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
-        //            self.loadingActivityIndicator.startAnimating()
-        //            self.loadingActivityIndicator.alpha = 1.0
-        //            }) { (completed) -> Void in
-        //                if completed {
-        self.checkStart()
-        //                }
-        //        }
+        UIView.animate(withDuration: 1.5, delay: 0.0, options: .curveEaseInOut, animations: { () -> Void in
+            self.loadingActivityIndicator.startAnimating()
+            self.loadingActivityIndicator.alpha = 1.0
+        }) { (completed) -> Void in
+            if completed {
+                self.checkStart()
+            }
+        }
     }
     
     // MARK: - Methods
     func checkStart() {
         var storyboard: UIStoryboard
-        let defautls = NSUserDefaults.standardUserDefaults()
-        if let userHasLogged = defautls.valueForKey(userLoginKey) as? Bool {
+        let defautls = UserDefaults.standard
+        if let userHasLogged = defautls.bool(forKey: userLoginKey) as? Bool {
             storyboard = userHasLogged ? UIStoryboard(name: BoardStoryboardID, bundle: nil) : UIStoryboard(name: LoginStoryboardID, bundle: nil)
         } else {
             storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
         }
-        //       storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil)
+        // storyboard = UIStoryboard(name: BoardStoryboardID, bundle: nil) // COMMENT
         if let viewController = storyboard.instantiateInitialViewController() {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             appDelegate.window?.rootViewController = viewController
         }
@@ -60,7 +58,7 @@ class LoadingViewController: UIViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }

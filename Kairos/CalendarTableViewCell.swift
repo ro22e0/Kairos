@@ -12,12 +12,15 @@ class CalendarTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var participantsLabel: UILabel!
+    @IBOutlet weak var colorView: UIImageView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        colorView.round()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

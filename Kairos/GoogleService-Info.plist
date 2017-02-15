@@ -3,13 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>523852149838-7gpurje82dgddf831nrcl90f89aun3t1.apps.googleusercontent.com</string>
+	<string>253177346337-fg7v3n9qpvssd789lfk05mc8fkag439m.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.523852149838-7gpurje82dgddf831nrcl90f89aun3t1</string>
+	<string>com.googleusercontent.apps.253177346337-fg7v3n9qpvssd789lfk05mc8fkag439m</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.kairos-app.Kairos</string>
+	<key>PROJECT_ID</key>
+	<string>kairos-app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -21,8 +23,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:523852149838:ios:a3bd7e6239abd503</string>
-	<key>PROJECT_ID</key>
-	<string>kairos-1254</string>
+	<string>1:253177346337:ios:a3bd7e6239abd503</string>
 </dict>
 </plist>

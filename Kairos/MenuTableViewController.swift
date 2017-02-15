@@ -30,16 +30,16 @@ class MenuTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menus.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(menus[indexPath.row], forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: menus[indexPath.row], for: indexPath)
         
         // Configure the cell...
         return cell
@@ -47,14 +47,14 @@ class MenuTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 5 {
             let storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
             
-            let viewController = storyboard.instantiateViewControllerWithIdentifier("SignOutViewController")
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let viewController = storyboard.instantiateViewController(withIdentifier: "SignOutViewController")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
-            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.dismiss(animated: true, completion: { () -> Void in
                 appDelegate.window?.rootViewController = viewController
             })
             return
@@ -62,9 +62,9 @@ class MenuTableViewController: UITableViewController {
         let storyboard = UIStoryboard(name: menus[indexPath.row], bundle: nil)
         
         if let viewController = storyboard.instantiateInitialViewController() {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
-            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.dismiss(animated: true, completion: { () -> Void in
                 appDelegate.window?.rootViewController = viewController
             })
         }
@@ -109,7 +109,7 @@ class MenuTableViewController: UITableViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }

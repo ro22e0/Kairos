@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UIImageView_Letters
 
 class ProfileTableViewController: UITableViewController {
     
@@ -16,8 +17,8 @@ class ProfileTableViewController: UITableViewController {
     var user: Owner!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.user = UserManager.sharedInstance.current
+    
+        self.user = UserManager.shared.current
         self.configure()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -27,36 +28,34 @@ class ProfileTableViewController: UITableViewController {
         //        RequestManager.fetchFriends()
         //        RequestManager.fetchUsers()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func configure() {
-        if self.user.imageData != nil {
-            self.profileImage.image = UIImage(data: self.user.imageData!)
-//            self.profileImage.addBorder(UIColor.whiteColor().CGColor)
-        } else {
-//            self.profileImage.backgroundColor = .whiteColor()
-        }
-        self.profileImage.round()
-        self.nameLabel.text = self.user.name
+//        if self.user.user!.image != nil {
+//            self.profileImage.image = UIImage(data: self.user.user!.image! as Data)
+//        } else {
+            self.profileImage.setImageWith(user.user?.name, color: .orangeTint(), circular: true)
+//        }
+        self.nameLabel.text = self.user.user!.name
     }
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return super.tableView(tableView, numberOfRowsInSection: section)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return super.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        return super.tableView(tableView, cellForRowAt: indexPath)
     }
     
     /*
@@ -98,14 +97,14 @@ class ProfileTableViewController: UITableViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
      */
     
-    @IBAction func signOut(sender: UIButton) {
-        UserManager.sharedInstance.signOut() { (status) in
+    @IBAction func signOut(_ sender: UIButton) {
+        UserManager.shared.signOut() { (status) in
             self.setRootVC(MainStoryboardID)
         }
     }

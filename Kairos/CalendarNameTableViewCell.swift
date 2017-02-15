@@ -18,19 +18,19 @@ class CalendarNameTableViewCell: BaseCalendarTableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    override func configure(calendar: Calendar) {
+    override func configure(_ calendar: Calendar) {
         super.configure(calendar)
 
         self.nameTextField.text = calendar.name
     }
     
-    override func updateCalendar(notification: NSNotification) {
+    override func updateCalendar(_ notification: Notification) {
         let calendar = notification.userInfo!["calendar"] as! Calendar
         
         calendar.name = nameTextField.text

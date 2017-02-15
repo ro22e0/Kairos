@@ -8,135 +8,173 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 class FriendManager {
     
     // MARK: Singleton
-    static let sharedInstance = FriendManager()
-    private init() {}
+    static let shared = FriendManager()
+    fileprivate init() {}
     
-    func all() -> [Friend] {
-        if let friends = UserManager.sharedInstance.current.friends?.allObjects as? [Friend] {
-            return friends
-        } else {
-            return [Friend]()
+    func all() -> [User] {
+        guard let friends = UserManager.shared.current.friends?.allObjects as? [User],
+            let requestedFriends = UserManager.shared.current.requestedFriends?.allObjects as? [User],
+            let pendingFriends = UserManager.shared.current.pendingFriends?.allObjects as? [User] else {
+                return [User]()
         }
-
-    }
-
-    func friends(withStatus status: FriendStatus = .Accepted) -> [Friend] {
-        if var friends = UserManager.sharedInstance.current.friends?.allObjects as? [Friend] {
-            friends = friends.filter({ (f) -> Bool in
-                return f.status == status.rawValue
-            })
-            return friends
-        } else {
-            return [Friend]()
-        }
+        return friends + requestedFriends + pendingFriends
     }
     
-    func all(filtered text: String, forFriends: Bool = false) -> [Friend] {
-           let namePred = NSPredicate(format: "name contains[c] %@", text)
-           let nicknamePred = NSPredicate(format: "nickname contains[c] %@", text)
-            let emailPred = NSPredicate(format: "email contains[c] %@", text)
+    func friends(withStatus status: FriendStatus = .Accepted) -> [User] {
+        var friends: [User]?
 
-        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicateType.OrPredicateType, subpredicates: [namePred, nicknamePred, emailPred])
+        switch status {
+        case .Accepted:
+            friends = UserManager.shared.current.friends?.allObjects as? [User]
+        case .Pending:
+            friends = UserManager.shared.current.pendingFriends?.allObjects as? [User]
+        case .Requested:
+            friends = UserManager.shared.current.requestedFriends?.allObjects as? [User]
+        case .None:
+            break
+        }
+        return friends != nil ? friends! : [User]()
+    }
+    
+    func all(filtered text: String) -> [User] {
+        let namePred = NSPredicate(format: "name contains[c] %@", text)
+        let nicknamePred = NSPredicate(format: "nickname contains[c] %@", text)
+        let emailPred = NSPredicate(format: "email contains[c] %@", text)
         
-        let friends = Friend.query(compoundPred) as! [Friend]
-        //        user.first?.entity.name
-        return friends
+        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: [namePred, nicknamePred, emailPred])
+        
+        guard let friends = UserManager.shared.current.friends?.allObjects as? [User],
+            let requestedFriends = UserManager.shared.current.requestedFriends?.allObjects as? [User],
+            let pendingFriends = UserManager.shared.current.pendingFriends?.allObjects as? [User] else {
+                return [User]()
+        }
+        let friendsArr = friends + requestedFriends + pendingFriends
+        
+        if let allFriends = (friendsArr as NSArray).filtered(using: compoundPred) as? [User] {
+            return allFriends
+        }
+        return [User]()
     }
 
+//    func friendsToAdd(filtered text:String) -> [User] {
+//        let currentUser = UserManager.shared.current
+//        let friends = self.all()
+//        var ids = [NSNumber]()
+//
+//        for f in friends {
+//            ids.append(f.id!)
+//        }
+//
+//        let namePred = NSPredicate(format: "name contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
+//        let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
+//        let emailPred = NSPredicate(format: "email contains[c] %@ AND self != %@ AND NOT (id IN %@)", text, currentUser, ids)
+//        let compoundPred = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.or, subpredicates: [namePred, nicknamePred, emailPred])
+//        
+//        if let users = User.query(compoundPred) as? [User] {
+//            return users
+//        }
+//        return [User]()
+//    }
     
-    func fetch(handler: (() -> Void)? = nil) {
+    func fetch(_ handler: (() -> Void)? = nil) {
         DataSync.fetchFriends { (status) in
             switch status {
-            case .Success:
+            case .success:
                 if handler != nil {
                     handler!()
                 }
-            case .Error(let error):
+            case .error(let error):
                 print(error)
             }
         }
     }
-
-    func invite(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.InviteFriend(parameters)) { (response) in
-        switch response.result {
-            case .Success:
+    
+    func invite(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.inviteFriend(parameters)) { (response) in
+            switch response.result {
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func cancel(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.CancelFriend(parameters)) { (response) in
+    func cancel(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.cancelFriend(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func accept(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.AcceptFriend(parameters)) { (response) in
+    func accept(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.acceptFriend(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
-                    completionHandler(.Success)
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        DataSync.syncFriends(json) {
+                            completionHandler(.success(nil))
+                        }
+                    }
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func refuse(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.DeclineFriend(parameters)) { (response) in
+    func refuse(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.declineFriend(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }
     
-    func remove(parameters: [String: AnyObject], completionHandler: (CustomStatus) -> Void) {
-        RouterWrapper.sharedInstance.request(.RemoveFriend(parameters)) { (response) in
+    func remove(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
+        RouterWrapper.shared.request(.removeFriend(parameters)) { (response) in
             switch response.result {
-            case .Success:
+            case .success:
                 switch response.response!.statusCode {
                 case 200...203:
-                    completionHandler(.Success)
+                    completionHandler(.success(nil))
                 default:
-                    completionHandler(.Error("kFail"))
+                    completionHandler(.error("kFail"))
                 }
-            case .Failure(let error):
-                completionHandler(.Error(error.localizedDescription))
+            case .failure(let error):
+                completionHandler(.error(error.localizedDescription))
             }
         }
     }

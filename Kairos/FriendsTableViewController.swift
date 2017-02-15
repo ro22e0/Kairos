@@ -9,41 +9,39 @@
 import UIKit
 import XLPagerTabStrip
 import DZNEmptyDataSet
+import SwiftMessages
 
 class FriendsTableViewController: UITableViewController {
     
     // MARK: - Class Properties
-    var friends = [Friend]()
+    var friends = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        FriendManager.shared.fetch() {
+            self.friends = FriendManager.shared.friends()
+            self.tableView.reloadData()
+        }
         configureView()
-        self.friends = FriendManager.sharedInstance.friends()
-        self.tableView.reloadData()
     }
     
     func configureView() {
         tableView.tableFooterView = UIView()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
-        tableView.registerNib(UINib(nibName: "FriendTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "friendCell")
+        tableView.register(UINib(nibName: "UserTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "userCell")
         tableView.allowsSelection = false
     }
     
     // MARK: - Methods
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
     }
     
@@ -54,29 +52,38 @@ class FriendsTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("friendCell", forIndexPath: indexPath) as! FriendTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserTableViewCell
         
-        cell.nameLabel.text = friends[indexPath.row].name
-        
-        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [Friend]
-        if let number = mutualFriends?.count where number > 0 {
-            cell.mutualFriendsLabel.hidden = false
-            cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
-        } else {
-            cell.mutualFriendsLabel.hidden = true
-        }
-        cell.tag = Int(friends[indexPath.row].id!)
+        cell.configure(user: friends[indexPath.row])
         
         return cell
+    }
+    
+    @IBAction func moreAction(_ sender: Any) {
+        let view: FriendRequestsActions = try! SwiftMessages.viewFromNib()
+        view.configureDropShadow()
+        view.cancelAction = { SwiftMessages.hide() }
+        view.friendRequests = {
+            self.performSegue(withIdentifier: "showFriendRequestsSegue", sender: self)
+        }
+        view.outgoingRequest = {
+            self.performSegue(withIdentifier: "showOutgoingRequestsSegue", sender: self)
+        }
+        var config = SwiftMessages.defaultConfig
+        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        config.duration = .forever
+        config.presentationStyle = .bottom
+        config.dimMode = .gray(interactive: true)
+        SwiftMessages.show(config: config, view: view)
     }
     
     /*
@@ -118,7 +125,7 @@ class FriendsTableViewController: UITableViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
@@ -126,7 +133,7 @@ class FriendsTableViewController: UITableViewController {
 }
 
 extension FriendsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         return NSAttributedString(string: "No friends to show")
     }
 }

@@ -14,28 +14,27 @@ class FriendsInviteTableViewController: UITableViewController {
     var searchController: UISearchController!
     var shouldShowSearchResults = true
     
-    var friends = [Friend]()
-    var onSelected: ((User, ()->Void) -> Void)?
+    var friends = [User]()
+    var onSelected: ((User, @escaping (String)->Void) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.friends = FriendManager.sharedInstance.friends()
         configureSearchController()
         configure()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.done))
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        searchController.active = true
-//        dispatch_async(dispatch_get_main_queue(), {
-//            self.searchController.searchBar.becomeFirstResponder()
-//        })
+//        searchController.isActive = true
+        //        dispatch_async(dispatch_get_main_queue(), {
+        //            self.searchController.searchBar.becomeFirstResponder()
+        //        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,22 +44,23 @@ class FriendsInviteTableViewController: UITableViewController {
     
     func configure() {
         self.tableView.tableFooterView = UIView()
-
-        let blurEffect = UIBlurEffect(style: .Light)
+        
+        let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.view.bounds
-        blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
         self.tableView.backgroundView = blurEffectView
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
-        tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "userCell")
+        tableView.register(UINib(nibName: "UserTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "userCell")
         tableView.allowsSelection = false
     }
-
+    
     func configureSearchController() {
         // Initialize and perform a minimum configuration to the search controller.
         searchController = UISearchController(searchResultsController: nil)
+        searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search here..."
@@ -75,37 +75,39 @@ class FriendsInviteTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shouldShowSearchResults ? self.friends.count : 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! UserTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserTableViewCell
         
         // Configure the cell...
-        cell.nameLabel.text = friends[indexPath.row].name
+        let friend = friends[indexPath.row]
+        cell.nameLabel.text = friend.name
         
-        //        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [Friend]
+        //        let mutualFriends = friends[indexPath.row].mutualFriends?.allObjects as? [User]
         //        if let number = mutualFriends?.count where number > 0 {
         //            cell.mutualFriendsLabel.hidden = false
-        //            cell.mutualFriendsLabel.text = String(number)  + "mutual friends"
+        //            cell.mutualFriendsLabel.text = String(number)  + " mutual friends"
         //        } else {
-                    cell.mutualFriendsLabel.hidden = true
+        cell.mutualFriendsLabel.isHidden = true
         //        }
+        cell.profilePictureImageView.setImageWith(friend.name, color: .orangeTint(), circular: true)
         cell.onSelected = { user, done in
-            self.onSelected!(user) {
-                done()
+            self.onSelected!(user) { text in
+                done(text)
             }
         }
-        cell.tag = Int(friends[indexPath.row].id!)
+        cell.tag = Int(friend.id!)
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.0
     }
     
@@ -148,33 +150,39 @@ class FriendsInviteTableViewController: UITableViewController {
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
      */
     
+    func done(_ sender: Any) {
+        shouldShowSearchResults = false
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
-extension FriendsInviteTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension FriendsInviteTableViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func didPresentSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.showsCancelButton = false
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         shouldShowSearchResults = true
         tableView.reloadData()
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        shouldShowSearchResults = false
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         if shouldShowSearchResults {
             let searchString = searchController.searchBar.text
             if !searchString!.isEmpty {
-                self.friends = FriendManager.sharedInstance.all(filtered: searchString!, forFriends: true)
+                self.friends = FriendManager.shared.all(filtered: searchString!)
             } else {
-                self.friends = FriendManager.sharedInstance.friends()
+                self.friends = FriendManager.shared.friends()
             }
             tableView.reloadData()
         }
@@ -182,7 +190,7 @@ extension FriendsInviteTableViewController: UISearchResultsUpdating, UISearchBar
 }
 
 extension FriendsInviteTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         return NSAttributedString(string: "No friends to show.")
     }
 }
