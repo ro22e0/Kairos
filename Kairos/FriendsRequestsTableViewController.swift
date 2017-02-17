@@ -43,10 +43,10 @@ class FriendsRequestsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func configureView() {
         self.tableView.tableFooterView = UIView()
-        
+
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 74
         self.navigationController?.navigationBar.isTranslucent = false
@@ -54,24 +54,24 @@ class FriendsRequestsTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "SentInvitationTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: pendingCellID)
         tableView.allowsSelection = false
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return requestedFriends.count
         }
         return pendingFriends.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: requestCellID, for: indexPath) as! InvitationTableViewCell
-            
+
             cell.nameLabel.text = requestedFriends[indexPath.row].name
             let mutualFriends = requestedFriends[indexPath.row].mutualFriends?.allObjects as? [User]
             if let number = mutualFriends?.count, number > 0 {

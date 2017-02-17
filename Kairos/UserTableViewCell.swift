@@ -34,9 +34,10 @@ class UserTableViewCell: UITableViewCell {
         self.nameLabel.text = user.name
         
         let mutualFriends = user.mutualFriends?.allObjects as? [User]
+        
         if let number = mutualFriends?.count, number > 0 {
             mutualFriendsLabel.isHidden = false
-            mutualFriendsLabel.text = String(number)  + " mutual friends"
+            mutualFriendsLabel.text = String(number)  + " mutual friends " + mutualFriends!.first!.name!
         } else {
             mutualFriendsLabel.isHidden = true
         }

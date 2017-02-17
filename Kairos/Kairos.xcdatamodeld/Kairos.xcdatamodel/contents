@@ -148,35 +148,35 @@
         <attribute name="promotion" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="provider" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="school" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="calendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="participatingUsers" inverseEntity="Calendar" syncable="YES"/>
-        <relationship name="chatRooms" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChatRoom" inverseName="users" inverseEntity="ChatRoom" syncable="YES"/>
-        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="participatingUsers" inverseEntity="Event" syncable="YES"/>
-        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Owner" inverseName="friends" inverseEntity="Owner" syncable="YES"/>
-        <relationship name="invitedCalendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="invitedUsers" inverseEntity="Calendar" syncable="YES"/>
-        <relationship name="invitedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="invitedUsers" inverseEntity="Event" syncable="YES"/>
-        <relationship name="invitedProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="invitedUsers" inverseEntity="Project" syncable="YES"/>
-        <relationship name="mutualFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="mutualFriends" inverseEntity="User" syncable="YES"/>
-        <relationship name="ownedCalendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="owners" inverseEntity="Calendar" syncable="YES"/>
-        <relationship name="ownedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="owners" inverseEntity="Event" syncable="YES"/>
-        <relationship name="ownedProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="owners" inverseEntity="Project" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="user" inverseEntity="Owner" syncable="YES"/>
-        <relationship name="pendingFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Owner" inverseName="pendingFriends" inverseEntity="Owner" syncable="YES"/>
-        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="participatingUsers" inverseEntity="Project" syncable="YES"/>
-        <relationship name="refusedCalendars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Calendar" inverseName="refusedUsers" inverseEntity="Calendar" syncable="YES"/>
-        <relationship name="refusedEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="refusedUsers" inverseEntity="Event" syncable="YES"/>
-        <relationship name="refusedProjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="refusedUsers" inverseEntity="Project" syncable="YES"/>
-        <relationship name="requestedFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Owner" inverseName="requestedFriends" inverseEntity="Owner" syncable="YES"/>
-        <relationship name="sentMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="user" inverseEntity="Message" syncable="YES"/>
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="users" inverseEntity="Task" syncable="YES"/>
+        <relationship name="calendars" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Calendar" inverseName="participatingUsers" inverseEntity="Calendar" syncable="YES"/>
+        <relationship name="chatRooms" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChatRoom" inverseName="users" inverseEntity="ChatRoom" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="participatingUsers" inverseEntity="Event" syncable="YES"/>
+        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Owner" inverseName="friends" inverseEntity="Owner" syncable="YES"/>
+        <relationship name="invitedCalendars" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Calendar" inverseName="invitedUsers" inverseEntity="Calendar" syncable="YES"/>
+        <relationship name="invitedEvents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="invitedUsers" inverseEntity="Event" syncable="YES"/>
+        <relationship name="invitedProjects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Project" inverseName="invitedUsers" inverseEntity="Project" syncable="YES"/>
+        <relationship name="mutualFriends" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="User" inverseName="mutualFriends" inverseEntity="User" syncable="YES"/>
+        <relationship name="ownedCalendars" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Calendar" inverseName="owners" inverseEntity="Calendar" syncable="YES"/>
+        <relationship name="ownedEvents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="owners" inverseEntity="Event" syncable="YES"/>
+        <relationship name="ownedProjects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Project" inverseName="owners" inverseEntity="Project" syncable="YES"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Owner" inverseName="user" inverseEntity="Owner" syncable="YES"/>
+        <relationship name="pendingFriends" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Owner" inverseName="pendingFriends" inverseEntity="Owner" syncable="YES"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Project" inverseName="participatingUsers" inverseEntity="Project" syncable="YES"/>
+        <relationship name="refusedCalendars" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Calendar" inverseName="refusedUsers" inverseEntity="Calendar" syncable="YES"/>
+        <relationship name="refusedEvents" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" inverseName="refusedUsers" inverseEntity="Event" syncable="YES"/>
+        <relationship name="refusedProjects" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Project" inverseName="refusedUsers" inverseEntity="Project" syncable="YES"/>
+        <relationship name="requestedFriends" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Owner" inverseName="requestedFriends" inverseEntity="Owner" syncable="YES"/>
+        <relationship name="sentMessages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Message" inverseName="user" inverseEntity="Message" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="users" inverseEntity="Task" syncable="YES"/>
     </entity>
     <elements>
         <element name="Calendar" positionX="-14058" positionY="-2817" width="128" height="178"/>
         <element name="ChatRoom" positionX="-14499" positionY="-2196" width="128" height="165"/>
         <element name="Event" positionX="-14060" positionY="-2547" width="128" height="223"/>
         <element name="Message" positionX="-14436" positionY="-2781" width="128" height="120"/>
-        <element name="Owner" positionX="-14652" positionY="-2601" width="126" height="118"/>
+        <element name="Owner" positionX="-14643" positionY="-2601" width="126" height="118"/>
         <element name="Project" positionX="-14276" positionY="-2943" width="128" height="208"/>
-        <element name="Task" positionX="-14213" positionY="-2277" width="128" height="180"/>
-        <element name="User" positionX="-14463" positionY="-2779" width="128" height="523"/>
+        <element name="Task" positionX="-14042" positionY="-2259" width="128" height="180"/>
+        <element name="User" positionX="-14274" positionY="-2583" width="128" height="523"/>
     </elements>
 </model>

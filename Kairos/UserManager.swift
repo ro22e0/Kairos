@@ -17,9 +17,7 @@ class UserManager {
     static let shared = UserManager()
     fileprivate init() {}
     
-    var current: Owner {
-        return Owner.all().first as! Owner
-    }
+    var current: Owner = Owner.temporary()
 
     fileprivate func syncOwner(_ data: JSON, completionHandler: @escaping (StatusRequest) -> Void) {
         if let owner = Owner.all().first as? Owner {
@@ -44,11 +42,6 @@ class UserManager {
                     let json = JSON(value)
                     switch response.response!.statusCode {
                     case 200:
-                        if let owner = Owner.all().first as? Owner {
-                            if owner.id != json["data"]["id"].number {
-                                DataSync.deleteAll()
-                            }
-                        }
                         var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
@@ -56,6 +49,7 @@ class UserManager {
                             let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
                             try! DataSync.dataStack().mainContext.save()
+                            self.current = Owner.all().first as! Owner
                             completionHandler(.success(nil))
                         })
                     default:
@@ -77,11 +71,11 @@ class UserManager {
                     let json = JSON(value)
                     switch response.response!.statusCode {
                     case 200:
-                        if let owner = Owner.all().first as? Owner {
-                            if owner.id != json["data"]["id"].number {
-                                DataSync.deleteAll()
-                            }
-                        }
+//                        if let owner = Owner.all().first as? Owner {
+//                            if owner.id != json["data"]["id"].number {
+//                                DataSync.deleteAll()
+//                            }
+//                        }
                         var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
@@ -109,6 +103,7 @@ class UserManager {
             case .success:
                 switch response.response!.statusCode {
                 case 200...203:
+                    DataSync.deleteAll()
                     completionHandler(.success(nil))
                 default:
                     completionHandler(.error("kFail"))
@@ -207,6 +202,7 @@ class UserManager {
     
     func fetchAll(_ handler: (() -> Void)? = nil) {
         DataSync.fetchUsers { (status) in
+        }
             FriendManager.shared.fetch()
             CalendarManager.shared.fetch() {
                 DataSync.fetchCalendarColors()
@@ -221,7 +217,6 @@ class UserManager {
                 }
             }
             handler?()
-        }
     }
     
     func getCalendars() -> [Calendar] {

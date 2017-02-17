@@ -19,10 +19,7 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FriendManager.shared.fetch() {
-            self.friends = FriendManager.shared.friends()
-            self.tableView.reloadData()
-        }
+        self.friends = FriendManager.shared.friends()
         configureView()
     }
     
@@ -66,6 +63,12 @@ class FriendsTableViewController: UITableViewController {
         cell.configure(user: friends[indexPath.row])
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        
+        self.performSegue(withIdentifier: "showFriendProfileSegue", sender: cell)
     }
     
     @IBAction func moreAction(_ sender: Any) {
@@ -121,15 +124,25 @@ class FriendsTableViewController: UITableViewController {
      }
      */
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "showFriendRequestsSegue":
+                let destVC = segue.destination as! UsersTableViewController
+                destVC.users = FriendManager.shared.friends(withStatus: .Requested)
+                destVC.title = "Friend Requests"
+            case "showOutgoingRequestsSegue":
+                let destVC = segue.destination as! UsersTableViewController
+                destVC.users = FriendManager.shared.friends(withStatus: .Requested)
+                destVC.title = "Outgoing Requests"
+            default:
+                break
+            }
+        }
+    }
 }
 
 extension FriendsTableViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {

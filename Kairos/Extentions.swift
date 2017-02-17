@@ -171,7 +171,6 @@ extension UIView {
     func round() {
         self.layer.cornerRadius = self.bounds.height / 2
         self.clipsToBounds = true
-        
     }
 
     func addBorder(_ color: CGColor) {
@@ -202,7 +201,7 @@ public extension UIWindow {
 
 extension UIApplication {
     class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-        
+
         if let nav = base as? UINavigationController {
             return topViewController(base: nav.visibleViewController)
         }

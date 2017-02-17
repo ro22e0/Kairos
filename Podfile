@@ -23,7 +23,7 @@ target 'Kairos' do
   pod 'UIImageView-Letters'
   pod 'JSQMessagesViewController'
   pod 'Starscream'
-  pod 'Socket.IO-Client-Swift'
+#  pod 'Socket.IO-Client-Swift'
   pod 'SwiftMessages'
   # pod 'DatePickerCell'
   # pod 'UITextField+Shake', '~> 1.1'

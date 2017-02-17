@@ -73,6 +73,7 @@
 		DA1E11FF1D78440E0068207F /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E11FE1D78440E0068207F /* SignOutViewController.swift */; };
 		DA1E12011D784AC90068207F /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1E12001D784AC90068207F /* EditProfileViewController.swift */; };
 		DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */; };
+		DA2A5AFC1E574C7F0008F05C /* KairosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2A5AFB1E574C7F0008F05C /* KairosUITests.swift */; };
 		DA2DA3231E31690F00F86C68 /* ChatRoom+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2DA3211E31690F00F86C68 /* ChatRoom+CoreDataClass.swift */; };
 		DA2DA3241E31690F00F86C68 /* ChatRoom+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2DA3221E31690F00F86C68 /* ChatRoom+CoreDataProperties.swift */; };
 		DA2DA3261E316D8E00F86C68 /* ChatRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2DA3251E316D8E00F86C68 /* ChatRoomManager.swift */; };
@@ -145,6 +146,7 @@
 		DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC801841CA3334D0092A717 /* Menu.storyboard */; };
 		DAC801881CA346B70092A717 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC801871CA346B70092A717 /* Settings.storyboard */; };
 		DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAC8018B1CA353AF0092A717 /* Board.storyboard */; };
+		DAD418A91E5703290060DF6C /* FriendProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD418A81E5703290060DF6C /* FriendProfileViewController.swift */; };
 		DAD51B941D982CF000A20376 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD51B931D982CF000A20376 /* Extentions.swift */; };
 		DADC45DC1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC45DB1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift */; };
 		DADC45DE1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADC45DD1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift */; };
@@ -167,6 +169,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		DA2A5AFE1E574C7F0008F05C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAAEE14C1C9ABE1F00D53AEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DAAEE1531C9ABE1F00D53AEC;
+			remoteInfo = Kairos;
+		};
 		DAAEE16C1C9ABE1F00D53AEC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DAAEE14C1C9ABE1F00D53AEC /* Project object */;
@@ -247,6 +256,9 @@
 		DA1E11FE1D78440E0068207F /* SignOutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
 		DA1E12001D784AC90068207F /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCalendarTableViewController.swift; sourceTree = "<group>"; };
+		DA2A5AF91E574C7F0008F05C /* KairosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KairosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA2A5AFB1E574C7F0008F05C /* KairosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KairosUITests.swift; sourceTree = "<group>"; };
+		DA2A5AFD1E574C7F0008F05C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA2DA3211E31690F00F86C68 /* ChatRoom+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatRoom+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DA2DA3221E31690F00F86C68 /* ChatRoom+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatRoom+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA2DA3251E316D8E00F86C68 /* ChatRoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomManager.swift; sourceTree = "<group>"; };
@@ -324,6 +336,7 @@
 		DAC801841CA3334D0092A717 /* Menu.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Menu.storyboard; sourceTree = "<group>"; };
 		DAC801871CA346B70092A717 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		DAC8018B1CA353AF0092A717 /* Board.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Board.storyboard; sourceTree = "<group>"; };
+		DAD418A81E5703290060DF6C /* FriendProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendProfileViewController.swift; sourceTree = "<group>"; };
 		DAD51B931D982CF000A20376 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		DADC45DB1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSecurityTableViewController.swift; sourceTree = "<group>"; };
 		DADC45DD1D9FBD0D003CC4D1 /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
@@ -346,6 +359,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DA2A5AF61E574C7F0008F05C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAAEE1511C9ABE1F00D53AEC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -423,6 +443,15 @@
 				DA05BED41E30E0D300DF1BE5 /* RoomViewController.swift */,
 			);
 			name = Chat;
+			sourceTree = "<group>";
+		};
+		DA2A5AFA1E574C7F0008F05C /* KairosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DA2A5AFB1E574C7F0008F05C /* KairosUITests.swift */,
+				DA2A5AFD1E574C7F0008F05C /* Info.plist */,
+			);
+			path = KairosUITests;
 			sourceTree = "<group>";
 		};
 		DA3F3AC91C9AEA1B00E82FC6 /* Login */ = {
@@ -695,6 +724,7 @@
 			children = (
 				DAAEE1561C9ABE1F00D53AEC /* Kairos */,
 				DAAEE16E1C9ABE1F00D53AEC /* KairosTests */,
+				DA2A5AFA1E574C7F0008F05C /* KairosUITests */,
 				DAAEE1551C9ABE1F00D53AEC /* Products */,
 				0D8B563A18CD85FE498FE4EA /* Pods */,
 				888AB52107EBFF6D977CFD15 /* Frameworks */,
@@ -706,6 +736,7 @@
 			children = (
 				DAAEE1541C9ABE1F00D53AEC /* Kairos.app */,
 				DAAEE16B1C9ABE1F00D53AEC /* KairosTests.xctest */,
+				DA2A5AF91E574C7F0008F05C /* KairosUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -787,6 +818,7 @@
 				DA668F3A1CA4AD7800230912 /* FriendsRequestsTableViewController.swift */,
 				DAEE7CBA1CA49A580019C8D4 /* FriendsTableViewController.swift */,
 				DAA2D4781DA3079700D5E6A7 /* UsersTableViewController.swift */,
+				DAD418A81E5703290060DF6C /* FriendProfileViewController.swift */,
 				DA7912F71CEFCBF800661753 /* FriendActionPopoverTableViewController.swift */,
 				DA2EC0281DA90FC100BCA895 /* FriendsInviteTableViewController.swift */,
 			);
@@ -796,6 +828,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DA2A5AF81E574C7F0008F05C /* KairosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA2A5B001E574C7F0008F05C /* Build configuration list for PBXNativeTarget "KairosUITests" */;
+			buildPhases = (
+				DA2A5AF51E574C7F0008F05C /* Sources */,
+				DA2A5AF61E574C7F0008F05C /* Frameworks */,
+				DA2A5AF71E574C7F0008F05C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DA2A5AFF1E574C7F0008F05C /* PBXTargetDependency */,
+			);
+			name = KairosUITests;
+			productName = KairosUITests;
+			productReference = DA2A5AF91E574C7F0008F05C /* KairosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		DAAEE1531C9ABE1F00D53AEC /* Kairos */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DAAEE1741C9ABE1F00D53AEC /* Build configuration list for PBXNativeTarget "Kairos" */;
@@ -850,10 +900,15 @@
 		DAAEE14C1C9ABE1F00D53AEC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kairos-app";
 				TargetAttributes = {
+					DA2A5AF81E574C7F0008F05C = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = DAAEE1531C9ABE1F00D53AEC;
+					};
 					DAAEE1531C9ABE1F00D53AEC = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = TWPS85FDC4;
@@ -887,11 +942,19 @@
 			targets = (
 				DAAEE1531C9ABE1F00D53AEC /* Kairos */,
 				DAAEE16A1C9ABE1F00D53AEC /* KairosTests */,
+				DA2A5AF81E574C7F0008F05C /* KairosUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DA2A5AF71E574C7F0008F05C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAAEE1521C9ABE1F00D53AEC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1144,6 +1207,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DA2A5AF51E574C7F0008F05C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA2A5AFC1E574C7F0008F05C /* KairosUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DAAEE1501C9ABE1F00D53AEC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1151,6 +1222,7 @@
 				DA3F3ACF1C9AFC2A00E82FC6 /* Common.swift in Sources */,
 				DA52AAE31CD7EC5900464096 /* EventTableViewController.swift in Sources */,
 				AC4A94BF1E2E817F00BA59B5 /* ProjectDetailsViewController.swift in Sources */,
+				DAD418A91E5703290060DF6C /* FriendProfileViewController.swift in Sources */,
 				DA2EC0291DA90FC100BCA895 /* FriendsInviteTableViewController.swift in Sources */,
 				DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */,
 				DA7912FD1CEFCDA100661753 /* BlockUserTableViewCell.swift in Sources */,
@@ -1278,6 +1350,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		DA2A5AFF1E574C7F0008F05C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DAAEE1531C9ABE1F00D53AEC /* Kairos */;
+			targetProxy = DA2A5AFE1E574C7F0008F05C /* PBXContainerItemProxy */;
+		};
 		DAAEE16D1C9ABE1F00D53AEC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DAAEE1531C9ABE1F00D53AEC /* Kairos */;
@@ -1297,6 +1374,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DA2A5B011E574C7F0008F05C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = KairosUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kairos-app.KairosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Kairos;
+			};
+			name = Debug;
+		};
+		DA2A5B021E574C7F0008F05C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = KairosUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kairos-app.KairosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Kairos;
+			};
+			name = Release;
+		};
 		DAAEE1721C9ABE1F00D53AEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1319,7 +1428,7 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1463,6 +1572,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DA2A5B001E574C7F0008F05C /* Build configuration list for PBXNativeTarget "KairosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA2A5B011E574C7F0008F05C /* Debug */,
+				DA2A5B021E574C7F0008F05C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		DAAEE14F1C9ABE1F00D53AEC /* Build configuration list for PBXProject "Kairos" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

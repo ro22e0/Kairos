@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SwiftSpinner
+import Crashlytics
 
 class SignInViewController: UIViewController {
     
@@ -38,6 +39,7 @@ class SignInViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func SignIn(_ sender: UIButton) {
+//            Crashlytics.sharedInstance().crash()
         SignInRequest()
     }
     

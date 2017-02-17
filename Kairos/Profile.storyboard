@@ -145,7 +145,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="E2D-Q2-GAq" kind="show" id="78W-Xp-iGH"/>
+                                            <segue destination="E2D-Q2-GAq" kind="show" identifier="showUsersSegue" id="78W-Xp-iGH"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SwH-uu-woZ">
@@ -443,35 +443,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="q6t-JX-iWs">
-                                <rect key="frame" x="106" y="241" width="163" height="186"/>
+                                <rect key="frame" x="106.5" y="241" width="162.5" height="186"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="wpw-j3-n3D">
-                                        <rect key="frame" x="0.0" y="0.0" width="163" height="98"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="162.5" height="98"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Current password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tUg-xg-Ipw">
-                                                <rect key="frame" x="0.0" y="0.0" width="163" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162.5" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p5k-EG-nRh">
-                                                <rect key="frame" x="0.0" y="34" width="163" height="30"/>
+                                                <rect key="frame" x="0.0" y="34" width="162.5" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Retype new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="urw-h6-H4M">
-                                                <rect key="frame" x="0.0" y="68" width="163" height="30"/>
+                                                <rect key="frame" x="0.0" y="68" width="162.5" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRz-Ve-IV6">
-                                        <rect key="frame" x="0.0" y="113" width="163" height="28"/>
+                                        <rect key="frame" x="0.0" y="113" width="162.5" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="Forgot password ?"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itl-MK-ik8">
-                                        <rect key="frame" x="0.0" y="156" width="163" height="30"/>
+                                        <rect key="frame" x="0.0" y="156" width="162.5" height="30"/>
                                         <state key="normal" title="Save changes"/>
                                     </button>
                                 </subviews>
@@ -511,7 +511,7 @@
                 <viewControllerPlaceholder storyboardName="Friends" referencedIdentifier="UsersTableViewController" id="E2D-Q2-GAq" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gc-cp-vFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1873" y="23"/>
+            <point key="canvasLocation" x="1873" y="264"/>
         </scene>
         <!--CalendarRequestsTableViewController-->
         <scene sceneID="5C5-eo-1qX">
@@ -567,7 +567,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Now-jG-m2u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2022" y="420"/>
+            <point key="canvasLocation" x="2468" y="337"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GQc-HK-438">
@@ -575,7 +575,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5jY-WH-Z9n" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="more" id="Jla-bb-7Jo" userLabel="More"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TGA-zh-iXk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="TGA-zh-iXk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

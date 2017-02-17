@@ -23,7 +23,7 @@ class UserListCell: UITableViewCell {
     // MARK: Private
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    
+
     private func configure() {
         selectionStyle = .none
         collectionView.delegate = self

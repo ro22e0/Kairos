@@ -20,22 +20,22 @@ class UsersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        users = UserManager.shared.all(excludeFriends: true)
-        
         configureSearchController()
         configureView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        
+        if users.count > 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
     }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        searchController.isActive = false
-//        super.viewWillDisappear(animated)
-//    }
+
+    //    override func viewWillDisappear(_ animated: Bool) {
+    //        searchController.isActive = false
+    //        super.viewWillDisappear(animated)
+    //    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -76,7 +76,7 @@ class UsersTableViewController: UITableViewController {
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
         self.definesPresentationContext = true
-
+        
         let searchBar = searchController.searchBar
         searchBar.tintColor = .orangeTint()
         searchBar.backgroundImage = UIImage()
@@ -98,10 +98,10 @@ class UsersTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserTableViewCell
-
+        
         // Configure the cell...
         let user = shouldShowSearchResults ? filteredUsers[indexPath.row] : users[indexPath.row]
-
+        
         cell.configure(user: user)
         
         return cell
@@ -111,13 +111,20 @@ class UsersTableViewController: UITableViewController {
         return 0.0
     }
 
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let additionalSeparatorThickness = CGFloat(5)
-//        let frame = CGRect(x: 0, y: cell.frame.size.height - additionalSeparatorThickness, width: cell.frame.size.width, height: additionalSeparatorThickness)
-//        let additionalSeparator = UIView(frame: frame)
-//        additionalSeparator.backgroundColor = .background()
-//        cell.addSubview(additionalSeparator)
-//    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        
+        self.performSegue(withIdentifier: "showUserProfileSegue", sender: cell)
+    }
+    
+    
+    //    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    //        let additionalSeparatorThickness = CGFloat(5)
+    //        let frame = CGRect(x: 0, y: cell.frame.size.height - additionalSeparatorThickness, width: cell.frame.size.width, height: additionalSeparatorThickness)
+    //        let additionalSeparator = UIView(frame: frame)
+    //        additionalSeparator.backgroundColor = .background()
+    //        cell.addSubview(additionalSeparator)
+    //    }
     
     @IBAction func done(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

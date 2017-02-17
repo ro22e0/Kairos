@@ -66,7 +66,9 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-  - Socket.IO-Client-Swift (8.2.0)
+  - PonyDebugger (0.4.5):
+    - SocketRocket
+  - SocketRocket (0.5.1)
   - Starscream (2.0.2)
   - SwiftMessages (3.1.3)
   - SwiftRecord (0.0.5)
@@ -93,7 +95,7 @@ DEPENDENCIES:
   - Google/SignIn
   - IQKeyboardManagerSwift
   - JSQMessagesViewController
-  - Socket.IO-Client-Swift
+  - PonyDebugger (~> 0.4)
   - Starscream
   - SwiftMessages
   - SwiftRecord
@@ -131,7 +133,8 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 58bbcf46b5cf9fd4ed625d28a60cb2fbae4ab0f4
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  Socket.IO-Client-Swift: 900cf511777045c80d1ce1f11f71261e87765dd1
+  PonyDebugger: 1c60f7c876bdb6a8b6bf0f0269087f8a234fafa7
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   Starscream: 6c135a34e0a6e60cedaa0b30db67a4c05cf7cd38
   SwiftMessages: 9d03bb95d394ac60f9c20335e2305dfea9cac70a
   SwiftRecord: f7fed44d27ef7703afd4a87ebf0d57cb26aacf12
@@ -143,6 +146,6 @@ SPEC CHECKSUMS:
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
   XLPagerTabStrip: c46e802a8dcac29edbcea573de8fe920e052455b
 
-PODFILE CHECKSUM: 19b406343b3df10d0eac46c10ceb3155a04f123b
+PODFILE CHECKSUM: 3ff1bbbc74d2215c75e153a41e4f57fa8ddcbfef
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.1.0.rc.2

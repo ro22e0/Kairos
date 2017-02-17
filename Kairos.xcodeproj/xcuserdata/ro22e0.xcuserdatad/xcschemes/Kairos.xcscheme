@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Kairos.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DA2A5AF81E574C7F0008F05C"
+               BuildableName = "KairosUITests.xctest"
+               BlueprintName = "KairosUITests"
+               ReferencedContainer = "container:Kairos.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

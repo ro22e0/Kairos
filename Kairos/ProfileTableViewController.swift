@@ -17,7 +17,7 @@ class ProfileTableViewController: UITableViewController {
     var user: Owner!
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         self.user = UserManager.shared.current
         self.configure()
         // Uncomment the following line to preserve selection between presentations
@@ -33,13 +33,13 @@ class ProfileTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func configure() {
-//        if self.user.user!.image != nil {
-//            self.profileImage.image = UIImage(data: self.user.user!.image! as Data)
-//        } else {
-            self.profileImage.setImageWith(user.user?.name, color: .orangeTint(), circular: true)
-//        }
+        //        if self.user.user!.image != nil {
+        //            self.profileImage.image = UIImage(data: self.user.user!.image! as Data)
+        //        } else {
+        self.profileImage.setImageWith(user.user?.name, color: .orangeTint(), circular: true)
+        //        }
         self.nameLabel.text = self.user.user!.name
     }
     
@@ -92,16 +92,21 @@ class ProfileTableViewController: UITableViewController {
      return true
      }
      */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "showUsersSegue":
+                let destVC = segue.destination as! UsersTableViewController
+                destVC.users = UserManager.shared.all(excludeFriends: true)
+            default:
+                break
+            }
+        }
+    }
     
     @IBAction func signOut(_ sender: UIButton) {
         UserManager.shared.signOut() { (status) in
