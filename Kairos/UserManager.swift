@@ -18,7 +18,7 @@ class UserManager {
     fileprivate init() {}
     
     var current: Owner = Owner.temporary()
-
+    
     fileprivate func syncOwner(_ data: JSON, completionHandler: @escaping (StatusRequest) -> Void) {
         if let owner = Owner.all().first as? Owner {
             if owner.id != data["id"].number {
@@ -26,7 +26,7 @@ class UserManager {
             }
         }
         print(data)
-        DataSync.sync(entity: "Owner", predicate: nil, data: [data.dictionaryObject! as Dictionary<String, Any>], completion: { error in
+        DataSync.sync(inEntityNamed: "Owner", predicate: nil, data: [data.dictionaryObject! as Dictionary<String, Any>], completion: { error in
             let defautls = UserDefaults.standard
             defautls.setValue(true, forKey: userLoginKey)
             completionHandler(.success(nil))
@@ -45,7 +45,7 @@ class UserManager {
                         var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
-                        DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
+                        DataSync.sync(inEntityNamed: "Owner", predicate: nil, data: [data], completion: { error in
                             let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
                             try! DataSync.dataStack().mainContext.save()
@@ -71,15 +71,15 @@ class UserManager {
                     let json = JSON(value)
                     switch response.response!.statusCode {
                     case 200:
-//                        if let owner = Owner.all().first as? Owner {
-//                            if owner.id != json["data"]["id"].number {
-//                                DataSync.deleteAll()
-//                            }
-//                        }
+                        //                        if let owner = Owner.all().first as? Owner {
+                        //                            if owner.id != json["data"]["id"].number {
+                        //                                DataSync.deleteAll()
+                        //                            }
+                        //                        }
                         var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
-                        DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
+                        DataSync.sync(inEntityNamed: "Owner", predicate: nil, data: [data], completion: { error in
                             let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
                             try! DataSync.dataStack().mainContext.save()
@@ -146,13 +146,13 @@ class UserManager {
         let token = defautls.value(forKey: userTokenKey) as? String
         let client = defautls.value(forKey: userClientKey) as? String
         let uid = defautls.value(forKey: userUIDKey) as? String
-
+        
         return ["access-token": token!, "client": client!, "uid": uid!]
     }
-
+    
     func all(excludeFriends: Bool = false) -> [User] {
         var users = [User]()
-
+        
         if excludeFriends {
             let format = "friends.@count == 0 AND owner == %@"
                 + "AND pendingFriends.@count == 0 AND requestedFriends.@count == 0"
@@ -163,7 +163,7 @@ class UserManager {
         }
         return users
     }
-
+    
     func all(filtered text: String) -> [User] {
         let namePred = NSPredicate(format: "name contains[c] %@ AND self != %@", text, self.current)
         let nicknamePred = NSPredicate(format: "nickname contains[c] %@ AND self != %@", text, self.current)
@@ -185,7 +185,7 @@ class UserManager {
         let filteredUsers = users.filter({ compoundPred.evaluate(with: $0) })
         return filteredUsers
     }
-
+    
     
     func fetch(_ handler: (() -> Void)? = nil) {
         DataSync.fetchUsers { (status) in
@@ -200,23 +200,21 @@ class UserManager {
         }
     }
     
-    func fetchAll(_ handler: (() -> Void)? = nil) {
-        DataSync.fetchUsers { (status) in
+    func fetchAll(_ handler: @escaping (() -> Void)) {
+        self.fetch()
+        FriendManager.shared.fetch()
+        DataSync.fetchCalendarColors()
+        CalendarManager.shared.fetch()
+        EventManager.shared.fetch()
+        ProjectManager.shared.fetch()
+        TaskManager.shared.fetch()
+        ChatRoomManager.shared.fetch() {
+            let chatRooms = ChatRoomManager.shared.chatRooms()
+            for chatRoom in chatRooms {
+                ChatRoomManager.shared.listen(for: chatRoom)
+            }
         }
-            FriendManager.shared.fetch()
-            CalendarManager.shared.fetch() {
-                DataSync.fetchCalendarColors()
-                EventManager.shared.fetch()
-            }
-            ProjectManager.shared.fetch()
-            TaskManager.shared.fetch()
-            ChatRoomManager.shared.fetch() {
-                let chatRooms = ChatRoomManager.shared.chatRooms()
-                for chatRoom in chatRooms {
-                    ChatRoomManager.shared.listen(for: chatRoom)
-                }
-            }
-            handler?()
+        RequestManager.default.serializationQueue.addOperation(handler)
     }
     
     func getCalendars() -> [Calendar] {

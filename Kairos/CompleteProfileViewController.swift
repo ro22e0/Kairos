@@ -31,7 +31,7 @@ class CompleteProfileViewController: FormViewController {
     }
     
     fileprivate func configure() {
-        former = Former(tableView: self.profileTableView)
+//        self.former = Former(tableView: self.profileTableView)
         
         title = "Complete your profile"
         tableView.contentInset.top = 40

@@ -27,13 +27,34 @@ struct DataSync {
         delegate.saveContext()
     }
     
-    static func sync(entity entityName: String, predicate: NSPredicate?, data: [[String: Any]], all: Bool = false, completion: @escaping ((NSError?) -> Void)) {
-        let ops: Sync.OperationOptions = all ? [.All] : [.Insert, .Update]
-        if predicate != nil {
-            Sync.changes(data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops, completion: completion)
-        } else {
-            Sync.changes(data, inEntityNamed: entityName, dataStack: self.dataStack(), operations: ops, completion: completion)
+    static func sync(inEntityNamed entityName: String, predicate: NSPredicate? = nil, data: [[String: Any]],  firstImport: Bool = false, completion: @escaping ((CustomStatus) -> Void)) {
+        
+        let ops: Sync.OperationOptions = firstImport ? [.All] : [.Insert, .Update]
+        
+//        let operation = Sync(changes: data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops)
+        
+        Sync.changes(data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops) { (error) in
+            let operation = BlockOperation {
+                if error == nil {
+                    completion(.success)
+                } else {
+                    completion(.error("ResponseSerializableObjectFailed"))
+                }
+            }
+            RequestManager.default.serializationQueue.addOperation(operation)
         }
+        
+//        
+//        Sync.changes(data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops, completion: completion)
+//        
+//        
+//        
+//        
+//        operation.completionBlock = {
+//            if operation.isFinished && !operation.isCancelled {
+//            } else {
+//            }
+//        }
     }
     
     static func transformJson(_ json: JSON) -> [[String: Any]] {
@@ -57,7 +78,7 @@ struct DataSync {
         ChatRoom.deleteAll()
         Message.deleteAll()
         try! NSManagedObjectContext.defaultContext.save()
-//        try! self.dataStack().drop()
+        //        try! self.dataStack().drop()
     }
     
     // MARK: - Friends
@@ -80,7 +101,7 @@ struct DataSync {
         var data: [String: Any] = json.dictionaryObject!
         data["id"] = UserManager.shared.current.id
         print(data)
-        DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
+        DataSync.sync(inEntityNamed: "Owner", predicate: nil, data: [data], completion: { error in
             try? self.dataStack().mainContext.save()
             print(NSDate(), "done")
             completionHandler()
@@ -97,13 +118,13 @@ struct DataSync {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-
+                        
                         print(json)
-
+                        
                         var data: [String: Any] = json.dictionaryObject!
                         data["id"] = UserManager.shared.current.id
                         print(data)
-                        DataSync.sync(entity: "Owner", predicate: nil, data: [data], all: true, completion: { error in
+                        DataSync.sync(inEntityNamed: "Owner", predicate: nil, data: [data], completion: { error in
                             try? self.dataStack().mainContext.save()
                             print(NSDate(), "done")
                             completionHandler(.success(nil))
@@ -117,9 +138,9 @@ struct DataSync {
             }
         }
     }
-
+    
     // MARK: - Users
-
+    
     fileprivate static func deleteUsers(_ users: [JSON]) {
         let ids = NSMutableArray()
         
@@ -172,7 +193,7 @@ struct DataSync {
                     if let value = response.result.value {
                         let json = JSON(value)
                         print(json)
-                        self.sync(entity: "User", predicate: nil, data: DataSync.transformJson(json), all: true, completion: { error in
+                        self.sync(inEntityNamed: "User", predicate: nil, data: DataSync.transformJson(json), completion: { error in
                             try! self.dataStack().mainContext.save()
                             completionHandler(StatusRequest.success(nil))
                         })
@@ -223,7 +244,7 @@ struct DataSync {
     
     static func syncCalendars(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Calendar", predicate: nil, data: [data!], completion: { error in
+        DataSync.sync(inEntityNamed: "Calendar", predicate: nil, data: [data!], completion: { error in
             try! self.dataStack().mainContext.save()
             let c = Calendar.all().first as! Calendar
             print(c)
@@ -247,7 +268,7 @@ struct DataSync {
                         return Calendar.query(predicate)
                     })
                     let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "Calendar", predicate: nil, data: data, all: true, completion: { error in
+                    DataSync.sync(inEntityNamed: "Calendar", predicate: nil, data: data, completion: { error in
                         //                        Calendar.save()
                         try! self.dataStack().mainContext.save()
                         let c = Calendar.all().first as! Calendar
@@ -296,7 +317,7 @@ struct DataSync {
     
     static func syncEvents(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Event", predicate: nil, data: [data!], completion: { error in
+        DataSync.sync(inEntityNamed: "Event", predicate: nil, data: [data!], completion: { error in
             //          try! self.dataStack().mainContext.save()
             let c = Event.all().first as! Event
             print(c)
@@ -314,7 +335,7 @@ struct DataSync {
                 if let value = response.result.value {
                     let json = JSON(value)
                     print(json)
-                    self.sync(entity: "Event", predicate: nil, data: json.object as! [[String : Any]], completion: { error in
+                    self.sync(inEntityNamed: "Event", predicate: nil, data: json.object as! [[String : Any]], completion: { error in
                         print(NSDate(), "done")
                     })
                 }
@@ -338,7 +359,7 @@ struct DataSync {
                         return Event.query(predicate)
                     })
                     let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "Event", predicate: nil, data: data, all: true, completion: { error in
+                    DataSync.sync(inEntityNamed: "Event", predicate: nil, data: data, completion: { error in
                         //                        Calendar.save()
                         try! self.dataStack().mainContext.save()
                         let c = Event.all().first as? Event
@@ -357,7 +378,7 @@ struct DataSync {
     // MARK: - Projects
     static func syncProjects(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Project", predicate: nil, data: [data!], completion: { error in
+        DataSync.sync(inEntityNamed: "Project", predicate: nil, data: [data!], completion: { error in
             //          try! self.dataStack().mainContext.save()
             let c = Project.all().first as! Project
             print(c)
@@ -381,7 +402,7 @@ struct DataSync {
                         return Project.query(predicate)
                     })
                     let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "Project", predicate: nil, data: data, all: true, completion: { error in
+                    DataSync.sync(inEntityNamed: "Project", predicate: nil, data: data, completion: { error in
                         //                        Calendar.save()
                         try! self.dataStack().mainContext.save()
                         let c = Project.all().first as? Project
@@ -422,7 +443,7 @@ struct DataSync {
     // MARK: - Tasks
     static func syncTasks(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Task", predicate: nil, data: [data!], completion: { error in
+        DataSync.sync(inEntityNamed: "Task", predicate: nil, data: [data!], completion: { error in
             //          try! self.dataStack().mainContext.save()
             let c = Task.all().first as? Task
             print(c)
@@ -446,7 +467,7 @@ struct DataSync {
                         return Task.query(predicate)
                     })
                     let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "Task", predicate: nil, data: data, all: true, completion: { error in
+                    DataSync.sync(inEntityNamed: "Task", predicate: nil, data: data, completion: { error in
                         //                        Calendar.save()
                         try! self.dataStack().mainContext.save()
                         let c = Task.all().first as? Task
@@ -487,7 +508,7 @@ struct DataSync {
     // MARK: - ChatRooms
     static func syncChatRooms(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "ChatRoom", predicate: nil, data: [data!], completion: { error in
+        DataSync.sync(inEntityNamed: "ChatRoom", predicate: nil, data: [data!], completion: { error in
             //          try! self.dataStack().mainContext.save()
             let c = ChatRoom.all().first as? ChatRoom
             print(c)
@@ -511,7 +532,7 @@ struct DataSync {
                         return ChatRoom.query(predicate)
                     })
                     let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "ChatRoom", predicate: nil, data: data, all: true, completion: { error in
+                    DataSync.sync(inEntityNamed: "ChatRoom", predicate: nil, data: data, completion: { error in
                         //                        Calendar.save()
                         try! self.dataStack().mainContext.save()
                         let c = ChatRoom.all().first as? ChatRoom
@@ -551,7 +572,7 @@ struct DataSync {
     
     static func syncMessages(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Message", predicate: nil, data: [data!], completion: { error in
+        DataSync.sync(inEntityNamed: "Message", predicate: nil, data: [data!], completion: { error in
             //          try! self.dataStack().mainContext.save()
             let c = Message.all().first as? Message
             print(c)
