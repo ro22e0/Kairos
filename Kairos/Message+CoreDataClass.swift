@@ -13,7 +13,7 @@ import CoreData
 public class Message: NSManagedObject {
 
     static func temporary() -> Message {
-        let entity = NSEntityDescription.entity(forEntityName: "Message", in: DataSync.dataStack().mainContext)
+        let entity = NSEntityDescription.entity(forEntityName: "Message", in: DataSync.newContext)
         return Message(entity: entity!, insertInto: nil)
     }
 }

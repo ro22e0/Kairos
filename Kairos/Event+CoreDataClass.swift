@@ -13,7 +13,7 @@ import CoreData
 public class Event: NSManagedObject {
 
     static func temporary() -> Event {
-        let entity = NSEntityDescription.entity(forEntityName: "Event", in: DataSync.dataStack().mainContext)
+        let entity = NSEntityDescription.entity(forEntityName: "Event", in: DataSync.newContext)
         return Event(entity: entity!, insertInto: nil)
     }
 }

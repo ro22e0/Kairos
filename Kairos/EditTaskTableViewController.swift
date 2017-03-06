@@ -379,8 +379,8 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
             switch status {
             case .success:
                 Spinner.showWhistle("kTaskSuccess")
-                print(DataSync.dataStack().viewContext)
-                print(DataSync.dataStack().mainContext)
+//                print(DataSync.dataStack().viewContext)
+                print(DataSync.newContext)
                 self.task?.delete()
                 self.task?.save()
                 print(self.task?.title)
@@ -391,7 +391,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
                     self.navigationController!.popViewController(animated: true)
                 }
                 //                do {
-                //                    try DataSync.dataStack().mainContext.save()
+                //                    try DataSync.newContext.save()
                 //                } catch (let error) {
                 //                    print(error)
             //                }

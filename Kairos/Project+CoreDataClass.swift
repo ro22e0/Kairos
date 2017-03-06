@@ -13,7 +13,7 @@ import CoreData
 public class Project: NSManagedObject {
 
     static func temporary() -> Project {
-        let entity = NSEntityDescription.entity(forEntityName: "Project", in: DataSync.dataStack().mainContext)
+        let entity = NSEntityDescription.entity(forEntityName: "Project", in: DataSync.newContext)
         return Project(entity: entity!, insertInto: nil)
     }
 

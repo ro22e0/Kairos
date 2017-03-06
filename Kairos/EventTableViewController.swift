@@ -345,8 +345,6 @@ class EventTableViewController: FormViewController {
             switch status {
             case .success:
                 Spinner.showWhistle("kEventSuccess")
-                print(DataSync.dataStack().viewContext)
-                print(DataSync.dataStack().mainContext)
                 self.event?.delete()
                 self.event?.save()
                 print(self.event?.title)
@@ -358,7 +356,7 @@ class EventTableViewController: FormViewController {
                     self.navigationController!.popViewController(animated: true)
                 }
                 do {
-                    try DataSync.dataStack().mainContext.save()
+//                    try DataSync.newContext.save()
                 } catch (let error) {
                     print(error)
                 }

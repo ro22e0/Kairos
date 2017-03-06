@@ -15,8 +15,10 @@ import Fabric
 import Crashlytics
 import SwiftRecord
 import DynamicColor
-import Sync
-import DATAStack
+import CocoaLumberjack
+import MagicalRecord
+//import Sync
+//import DATAStack
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,23 +29,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.NS
         
         // Fetch update
-
-//        let defautls = UserDefaults.standard
-//        if let isLogged = defautls.value(forKey: userLoginKey) as? Bool, isLogged { // TODO
-//            UserManager.shared.fetchAll()
-//        }
+        
+        //        let defautls = UserDefaults.standard
+        //        if let isLogged = defautls.value(forKey: userLoginKey) as? Bool, isLogged { // TODO
+        //            UserManager.shared.fetchAll()
+        //        }
         
         
+        MagicalRecord.setupCoreDataStack()
+        MagicalRecord.setupAutoMigratingCoreDataStack()
+        MagicalRecord.setupCoreDataStack(withStoreNamed: "Kairos")
+        MagicalRecord.enableShorthandMethods()
+        MagicalRecord.setLoggingLevel(.debug)
         
-        
-        
-        
-        
-        
-        
-        
-        
-
         UINavigationBar.appearance().tintColor = .orangeTint()
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().titleTextAttributes = [
@@ -62,10 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //        UINavigationBar.appearance()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.changeNotification), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.dataStack.mainContext)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.changeNotification), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.dataStack.mainContext)
         
         SwiftRecord.generateRelationships = true
-        SwiftRecord.sharedRecord.managedObjectContext = self.dataStack.mainContext
+        SwiftRecord.sharedRecord.managedObjectContext = self.mainContext
         
         // Fabric
         Fabric.with([Crashlytics.self])
@@ -88,9 +86,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
         GIDSignIn.sharedInstance().delegate = self
-
+        
         // Configure FBSDK
-        FBSDKLoginButton.classForCoder()
+        _ = FBSDKLoginButton.classForCoder()
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -116,28 +114,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        MagicalRecord.cleanUp()
     }
     
-    // MARK: - Core Data stack
-    
-    var dataStack: DATAStack = {
-        let dataStack = DATAStack(modelName: "Kairos")
-        
-        return dataStack
+    // MARK: - CoreData main Context
+    lazy var mainContext: NSManagedObjectContext = {
+        return NSManagedObjectContext.mr_default()
     }()
-    
+
     func changeNotification(_ notification: Notification) {
-        let deletedObjects = notification.userInfo![NSDeletedObjectsKey]
-        print(deletedObjects)
-        let insertedObjects = notification.userInfo![NSInsertedObjectsKey]
-        print(insertedObjects)
+//        let deletedObjects = notification.userInfo![NSDeletedObjectsKey]
+//        print(deletedObjects)
+//        let insertedObjects = notification.userInfo![NSInsertedObjectsKey]
+//        print(insertedObjects)
     }
     
     // MARK: - Core Data Saving support
     
     func saveContext() {
-        try! self.dataStack.mainContext.save()
+//        try! self.dataStack.mainContext.save()
     }
 }
 
@@ -145,8 +140,8 @@ extension AppDelegate: GIDSignInDelegate {
     func application(_ application: UIApplication,
                      open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication: sourceApplication,
-                                                 annotation: annotation){
+                                             sourceApplication: sourceApplication,
+                                             annotation: annotation){
             return true
         } else if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
             return true
@@ -158,8 +153,8 @@ extension AppDelegate: GIDSignInDelegate {
                      open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
         
         if GIDSignIn.sharedInstance().handle(url,
-                                                sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                annotation: options[UIApplicationOpenURLOptionsKey.annotation]) {
+                                             sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                             annotation: options[UIApplicationOpenURLOptionsKey.annotation]) {
             return true
         } else if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?, annotation: options[UIApplicationOpenURLOptionsKey.annotation]) {
             return true

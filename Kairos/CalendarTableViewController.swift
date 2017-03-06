@@ -345,8 +345,8 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
             switch status {
             case .success:
                 Spinner.showWhistle("kCalendarSuccess")
-                print(DataSync.dataStack().viewContext)
-                print(DataSync.dataStack().mainContext)
+//                print(DataSync.dataStack().viewContext)
+                print(DataSync.newContext)
                 self.calendar?.delete()
                 self.calendar?.save()
                 print(self.calendar?.name)
@@ -358,7 +358,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
                     self.navigationController!.popViewController(animated: true)
                 }
                 //                do {
-                //                    try DataSync.dataStack().mainContext.save()
+                //                    try DataSync.newContext.save()
                 //                } catch (let error) {
                 //                    print(error)
             //                }

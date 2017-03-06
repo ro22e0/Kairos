@@ -13,7 +13,7 @@ import CoreData
 public class Owner: NSManagedObject {
     
     static func temporary() -> Owner {
-        let entity = NSEntityDescription.entity(forEntityName: "Owner", in: DataSync.dataStack().mainContext)
+        let entity = NSEntityDescription.entity(forEntityName: "Owner", in: DataSync.newContext)
         return Owner(entity: entity!, insertInto: nil)
     }
 }

@@ -371,8 +371,8 @@ class EditProjectTableViewController: UITableViewController, UIPopoverPresentati
             switch status {
             case .success:
                 Spinner.showWhistle("kProjectSuccess")
-                print(DataSync.dataStack().viewContext)
-                print(DataSync.dataStack().mainContext)
+//                print(DataSync.dataStack().viewContext)
+//                print(DataSync.dataStack().mainContext)
                 self.project?.delete()
                 self.project?.save()
                 print(self.project?.title)

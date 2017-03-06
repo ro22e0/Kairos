@@ -10,6 +10,7 @@ import CoreData
 import FSCalendar
 import Alamofire
 import SwiftyJSON
+import MagicalRecord
 
 class UserManager {
     
@@ -26,7 +27,10 @@ class UserManager {
             }
         }
         print(data)
-        DataSync.sync(inEntityNamed: "Owner", predicate: nil, data: [data.dictionaryObject! as Dictionary<String, Any>], completion: { error in
+        MagicalRecord.saveInBackground({ (localContext) in
+            Owner.mr_import(from: [data.dictionaryObject! as [String: Any]])
+        }, completion: {
+            print("finish")
             let defautls = UserDefaults.standard
             defautls.setValue(true, forKey: userLoginKey)
             completionHandler(.success(nil))
@@ -45,10 +49,15 @@ class UserManager {
                         var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
-                        DataSync.sync(inEntityNamed: "Owner", predicate: nil, data: [data], completion: { error in
+                        let dataArr = Array(data)
+
+                        MagicalRecord.saveInBackground({ (localContext) in
+                            Owner.mr_import(from: dataArr)
+//                            Owner.mr_import(from: [data], in: localContext)
+                        }, completion: {
+                            print("finish")
                             let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
-                            try! DataSync.dataStack().mainContext.save()
                             self.current = Owner.all().first as! Owner
                             completionHandler(.success(nil))
                         })
@@ -79,10 +88,13 @@ class UserManager {
                         var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
-                        DataSync.sync(inEntityNamed: "Owner", predicate: nil, data: [data], completion: { error in
+                        MagicalRecord.saveInBackground({ (localContext) in
+                            Owner.mr_import(from: [data])
+                        }, completion: {
+                            print("finish")
                             let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
-                            try! DataSync.dataStack().mainContext.save()
+                            self.current = Owner.all().first as! Owner
                             completionHandler(.success(nil))
                         })
                     default:

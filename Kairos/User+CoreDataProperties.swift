@@ -18,7 +18,7 @@ extension User {
 
     @NSManaged public var company: String?
     @NSManaged public var email: String?
-    @NSManaged public var id: NSNumber?
+    @NSManaged public var ownerID: NSNumber?
     @NSManaged public var image: NSData?
     @NSManaged public var imageUrl: String?
     @NSManaged public var job: String?

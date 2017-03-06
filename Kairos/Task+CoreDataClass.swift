@@ -13,7 +13,7 @@ import CoreData
 public class Task: NSManagedObject {
     
     static func temporary() -> Task {
-        let entity = NSEntityDescription.entity(forEntityName: "Task", in: DataSync.dataStack().mainContext)
+        let entity = NSEntityDescription.entity(forEntityName: "Task", in: DataSync.newContext)
         return Task(entity: entity!, insertInto: nil)
     }
 }
