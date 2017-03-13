@@ -87,7 +87,7 @@ struct DataSync {
     
     static func syncFriends(_ json: JSON, completionHandler: @escaping ()->()) {
         var data: [String: Any] = json.dictionaryObject!
-        data["id"] = UserManager.shared.current.id
+        data["id"] = UserManager.shared.current.ownerID
         print(data)
         Owner.mr_import(from: [data])
     }
@@ -106,10 +106,10 @@ struct DataSync {
                         print(json)
                         
                         var data: [String: Any] = json.dictionaryObject!
-                        data["id"] = UserManager.shared.current.id
+                        data["id"] = UserManager.shared.current.ownerID
                         print(data)
                         MagicalRecord.saveInBackground({ (localContext) in
-                            Owner.mr_import(from: [data])
+                            Owner.mr_import(from: data)
                         }, completion: {
                             print("finish")
                         })
@@ -160,7 +160,7 @@ struct DataSync {
                 user.name = u["name"].stringValue
                 user.nickname = u["nickname"].stringValue
                 user.email = u["email"].stringValue
-                user.image = u["image"].rawValue as? NSData
+                user.image = u["image"].string
             }
         }
         User.save()
@@ -175,11 +175,12 @@ struct DataSync {
                 switch response.response!.statusCode {
                 case 200...203:
                     if let value = response.result.value {
-                        let json = JSON(value)
+                        let json = JSON(value).arrayValue
                         print(json)
                         
+//                        MagicalRecord.
                         MagicalRecord.saveInBackground({ (localContext) in
-                            User.mr_import(from: self.transformJson(json), in: localContext)
+                            User.mr_import(from: json, in: localContext)
                         }, completion: {
                             print("finish")
                         })
@@ -336,9 +337,9 @@ struct DataSync {
                 if let value = response.result.value {
                     let json = JSON(value)
                     print(json)
-                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
-                        return Event.query(predicate)
-                    })
+//                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+//                        return Event.query(predicate)
+//                    })
                     let data = DataSync.transformJson(json)
                     MagicalRecord.saveInBackground({ (localContext) in
                         User.mr_import(from: data, in: localContext)

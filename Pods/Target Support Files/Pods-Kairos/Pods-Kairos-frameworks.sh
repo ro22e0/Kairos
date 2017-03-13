@@ -59,8 +59,13 @@ code_sign_if_enabled() {
   if [ -n "${EXPANDED_CODE_SIGN_IDENTITY}" -a "${CODE_SIGNING_REQUIRED}" != "NO" -a "${CODE_SIGNING_ALLOWED}" != "NO" ]; then
     # Use the current code_sign_identitiy
     echo "Code Signing $1 with Identity ${EXPANDED_CODE_SIGN_IDENTITY_NAME}"
-    echo "/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements \"$1\""
-    /usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements "$1"
+    local code_sign_cmd="/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements '$1'"
+
+    if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
+      code_sign_cmd="$code_sign_cmd &"
+    fi
+    echo "$code_sign_cmd"
+    eval "$code_sign_cmd"
   fi
 }
 
@@ -87,7 +92,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AlamofireNetworkActivityIndicator/AlamofireNetworkActivityIndicator.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/DATAStack/DATAStack.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CocoaLumberjack/CocoaLumberjack.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DZNEmptyDataSet/DZNEmptyDataSet.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DynamicColor/DynamicColor.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
@@ -100,15 +105,12 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQMessagesViewController/JSQMessagesViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/PonyDebugger/PonyDebugger.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SYNCPropertyMapper/SYNCPropertyMapper.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SocketRocket/SocketRocket.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MagicalRecord/MagicalRecord.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Starscream/Starscream.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftMessages/SwiftMessages.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftRecord/SwiftRecord.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftSpinner/SwiftSpinner.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Sync/Sync.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIImageView-Letters/UIImageView_Letters.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Whisper/Whisper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/XLPagerTabStrip/XLPagerTabStrip.framework"
@@ -117,7 +119,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AlamofireNetworkActivityIndicator/AlamofireNetworkActivityIndicator.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/DATAStack/DATAStack.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/CocoaLumberjack/CocoaLumberjack.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DZNEmptyDataSet/DZNEmptyDataSet.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DynamicColor/DynamicColor.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
@@ -130,16 +132,16 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQMessagesViewController/JSQMessagesViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/PonyDebugger/PonyDebugger.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SYNCPropertyMapper/SYNCPropertyMapper.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SocketRocket/SocketRocket.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MagicalRecord/MagicalRecord.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Starscream/Starscream.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftMessages/SwiftMessages.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftRecord/SwiftRecord.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftSpinner/SwiftSpinner.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Sync/Sync.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIImageView-Letters/UIImageView_Letters.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Whisper/Whisper.framework"
   install_framework "$BUILT_PRODUCTS_DIR/XLPagerTabStrip/XLPagerTabStrip.framework"
+fi
+if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
+  wait
 fi

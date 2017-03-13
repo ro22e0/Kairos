@@ -16,4 +16,17 @@ public class Owner: NSManagedObject {
         let entity = NSEntityDescription.entity(forEntityName: "Owner", in: DataSync.newContext)
         return Owner(entity: entity!, insertInto: nil)
     }
+    
+    override public func shouldImport(_ data: Any) -> Bool {
+        print(data)
+        return true
+    }
+    
+    override public func willImport(_ data: Any) {
+        print(data)
+    }
+    
+    override public func didImport(_ data: Any) {
+        print(data)
+    }
 }

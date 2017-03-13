@@ -1,6 +1,6 @@
 //
 //  SwiftRecord.swift
-//
+//  
 //  ark - http://www.arkverse.com
 //  Created by Zaid on 5/7/15.
 //
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 #if os(iOS)
-    import UIKit
+import UIKit
 #endif
 
 open class SwiftRecord {
@@ -116,7 +116,7 @@ open class SwiftRecord {
         if !self.managedObjectContext.hasChanges {
             return false
         }
-        
+
         do {
             try self.managedObjectContext.save()
         } catch let error as NSError {
@@ -168,14 +168,14 @@ open class SwiftRecord {
     }
     fileprivate init() {
         #if os(iOS)
-            NotificationCenter.default.addObserver(self, selector: #selector(SwiftRecord.applicationWillTerminate), name: NSNotification.Name.UIApplicationWillTerminate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SwiftRecord.applicationWillTerminate), name: NSNotification.Name.UIApplicationWillTerminate, object: nil)
         #endif
     }
     @objc open func applicationWillTerminate() {
-        #if os(iOS)
-            NotificationCenter.default.removeObserver(self)
-            _ = saveContext()
-        #endif
+    #if os(iOS)
+        NotificationCenter.default.removeObserver(self)
+        _ = saveContext()
+    #endif
     }
     // singleton
     open static let sharedRecord = SwiftRecord()
@@ -193,11 +193,11 @@ extension NSManagedObject {
     @nonobjc public static func all(context: NSManagedObjectContext = NSManagedObjectContext.defaultContext) -> [NSManagedObject] {
         return self.fetch(predicate: nil, context: context, sortQuery: nil, limit: nil)
     }
-    
+
     @nonobjc public static func all(context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: String?) -> [NSManagedObject] {
         return self.fetch(predicate: nil, context: context, sortQuery: sort, limit: nil)
     }
-    
+
     @nonobjc public static func all(context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [[String: Any]]?) -> [NSManagedObject] {
         return self.fetch(predicate: nil, context: context, sortConditions: sort, limit: nil)
     }
@@ -211,51 +211,51 @@ extension NSManagedObject {
         let existing: NSManagedObject? = self.query(transformed, context: context).first
         return existing ?? self.create(transformed, context:context)
     }
-    
+
     @nonobjc public static func find(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, argsArray: [Any]? = nil) -> NSManagedObject? {
         return self.query(condition, context: context, limit: 1, argsArray: argsArray).first
     }
-    
+
     @nonobjc public static func find(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, args: Any...) -> NSManagedObject? {
         return self.query(condition, context: context, limit: 1, argsArray: args).first
     }
-    
+
     @nonobjc public static func find(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: String?, argsArray: [Any]? = nil) -> NSManagedObject? {
         return self.query(condition, context: context, sort: sort, limit: 1, argsArray: argsArray).first
     }
-    
+
     @nonobjc public static func find(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: String?, args: Any...) -> NSManagedObject? {
         return self.query(condition, context: context, sort: sort, limit: 1, argsArray: args).first
     }
-    
+
     @nonobjc public static func find(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [[String: Any]]?, argsArray: [Any]? = nil) -> NSManagedObject? {
         return self.query(condition, context: context, sort: sort, limit: 1, argsArray: argsArray).first
     }
-    
+
     @nonobjc public static func find(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [[String: Any]]?, args: Any...) -> NSManagedObject? {
         return self.query(condition, context: context, sort: sort, limit: 1, argsArray: args).first
     }
-    
+
     @nonobjc public static func find(_ condition: [String: Any], context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: String?) -> NSManagedObject? {
         return self.query(condition, context: context, sort: sort, limit: 1).first
     }
-    
+
     @nonobjc public static func find(_ condition: [String: Any], context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [[String: Any]]?) -> NSManagedObject? {
         return self.query(condition, context: context, sort: sort, limit: 1).first
     }
-    
+
     @nonobjc public static func find(_ condition: NSPredicate, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: String?) -> NSManagedObject? {
         return self.query(condition, context: context, sort: sort, limit: 1).first
     }
-    
+
     @nonobjc public static func find(_ condition: NSPredicate, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [[String: Any]]?) -> NSManagedObject? {
         return self.query(condition, context: context, sort: sort, limit: 1).first
     }
-    
+
     @nonobjc public static func query(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, limit: Int? = nil, argsArray: [Any]? = nil) -> [NSManagedObject] {
         return self.fetch(query: condition, context: context, sortDescriptors: nil, limit: limit, args: argsArray)
     }
-    
+
     @nonobjc public static func query(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, limit: Int? = nil, args: Any...) -> [NSManagedObject] {
         return self.fetch(query: condition, context: context, sortDescriptors: nil, limit: limit, args: args)
     }
@@ -263,55 +263,55 @@ extension NSManagedObject {
     @nonobjc public static func query(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: String?, limit: Int? = nil, argsArray: [Any]? = nil) -> [NSManagedObject] {
         return self.fetch(query: condition, context: context, sortQuery: sort, limit: limit, args: argsArray)
     }
-    
+
     @nonobjc public static func query(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: String?, limit: Int? = nil, args: Any...) -> [NSManagedObject] {
         return self.fetch(query: condition, context: context, sortQuery: sort, limit: limit, args: args)
     }
-    
+
     @nonobjc public static func query(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [[String: Any]]?, limit: Int? = nil, argsArray: [Any]? = nil) -> [NSManagedObject] {
         return self.fetch(query: condition, context: context, sortConditions: sort, limit: limit, args: argsArray)
     }
-    
+
     @nonobjc public static func query(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [[String: Any]]?, limit: Int? = nil, args: Any...) -> [NSManagedObject] {
         return self.fetch(query: condition, context: context, sortConditions: sort, limit: limit, args: args)
     }
-    
+
     @nonobjc public static func query(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [String: Any]?, limit: Int? = nil, argsArray: [Any]? = nil) -> [NSManagedObject] {
         return self.fetch(query: condition, context: context, sortCondition: sort, limit: limit, args: argsArray)
     }
-    
+
     @nonobjc public static func query(_ condition: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [String: Any]?, limit: Int? = nil, args: Any...) -> [NSManagedObject] {
         return self.fetch(query: condition, context: context, sortCondition: sort, limit: limit, args: args)
     }
-    
+
     @nonobjc public static func query(_ condition: [String: Any], context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, limit: Int? = nil) -> [NSManagedObject] {
         return self.fetch(properties: condition, context: context, sortDescriptors: nil, limit: limit)
     }
-    
+
     @nonobjc public static func query(_ condition: [String: Any], context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: String?, limit: Int? = nil) -> [NSManagedObject] {
         return self.fetch(properties: condition, context: context, sortQuery: sort, limit: limit)
     }
-    
+
     @nonobjc public static func query(_ condition: [String: Any], context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [[String: Any]]?, limit: Int? = nil) -> [NSManagedObject] {
         return self.fetch(properties: condition, context: context, sortConditions: sort, limit: limit)
     }
-    
+
     @nonobjc public static func query(_ condition: [String: Any], context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [String: Any]?, limit: Int? = nil) -> [NSManagedObject] {
         return self.fetch(properties: condition, context: context, sortCondition: sort, limit: limit)
     }
-    
+
     @nonobjc public static func query(_ condition: NSPredicate, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, limit: Int? = nil) -> [NSManagedObject] {
         return self.fetch(predicate: condition, context: context, sortDescriptors: nil, limit: limit)
     }
-    
+
     @nonobjc public static func query(_ condition: NSPredicate, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [[String: Any]]?, limit: Int? = nil) -> [NSManagedObject] {
         return self.fetch(predicate: condition, context: context, sortConditions: sort, limit: limit)
     }
-    
+
     @nonobjc public static func query(_ condition: NSPredicate, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: [String: Any]?, limit: Int? = nil) -> [NSManagedObject] {
         return self.fetch(predicate: condition, context: context, sortCondition: sort, limit: limit)
     }
-    
+
     @nonobjc public static func query(_ condition: NSPredicate, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, sort: String?, limit: Int? = nil) -> [NSManagedObject] {
         return self.fetch(predicate: condition, context: context, sortQuery: sort, limit: limit)
     }
@@ -320,17 +320,17 @@ extension NSManagedObject {
     @nonobjc public static func count(_ context: NSManagedObjectContext = NSManagedObjectContext.defaultContext) -> Int {
         return self.countForFetch(nil, context: context)
     }
-    
+
     @nonobjc public static func count(query: [String: Any], context: NSManagedObjectContext = NSManagedObjectContext.defaultContext) -> Int {
         let predicate = self.predicate(query)
         return self.countForFetch(predicate, context: context)
     }
-    
+
     @nonobjc public static func count(query: String, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext, args: Any...) -> Int {
         let predicate = self.predicate(query, args: args)
         return self.countForFetch(predicate, context: context)
     }
-    
+
     @nonobjc public static func count(query: NSPredicate, context: NSManagedObjectContext = NSManagedObjectContext.defaultContext) -> Int {
         return self.countForFetch(query, context: context)
     }
@@ -404,7 +404,7 @@ extension NSManagedObject {
     open func save() -> Bool {
         return self.saveTheContext()
     }
-    
+
     open func delete() {
         self.managedObjectContext!.delete(self)
     }
@@ -491,19 +491,19 @@ extension NSManagedObject {
         guard let properties = properties else {
             return nil
         }
-        
+
         var preds = [NSPredicate]()
         for (key, value) in properties {
             preds.append(NSPredicate(format: "%K = %@", argumentArray: [key, value]))
         }
         return NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: preds)
     }
-    
+
     fileprivate static func predicate(_ condition: String?, args: [Any]? = nil) -> NSPredicate? {
         guard let condition = condition else {
             return nil
         }
-        
+
         return NSPredicate(format: condition, argumentArray: args)
     }
     
@@ -513,7 +513,7 @@ extension NSManagedObject {
     }
     
     fileprivate static func sortDescriptor(_ string: String) -> NSSortDescriptor {
-        
+
         var key = string
         let components = string.characters.split {$0 == " "}.map { String($0) }
         var isAscending = true
@@ -528,7 +528,7 @@ extension NSManagedObject {
         guard let s = s else {
             return nil
         }
-        
+
         let components = s.characters.split {$0 == ","}.map { String($0) }
         var ds = [NSSortDescriptor]()
         for sub in components {
@@ -541,7 +541,7 @@ extension NSManagedObject {
         guard let ds = ds else {
             return nil
         }
-        
+
         var ret = [NSSortDescriptor]()
         for d in ds {
             ret.append(self.sortDescriptor(d))
@@ -557,159 +557,159 @@ extension NSManagedObject {
     
     fileprivate static func fetch(query: String?, context: NSManagedObjectContext, sortQuery: String?, limit: Int?, args: [Any]? = nil) -> [NSManagedObject] {
         let request = self.createFetchRequest(context)
-        
+
         request.predicate = self.predicate(query, args: args)
         request.sortDescriptors = self.sortDescriptors(sortQuery)
         
         if let lim = limit {
             request.fetchLimit = lim
         }
-        
+
         return fetch(request: request, context: context)
     }
-    
+
     fileprivate static func fetch(query: String?, context: NSManagedObjectContext, sortConditions: [[String: Any]]?, limit: Int?, args: [Any]? = nil) -> [NSManagedObject] {
         let request = self.createFetchRequest(context)
-        
+
         request.predicate = self.predicate(query, args: args)
         request.sortDescriptors = self.sortDescriptors(sortConditions)
-        
+
         if let lim = limit {
             request.fetchLimit = lim
         }
-        
+
         return fetch(request: request, context: context)
     }
-    
+
     fileprivate static func fetch(query: String?, context: NSManagedObjectContext, sortCondition: [String: Any]?, limit: Int?, args: [Any]? = nil) -> [NSManagedObject] {
         var conditions: [[String: Any]]?
-        
+
         if let condition = sortCondition {
             conditions = [condition]
         }
-        
+
         return fetch(query: query, context: context, sortConditions: conditions, limit: limit, args: args)
     }
-    
-    
+
+
     fileprivate static func fetch(query: String?, context: NSManagedObjectContext, sortDescriptors: [NSSortDescriptor]?, limit: Int?, args: [Any]? = nil) -> [NSManagedObject] {
         let request = self.createFetchRequest(context)
-        
+
         request.predicate = self.predicate(query, args: args)
         request.sortDescriptors = sortDescriptors
-        
+
         if let lim = limit {
             request.fetchLimit = lim
         }
-        
+
         return fetch(request: request, context: context)
     }
-    
+
     fileprivate static func fetch(properties: [String: Any]?, context: NSManagedObjectContext, sortQuery: String?, limit: Int?) -> [NSManagedObject] {
         let request = self.createFetchRequest(context)
-        
+
         request.predicate = self.predicate(properties)
         request.sortDescriptors = self.sortDescriptors(sortQuery)
-        
+
         if let lim = limit {
             request.fetchLimit = lim
         }
-        
+
         return fetch(request: request, context: context)
     }
-    
+
     fileprivate static func fetch(properties: [String: Any]?, context: NSManagedObjectContext, sortConditions: [[String: Any]]?, limit: Int?) -> [NSManagedObject] {
         let request = self.createFetchRequest(context)
-        
+
         request.predicate = self.predicate(properties)
         request.sortDescriptors = self.sortDescriptors(sortConditions)
-        
+
         if let lim = limit {
             request.fetchLimit = lim
         }
-        
+
         return fetch(request: request, context: context)
     }
-    
+
     fileprivate static func fetch(properties: [String: Any]?, context: NSManagedObjectContext, sortCondition: [String: Any]?, limit: Int?) -> [NSManagedObject] {
         var conditions: [[String: Any]]?
-        
+
         if let condition = sortCondition {
             conditions = [condition]
         }
-        
+
         return fetch(properties: properties, context: context, sortConditions: conditions, limit: limit)
     }
-    
+
     fileprivate static func fetch(properties: [String: Any]?, context: NSManagedObjectContext, sortDescriptors: [NSSortDescriptor]?, limit: Int?) -> [NSManagedObject] {
         let request = self.createFetchRequest(context)
-        
+
         request.predicate = self.predicate(properties)
         request.sortDescriptors = sortDescriptors
-        
+
         if let lim = limit {
             request.fetchLimit = lim
         }
-        
+
         return fetch(request: request, context: context)
     }
-    
+
     fileprivate static func fetch(predicate: NSPredicate?, context: NSManagedObjectContext, sortQuery: String?, limit: Int?) -> [NSManagedObject] {
         let request = self.createFetchRequest(context)
-        
+
         request.predicate = predicate
         request.sortDescriptors = self.sortDescriptors(sortQuery)
-        
+
         if let lim = limit {
             request.fetchLimit = lim
         }
-        
+
         return fetch(request: request, context: context)
     }
-    
+
     fileprivate static func fetch(predicate: NSPredicate?, context: NSManagedObjectContext, sortConditions: [[String: Any]]?, limit: Int?) -> [NSManagedObject] {
         let request = self.createFetchRequest(context)
-        
+
         request.predicate = predicate
         request.sortDescriptors = self.sortDescriptors(sortConditions)
-        
+
         if let lim = limit {
             request.fetchLimit = lim
         }
-        
+
         return fetch(request: request, context: context)
     }
-    
+
     fileprivate static func fetch(predicate: NSPredicate?, context: NSManagedObjectContext, sortCondition: [String: Any]?, limit: Int?) -> [NSManagedObject] {
         var conditions: [[String: Any]]?
-        
+
         if let condition = sortCondition {
             conditions = [condition]
         }
-        
+
         return fetch(predicate: predicate, context: context, sortConditions: conditions, limit: limit)
     }
-    
+
     fileprivate static func fetch(predicate: NSPredicate?, context: NSManagedObjectContext, sortDescriptors: [NSSortDescriptor]?, limit: Int?) -> [NSManagedObject] {
         let request = self.createFetchRequest(context)
-        
+
         request.predicate = predicate
         request.sortDescriptors = sortDescriptors
-        
+
         if let lim = limit {
             request.fetchLimit = lim
         }
-        
+
         return fetch(request: request, context: context)
     }
-    
+
     fileprivate static func fetch(request: NSFetchRequest<NSFetchRequestResult>, context: NSManagedObjectContext) -> [NSManagedObject] {
         var result : [NSManagedObject]
-        
+
         do {
             var fetchResult : [AnyObject]
             try fetchResult = context.fetch(request)
-            
+
             if let fetchResultTyped = fetchResult as? [NSManagedObject] {
                 result = fetchResultTyped
             } else {
@@ -719,7 +719,7 @@ extension NSManagedObject {
             print("Error executing fetch request \(request): " + error.description)
             result = [NSManagedObject]()
         }
-        
+
         return result
     }
     

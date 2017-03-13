@@ -12,4 +12,16 @@ import CoreData
 
 public class User: NSManagedObject {
 
+    override public func shouldImport(_ data: Any) -> Bool {
+        print(data)
+        return true
+    }
+    
+    override public func willImport(_ data: Any) {
+        print(data)
+    }
+    
+    override public func didImport(_ data: Any) {
+        print(data)
+    }
 }

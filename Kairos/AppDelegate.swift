@@ -34,14 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        if let isLogged = defautls.value(forKey: userLoginKey) as? Bool, isLogged { // TODO
         //            UserManager.shared.fetchAll()
         //        }
-        
-        
-        MagicalRecord.setupCoreDataStack()
-        MagicalRecord.setupAutoMigratingCoreDataStack()
+
         MagicalRecord.setupCoreDataStack(withStoreNamed: "Kairos")
+        MagicalRecord.setupAutoMigratingCoreDataStack()
         MagicalRecord.enableShorthandMethods()
         MagicalRecord.setLoggingLevel(.debug)
-        
+
         UINavigationBar.appearance().tintColor = .orangeTint()
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().titleTextAttributes = [

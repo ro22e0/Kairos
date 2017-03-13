@@ -26,11 +26,7 @@
 
 #if os(iOS) || os(tvOS) || os(watchOS)
   import UIKit
-#elseif os(OSX)
-  import AppKit
-#endif
 
-#if os(iOS) || os(tvOS) || os(watchOS)
   /**
    Extension to manipulate colours easily.
 
@@ -38,6 +34,8 @@
    */
   public typealias DynamicColor = UIColor
 #elseif os(OSX)
+  import AppKit
+
   /**
    Extension to manipulate colours easily.
 
@@ -60,7 +58,7 @@ public extension DynamicColor {
     let hexString = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     let scanner   = Scanner(string: hexString)
 
-    if (hexString.hasPrefix("#")) {
+    if hexString.hasPrefix("#") {
       scanner.scanLocation = 1
     }
 
@@ -149,10 +147,62 @@ public extension DynamicColor {
 
    - returns: A boolean value to know whether the color is light. If true the color is light, dark otherwise.
    */
-  func isLight() -> Bool {
+  public func isLight() -> Bool {
     let components = toRGBAComponents()
     let brightness = ((components.r * 299) + (components.g * 587) + (components.b * 114)) / 1000
-    
+
     return brightness >= 0.5
+  }
+
+  /**
+   A float value representing the luminance of the current color. May vary from 0 to 1.0.
+   
+   We use the formula described by W3C in WCAG 2.0. You can read more here: https://www.w3.org/TR/WCAG20/#relativeluminancedef
+  */
+  public var luminance: CGFloat {
+    let components = toRGBAComponents()
+
+    let componentsArray = [components.r, components.g, components.b].map { (val) -> CGFloat in
+      guard val <= 0.03928 else { return pow((val + 0.055) / 1.055, 2.4) }
+
+      return val / 12.92
+    }
+
+    return (0.2126 * componentsArray[0]) + (0.7152 * componentsArray[1]) + (0.0722 * componentsArray[2])
+  }
+
+  /**
+     Returns a float value representing the contrast ratio between 2 colors. 
+     
+     We use the formula described by W3C in WCAG 2.0. You can read more here: https://www.w3.org/TR/WCAG20-TECHS/G18.html
+     NB: the contrast ratio is a relative value. So the contrast between Color1 and Color2 is exactly the same between Color2 and Color1.
+     
+     - returns: A CGFloat representing contrast value
+     */
+  public func contrastRatio(with otherColor: DynamicColor) -> CGFloat {
+    let otherLuminance = otherColor.luminance
+
+    let l1 = max(luminance, otherLuminance)
+    let l2 = min(luminance, otherLuminance)
+
+    return (l1 + 0.05) / (l2 + 0.05)
+  }
+
+  /**
+   Indicates if two colors are contrasting, regarding W3C's WCAG 2.0 recommendations.
+   
+   You can read it here: https://www.w3.org/TR/2008/REC-WCAG20-20081211/#visual-audio-contrast-contrast
+   
+   The acceptable contrast ratio depends on the context of display. Most of the time, the default context (.Standard) is enough.
+   
+   You can look at ContrastDisplayContext for more options.
+   
+   - parameter otherColor: The other color to compare with.
+   - parameter context: An optional context to determine the minimum acceptable contrast ratio. Default value is .Standard.
+   
+   - returns: true is the contrast ratio between 2 colors exceed the minimum acceptable ratio.
+   */
+  public func isContrasting(with otherColor: DynamicColor, inContext context: ContrastDisplayContext = .standard) -> Bool {
+    return self.contrastRatio(with: otherColor) > context.minimumContrastRatio
   }
 }

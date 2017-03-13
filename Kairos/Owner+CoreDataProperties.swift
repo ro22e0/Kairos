@@ -16,7 +16,7 @@ extension Owner {
         return NSFetchRequest<Owner>(entityName: "Owner");
     }
 
-    @NSManaged public var id: NSNumber?
+    @NSManaged public var ownerID: NSNumber?
     @NSManaged public var friends: NSSet?
     @NSManaged public var pendingFriends: NSSet?
     @NSManaged public var requestedFriends: NSSet?

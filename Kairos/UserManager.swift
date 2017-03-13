@@ -22,7 +22,7 @@ class UserManager {
     
     fileprivate func syncOwner(_ data: JSON, completionHandler: @escaping (StatusRequest) -> Void) {
         if let owner = Owner.all().first as? Owner {
-            if owner.id != data["id"].number {
+            if owner.ownerID != data["id"].number {
                 DataSync.deleteAll()
             }
         }
@@ -49,16 +49,16 @@ class UserManager {
                         var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
-                        let dataArr = Array(data)
+                        let dataArr = NSArray(array: [data])
 
                         MagicalRecord.saveInBackground({ (localContext) in
-                            Owner.mr_import(from: dataArr)
+                            Owner.mr_import(from: data)
 //                            Owner.mr_import(from: [data], in: localContext)
                         }, completion: {
                             print("finish")
                             let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
-                            self.current = Owner.all().first as! Owner
+                            self.current = Owner.mr_findAll()?.first as! Owner
                             completionHandler(.success(nil))
                         })
                     default:

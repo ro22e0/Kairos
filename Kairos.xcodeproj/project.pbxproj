@@ -201,7 +201,7 @@
 		AC3B67881E2EB2CF00BFCB84 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC3B67891E2EB2CF00BFCB84 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC3B678A1E2EB2CF00BFCB84 /* Calendar+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		AC3B678B1E2EB2CF00BFCB84 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AC3B678B1E2EB2CF00BFCB84 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC3B678C1E2EB2CF00BFCB84 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC3B678D1E2EB2CF00BFCB84 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC3B67971E2EBBA500BFCB84 /* ProjectRequestsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRequestsTableViewController.swift; sourceTree = "<group>"; };
@@ -212,9 +212,9 @@
 		AC4A94BA1E2E5D4C00BA59B5 /* UserEventActionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventActionTableViewController.swift; sourceTree = "<group>"; };
 		AC4A94BC1E2E704600BA59B5 /* ProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewController.swift; sourceTree = "<group>"; };
 		AC4A94BE1E2E817F00BA59B5 /* ProjectDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailsViewController.swift; sourceTree = "<group>"; };
-		AC4A94C01E2E818E00BA59B5 /* EditProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProjectTableViewController.swift; sourceTree = "<group>"; };
+		AC4A94C01E2E818E00BA59B5 /* EditProjectTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditProjectTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC4A94C21E2E81E800BA59B5 /* TaskDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskDetailsTableViewController.swift; sourceTree = "<group>"; };
-		AC4A94C41E2E821100BA59B5 /* EditTaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTaskTableViewController.swift; sourceTree = "<group>"; };
+		AC4A94C41E2E821100BA59B5 /* EditTaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EditTaskTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC5C596E1E2FC2D300D51C69 /* ProjectMembersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectMembersTableViewController.swift; sourceTree = "<group>"; };
 		AC5C59701E300E9200D51C69 /* UserProjectActionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProjectActionTableViewController.swift; sourceTree = "<group>"; };
 		AC6BF4191E30429600EC353C /* UserTaskActionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTaskActionTableViewController.swift; sourceTree = "<group>"; };
@@ -224,9 +224,9 @@
 		AC9D1E5D1E2D7B3700F1D29D /* EventHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventHeaderCell.xib; sourceTree = "<group>"; };
 		AC9D1E681E2DA06700F1D29D /* EventDateDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDateDetailsCell.swift; sourceTree = "<group>"; };
 		AC9D1E691E2DA06700F1D29D /* EventDateDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDateDetailsCell.xib; sourceTree = "<group>"; };
-		ACFEF0C61E28ED2F00381ECA /* Owner+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Owner+CoreDataClass.swift"; sourceTree = "<group>"; };
-		ACFEF0C81E28ED2F00381ECA /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; };
-		ACFEF0CA1E28ED2F00381ECA /* Calendar+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ACFEF0C61E28ED2F00381ECA /* Owner+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Owner+CoreDataClass.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ACFEF0C81E28ED2F00381ECA /* Event+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Event+CoreDataClass.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ACFEF0CA1E28ED2F00381ECA /* Calendar+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Calendar+CoreDataClass.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ACFEF0CC1E28ED2F00381ECA /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CA9F71EE2164C082689D74FB /* Pods-KairosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KairosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KairosTests/Pods-KairosTests.release.xcconfig"; sourceTree = "<group>"; };
 		DA0019051D9FEDEC00CA11F5 /* FriendManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FriendManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -237,7 +237,7 @@
 		DA05BECD1E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendingStatusCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA05BECE1E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendingStatusCollectionViewCell.xib; sourceTree = "<group>"; };
 		DA05BED41E30E0D300DF1BE5 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RoomViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		DA05BED61E30E3FE00DF1BE5 /* ChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewController.swift; sourceTree = "<group>"; };
+		DA05BED61E30E3FE00DF1BE5 /* ChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChatTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA0E144A1DA8125200865C20 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA11A9F51D986A6700218FF3 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalSearchSegue.swift; sourceTree = "<group>"; };
@@ -259,10 +259,10 @@
 		DA2A5AF91E574C7F0008F05C /* KairosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KairosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA2A5AFB1E574C7F0008F05C /* KairosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KairosUITests.swift; sourceTree = "<group>"; };
 		DA2A5AFD1E574C7F0008F05C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA2DA3211E31690F00F86C68 /* ChatRoom+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatRoom+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA2DA3211E31690F00F86C68 /* ChatRoom+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "ChatRoom+CoreDataClass.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA2DA3221E31690F00F86C68 /* ChatRoom+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatRoom+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA2DA3251E316D8E00F86C68 /* ChatRoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomManager.swift; sourceTree = "<group>"; };
-		DA2DA3271E31709900F86C68 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DA2DA3271E31709900F86C68 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA2DA3281E31709900F86C68 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DA2DA32B1E31995300F86C68 /* WebSocketClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketClient.swift; sourceTree = "<group>"; };
 		DA2EC0261DA9009700BCA895 /* UserCalendarActionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserCalendarActionTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -1579,6 +1579,7 @@
 				DA2A5B021E574C7F0008F05C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		DAAEE14F1C9ABE1F00D53AEC /* Build configuration list for PBXProject "Kairos" */ = {
 			isa = XCConfigurationList;
