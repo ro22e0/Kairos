@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import SwiftyJSON
 import SwiftRecord
-import MagicalRecord
+//import MagicalRecord
 //import DATAStack
 //import Sync
 
@@ -23,7 +23,9 @@ struct DataSync {
     }
     
     static var newContext: NSManagedObjectContext = {
-        return NSManagedObjectContext.mr_new()
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+
+        return delegate.mainContext
     }()
     
     //    static func sync(inEntityNamed entityName: String, predicate: NSPredicate? = nil, data: [[String: Any]],  firstImport: Bool = false, completion: @escaping ((CustomStatus) -> Void)) {
@@ -89,7 +91,7 @@ struct DataSync {
         var data: [String: Any] = json.dictionaryObject!
         data["id"] = UserManager.shared.current.ownerID
         print(data)
-        Owner.mr_import(from: [data])
+//        Owner.mr_import(from: [data])
     }
     
     static func fetchFriends(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -108,11 +110,11 @@ struct DataSync {
                         var data: [String: Any] = json.dictionaryObject!
                         data["id"] = UserManager.shared.current.ownerID
                         print(data)
-                        MagicalRecord.saveInBackground({ (localContext) in
-                            Owner.mr_import(from: data, in: localContext)
-                        }, completion: {
-                            print("finish")
-                        })
+//                        MagicalRecord.saveInBackground({ (localContext) in
+//                            Owner.mr_import(from: data, in: localContext)
+//                        }, completion: {
+//                            print("finish")
+//                        })
                     }
                 default:
                     completionHandler(.error("error"))
@@ -179,11 +181,11 @@ struct DataSync {
                         print(json)
 
 //                        let data = self.transformJson(json)
-                        MagicalRecord.saveInBackground({ (localContext) in
-                            User.mr_import(from: json, in: localContext)
-                        }, completion: {
-                            print("finish")
-                        })
+//                        MagicalRecord.saveInBackground({ (localContext) in
+//                            User.mr_import(from: json, in: localContext)
+//                        }, completion: {
+//                            print("finish")
+//                        })
                     }
                 default:
                     completionHandler(.error("error"))
@@ -231,11 +233,11 @@ struct DataSync {
     
     static func syncCalendars(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        MagicalRecord.saveInBackground({ (localContext) in
-            Calendar.mr_import(from: [data], in: localContext)
-        }, completion: {
-            print("finish")
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Calendar.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
     
     static func fetchCalendars(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -253,11 +255,11 @@ struct DataSync {
 //                        return Calendar.query(predicate)
 //                    })
 //                    let data = DataSync.transformJson(json)
-                    MagicalRecord.saveInBackground({ (localContext) in
-                        Calendar.mr_import(from: json, in: localContext)
-                    }, completion: {
-                        print("finish")
-                    })
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Calendar.mr_import(from: json, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                 }
             case .failure(let error):
                 completionHandler(.error("error"))
@@ -299,11 +301,11 @@ struct DataSync {
     
     static func syncEvents(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        MagicalRecord.saveInBackground({ (localContext) in
-            Event.mr_import(from: [data], in: localContext)
-        }, completion: {
-            print("finish")
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Event.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
 
     static func fetchEvents() {
@@ -315,11 +317,11 @@ struct DataSync {
                 if let value = response.result.value {
                     let json = JSON(value).arrayValue
                     print(json)
-                    MagicalRecord.saveInBackground({ (localContext) in
-                        Event.mr_import(from: json, in: localContext)
-                    }, completion: {
-                        print("finish")
-                    })
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Event.mr_import(from: json, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                 }
             case .failure(let error):
                 print(error)
@@ -341,11 +343,11 @@ struct DataSync {
 //                        return Event.query(predicate)
 //                    })
 //                    let data = DataSync.transformJson(json)
-                    MagicalRecord.saveInBackground({ (localContext) in
-                        Event.mr_import(from: json, in: localContext)
-                    }, completion: {
-                        print("finish")
-                    })
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Event.mr_import(from: json, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                 }
             case .failure(let error):
                 completionHandler(.error("error"))
@@ -357,11 +359,11 @@ struct DataSync {
     // MARK: - Projects
     static func syncProjects(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        MagicalRecord.saveInBackground({ (localContext) in
-            Project.mr_import(from: [data], in: localContext)
-        }, completion: {
-            print("finish")
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Project.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
     
     static func fetchProjects(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -376,11 +378,11 @@ struct DataSync {
                     print(json)
                     
                     let data = DataSync.transformJson(json)
-                    MagicalRecord.saveInBackground({ (localContext) in
-                        Project.mr_import(from: data, in: localContext)
-                    }, completion: {
-                        print("finish")
-                    })
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Project.mr_import(from: data, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                     
                     //                    deleteObject(json.array!, query: Calendar.query)
                     
@@ -414,11 +416,11 @@ struct DataSync {
     // MARK: - Tasks
     static func syncTasks(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        MagicalRecord.saveInBackground({ (localContext) in
-            Task.mr_import(from: [data], in: localContext)
-        }, completion: {
-            print("finish")
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Task.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
     
     static func fetchTasks(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -436,11 +438,11 @@ struct DataSync {
                     //                        return Task.query(predicate)
                     //                    })
                     let data = DataSync.transformJson(json)
-                    MagicalRecord.saveInBackground({ (localContext) in
-                        Task.mr_import(from: data, in: localContext)
-                    }, completion: {
-                        print("finish")
-                    })
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Task.mr_import(from: data, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                     
                     //                    deleteObject(json.array!, query: Calendar.query)
                     
@@ -474,11 +476,11 @@ struct DataSync {
     // MARK: - ChatRooms
     static func syncChatRooms(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        MagicalRecord.saveInBackground({ (localContext) in
-            ChatRoom.mr_import(from: [data], in: localContext)
-        }, completion: {
-            print("finish")
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            ChatRoom.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
     
     static func fetchChatRooms(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -493,11 +495,11 @@ struct DataSync {
                     print(json)
                     
                     let data = DataSync.transformJson(json)
-                    MagicalRecord.saveInBackground({ (localContext) in
-                        ChatRoom.mr_import(from: data, in: localContext)
-                    }, completion: {
-                        print("finish")
-                    })
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        ChatRoom.mr_import(from: data, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                     
                     //                    deleteObject(json.array!, query: Calendar.query)
                     
@@ -530,10 +532,10 @@ struct DataSync {
     
     static func syncMessages(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        MagicalRecord.saveInBackground({ (localContext) in
-            Message.mr_import(from: [data], in: localContext)
-        }, completion: {
-            print("finish")
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Message.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
 }

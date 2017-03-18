@@ -8,19 +8,35 @@
 
 import Foundation
 import CoreData
+import CoreStore
 
-public class User: NSManagedObject {
+public class User: NSManagedObject, ImportableUniqueObject {
 
-    override public func shouldImport(_ data: Any) -> Bool {
-        print(data)
-        return true
+    public typealias ImportSource = [String: Any]
+    public class var uniqueIDKeyPath: String {
+        return "userID"
+    }
+    public var uniqueIDValue: NSNumber {
+        get { return self.userID! }
+        set { self.userID = newValue }
     }
     
-    override public func willImport(_ data: Any) {
-        print(data)
+    //public func shouldInsert(from source: Dictionary<String, Any>, in transaction: BaseDataTransaction) -> Bool {
+    //
+    //}
+    
+    public func didInsert(from source: ImportSource, in transaction: BaseDataTransaction) throws {
+        print(source)
+        self.userID = source["id"] as? NSNumber
+        self.name = source["name"] as? String
+        self.email = source["email"] as? String
     }
     
-    override public func didImport(_ data: Any) {
-        print(data)
+    public class func uniqueID(from source: ImportSource, in transaction: BaseDataTransaction) throws -> NSNumber? {
+        return source["id"] as? NSNumber
+    }
+    
+    public func update(from source: ImportSource, in transaction: BaseDataTransaction) throws {
+        print(source)
     }
 }

@@ -10,7 +10,8 @@ import CoreData
 import FSCalendar
 import Alamofire
 import SwiftyJSON
-import MagicalRecord
+//import MagicalRecord
+import CoreStore
 
 class UserManager {
     
@@ -27,14 +28,14 @@ class UserManager {
             }
         }
         print(data)
-        MagicalRecord.saveInBackground({ (localContext) in
-            Owner.mr_import(from: [data.dictionaryObject! as [String: Any]])
-        }, completion: {
-            print("finish")
-            let defautls = UserDefaults.standard
-            defautls.setValue(true, forKey: userLoginKey)
-            completionHandler(.success(nil))
-        })
+        //        MagicalRecord.saveInBackground({ (localContext) in
+        //            Owner.mr_import(from: [data.dictionaryObject! as [String: Any]])
+        //        }, completion: {
+        //            print("finish")
+        //            let defautls = UserDefaults.standard
+        //            defautls.setValue(true, forKey: userLoginKey)
+        //            completionHandler(.success(nil))
+        //        })
     }
     
     func signIn(_ parameters: [String: Any], completionHandler: @escaping (StatusRequest) -> Void) {
@@ -49,18 +50,36 @@ class UserManager {
                         var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
-                        let dataArr = NSArray(array: [data])
-
-                        MagicalRecord.saveInBackground({ (localContext) in
-                            Owner.mr_import(from: data, in: localContext)
-//                            Owner.mr_import(from: [data], in: localContext)
-                        }, completion: {
-                            print("finish")
-                            let defautls = UserDefaults.standard
-                            defautls.setValue(true, forKey: userLoginKey)
-//                            self.current = Owner.mr_findAll()?.first as! Owner
-                            completionHandler(.success(nil))
+                        
+                        CoreStore.beginAsynchronous({ (transaction) in
+                            do {
+                                try _ = transaction.importUniqueObject(
+                                    Into<Owner>(),
+                                    source: data
+                                )
+                            }
+                            catch {
+                                return // Woops, don't save
+                            }
+                            transaction.commit({ (result) in
+                                switch result {
+                                case .success(let hasChanges):
+                                    print("success!", hasChanges)
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            })
                         })
+                        //                        MagicalRecord.saveInBackground({ (localContext) in
+                        //                            Owner.mr_import(from: data, in: localContext)
+                        ////                            Owner.mr_import(from: [data], in: localContext)
+                        //                        }, completion: {
+                        //                            print("finish")
+                        //                            let defautls = UserDefaults.standard
+                        //                            defautls.setValue(true, forKey: userLoginKey)
+                        ////                            self.current = Owner.mr_findAll()?.first as! Owner
+                        //                            completionHandler(.success(nil))
+                    //                        })
                     default:
                         completionHandler(.error("Fail to connect"))
                     }
@@ -88,15 +107,15 @@ class UserManager {
                         var data: [String: Any] = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
-                        MagicalRecord.saveInBackground({ (localContext) in
-                            Owner.mr_import(from: [data], in: localContext)
-                        }, completion: {
-                            print("finish")
-                            let defautls = UserDefaults.standard
-                            defautls.setValue(true, forKey: userLoginKey)
-                            self.current = Owner.all().first as! Owner
-                            completionHandler(.success(nil))
-                        })
+                        //                        MagicalRecord.saveInBackground({ (localContext) in
+                        //                            Owner.mr_import(from: [data], in: localContext)
+                        //                        }, completion: {
+                        //                            print("finish")
+                        //                            let defautls = UserDefaults.standard
+                        //                            defautls.setValue(true, forKey: userLoginKey)
+                        //                            self.current = Owner.all().first as! Owner
+                        //                            completionHandler(.success(nil))
+                    //                        })
                     default:
                         completionHandler(.error("The operation can't be completed"))
                     }
@@ -216,19 +235,19 @@ class UserManager {
         self.fetch() {
             handler()
         }
-//        FriendManager.shared.fetch()
-//        DataSync.fetchCalendarColors()
-//        CalendarManager.shared.fetch()
-//        EventManager.shared.fetch()
-//        ProjectManager.shared.fetch()
-//        TaskManager.shared.fetch()
-//        ChatRoomManager.shared.fetch() {
-//            let chatRooms = ChatRoomManager.shared.chatRooms()
-//            for chatRoom in chatRooms {
-//                ChatRoomManager.shared.listen(for: chatRoom)
-//            }
-//        }
-//        RequestManager.default.serializationQueue.addOperation(handler)
+        //        FriendManager.shared.fetch()
+        //        DataSync.fetchCalendarColors()
+        //        CalendarManager.shared.fetch()
+        //        EventManager.shared.fetch()
+        //        ProjectManager.shared.fetch()
+        //        TaskManager.shared.fetch()
+        //        ChatRoomManager.shared.fetch() {
+        //            let chatRooms = ChatRoomManager.shared.chatRooms()
+        //            for chatRoom in chatRooms {
+        //                ChatRoomManager.shared.listen(for: chatRoom)
+        //            }
+        //        }
+        //        RequestManager.default.serializationQueue.addOperation(handler)
     }
     
     func getCalendars() -> [Calendar] {

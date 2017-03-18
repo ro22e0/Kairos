@@ -16,9 +16,10 @@ import Crashlytics
 import SwiftRecord
 import DynamicColor
 import CocoaLumberjack
-import MagicalRecord
+//import MagicalRecord
 //import Sync
 //import DATAStack
+import CoreStore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,11 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //        if let isLogged = defautls.value(forKey: userLoginKey) as? Bool, isLogged { // TODO
         //            UserManager.shared.fetchAll()
         //        }
-
-        MagicalRecord.setupCoreDataStack(withStoreNamed: "Kairos")
-        MagicalRecord.setupAutoMigratingCoreDataStack()
-        MagicalRecord.enableShorthandMethods()
-        MagicalRecord.setLoggingLevel(.debug)
+        
+        do {
+        try CoreStore.addStorageAndWait()
+        } catch {
+            print("fails")
+        }
 
         UINavigationBar.appearance().tintColor = .orangeTint()
         UINavigationBar.appearance().backgroundColor = .white
@@ -112,12 +114,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        MagicalRecord.cleanUp()
+//        MagicalRecord.cleanUp()
     }
-    
+
     // MARK: - CoreData main Context
     lazy var mainContext: NSManagedObjectContext = {
-        return NSManagedObjectContext.mr_default()
+        return CoreStore.defaultStack.internalContext()
     }()
 
     func changeNotification(_ notification: Notification) {
