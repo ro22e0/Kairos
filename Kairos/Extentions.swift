@@ -151,8 +151,8 @@ extension UIViewController {
         return storyboard.instantiateViewController(withIdentifier: name)
     }
     
-    func setRootVC(_ storyboard: String) {
-        let storyboard = UIStoryboard(name: storyboard, bundle: nil)
+    func setRootVC(_ storyboard: StoryboardID) {
+        let storyboard = UIStoryboard(name: storyboard.rawValue, bundle: nil)
         
         if let viewController = storyboard.instantiateInitialViewController() {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate

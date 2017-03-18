@@ -52,13 +52,13 @@ class UserManager {
                         let dataArr = NSArray(array: [data])
 
                         MagicalRecord.saveInBackground({ (localContext) in
-                            Owner.mr_import(from: data)
+                            Owner.mr_import(from: data, in: localContext)
 //                            Owner.mr_import(from: [data], in: localContext)
                         }, completion: {
                             print("finish")
                             let defautls = UserDefaults.standard
                             defautls.setValue(true, forKey: userLoginKey)
-                            self.current = Owner.mr_findAll()?.first as! Owner
+//                            self.current = Owner.mr_findAll()?.first as! Owner
                             completionHandler(.success(nil))
                         })
                     default:
@@ -89,7 +89,7 @@ class UserManager {
                         data["id"] = json["data"]["id"].number
                         print(data)
                         MagicalRecord.saveInBackground({ (localContext) in
-                            Owner.mr_import(from: [data])
+                            Owner.mr_import(from: [data], in: localContext)
                         }, completion: {
                             print("finish")
                             let defautls = UserDefaults.standard
@@ -204,7 +204,7 @@ class UserManager {
             switch status {
             case .success:
                 if handler != nil {
-                    handler!()
+                    RequestManager.default.serializationQueue.addOperation(handler!)
                 }
             case .error(let error):
                 print(error)
@@ -213,20 +213,22 @@ class UserManager {
     }
     
     func fetchAll(_ handler: @escaping (() -> Void)) {
-        self.fetch()
-        FriendManager.shared.fetch()
-        DataSync.fetchCalendarColors()
-        CalendarManager.shared.fetch()
-        EventManager.shared.fetch()
-        ProjectManager.shared.fetch()
-        TaskManager.shared.fetch()
-        ChatRoomManager.shared.fetch() {
-            let chatRooms = ChatRoomManager.shared.chatRooms()
-            for chatRoom in chatRooms {
-                ChatRoomManager.shared.listen(for: chatRoom)
-            }
+        self.fetch() {
+            handler()
         }
-        RequestManager.default.serializationQueue.addOperation(handler)
+//        FriendManager.shared.fetch()
+//        DataSync.fetchCalendarColors()
+//        CalendarManager.shared.fetch()
+//        EventManager.shared.fetch()
+//        ProjectManager.shared.fetch()
+//        TaskManager.shared.fetch()
+//        ChatRoomManager.shared.fetch() {
+//            let chatRooms = ChatRoomManager.shared.chatRooms()
+//            for chatRoom in chatRooms {
+//                ChatRoomManager.shared.listen(for: chatRoom)
+//            }
+//        }
+//        RequestManager.default.serializationQueue.addOperation(handler)
     }
     
     func getCalendars() -> [Calendar] {

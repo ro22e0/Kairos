@@ -47,7 +47,7 @@ class EventDetailsTableViewController: UITableViewController {
     ///
     ///  - parameter notification: The notification
     @objc func reloadData(_ notification: Notification) {
-        self.event = Event.find("id = %@", args: self.event?.id) as? Event
+        self.event = Event.find("id = %@", args: self.event?.eventID) as? Event
         if let event = self.event, event.userStatus != UserStatus.Refused.rawValue {
             self.former.removeAll()
             self.configure()
@@ -86,7 +86,7 @@ class EventDetailsTableViewController: UITableViewController {
                 $0.colorView.backgroundColor = DynamicColor(hexString: CalendarManager.shared.colors[color]!)
             }
             }.configure {
-                $0.cell.tag = event!.id!.intValue
+                $0.cell.tag = event!.eventID!.intValue
                 $0.text = event?.title
                 $0.rowHeight = 80
         }
@@ -194,7 +194,7 @@ class EventDetailsTableViewController: UITableViewController {
     }
     
     fileprivate func invite(_ user: User, done: @escaping (String)->Void) -> Void {
-        let parameters = ["id": event!.id!, "user_id": user.id!]
+        let parameters = ["id": event!.eventID!, "user_id": user.userID!]
         let addedUsers = EventManager.shared.allUsers(forEvent: event!)
         
         if addedUsers.contains(user) {
@@ -338,7 +338,7 @@ class EventDetailsTableViewController: UITableViewController {
 //
 //    @IBAction func deleteEvent(_ sender: UIButton) {
 //
-//        let parameters: [String: Any] = ["id": self.event!.id!]
+//        let parameters: [String: Any] = ["id": self.event!.eventID!]
 //
 //        RouterWrapper.shared.request(.deleteEvent(parameters)) { (response) in
 //            print(response.response)

@@ -163,7 +163,7 @@ class CompleteProfileViewController: FormViewController {
             case .success:
                 print("yeah")
                 _ = self.user.save()
-                self.setRootVC(StoryboardID.Board.rawValue)
+                self.setRootVC(StoryboardID.Board)
             case .error(let error):
                 print(error)
             }
@@ -179,7 +179,7 @@ class CompleteProfileViewController: FormViewController {
                 user.user!.setValue(value, forKey: key)
             }
         }
-        self.setRootVC(StoryboardID.Board.rawValue)
+        self.setRootVC(StoryboardID.Board)
     }
 
     /*

@@ -43,7 +43,7 @@ class UserTableViewCell: UITableViewCell {
         }
         profilePictureImageView.setImageWith(user.name!, color: nil, circular: true)
         emailLabel.text = user.email
-        tag = Int(user.id!)
+        tag = Int(user.userID!)
     }
     
     @IBAction func invite(_ sender: UIButton) {

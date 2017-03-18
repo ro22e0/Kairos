@@ -103,7 +103,7 @@ class FriendsInviteTableViewController: UITableViewController {
                 done(text)
             }
         }
-        cell.tag = Int(friend.id!)
+        cell.tag = Int(friend.userID!)
         return cell
     }
     

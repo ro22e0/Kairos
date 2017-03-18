@@ -79,7 +79,7 @@ struct DataSync {
         User.deleteAll()
         ChatRoom.deleteAll()
         Message.deleteAll()
-        try! NSManagedObjectContext.defaultContext.save()
+//        try! NSManagedObjectContext.defaultContext.save()
         //        try! self.dataStack().drop()
     }
     
@@ -109,7 +109,7 @@ struct DataSync {
                         data["id"] = UserManager.shared.current.ownerID
                         print(data)
                         MagicalRecord.saveInBackground({ (localContext) in
-                            Owner.mr_import(from: data)
+                            Owner.mr_import(from: data, in: localContext)
                         }, completion: {
                             print("finish")
                         })
@@ -135,8 +135,8 @@ struct DataSync {
         let predicate = NSPredicate(format: "NOT (id IN %@)", ids)
         let deletedUsers = User.query(predicate) as! [User]
         for u in deletedUsers {
-            let friendExist = User.find("id == %@", args: u.id!) != nil ? true : false
-            let ownerExist = Owner.find("id == %@", args: u.id!) != nil ? true : false
+            let friendExist = User.find("id == %@", args: u.userID!) != nil ? true : false
+            let ownerExist = Owner.find("id == %@", args: u.userID!) != nil ? true : false
             
             if (!friendExist && !ownerExist) {
                 u.delete()
@@ -151,10 +151,10 @@ struct DataSync {
             print("User id : ", u["id"])
             print("User id : ", User.find("id == %@", args: u["id"].stringValue))
             print("Owner id : ", Owner.find("id == %@", args: u["id"].stringValue))
-            
+
             let friendExist = User.find("id == %@", args: u["id"].stringValue) != nil ? true : false
             let ownerExist = Owner.find("id == %@", args: u["id"].stringValue) != nil ? true : false
-            
+
             if (!friendExist && !ownerExist) {
                 let user = User.findOrCreate(["id": u["id"].object]) as! User
                 user.name = u["name"].stringValue
@@ -165,7 +165,7 @@ struct DataSync {
         }
         User.save()
     }
-    
+
     static func fetchUsers(_ completionHandler: @escaping (StatusRequest) -> Void) {
         RouterWrapper.shared.request(.getUsers) { (response) in
             print(response.response) // URL response
@@ -175,10 +175,10 @@ struct DataSync {
                 switch response.response!.statusCode {
                 case 200...203:
                     if let value = response.result.value {
-                        let json = JSON(value).arrayValue
+                        let json = JSON(value).array
                         print(json)
-                        
-//                        MagicalRecord.
+
+//                        let data = self.transformJson(json)
                         MagicalRecord.saveInBackground({ (localContext) in
                             User.mr_import(from: json, in: localContext)
                         }, completion: {
@@ -245,16 +245,16 @@ struct DataSync {
             case .success:
                 UserManager.shared.setCredentials(response.response!)
                 if let value = response.result.value {
-                    let json = JSON(value)
+                    let json = JSON(value).arrayValue
                     
                     print(json)
                     
-                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
-                        return Calendar.query(predicate)
-                    })
-                    let data = DataSync.transformJson(json)
+//                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+//                        return Calendar.query(predicate)
+//                    })
+//                    let data = DataSync.transformJson(json)
                     MagicalRecord.saveInBackground({ (localContext) in
-                        Calendar.mr_import(from: data, in: localContext)
+                        Calendar.mr_import(from: json, in: localContext)
                     }, completion: {
                         print("finish")
                     })
@@ -305,7 +305,7 @@ struct DataSync {
             print("finish")
         })
     }
-    
+
     static func fetchEvents() {
         RouterWrapper.shared.request(.getEvents) { (response) in
             print(response.response) // URL response
@@ -313,10 +313,10 @@ struct DataSync {
             case .success:
                 UserManager.shared.setCredentials(response.response!)
                 if let value = response.result.value {
-                    let json = JSON(value)
+                    let json = JSON(value).arrayValue
                     print(json)
                     MagicalRecord.saveInBackground({ (localContext) in
-                        Event.mr_import(from: json.object as! [[String : Any]], in: localContext)
+                        Event.mr_import(from: json, in: localContext)
                     }, completion: {
                         print("finish")
                     })
@@ -335,14 +335,14 @@ struct DataSync {
             case .success:
                 UserManager.shared.setCredentials(response.response!)
                 if let value = response.result.value {
-                    let json = JSON(value)
+                    let json = JSON(value).arrayValue
                     print(json)
 //                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
 //                        return Event.query(predicate)
 //                    })
-                    let data = DataSync.transformJson(json)
+//                    let data = DataSync.transformJson(json)
                     MagicalRecord.saveInBackground({ (localContext) in
-                        User.mr_import(from: data, in: localContext)
+                        Event.mr_import(from: json, in: localContext)
                     }, completion: {
                         print("finish")
                     })
@@ -415,7 +415,7 @@ struct DataSync {
     static func syncTasks(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
         MagicalRecord.saveInBackground({ (localContext) in
-            User.mr_import(from: [data], in: localContext)
+            Task.mr_import(from: [data], in: localContext)
         }, completion: {
             print("finish")
         })
@@ -437,7 +437,7 @@ struct DataSync {
                     //                    })
                     let data = DataSync.transformJson(json)
                     MagicalRecord.saveInBackground({ (localContext) in
-                        User.mr_import(from: data, in: localContext)
+                        Task.mr_import(from: data, in: localContext)
                     }, completion: {
                         print("finish")
                     })
@@ -475,7 +475,7 @@ struct DataSync {
     static func syncChatRooms(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
         MagicalRecord.saveInBackground({ (localContext) in
-            User.mr_import(from: [data], in: localContext)
+            ChatRoom.mr_import(from: [data], in: localContext)
         }, completion: {
             print("finish")
         })
@@ -494,7 +494,7 @@ struct DataSync {
                     
                     let data = DataSync.transformJson(json)
                     MagicalRecord.saveInBackground({ (localContext) in
-                        User.mr_import(from: data, in: localContext)
+                        ChatRoom.mr_import(from: data, in: localContext)
                     }, completion: {
                         print("finish")
                     })
@@ -531,7 +531,7 @@ struct DataSync {
     static func syncMessages(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
         MagicalRecord.saveInBackground({ (localContext) in
-            User.mr_import(from: [data], in: localContext)
+            Message.mr_import(from: [data], in: localContext)
         }, completion: {
             print("finish")
         })

@@ -3,5 +3,6 @@
 //
 
 #import <Google/SignIn.h>
+#define MR_SHORTHAND
 #import <MagicalRecord/MagicalRecord.h>
 #import <MagicalRecord/MagicalRecord+ShorthandMethods.h>

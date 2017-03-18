@@ -99,7 +99,7 @@ class CalendarRequestsTableViewController: UITableViewController {
         }
         cell.titleLabel.text = calendar.name
         cell.participantLabel.text = String(participants.count) + " participants"
-        cell.tag = calendar.id!.intValue
+        cell.tag = calendar.calendarID!.intValue
         
         return cell
     }

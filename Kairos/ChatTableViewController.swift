@@ -89,7 +89,7 @@ class ChatTableViewController: UITableViewController {
     }
 
     fileprivate func delete(chatRoom: ChatRoom) {
-        let parameters = ["id": chatRoom.id!]
+        let parameters = ["id": chatRoom.chatRoomID!]
 
         ProjectManager.shared.delete(parameters) { (status) in
             switch status {

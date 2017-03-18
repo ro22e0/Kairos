@@ -73,10 +73,10 @@ class ProjectManager {
         //            let users = project.projectUsers?.allObjects as? [UserProject]
         //            var isIn = false
         //            isIn = (users?.contains({ (u) -> Bool in
-        //                return u.userId == user.id
+        //                return u.userId == user.userID
         //            }))!
         //    //        users?.forEach({ (u) in
-        //    //            if u.userId == user.id {
+        //    //            if u.userId == user.userID {
         //    //                isIn = true
         //    //            }
         //    //        })

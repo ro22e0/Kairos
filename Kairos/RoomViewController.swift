@@ -25,7 +25,7 @@ class RoomViewController: JSQMessagesViewController {
         ChatRoomManager.shared.listen(for: chatRoom!)
 
         self.title = displayName
-        senderId = UserManager.shared.current.user!.id!.stringValue
+        senderId = UserManager.shared.current.user!.userID!.stringValue
         senderDisplayName = UserManager.shared.current.user!.name!
         inputToolbar.contentView.leftBarButtonItem = nil
         inputToolbar.contentView.textView.placeHolder = "Type a message"
@@ -94,7 +94,7 @@ class RoomViewController: JSQMessagesViewController {
          *  Last message was a text message
          */
         
-        newMessage = JSQMessage(senderId: message.user!.id!.stringValue, senderDisplayName: message.user!.name, date: message.createdAt as! Date, text: message.body!)
+        newMessage = JSQMessage(senderId: message.user!.userID!.stringValue, senderDisplayName: message.user!.name, date: message.createdAt as! Date, text: message.body!)
         
         /**
          *  Upon receiving a message, you should:

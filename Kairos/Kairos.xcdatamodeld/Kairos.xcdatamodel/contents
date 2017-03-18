@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Calendar" representedClassName=".Calendar" syncable="YES">
-        <attribute name="calendarID" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="calendarID" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
         <attribute name="color" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userStatus" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,7 +19,11 @@
         </userInfo>
     </entity>
     <entity name="ChatRoom" representedClassName=".ChatRoom" syncable="YES">
-        <attribute name="chatRoomID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="chatRoomID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
         <attribute name="chatType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -40,7 +48,7 @@
         </attribute>
         <attribute name="eventID" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES">
             <userInfo>
-                <entry key="hyper.isPrimaryKey" value="true"/>
+                <entry key="mappedKeyName" value="id"/>
             </userInfo>
         </attribute>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
@@ -63,7 +71,11 @@
     <entity name="Message" representedClassName=".Message" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="messageID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="messageID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
         <relationship name="chatRoom" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChatRoom" inverseName="messages" inverseEntity="ChatRoom" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="sentMessages" inverseEntity="User" syncable="YES"/>
         <userInfo>
@@ -112,7 +124,11 @@
                 <entry key="hyper.remoteKey" value="description"/>
             </userInfo>
         </attribute>
-        <attribute name="projectID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="projectID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userStatus" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="invitedUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="invitedProjects" inverseEntity="User" syncable="YES"/>
@@ -140,7 +156,11 @@
                 <entry key="hyper.remoteKey" value="description"/>
             </userInfo>
         </attribute>
-        <attribute name="taskID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="taskID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES">
+            <userInfo>
+                <entry key="mappedKeyName" value="id"/>
+            </userInfo>
+        </attribute>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="childTasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="parent" inverseEntity="Task" syncable="YES"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="childTasks" inverseEntity="Task" syncable="YES"/>
@@ -162,7 +182,7 @@
         <attribute name="promotion" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="provider" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="school" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="userID" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES">
+        <attribute name="userID" optional="YES" attributeType="Integer 32" usesScalarValueType="NO" syncable="YES">
             <userInfo>
                 <entry key="mappedKeyName" value="id"/>
             </userInfo>
@@ -192,13 +212,13 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Calendar" positionX="-14058" positionY="-2817" width="128" height="180"/>
-        <element name="ChatRoom" positionX="-14499" positionY="-2196" width="128" height="165"/>
+        <element name="Calendar" positionX="-14058" positionY="-2817" width="128" height="178"/>
+        <element name="ChatRoom" positionX="-14499" positionY="-2196" width="128" height="163"/>
         <element name="Event" positionX="-14060" positionY="-2547" width="128" height="225"/>
-        <element name="Message" positionX="-14436" positionY="-2781" width="128" height="120"/>
+        <element name="Message" positionX="-14436" positionY="-2781" width="128" height="118"/>
         <element name="Owner" positionX="-14643" positionY="-2601" width="126" height="120"/>
-        <element name="Project" positionX="-14276" positionY="-2943" width="128" height="210"/>
+        <element name="Project" positionX="-14276" positionY="-2943" width="128" height="208"/>
         <element name="Task" positionX="-14042" positionY="-2259" width="128" height="180"/>
-        <element name="User" positionX="-14274" positionY="-2583" width="128" height="525"/>
+        <element name="User" positionX="-14274" positionY="-2583" width="128" height="523"/>
     </elements>
 </model>

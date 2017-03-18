@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 public class User: NSManagedObject {
 
     override public func shouldImport(_ data: Any) -> Bool {

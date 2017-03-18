@@ -2,7 +2,7 @@
 //  Event+CoreDataProperties.swift
 //  Kairos
 //
-//  Created by rba3555 on 17/01/2017.
+//  Created by Ronaël Bajazet on 15/03/2017.
 //  Copyright © 2017 Kairos-app. All rights reserved.
 //
 
@@ -18,7 +18,7 @@ extension Event {
 
     @NSManaged public var dateEnd: NSDate?
     @NSManaged public var dateStart: NSDate?
-    @NSManaged public var id: NSNumber?
+    @NSManaged public var eventID: NSNumber?
     @NSManaged public var location: String?
     @NSManaged public var notes: String?
     @NSManaged public var title: String?

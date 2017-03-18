@@ -298,7 +298,7 @@ class EventTableViewController: FormViewController {
     fileprivate func create() {
         var parameters = event!.dictionaryWithValues(forKeys: ["title", "location"])
         parameters["description"] = self.event?.notes
-        parameters["calendar_id"] = self.selectedCalendar?.id
+        parameters["calendar_id"] = self.selectedCalendar?.calendarID
         parameters["date_start"] = String.formatDateApi(self.event!.dateStart! as Date)
         parameters["date_end"] = String.formatDateApi(self.event!.dateEnd! as Date)
         
@@ -318,7 +318,7 @@ class EventTableViewController: FormViewController {
     fileprivate func update() {
         var parameters = event!.dictionaryWithValues(forKeys: ["id", "title", "location"])
         parameters["description"] = self.event?.notes
-        parameters["calendar_id"] = self.selectedCalendar?.id
+        parameters["calendar_id"] = self.selectedCalendar?.calendarID
         parameters["date_start"] = String.formatDateApi(self.event!.dateStart! as Date)
         parameters["date_end"] = String.formatDateApi(self.event!.dateEnd! as Date)
         
@@ -339,7 +339,7 @@ class EventTableViewController: FormViewController {
     }
     
     fileprivate func delete() {
-        let parameters = ["id": event!.id!]
+        let parameters = ["id": event!.eventID!]
         
         EventManager.shared.delete(parameters) { (status) in
             switch status {

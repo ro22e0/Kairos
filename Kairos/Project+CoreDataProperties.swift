@@ -2,7 +2,7 @@
 //  Project+CoreDataProperties.swift
 //  Kairos
 //
-//  Created by rba3555 on 17/01/2017.
+//  Created by Ronaël Bajazet on 15/03/2017.
 //  Copyright © 2017 Kairos-app. All rights reserved.
 //
 
@@ -16,18 +16,18 @@ extension Project {
         return NSFetchRequest<Project>(entityName: "Project");
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var notes: String?
-    @NSManaged public var dateStart: NSDate?
     @NSManaged public var dateEnd: NSDate?
-    @NSManaged public var id: NSNumber?
+    @NSManaged public var dateStart: NSDate?
+    @NSManaged public var notes: String?
+    @NSManaged public var projectID: NSNumber?
+    @NSManaged public var title: String?
     @NSManaged public var userStatus: String?
     @NSManaged public var invitedUsers: NSSet?
     @NSManaged public var owners: NSSet?
     @NSManaged public var participatingUsers: NSSet?
     @NSManaged public var refusedUsers: NSSet?
     @NSManaged public var tasks: NSSet?
-    
+
 }
 
 // MARK: Generated accessors for invitedUsers

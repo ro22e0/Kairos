@@ -43,7 +43,7 @@ class UsersTableViewController: UITableViewController {
     }
     
     fileprivate func invite(_ user: User, done: @escaping ()->Void) -> Void {
-        let parameters = ["user_id": user.id!]
+        let parameters = ["user_id": user.userID!]
         
         FriendManager.shared.invite(parameters) { (status) in
             switch status {

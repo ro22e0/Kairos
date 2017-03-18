@@ -339,7 +339,7 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
     }
 
     fileprivate func delete() {
-        let parameters = ["id": calendar!.id!]
+        let parameters = ["id": calendar!.calendarID!]
         
         CalendarManager.shared.delete(parameters) { (status) in
             switch status {
@@ -378,11 +378,11 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         addedUsers.forEach { (user, status) in
             switch status {
             case .Invited:
-                invited.append(user.id!.intValue)
+                invited.append(user.userID!.intValue)
             case .Removed:
-                removed.append(user.id!.intValue)
+                removed.append(user.userID!.intValue)
             case .Owner:
-                owners.append(user.id!.intValue)
+                owners.append(user.userID!.intValue)
             default:
                 break
             }
@@ -414,11 +414,11 @@ class CalendarTableViewController: FormViewController, UIPopoverPresentationCont
         addedUsers.forEach { (user, status) in
             switch status {
             case .Invited:
-                invited.append(user.id!.intValue)
+                invited.append(user.userID!.intValue)
             case .Removed:
-                removed.append(user.id!.intValue)
+                removed.append(user.userID!.intValue)
             case .Owner:
-                owners.append(user.id!.intValue)
+                owners.append(user.userID!.intValue)
             default:
                 break
             }

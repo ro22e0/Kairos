@@ -35,7 +35,7 @@ class FriendTableViewCell: UITableViewCell, UIPopoverPresentationControllerDeleg
         } else {
             self.mutualFriendsLabel.isHidden = true
         }
-        self.tag = Int(user.id!)
+        self.tag = Int(user.userID!)
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
