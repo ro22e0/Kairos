@@ -38,7 +38,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/UserManager.swift"
@@ -51,14 +51,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Kairos.UserManager.signIn (Swift.Dictionary&lt;Swift.String, Any&gt;, completionHandler : (Kairos.StatusRequest) -&gt; ()) -&gt; ()"
                   moduleName = "Kairos"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/UserManager.swift"
-                  timestampString = "511543499.043139"
+                  timestampString = "511655626.782971"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "42"
@@ -66,14 +66,14 @@
                   offsetFromSymbolStart = "27">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Kairos.UserManager.(signIn (Swift.Dictionary&lt;Swift.String, Any&gt;, completionHandler : (Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "Kairos"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/UserManager.swift"
-                  timestampString = "511543499.044646"
+                  timestampString = "511655626.784643"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "43"
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/Owner+CoreDataClass.swift"
-            timestampString = "511543495.89271"
+            timestampString = "511656858.036097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "update(from:in:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -102,7 +102,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/UserManager.swift"
@@ -113,44 +113,12 @@
             endingLineNumber = "54"
             landmarkName = "signIn(_:completionHandler:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Kairos.UserManager.(signIn (Swift.Dictionary&lt;Swift.String, Any&gt;, completionHandler : (Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "Kairos"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/UserManager.swift"
-                  timestampString = "511543499.05045"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "54"
-                  endingLineNumber = "54"
-                  offsetFromSymbolStart = "4314">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "function signature specialization &lt;Arg[1] = Value Promoted from Box&gt; of Kairos.UserManager.(signIn (Swift.Dictionary&lt;Swift.String, Any&gt;, completionHandler : (Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "Kairos"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/UserManager.swift"
-                  timestampString = "511543499.051738"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/UserManager.swift"
@@ -218,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/Owner+CoreDataClass.swift"
-            timestampString = "511543469.145474"
+            timestampString = "511656858.036097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "didInsert(from:in:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/Owner+CoreDataClass.swift"
-            timestampString = "511543470.244728"
+            timestampString = "511656858.036097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "didInsert(from:in:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/Owner+CoreDataClass.swift"
-            timestampString = "511543474.088782"
+            timestampString = "511656858.036097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "didInsert(from:in:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -262,7 +230,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/UserManager.swift"
@@ -272,6 +240,134 @@
             startingLineNumber = "73"
             endingLineNumber = "73"
             landmarkName = "signIn(_:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Kairos.UserManager.(signIn (Swift.Dictionary&lt;Swift.String, Any&gt;, completionHandler : (Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "Kairos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/UserManager.swift"
+                  timestampString = "511655626.811976"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "5022">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Kairos.UserManager.(signIn (Swift.Dictionary&lt;Swift.String, Any&gt;, completionHandler : (Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "Kairos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/UserManager.swift"
+                  timestampString = "511655626.813216"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "5037">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kairos/UserManager.swift"
+            timestampString = "511629607.35924"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "signIn(_:completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kairos/User+CoreDataClass.swift"
+            timestampString = "511659013.706082"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "didInsert(from:in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kairos/Owner+CoreDataClass.swift"
+            timestampString = "511656858.036097"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "didInsert(from:in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kairos/User+CoreDataClass.swift"
+            timestampString = "511659013.706082"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "didInsert(from:in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kairos/Owner+CoreDataClass.swift"
+            timestampString = "511656858.036097"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "didInsert(from:in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kairos/User+CoreDataClass.swift"
+            timestampString = "511659013.706082"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "didInsert(from:in:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

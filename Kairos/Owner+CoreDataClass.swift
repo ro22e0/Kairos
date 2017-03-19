@@ -9,10 +9,12 @@
 import Foundation
 import CoreData
 import CoreStore
+import SwiftyJSON
+import Arrow
 
 public class Owner: NSManagedObject, ImportableUniqueObject {
     
-    public typealias ImportSource = [String: Any]
+    public typealias ImportSource = SwiftyJSON.JSON
     public class var uniqueIDKeyPath: String {
         return "ownerID"
     }
@@ -25,23 +27,19 @@ public class Owner: NSManagedObject, ImportableUniqueObject {
         let entity = NSEntityDescription.entity(forEntityName: "Owner", in: DataSync.newContext)
         return Owner(entity: entity!, insertInto: nil)
     }
-    
-    //public func shouldInsert(from source: Dictionary<String, Any>, in transaction: BaseDataTransaction) -> Bool {
-    //
-    //}
 
     public func didInsert(from source: ImportSource, in transaction: BaseDataTransaction) throws {
         print(source)
-        self.ownerID = source["id"] as! NSNumber?
-        
+        self.ownerID = source["id"].number
+
         try self.user = transaction.importUniqueObject(
-            Into(User.self),
-            source: source["user"] as! User.ImportSource
+            Into<User>(),
+            source: source["user"] 
         )
     }
 
     public class func uniqueID(from source: ImportSource, in transaction: BaseDataTransaction) throws -> NSNumber? {
-        return source["id"] as? NSNumber
+        return source["id"].number
     }
     
     public func update(from source: ImportSource, in transaction: BaseDataTransaction) throws {

@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.2.0)
   - AlamofireNetworkActivityIndicator (2.1.0):
     - Alamofire (~> 4.1)
+  - Arrow (3.0.4)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -76,6 +77,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.2.0)
   - AlamofireNetworkActivityIndicator
+  - Arrow
   - CocoaLumberjack
   - CoreStore
   - Crashlytics
@@ -84,7 +86,7 @@ DEPENDENCIES:
   - Fabric
   - FBSDKLoginKit
   - Former
-  - FSCalendar (~> 2.7)
+  - FSCalendar
   - Google/SignIn
   - IQKeyboardManagerSwift
   - JSQMessagesViewController
@@ -100,6 +102,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AlamofireNetworkActivityIndicator: 4716f6554bdfb9c7cf13b1e0e3af21163129690a
+  Arrow: a94c0fceb67db145cf94dc34641409108f52b86f
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CocoaLumberjack: 8311463ddf9ee86a06ef92a071dd656c89244500
   CoreStore: b57aaae17a796e24b58726ce2aaa7c883456cbf5
@@ -131,6 +134,6 @@ SPEC CHECKSUMS:
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: dd21249b9ddae7d01df1b83ce4edd3cb28b08f60
+PODFILE CHECKSUM: e498ed1835f57938a4dcee446d55e16866d50aba
 
 COCOAPODS: 1.2.0

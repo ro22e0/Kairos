@@ -47,15 +47,16 @@ class UserManager {
                     let json = JSON(value)
                     switch response.response!.statusCode {
                     case 200:
-                        var data: [String: Any] = ["user": json["data"].object]
+                        var data = ["user": json["data"].object]
                         data["id"] = json["data"]["id"].number
                         print(data)
                         
+                        let source = JSON(data)
                         CoreStore.beginAsynchronous({ (transaction) in
                             do {
                                 try _ = transaction.importUniqueObject(
                                     Into<Owner>(),
-                                    source: data
+                                    source: source
                                 )
                             }
                             catch {

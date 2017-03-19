@@ -96,6 +96,7 @@
 		DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3AD01C9B022400E82FC6 /* SignUpViewController.swift */; };
 		DA3F3AD31C9B022F00E82FC6 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3AD21C9B022F00E82FC6 /* SignInViewController.swift */; };
 		DA3F3AD51C9B037600E82FC6 /* GetStartedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F3AD41C9B037600E82FC6 /* GetStartedViewController.swift */; };
+		DA3F685D1E7F41D300CDF93B /* Type+Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3F685C1E7F41D300CDF93B /* Type+Arrow.swift */; };
 		DA40416D1DE75DA60043A8F0 /* LabelColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40416B1DE75DA60043A8F0 /* LabelColorCell.swift */; };
 		DA40416E1DE75DA60043A8F0 /* LabelColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA40416C1DE75DA60043A8F0 /* LabelColorCell.xib */; };
 		DA4041701DE769450043A8F0 /* ColorSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40416F1DE769450043A8F0 /* ColorSelectionViewController.swift */; };
@@ -281,6 +282,7 @@
 		DA3F3AD01C9B022400E82FC6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SignUpViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA3F3AD21C9B022F00E82FC6 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DA3F3AD41C9B037600E82FC6 /* GetStartedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStartedViewController.swift; sourceTree = "<group>"; };
+		DA3F685C1E7F41D300CDF93B /* Type+Arrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Type+Arrow.swift"; sourceTree = "<group>"; };
 		DA40416B1DE75DA60043A8F0 /* LabelColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelColorCell.swift; sourceTree = "<group>"; };
 		DA40416C1DE75DA60043A8F0 /* LabelColorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelColorCell.xib; sourceTree = "<group>"; };
 		DA40416F1DE769450043A8F0 /* ColorSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ColorSelectionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -546,6 +548,7 @@
 				DA3F3ACE1C9AFC2A00E82FC6 /* Common.swift */,
 				DAD51B931D982CF000A20376 /* Extentions.swift */,
 				DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */,
+				DA3F685C1E7F41D300CDF93B /* Type+Arrow.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1290,6 +1293,7 @@
 				AC4A94C51E2E821100BA59B5 /* EditTaskTableViewController.swift in Sources */,
 				DA05BECA1E30DBC600DF1BE5 /* ChatTableViewCell.swift in Sources */,
 				DAE380CE1CB2F5B3002DB874 /* EventTableViewCell.swift in Sources */,
+				DA3F685D1E7F41D300CDF93B /* Type+Arrow.swift in Sources */,
 				DA799DF71D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift in Sources */,
 				DA3F3ACB1C9AEA5200E82FC6 /* LoadingViewController.swift in Sources */,
 				DA3F3AD51C9B037600E82FC6 /* GetStartedViewController.swift in Sources */,

@@ -9,10 +9,12 @@
 import Foundation
 import CoreData
 import CoreStore
+import SwiftyJSON
+import Arrow
 
 public class User: NSManagedObject, ImportableUniqueObject {
-
-    public typealias ImportSource = [String: Any]
+    
+    public typealias ImportSource = SwiftyJSON.JSON
     public class var uniqueIDKeyPath: String {
         return "userID"
     }
@@ -27,13 +29,59 @@ public class User: NSManagedObject, ImportableUniqueObject {
     
     public func didInsert(from source: ImportSource, in transaction: BaseDataTransaction) throws {
         print(source)
-        self.userID = source["id"] as? NSNumber
-        self.name = source["name"] as? String
-        self.email = source["email"] as? String
+                self.userID = source["id"].number
+                self.provider = source["provider"].string
+        self.name = source["name"].string
+        
+                    self.email = source["email"].string
+
+        
+//        if let arrowSource = ArrowJSON(source) {
+//            self.userID <-- arrowSource["id"]
+//            self.provider <-- arrowSource["provider"]
+//            self.name <-- arrowSource["name"]
+//            self.nickname <-- arrowSource["nickname"]
+//            self.image <-- arrowSource["image"]
+//            self.email <-- arrowSource["email"]
+//            self.school <-- arrowSource["school"]
+//            self.promotion <-- arrowSource["promotion"]
+//            self.location <-- arrowSource["location"]
+//            self.company <-- arrowSource["company"]
+//            self.job <-- arrowSource["job"]
+//            
+//            let mutualFriends = try transaction.importUniqueObjects(Into<User>(), sourceArray: source["mutual_friends"].arrayValue)
+//            self.mutualFriends?.addingObjects(from: mutualFriends)
+//        }
+        //        self.mutualFriends <-- source["mutual_friends"]
+        
+        
+        //        if let mutualFriendsSource = source["mutual_friends"]?.collection {
+        //            let mutualFriends = try transaction.importUniqueObjects(Into<User>(), sourceArray: mutualFriendsSource)
+        //            self.mutualFriends?.addingObjects(from: mutualFriends)
+        //        }
+        //        self.calendars
+        //        self.chatRooms
+        //        self.events
+        //        self.friends
+        //        self.invitedCalendars
+        //        self.invitedEvents
+        //        self.invitedProjects
+        //        self.ownedCalendars
+        //        self.ownedEvents
+        //        self.ownedProjects
+        //        self.owner
+        //        self.pendingFriends
+        //        self.projects
+        //        self.refusedCalendars
+        //        self.refusedEvents
+        //        self.refusedProjects
+        //        self.requestedFriends
+        //        self.sentMessages
+        //        self.tasks
     }
     
-    public class func uniqueID(from source: ImportSource, in transaction: BaseDataTransaction) throws -> NSNumber? {
-        return source["id"] as? NSNumber
+    public static func uniqueID(from source: ImportSource, in transaction: BaseDataTransaction) throws -> NSNumber? {
+        return source["id"].number
     }
     
     public func update(from source: ImportSource, in transaction: BaseDataTransaction) throws {

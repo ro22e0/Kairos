@@ -13,7 +13,7 @@ target 'Kairos' do
   pod 'XLPagerTabStrip'
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'FSCalendar', '~> 2.7'
+  pod 'FSCalendar'
   pod 'Whisper'
   pod 'CocoaLumberjack'
   pod 'CoreStore'
@@ -27,6 +27,7 @@ target 'Kairos' do
   pod 'Starscream'
 #  pod 'Socket.IO-Client-Swift'
   pod 'SwiftMessages'
+  pod 'Arrow'
   # pod 'DatePickerCell'
   # pod 'UITextField+Shake', '~> 1.1'
 end
