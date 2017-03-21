@@ -10,6 +10,7 @@ import CoreData
 import FSCalendar
 import Alamofire
 import SwiftyJSON
+import Arrow
 //import MagicalRecord
 import CoreStore
 
@@ -19,9 +20,14 @@ class UserManager {
     static let shared = UserManager()
     fileprivate init() {}
     
-    var current: Owner = Owner.temporary()
+    lazy var current: Owner = {
+        if let owner = CoreStore.fetchAll(From<Owner>())?.first {
+            return owner
+        }
+        return Owner.temporary()
+    }()
     
-    fileprivate func syncOwner(_ data: JSON, completionHandler: @escaping (StatusRequest) -> Void) {
+    fileprivate func syncOwner(_ data: SwiftyJSON.JSON, completionHandler: @escaping (StatusRequest) -> Void) {
         if let owner = Owner.all().first as? Owner {
             if owner.ownerID != data["id"].number {
                 DataSync.deleteAll()
@@ -51,12 +57,12 @@ class UserManager {
                         data["id"] = json["data"]["id"].number
                         print(data)
                         
-                        let source = JSON(data)
+                        let source = ArrowJSON(data)
                         CoreStore.beginAsynchronous({ (transaction) in
                             do {
                                 try _ = transaction.importUniqueObject(
                                     Into<Owner>(),
-                                    source: source
+                                    source: source!
                                 )
                             }
                             catch {
@@ -66,6 +72,9 @@ class UserManager {
                                 switch result {
                                 case .success(let hasChanges):
                                     print("success!", hasChanges)
+                                    let defautls = UserDefaults.standard
+                                    defautls.setValue(true, forKey: userLoginKey)
+                                                                completionHandler(.success(nil))
                                 case .failure(let error):
                                     print(error)
                                 }

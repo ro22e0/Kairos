@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 import SwiftyJSON
 import SwiftRecord
+//import Arrow
+import CoreStore
 //import MagicalRecord
 //import DATAStack
 //import Sync
@@ -179,6 +181,32 @@ struct DataSync {
                     if let value = response.result.value {
                         let json = JSON(value).array
                         print(json)
+                        
+                        
+                        let source = ArrowJSON(value)
+                        CoreStore.beginAsynchronous({ (transaction) in
+                            do {
+                                try _ = transaction.importUniqueObjects(
+                                    Into<User>(),
+                                    sourceArray: source!.collection!
+                                )
+                            }
+                            catch {
+                                return // Woops, don't save
+                            }
+                            transaction.commit({ (result) in
+                                switch result {
+                                case .success(let hasChanges):
+                                    print("success!", hasChanges)
+                                    completionHandler(.success(nil))
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            })
+                        })
+
+                        
+                        
 
 //                        let data = self.transformJson(json)
 //                        MagicalRecord.saveInBackground({ (localContext) in

@@ -14,7 +14,7 @@ import Arrow
 
 public class Owner: NSManagedObject, ImportableUniqueObject {
     
-    public typealias ImportSource = SwiftyJSON.JSON
+    public typealias ImportSource = ArrowJSON
     public class var uniqueIDKeyPath: String {
         return "ownerID"
     }
@@ -30,16 +30,16 @@ public class Owner: NSManagedObject, ImportableUniqueObject {
 
     public func didInsert(from source: ImportSource, in transaction: BaseDataTransaction) throws {
         print(source)
-        self.ownerID = source["id"].number
+        self.ownerID <-- source["id"]
 
         try self.user = transaction.importUniqueObject(
             Into<User>(),
-            source: source["user"] 
+            source: source["user"]!
         )
     }
 
     public class func uniqueID(from source: ImportSource, in transaction: BaseDataTransaction) throws -> NSNumber? {
-        return source["id"].number
+        return source["id"]?.data as? NSNumber
     }
     
     public func update(from source: ImportSource, in transaction: BaseDataTransaction) throws {
