@@ -35,6 +35,7 @@ public class User: NSManagedObject, ImportableUniqueObject {
         //
         //                    self.email = source["email"].string
         
+        
         self.userID <-- source["id"]
         self.provider <-- source["provider"]
         self.name <-- source["name"]
@@ -49,10 +50,7 @@ public class User: NSManagedObject, ImportableUniqueObject {
         
         if let mutualFriendsSource = source["mutual_friends"]?.collection {
             let importedMutualFriends = try transaction.importUniqueObjects(Into<User>(), sourceArray: mutualFriendsSource)
-            //            self.mutualFriends?.addingObjects(from: mutualFriends)
-            let mutualFriendsSet = NSSet().addingObjects(from: importedMutualFriends)
-            print(importedMutualFriends)
-            self.mutualFriends = mutualFriendsSet as NSSet?
+            self.mutualFriends = NSSet(array: importedMutualFriends)
         }
         
         //        if let arrowSource = ArrowJSON(source) {

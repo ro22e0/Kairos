@@ -30,8 +30,8 @@ public class Owner: NSManagedObject, ImportableUniqueObject {
 
     public func didInsert(from source: ImportSource, in transaction: BaseDataTransaction) throws {
         print(source)
+        
         self.ownerID <-- source["id"]
-
         try self.user = transaction.importUniqueObject(
             Into<User>(),
             source: source["user"]!
@@ -44,5 +44,17 @@ public class Owner: NSManagedObject, ImportableUniqueObject {
     
     public func update(from source: ImportSource, in transaction: BaseDataTransaction) throws {
         print(source)
+        if let requestedFriendsSource = source["friend_requests"]?.collection {
+            let importedRequestedFriends = try transaction.importUniqueObjects(Into<User>(), sourceArray: requestedFriendsSource)
+            self.requestedFriends = NSSet(array: importedRequestedFriends)
+        }
+        if let pendingFriendsSource = source["pending_requests"]?.collection {
+            let importedPendingFriends = try transaction.importUniqueObjects(Into<User>(), sourceArray: pendingFriendsSource)
+            self.pendingFriends = NSSet(array: importedPendingFriends)
+        }
+        if let friendsSource = source["friends"]?.collection {
+            let importedFriends = try transaction.importUniqueObjects(Into<User>(), sourceArray: friendsSource)
+            self.friends = NSSet(array: importedFriends)
+        }
     }
 }

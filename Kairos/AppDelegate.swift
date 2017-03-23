@@ -20,6 +20,7 @@ import CocoaLumberjack
 //import Sync
 //import DATAStack
 import CoreStore
+import Arrow
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print("fails")
         }
+        DataSync.deleteAll()
 
         UINavigationBar.appearance().tintColor = .orangeTint()
         UINavigationBar.appearance().backgroundColor = .white

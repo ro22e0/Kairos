@@ -74,7 +74,7 @@ class UserManager {
                                     print("success!", hasChanges)
                                     let defautls = UserDefaults.standard
                                     defautls.setValue(true, forKey: userLoginKey)
-                                                                completionHandler(.success(nil))
+                                    completionHandler(.success(nil))
                                 case .failure(let error):
                                     print(error)
                                 }
@@ -245,9 +245,9 @@ class UserManager {
         self.fetch() {
             handler()
         }
-        //        FriendManager.shared.fetch()
+        FriendManager.shared.fetch()
         //        DataSync.fetchCalendarColors()
-        //        CalendarManager.shared.fetch()
+                CalendarManager.shared.fetch()
         //        EventManager.shared.fetch()
         //        ProjectManager.shared.fetch()
         //        TaskManager.shared.fetch()

@@ -75,14 +75,25 @@ struct DataSync {
     }
     
     static func deleteAll() {
-        Owner.deleteAll()
-        Calendar.deleteAll()
-        Event.deleteAll()
-        Project.deleteAll()
-        Task.deleteAll()
-        User.deleteAll()
-        ChatRoom.deleteAll()
-        Message.deleteAll()
+        CoreStore.beginAsynchronous { (transaction) -> Void in
+            transaction.deleteAll(From<Owner>())
+            transaction.deleteAll(From<Event>())
+            transaction.deleteAll(From<Calendar>())
+            transaction.deleteAll(From<User>())
+            transaction.deleteAll(From<Project>())
+            transaction.deleteAll(From<Task>())
+            transaction.deleteAll(From<ChatRoom>())
+            transaction.deleteAll(From<Message>())
+            transaction.commit()
+        }
+//        Owner.deleteAll()
+//        Calendar.deleteAll()
+//        Event.deleteAll()
+//        Project.deleteAll()
+//        Task.deleteAll()
+//        User.deleteAll()
+//        ChatRoom.deleteAll()
+//        Message.deleteAll()
 //        try! NSManagedObjectContext.defaultContext.save()
         //        try! self.dataStack().drop()
     }
@@ -104,20 +115,56 @@ struct DataSync {
                 UserManager.shared.setCredentials(response.response!)
                 switch response.response!.statusCode {
                 case 200...203:
+
                     if let value = response.result.value {
                         let json = JSON(value)
-                        
-                        print(json)
-                        
-                        var data: [String: Any] = json.dictionaryObject!
-                        data["id"] = UserManager.shared.current.ownerID
-                        print(data)
-//                        MagicalRecord.saveInBackground({ (localContext) in
-//                            Owner.mr_import(from: data, in: localContext)
-//                        }, completion: {
-//                            print("finish")
-//                        })
+                        switch response.response!.statusCode {
+                        case 200:
+                            var data: [String: Any] = json.dictionaryObject!
+                            data["id"] = UserManager.shared.current.ownerID
+                            print(data)
+
+                            let source = ArrowJSON(data)
+                            CoreStore.beginAsynchronous({ (transaction) in
+                                do {
+                                    try _ = transaction.importUniqueObject(
+                                        Into<Owner>(),
+                                        source: source!
+                                    )
+                                }
+                                catch {
+                                    return // Woops, don't save
+                                }
+                                transaction.commit({ (result) in
+                                    switch result {
+                                    case .success(let hasChanges):
+                                        print("success!", hasChanges)
+                                        let defautls = UserDefaults.standard
+                                        defautls.setValue(true, forKey: userLoginKey)
+                                        completionHandler(.success(nil))
+                                    case .failure(let error):
+                                        print(error)
+                                    }
+                                })
+                            })
+                            //                        MagicalRecord.saveInBackground({ (localContext) in
+                            //                            Owner.mr_import(from: data, in: localContext)
+                            ////                            Owner.mr_import(from: [data], in: localContext)
+                            //                        }, completion: {
+                            //                            print("finish")
+                            //                            let defautls = UserDefaults.standard
+                            //                            defautls.setValue(true, forKey: userLoginKey)
+                            ////                            self.current = Owner.mr_findAll()?.first as! Owner
+                            //                            completionHandler(.success(nil))
+                        //                        })
+                        default:
+                            completionHandler(.error("Fail to connect"))
+                        }
                     }
+
+                    
+                    
+                    
                 default:
                     completionHandler(.error("error"))
                 }
@@ -181,8 +228,7 @@ struct DataSync {
                     if let value = response.result.value {
                         let json = JSON(value).array
                         print(json)
-                        
-                        
+
                         let source = ArrowJSON(value)
                         CoreStore.beginAsynchronous({ (transaction) in
                             do {
@@ -204,9 +250,6 @@ struct DataSync {
                                 }
                             })
                         })
-
-                        
-                        
 
 //                        let data = self.transformJson(json)
 //                        MagicalRecord.saveInBackground({ (localContext) in
@@ -230,7 +273,7 @@ struct DataSync {
     fileprivate static func deleteCalendars(_ calendars: [JSON]) {
         let ids = NSMutableArray()
         let id: Int?
-        
+
         for c in calendars {
             ids.add(c["id"].object)
         }
@@ -276,8 +319,29 @@ struct DataSync {
                 UserManager.shared.setCredentials(response.response!)
                 if let value = response.result.value {
                     let json = JSON(value).arrayValue
-                    
                     print(json)
+                    
+                    let source = ArrowJSON(value)
+                    CoreStore.beginAsynchronous({ (transaction) in
+                        do {
+                            try _ = transaction.importUniqueObjects(
+                                Into<Calendar>(),
+                                sourceArray: source!.collection!
+                            )
+                        }
+                        catch {
+                            return // Woops, don't save
+                        }
+                        transaction.commit({ (result) in
+                            switch result {
+                            case .success(let hasChanges):
+                                print("success!", hasChanges)
+                                completionHandler(.success(nil))
+                            case .failure(let error):
+                                print(error)
+                            }
+                        })
+                    })
                     
 //                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
 //                        return Calendar.query(predicate)
