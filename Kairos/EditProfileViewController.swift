@@ -33,7 +33,7 @@ class EditProfileViewController: FormViewController {
         // Create RowFomers
         let imageRow = LabelRowFormer<ProfileImagePickerTableViewCell>(instantiateType: .Nib(nibName: "ProfileImagePickerTableViewCell")) {
             if self.user.user!.image != nil {
-                $0.imageProfileView.image = UIImage(data: self.user.user!.image! as Data)
+                $0.imageProfileView.image = UIImage(data: self.user.user!.imageData! as Data)
                 $0.imageProfileView.round()
             }
             }.configure {
@@ -208,7 +208,7 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
         picker.dismiss(animated: true, completion: nil)
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            user.user!.image = UIImageJPEGRepresentation(pickedImage, 1) as NSData?
+            user.user!.imageData = UIImageJPEGRepresentation(pickedImage, 1) as NSData?
             let imageRow = self.rows.first as! LabelRowFormer<ProfileImagePickerTableViewCell>
             imageRow.cellUpdate {
                 $0.imageProfileView.image = pickedImage

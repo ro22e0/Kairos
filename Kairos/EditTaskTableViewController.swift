@@ -373,14 +373,14 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
     }
     
     fileprivate func delete() {
-        let parameters = ["id": task!.id!, "project_id": project!.id!]
+        let parameters = ["id": task!.taskID!, "project_id": project!.projectID!]
         
         TaskManager.shared.delete(parameters) { (status) in
             switch status {
             case .success:
                 Spinner.showWhistle("kTaskSuccess")
-                print(DataSync.dataStack().viewContext)
-                print(DataSync.dataStack().mainContext)
+//                print(DataSync.dataStack().viewContext)
+                print(DataSync.newContext)
                 self.task?.delete()
                 self.task?.save()
                 print(self.task?.title)
@@ -391,7 +391,7 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
                     self.navigationController!.popViewController(animated: true)
                 }
                 //                do {
-                //                    try DataSync.dataStack().mainContext.save()
+                //                    try DataSync.newContext.save()
                 //                } catch (let error) {
                 //                    print(error)
             //                }
@@ -404,8 +404,8 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
     
     fileprivate func create() {
         var parameters = task!.dictionaryWithValues(forKeys: ["title"])
-        parameters["project_id"] = project!.id
-        parameters["parent_id"] = parentTask?.id
+        parameters["project_id"] = project!.projectID
+        parameters["parent_id"] = parentTask?.taskID
         parameters["description"] = task!.notes
         parameters["date_start"] = String.formatDateApi(task!.dateStart! as Date)
         parameters["date_end"] = String.formatDateApi(task!.dateEnd! as Date)
@@ -415,9 +415,9 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
         addedUsers.forEach { (user, status) in
             switch status {
             case .Participating:
-                added.append(user.id!.intValue)
+                added.append(user.userID!.intValue)
             case .Removed:
-                removed.append(user.id!.intValue)
+                removed.append(user.userID!.intValue)
             default:
                 break
             }
@@ -440,8 +440,8 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
     
     fileprivate func update() {
         var parameters = task!.dictionaryWithValues(forKeys: ["id", "title"])
-        parameters["project_id"] = project!.id
-        parameters["parent_id"] = parentTask?.id
+        parameters["project_id"] = project!.projectID
+        parameters["parent_id"] = parentTask?.taskID
         parameters["description"] = task!.notes
         parameters["date_start"] = String.formatDateApi(task!.dateStart! as Date)
         parameters["date_end"] = String.formatDateApi(task!.dateEnd! as Date)
@@ -451,9 +451,9 @@ class EditTaskTableViewController: UITableViewController, UIPopoverPresentationC
         addedUsers.forEach { (user, status) in
             switch status {
             case .Participating:
-                added.append(user.id!.intValue)
+                added.append(user.userID!.intValue)
             case .Removed:
-                removed.append(user.id!.intValue)
+                removed.append(user.userID!.intValue)
             default:
                 break
             }

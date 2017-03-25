@@ -2,7 +2,7 @@
 //  Task+CoreDataProperties.swift
 //  Kairos
 //
-//  Created by rba3555 on 17/01/2017.
+//  Created by Ronaël Bajazet on 15/03/2017.
 //  Copyright © 2017 Kairos-app. All rights reserved.
 //
 
@@ -16,15 +16,15 @@ extension Task {
         return NSFetchRequest<Task>(entityName: "Task");
     }
 
-    @NSManaged public var id: NSNumber?
-    @NSManaged public var title: String?
-    @NSManaged public var dateStart: NSDate?
     @NSManaged public var dateEnd: NSDate?
+    @NSManaged public var dateStart: NSDate?
     @NSManaged public var notes: String?
-    @NSManaged public var parent: Task?
+    @NSManaged public var taskID: NSNumber?
+    @NSManaged public var title: String?
     @NSManaged public var childTasks: NSSet?
-    @NSManaged public var users: NSSet?
+    @NSManaged public var parent: Task?
     @NSManaged public var project: Project?
+    @NSManaged public var users: NSSet?
 
 }
 

@@ -49,7 +49,7 @@ class EventHeaderCell: UITableViewCell, LabelFormableRow {
     
     @IBAction func accept(_ sender: Any) {
         let event = Event.find("id == %@", args: self.tag) as! Event
-        let parameters = ["id": event.id!]
+        let parameters = ["id": event.eventID!]
         
         EventManager.shared.accept(parameters) { (status) in
             switch status {
@@ -67,7 +67,7 @@ class EventHeaderCell: UITableViewCell, LabelFormableRow {
     
     @IBAction func decline(_ sender: Any) {
         let event = Event.find("id == %@", args: self.tag) as! Event
-        let parameters = ["id": event.id!]
+        let parameters = ["id": event.eventID!]
         
         EventManager.shared.refuse(parameters) { (status) in
             switch status {

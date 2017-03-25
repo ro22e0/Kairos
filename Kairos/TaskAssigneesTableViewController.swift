@@ -102,7 +102,7 @@ class TaskAssigneesTableViewController: UITableViewController, UIPopoverPresenta
     }
 
     fileprivate func invite(_ user: User, done: @escaping (String)->Void) -> Void {
-        let parameters = ["id": task!.id!, "user_id": user.id!]
+        let parameters = ["id": task!.taskID!, "user_id": user.userID!]
         let addedUsers = TaskManager.shared.users(for: task!)
         
         if addedUsers.contains(user) {

@@ -27,7 +27,7 @@ class SignInViewController: UIViewController {
         
         emailTextField.text = "ronael.bajazet@gmail.com"
         passwordTextField.text = "qwerty123"
-
+        
         let configuration = URLSessionConfiguration.default
         self.manager = SessionManager(configuration: configuration)
     }
@@ -39,7 +39,7 @@ class SignInViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func SignIn(_ sender: UIButton) {
-//            Crashlytics.sharedInstance().crash()
+        //            Crashlytics.sharedInstance().crash()
         SignInRequest()
     }
     
@@ -51,7 +51,9 @@ class SignInViewController: UIViewController {
             switch status {
             case .success:
                 UserManager.shared.fetchAll() {
-                    self.setRootVC(BoardStoryboardID)
+                    DispatchQueue.main.sync {
+                        self.setRootVC(.Board)
+                    }
                 }
             case .error: break
             }

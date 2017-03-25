@@ -89,14 +89,14 @@ class ChatTableViewController: UITableViewController {
     }
 
     fileprivate func delete(chatRoom: ChatRoom) {
-        let parameters = ["id": chatRoom.id!]
+        let parameters = ["id": chatRoom.chatRoomID!]
 
         ProjectManager.shared.delete(parameters) { (status) in
             switch status {
             case .success:
                 Spinner.showWhistle("kProjectSuccess")
-                print(DataSync.dataStack().viewContext)
-                print(DataSync.dataStack().mainContext)
+//                print(DataSync.dataStack().viewContext)
+                print(DataSync.newContext)
                 chatRoom.delete()
                 let _ = chatRoom.save()
                 self.chatRooms = ChatRoomManager.shared.chatRooms()

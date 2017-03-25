@@ -11,5 +11,14 @@ import SwiftyJSON
 import Alamofire
 
 class RequestManager {
-    static let sharedInstance = RequestManager()
+    static let `default` = RequestManager()
+
+    private init() {
+        serializationQueue = OperationQueue()
+        serializationQueue.maxConcurrentOperationCount = 3
+        serializationQueue.name = "Serialisation Queue"
+    }
+
+    var serializationQueue: OperationQueue
+    var fetchCount = 0
 }

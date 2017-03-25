@@ -69,7 +69,7 @@ class ProjectRequestsTableViewController: UITableViewController {
             cell.declineButton.isEnabled = false
             cell.acceptButton.isEnabled = true
         }
-        cell.tag = project.id!.intValue
+        cell.tag = project.projectID!.intValue
         let members = ProjectManager.shared.allUsers(forProject: project)
 
         if let count = project.tasks?.count, count > 0 {

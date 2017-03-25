@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  Kairos
 //
-//  Created by Ronaël Bajazet on 19/01/2017.
+//  Created by Ronaël Bajazet on 15/03/2017.
 //  Copyright © 2017 Kairos-app. All rights reserved.
 //
 
@@ -18,9 +18,8 @@ extension User {
 
     @NSManaged public var company: String?
     @NSManaged public var email: String?
-    @NSManaged public var id: NSNumber?
-    @NSManaged public var image: NSData?
-    @NSManaged public var imageUrl: String?
+    @NSManaged public var image: String?
+    @NSManaged public var imageData: NSData?
     @NSManaged public var job: String?
     @NSManaged public var location: String?
     @NSManaged public var name: String?
@@ -28,7 +27,9 @@ extension User {
     @NSManaged public var promotion: String?
     @NSManaged public var provider: String?
     @NSManaged public var school: String?
+    @NSManaged public var userID: NSNumber?
     @NSManaged public var calendars: NSSet?
+    @NSManaged public var chatRooms: NSSet?
     @NSManaged public var events: NSSet?
     @NSManaged public var friends: NSSet?
     @NSManaged public var invitedCalendars: NSSet?
@@ -45,9 +46,8 @@ extension User {
     @NSManaged public var refusedEvents: NSSet?
     @NSManaged public var refusedProjects: NSSet?
     @NSManaged public var requestedFriends: NSSet?
-    @NSManaged public var tasks: NSSet?
-    @NSManaged public var chatRooms: NSSet?
     @NSManaged public var sentMessages: NSSet?
+    @NSManaged public var tasks: NSSet?
 
 }
 
@@ -65,6 +65,23 @@ extension User {
 
     @objc(removeCalendars:)
     @NSManaged public func removeFromCalendars(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for chatRooms
+extension User {
+
+    @objc(addChatRoomsObject:)
+    @NSManaged public func addToChatRooms(_ value: ChatRoom)
+
+    @objc(removeChatRoomsObject:)
+    @NSManaged public func removeFromChatRooms(_ value: ChatRoom)
+
+    @objc(addChatRooms:)
+    @NSManaged public func addToChatRooms(_ values: NSSet)
+
+    @objc(removeChatRooms:)
+    @NSManaged public func removeFromChatRooms(_ values: NSSet)
 
 }
 
@@ -323,40 +340,6 @@ extension User {
 
 }
 
-// MARK: Generated accessors for tasks
-extension User {
-
-    @objc(addTasksObject:)
-    @NSManaged public func addToTasks(_ value: Task)
-
-    @objc(removeTasksObject:)
-    @NSManaged public func removeFromTasks(_ value: Task)
-
-    @objc(addTasks:)
-    @NSManaged public func addToTasks(_ values: NSSet)
-
-    @objc(removeTasks:)
-    @NSManaged public func removeFromTasks(_ values: NSSet)
-
-}
-
-// MARK: Generated accessors for chatRooms
-extension User {
-
-    @objc(addChatRoomsObject:)
-    @NSManaged public func addToChatRooms(_ value: ChatRoom)
-
-    @objc(removeChatRoomsObject:)
-    @NSManaged public func removeFromChatRooms(_ value: ChatRoom)
-
-    @objc(addChatRooms:)
-    @NSManaged public func addToChatRooms(_ values: NSSet)
-
-    @objc(removeChatRooms:)
-    @NSManaged public func removeFromChatRooms(_ values: NSSet)
-
-}
-
 // MARK: Generated accessors for sentMessages
 extension User {
 
@@ -371,5 +354,22 @@ extension User {
 
     @objc(removeSentMessages:)
     @NSManaged public func removeFromSentMessages(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for tasks
+extension User {
+
+    @objc(addTasksObject:)
+    @NSManaged public func addToTasks(_ value: Task)
+
+    @objc(removeTasksObject:)
+    @NSManaged public func removeFromTasks(_ value: Task)
+
+    @objc(addTasks:)
+    @NSManaged public func addToTasks(_ values: NSSet)
+
+    @objc(removeTasks:)
+    @NSManaged public func removeFromTasks(_ values: NSSet)
 
 }

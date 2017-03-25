@@ -56,7 +56,7 @@ class TaskDetailsTableViewController: ButtonBarPagerTabStripViewController {
     ///
     ///  - parameter notification: The notification
     @objc func reloadData(_ notification: Notification) {
-        self.task = Task.find("id = %@", args: self.task?.id) as? Task
+        self.task = Task.find("id = %@", args: self.task?.taskID) as? Task
         if let task = self.task {
             configureView()
             self.reloadPagerTabStripView()

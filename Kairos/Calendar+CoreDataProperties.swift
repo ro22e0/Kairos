@@ -2,7 +2,7 @@
 //  Calendar+CoreDataProperties.swift
 //  Kairos
 //
-//  Created by rba3555 on 17/01/2017.
+//  Created by Ronaël Bajazet on 15/03/2017.
 //  Copyright © 2017 Kairos-app. All rights reserved.
 //
 
@@ -16,8 +16,8 @@ extension Calendar {
         return NSFetchRequest<Calendar>(entityName: "Calendar");
     }
 
+    @NSManaged public var calendarID: NSNumber?
     @NSManaged public var color: String?
-    @NSManaged public var id: NSNumber?
     @NSManaged public var name: String?
     @NSManaged public var userStatus: String?
     @NSManaged public var events: NSSet?

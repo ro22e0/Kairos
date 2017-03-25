@@ -40,7 +40,7 @@ class WebSocketClient: WebSocketDelegate {
         let user = UserManager.shared.current.user
         var message = "{\"command\": \"message\", \"identifier\": \"{\\\"channel\\\": \\\"ChatRoomChannel\\\"," +
         "\\\"id\\\": \\\""
-        message += "\(chatRoom.id!)" + "\\\"}\", \"data\": \"{\\\"body\\\": \\\"" + text + "\\\", " + "\\\"action\\\": \\\"send_message\\\", \\\"user_id\\\": " + "\(user!.id!)" + "}\"}"
+        message += "\(chatRoom.chatRoomID!)" + "\\\"}\", \"data\": \"{\\\"body\\\": \\\"" + text + "\\\", " + "\\\"action\\\": \\\"send_message\\\", \\\"user_id\\\": " + "\(user!.userID!)" + "}\"}"
         socket.write(string: message)
     }
     
@@ -48,7 +48,7 @@ class WebSocketClient: WebSocketDelegate {
         print("websocket is connected")
         
         var message = "{\"command\": \"subscribe\", \"identifier\": \"{\\\"channel\\\": \\\"ChatRoomChannel\\\","
-        message += "\\\"id\\\": \\\"" + "\(chatRoom.id!)" + "\\\"}\"}"
+        message += "\\\"id\\\": \\\"" + "\(chatRoom.chatRoomID!)" + "\\\"}\"}"
         socket.write(string: message.description)
     }
     

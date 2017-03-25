@@ -3,7 +3,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'Kairos' do
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 4.2.0'
   pod 'AlamofireNetworkActivityIndicator'
   pod 'SwiftyJSON'
   pod 'Google/SignIn'
@@ -15,7 +15,9 @@ target 'Kairos' do
   pod 'Crashlytics'
   pod 'FSCalendar'
   pod 'Whisper'
-  pod 'Sync'
+  pod 'CocoaLumberjack'
+  pod 'CoreStore'
+  #pod 'Sync'
   pod 'Former'
   pod 'DZNEmptyDataSet'
   pod 'DynamicColor'
@@ -25,6 +27,7 @@ target 'Kairos' do
   pod 'Starscream'
 #  pod 'Socket.IO-Client-Swift'
   pod 'SwiftMessages'
+  pod 'Arrow'
   # pod 'DatePickerCell'
   # pod 'UITextField+Shake', '~> 1.1'
 end

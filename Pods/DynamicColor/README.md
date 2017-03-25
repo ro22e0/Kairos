@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="http://yannickloriot.com/resources/dynamiccolor-header.png">
+  <img src="http://yannickloriot.com/resources/dynamiccolor-header.png" alt="DynamicColor">
 </p>
 
 <p align="center">
-  <a href="https://cocoapod-badges.herokuapp.com/l/DynamicColor/badge.svg"><img alt="License" src="https://cocoapod-badges.herokuapp.com/l/DynamicColor/badge.svg"/></a>
-  <a href="http://cocoadocs.org/docsets/DynamicColor/"><img alt="Supported Plateforms" src="https://cocoapod-badges.herokuapp.com/p/DynamicColor/badge.svg"/></a>
+  <a href="http://cocoadocs.org/docsets/DynamicColor/"><img alt="Supported Platforms" src="https://cocoapod-badges.herokuapp.com/p/DynamicColor/badge.svg"/></a>
   <a href="http://cocoadocs.org/docsets/DynamicColor/"><img alt="Version" src="https://cocoapod-badges.herokuapp.com/v/DynamicColor/badge.svg"/></a>
-  <a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"/></a>
+  <a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-%E2%9C%93-brightgreen.svg?style=flat"/></a>
+  <a href="https://github.com/apple/swift-package-manager"><img alt="Swift Package Manager compatible" src="https://img.shields.io/badge/SPM-%E2%9C%93-brightgreen.svg?style=flat"/></a>
   <a href="https://travis-ci.org/yannickl/DynamicColor"><img alt="Build status" src="https://travis-ci.org/yannickl/DynamicColor.svg?branch=master"/></a>
   <a href="http://codecov.io/github/yannickl/DynamicColor"><img alt="Code coverage status" src="http://codecov.io/github/yannickl/DynamicColor/coverage.svg?branch=master"/></a>
 </p>
 
-**DynamicColor** provides powerful methods to manipulate colours in an easy way in Swift.
+**DynamicColor** provides powerful methods to manipulate colors in an easy way in Swift.
 
 <p align="center">
   <img src="http://yannickloriot.com/resources/dynamiccolor-sample-screenshot.png" alt="example screenshot" width="300" />
@@ -19,12 +19,16 @@
 </p>
 
 <p align="center">
-    <a href="#usage">Usage</a> • <a href="#installation">Installation</a> • <a href="#contact">Contact</a> • <a href="#license-mit">License</a>
+    <a href="#requirements">Requirements</a> • <a href="#usage">Usage</a> • <a href="#installation">Installation</a> • <a href="#contact">Contact</a> • <a href="#license-mit">License</a>
 </p>
 
-## Usage
+## Requirements
 
-*This branch is Swift 3 compatible, use the [v2 version](https://github.com/yannickl/DynamicColor/tree/2.4.0) for Swift 2.x.*
+- iOS 8.0+ / Mac OS X 10.9+ / tvOS 9.0+ / watchOS 2.0+
+- Xcode 8.0+
+- Swift 3.0+
+
+## Usage
 
 #### Creation (Hex String)
 
@@ -231,7 +235,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
 use_frameworks!
-pod 'DynamicColor', '~> 3.1.0'
+pod 'DynamicColor', '~> 3.2.1'
 ```
 
 Install into your project:
@@ -262,7 +266,7 @@ $ brew install carthage
 To integrate `DynamicColor` into your Xcode project using Carthage, specify it in your `Cartfile` file:
 
 ```ogdl
-github "yannickl/DynamicColor" >= 3.1.0
+github "yannickl/DynamicColor" >= 3.2.1
 ```
 
 #### Swift Package Manager
@@ -274,12 +278,12 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .Package(url: "https://github.com/yannickl/DynamicColor.git", versions: "3.1.0" ..< Version.max)
+        .Package(url: "https://github.com/yannickl/DynamicColor.git", versions: "3.2.1" ..< Version.max)
     ]
 )
 ```
 
-Note that the [Swift Package Manager](https://swift.org/package-manager) is still in early design and development, for more infomation checkout its [GitHub Page](https://github.com/apple/swift-package-manager)
+Note that the [Swift Package Manager](https://swift.org/package-manager) is still in early design and development, for more information checkout its [GitHub Page](https://github.com/apple/swift-package-manager).
 
 #### Manually
 

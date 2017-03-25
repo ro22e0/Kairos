@@ -110,7 +110,7 @@ class ProjectMembersTableViewController: UITableViewController, UIPopoverPresent
     }
     
     fileprivate func invite(_ user: User, done: @escaping (String)->Void) -> Void {
-        let parameters = ["id": project!.id!, "user_id": user.id!]
+        let parameters = ["id": project!.projectID!, "user_id": user.userID!]
         let addedUsers = ProjectManager.shared.allUsers(forProject: project!)
         
         if addedUsers.contains(user) {

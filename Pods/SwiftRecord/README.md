@@ -58,7 +58,7 @@ if you love SwiftRecord, tweet it!
 
 1. Just add SwiftRecord to your Cartfile:
 
-	github "arkverse/SwiftRecord" >= 0.0.1
+	github "arkverse/SwiftRecord" >= 0.0.5
 	
 2. and run `carthage update`
 
@@ -82,7 +82,7 @@ Drag and drop either `Classes/SwiftRecord.swift` or `SwiftRecord.framework` into
 		@NSManaged var attendess: NSSet
 	}
 	```
-2. Set up Core Data by naming your model file `MyAppName.xcdatamodel`. Optionally, you can set your own model name by calling `CoreDataManager.sharedManager.modelName = "mymodelname"`
+2. Set up Core Data by naming your model file `MyAppName.xcdatamodel`. Optionally, you can set your own model name by calling `SwiftRecored.sharedRecord.modelName = "mymodelname"`
 
 ### create, save & delete:
 
@@ -158,15 +158,15 @@ if you made your own, feel free to set it
 ```swift
 var myContext: NSManagedObjectContext = ...
 
-CoreDataManager.sharedManager.managedObjectContext = myContext
+SwiftRecord.sharedRecord.managedObjectContext = myContext
 ```
 
 #### Custom CoreData model or .sqlite database
 Don't set these if you set your own context.
 If you have a modelName different from the name of your app, set it. If you want a different databse name, set it.
 ```swift
-CoreDataManager.sharedManager.modelName = "MyModelName"
-CoreDataManager.sharedManager.databaseName = "custom_database_name"
+SwiftRecord.sharedRecord.modelName = "MyModelName"
+SwiftRecord.sharedRecord.databaseName = "custom_database_name"
 ```
 
 ### Mapping
@@ -224,7 +224,7 @@ Note, this will set your ID property whenever one isn't provided. You will have 
 
 ObjectiveRecord supports CoreData's in-memory store. In any place, before your tests start running, it's enough to call
 ```swift
-CoreDataManager.sharedManager.useInMemoryStore()
+SwiftRecord.sharedRecord.useInMemoryStore()
 ```
 
 #### Roadmap

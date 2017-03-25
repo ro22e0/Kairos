@@ -298,7 +298,7 @@ class EventTableViewController: FormViewController {
     fileprivate func create() {
         var parameters = event!.dictionaryWithValues(forKeys: ["title", "location"])
         parameters["description"] = self.event?.notes
-        parameters["calendar_id"] = self.selectedCalendar?.id
+        parameters["calendar_id"] = self.selectedCalendar?.calendarID
         parameters["date_start"] = String.formatDateApi(self.event!.dateStart! as Date)
         parameters["date_end"] = String.formatDateApi(self.event!.dateEnd! as Date)
         
@@ -318,7 +318,7 @@ class EventTableViewController: FormViewController {
     fileprivate func update() {
         var parameters = event!.dictionaryWithValues(forKeys: ["id", "title", "location"])
         parameters["description"] = self.event?.notes
-        parameters["calendar_id"] = self.selectedCalendar?.id
+        parameters["calendar_id"] = self.selectedCalendar?.calendarID
         parameters["date_start"] = String.formatDateApi(self.event!.dateStart! as Date)
         parameters["date_end"] = String.formatDateApi(self.event!.dateEnd! as Date)
         
@@ -339,14 +339,12 @@ class EventTableViewController: FormViewController {
     }
     
     fileprivate func delete() {
-        let parameters = ["id": event!.id!]
+        let parameters = ["id": event!.eventID!]
         
         EventManager.shared.delete(parameters) { (status) in
             switch status {
             case .success:
                 Spinner.showWhistle("kEventSuccess")
-                print(DataSync.dataStack().viewContext)
-                print(DataSync.dataStack().mainContext)
                 self.event?.delete()
                 self.event?.save()
                 print(self.event?.title)
@@ -358,7 +356,7 @@ class EventTableViewController: FormViewController {
                     self.navigationController!.popViewController(animated: true)
                 }
                 do {
-                    try DataSync.dataStack().mainContext.save()
+//                    try DataSync.newContext.save()
                 } catch (let error) {
                     print(error)
                 }

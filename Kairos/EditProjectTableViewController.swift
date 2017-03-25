@@ -365,14 +365,14 @@ class EditProjectTableViewController: UITableViewController, UIPopoverPresentati
     }
     
     fileprivate func delete() {
-        let parameters = ["id": project!.id!]
+        let parameters = ["id": project!.projectID!]
         
         ProjectManager.shared.delete(parameters) { (status) in
             switch status {
             case .success:
                 Spinner.showWhistle("kProjectSuccess")
-                print(DataSync.dataStack().viewContext)
-                print(DataSync.dataStack().mainContext)
+//                print(DataSync.dataStack().viewContext)
+//                print(DataSync.dataStack().mainContext)
                 self.project?.delete()
                 self.project?.save()
                 print(self.project?.title)
@@ -407,11 +407,11 @@ class EditProjectTableViewController: UITableViewController, UIPopoverPresentati
         addedUsers.forEach { (user, status) in
             switch status {
             case .Invited:
-                invited.append(user.id!.intValue)
+                invited.append(user.userID!.intValue)
             case .Removed:
-                removed.append(user.id!.intValue)
+                removed.append(user.userID!.intValue)
             case .Owner:
-                owners.append(user.id!.intValue)
+                owners.append(user.userID!.intValue)
             default:
                 break
             }
@@ -445,11 +445,11 @@ class EditProjectTableViewController: UITableViewController, UIPopoverPresentati
         addedUsers.forEach { (user, status) in
             switch status {
             case .Invited:
-                invited.append(user.id!.intValue)
+                invited.append(user.userID!.intValue)
             case .Removed:
-                removed.append(user.id!.intValue)
+                removed.append(user.userID!.intValue)
             case .Owner:
-                owners.append(user.id!.intValue)
+                owners.append(user.userID!.intValue)
             default:
                 break
             }

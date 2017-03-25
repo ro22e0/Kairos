@@ -42,7 +42,7 @@ class CalendarDetailsTableViewController: UITableViewController {
     ///
     ///  - parameter notification: The notification
     @objc func reloadData(_ notification: Notification) {
-        self.calendar = Calendar.find("id = %@", args: self.calendar?.id) as? Calendar
+        self.calendar = Calendar.find("id = %@", args: self.calendar?.calendarID) as? Calendar
         if let calendar = self.calendar, calendar.userStatus != UserStatus.Refused.rawValue {
             self.former.removeAll()
             self.configure()
@@ -82,7 +82,7 @@ class CalendarDetailsTableViewController: UITableViewController {
                 $0.colorImageView.round()
             }
             }.configure {
-                $0.cell.tag = calendar!.id!.intValue
+                $0.cell.tag = calendar!.calendarID!.intValue
                 $0.text = calendar?.name
                 $0.rowHeight = 86
         }
@@ -150,7 +150,7 @@ class CalendarDetailsTableViewController: UITableViewController {
     }
     
     fileprivate func invite(_ user: User, done: @escaping (String)->Void) -> Void {
-        let parameters = ["id": calendar!.id!, "user_id": user.id!]
+        let parameters = ["id": calendar!.calendarID!, "user_id": user.userID!]
         let addedUsers = CalendarManager.shared.allUsers(forCalendar: calendar!)
         
         if addedUsers.contains(user) {

@@ -58,7 +58,7 @@ class ProjectDetailsViewController: ButtonBarPagerTabStripViewController {
     ///
     ///  - parameter notification: The notification
     @objc func reloadData(_ notification: Notification) {
-        self.project = Project.find("id = %@", args: self.project?.id) as? Project
+        self.project = Project.find("id = %@", args: self.project?.projectID) as? Project
         if let project = self.project, project.userStatus != UserStatus.Refused.rawValue {
             configureDetailsView()
             self.reloadPagerTabStripView()
@@ -153,7 +153,7 @@ class ProjectDetailsViewController: ButtonBarPagerTabStripViewController {
     }
     
     @IBAction func accept(_ sender: Any) {
-        let parameters = ["id": project!.id!]
+        let parameters = ["id": project!.projectID!]
         
         ProjectManager.shared.accept(parameters) { (status) in
             switch status {
@@ -170,7 +170,7 @@ class ProjectDetailsViewController: ButtonBarPagerTabStripViewController {
     }
     
     @IBAction func decline(_ sender: Any) {
-        let parameters = ["id": project!.id!]
+        let parameters = ["id": project!.projectID!]
         
         ProjectManager.shared.refuse(parameters) { (status) in
             switch status {

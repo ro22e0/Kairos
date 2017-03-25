@@ -31,7 +31,7 @@ class CompleteProfileViewController: FormViewController {
     }
     
     fileprivate func configure() {
-        former = Former(tableView: self.profileTableView)
+//        self.former = Former(tableView: self.profileTableView)
         
         title = "Complete your profile"
         tableView.contentInset.top = 40
@@ -163,7 +163,7 @@ class CompleteProfileViewController: FormViewController {
             case .success:
                 print("yeah")
                 _ = self.user.save()
-                self.setRootVC(StoryboardID.Board.rawValue)
+                self.setRootVC(StoryboardID.Board)
             case .error(let error):
                 print(error)
             }
@@ -179,7 +179,7 @@ class CompleteProfileViewController: FormViewController {
                 user.user!.setValue(value, forKey: key)
             }
         }
-        self.setRootVC(StoryboardID.Board.rawValue)
+        self.setRootVC(StoryboardID.Board)
     }
 
     /*
@@ -199,7 +199,7 @@ extension CompleteProfileViewController: UIImagePickerControllerDelegate, UINavi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             picker.dismiss(animated: true, completion: nil)
-            user.user!.image = UIImageJPEGRepresentation(image, 1) as NSData?
+            user.user!.imageData = UIImageJPEGRepresentation(image, 1) as NSData?
             let imageRow = self.rows.first as! LabelRowFormer<ProfileImagePickerTableViewCell>
             imageRow.cellUpdate {
                 $0.imageProfileView.image = image

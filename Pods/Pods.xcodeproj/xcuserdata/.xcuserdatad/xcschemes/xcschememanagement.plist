@@ -14,12 +14,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Arrow.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>DATAStack.xcscheme</key>
+		<key>CocoaLumberjack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>CoreStore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -94,16 +104,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SYNCPropertyMapper.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Socket.IO-Client-Swift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Starscream.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -130,11 +130,6 @@
 			<false/>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Sync.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

@@ -70,8 +70,8 @@ class FriendActionPopoverTableViewController: UITableViewController {
      */
     
     fileprivate func removeFriend() {
-        let user = User.find("id == %@", args: friend!.id!) as! User
-        let parameters = ["user_id": user.id!]
+        let user = User.find("id == %@", args: friend!.userID!) as! User
+        let parameters = ["user_id": user.userID!]
         
         FriendManager.shared.remove(parameters) { (status) in
             switch status {

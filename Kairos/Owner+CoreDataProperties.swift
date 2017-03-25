@@ -2,7 +2,7 @@
 //  Owner+CoreDataProperties.swift
 //  Kairos
 //
-//  Created by rba3555 on 17/01/2017.
+//  Created by Ronaël Bajazet on 15/03/2017.
 //  Copyright © 2017 Kairos-app. All rights reserved.
 //
 
@@ -16,7 +16,7 @@ extension Owner {
         return NSFetchRequest<Owner>(entityName: "Owner");
     }
 
-    @NSManaged public var id: NSNumber?
+    @NSManaged public var ownerID: NSNumber?
     @NSManaged public var friends: NSSet?
     @NSManaged public var pendingFriends: NSSet?
     @NSManaged public var requestedFriends: NSSet?

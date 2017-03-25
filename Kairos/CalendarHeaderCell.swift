@@ -46,7 +46,7 @@ class CalendarHeaderCell: UITableViewCell, LabelFormableRow {
 
     @IBAction func accept(_ sender: Any) {
         let calendar = Calendar.find("id == %@", args: self.tag) as! Calendar
-        let parameters = ["id": calendar.id!]
+        let parameters = ["id": calendar.calendarID!]
         
         CalendarManager.shared.accept(parameters) { (status) in
             switch status {
@@ -64,7 +64,7 @@ class CalendarHeaderCell: UITableViewCell, LabelFormableRow {
 
     @IBAction func decline(_ sender: Any) {
         let calendar = Calendar.find("id == %@", args: self.tag) as! Calendar
-        let parameters = ["id": calendar.id!]
+        let parameters = ["id": calendar.calendarID!]
         
         CalendarManager.shared.refuse(parameters) { (status) in
             switch status {

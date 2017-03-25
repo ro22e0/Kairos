@@ -81,7 +81,7 @@ class FriendsRequestsTableViewController: UITableViewController {
                 cell.mutualFriendsLabel.isHidden = true
             }
             
-            cell.tag = Int(requestedFriends[indexPath.row].id!)
+            cell.tag = Int(requestedFriends[indexPath.row].userID!)
             
             return cell
         }
@@ -89,7 +89,7 @@ class FriendsRequestsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: pendingCellID, for: indexPath) as! SentInvitationTableViewCell
         
         cell.nameLabel.text = pendingFriends[indexPath.row].name
-        cell.tag = Int(pendingFriends[indexPath.row].id!)
+        cell.tag = Int(pendingFriends[indexPath.row].userID!)
         
         return cell
     }

@@ -15,9 +15,12 @@ import Fabric
 import Crashlytics
 import SwiftRecord
 import DynamicColor
-import Sync
-import DATAStack
-import PonyDebugger
+import CocoaLumberjack
+//import MagicalRecord
+//import Sync
+//import DATAStack
+import CoreStore
+import Arrow
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,49 +31,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.NS
         
         // Fetch update
-
-//        let defautls = UserDefaults.standard
-//        if let isLogged = defautls.value(forKey: userLoginKey) as? Bool, isLogged { // TODO
-//            UserManager.shared.fetchAll()
-//        }
         
+        //        let defautls = UserDefaults.standard
+        //        if let isLogged = defautls.value(forKey: userLoginKey) as? Bool, isLogged { // TODO
+        //            UserManager.shared.fetchAll()
+        //        }
         
-        
-        
-        
-        
-        let debugger = PDDebugger.defaultInstance()
-        
-        // Enable Network debugging, and automatically track network traffic that comes through any classes that implement either NSURLConnectionDelegate, NSURLSessionTaskDelegate, NSURLSessionDataDelegate or NSURLSessionDataDelegate methods.
-        debugger?.enableNetworkTrafficDebugging()
-        debugger?.forwardAllNetworkTraffic()
-        
-        // Enable Core Data debugging, and broadcast the main managed object context.
-        debugger?.enableCoreDataDebugging()
-        debugger?.add(dataStack.mainContext, withName: "Kairos")
-        
-        // Enable View Hierarchy debugging. This will swizzle UIView methods to monitor changes in the hierarchy
-        // Choose a few UIView key paths to display as attributes of the dom nodes
-        debugger?.enableViewHierarchyDebugging()
-        debugger?.setDisplayedViewAttributeKeyPaths(["frame", "hidden", "alpha", "opaque", "accessibilityLabel", "text"])
-    
-        // Connect to a specific host
-        // Or auto connect via bonjour discovery
-        debugger?.autoConnect()
-        // Or to a specific ponyd bonjour service
-        //[debugger autoConnectToBonjourServiceNamed:@"MY PONY"];
-        
-        // Enable remote logging to the DevTools Console via PDLog()/PDLogObjects().
-        debugger?.enableRemoteLogging()
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        do {
+        try CoreStore.addStorageAndWait()
+        } catch {
+            print("fails")
+        }
+        DataSync.deleteAll()
 
         UINavigationBar.appearance().tintColor = .orangeTint()
         UINavigationBar.appearance().backgroundColor = .white
@@ -90,10 +62,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //        UINavigationBar.appearance()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.changeNotification), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.dataStack.mainContext)
+//        NotificationCenter.default.addObserver(self, selector: #selector(self.changeNotification), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.dataStack.mainContext)
         
         SwiftRecord.generateRelationships = true
-        SwiftRecord.sharedRecord.managedObjectContext = self.dataStack.mainContext
+        SwiftRecord.sharedRecord.managedObjectContext = self.mainContext
         
         // Fabric
         Fabric.with([Crashlytics.self])
@@ -116,9 +88,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
         GIDSignIn.sharedInstance().delegate = self
-
+        
         // Configure FBSDK
-        FBSDKLoginButton.classForCoder()
+        _ = FBSDKLoginButton.classForCoder()
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -144,28 +116,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+//        MagicalRecord.cleanUp()
     }
-    
-    // MARK: - Core Data stack
-    
-    var dataStack: DATAStack = {
-        let dataStack = DATAStack(modelName: "Kairos")
-        
-        return dataStack
+
+    // MARK: - CoreData main Context
+    lazy var mainContext: NSManagedObjectContext = {
+        return CoreStore.defaultStack.internalContext()
     }()
-    
+
     func changeNotification(_ notification: Notification) {
-        let deletedObjects = notification.userInfo![NSDeletedObjectsKey]
-        print(deletedObjects)
-        let insertedObjects = notification.userInfo![NSInsertedObjectsKey]
-        print(insertedObjects)
+//        let deletedObjects = notification.userInfo![NSDeletedObjectsKey]
+//        print(deletedObjects)
+//        let insertedObjects = notification.userInfo![NSInsertedObjectsKey]
+//        print(insertedObjects)
     }
     
     // MARK: - Core Data Saving support
     
     func saveContext() {
-        try! self.dataStack.mainContext.save()
+//        try! self.dataStack.mainContext.save()
     }
 }
 
@@ -173,8 +142,8 @@ extension AppDelegate: GIDSignInDelegate {
     func application(_ application: UIApplication,
                      open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication: sourceApplication,
-                                                 annotation: annotation){
+                                             sourceApplication: sourceApplication,
+                                             annotation: annotation){
             return true
         } else if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
             return true
@@ -186,8 +155,8 @@ extension AppDelegate: GIDSignInDelegate {
                      open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
         
         if GIDSignIn.sharedInstance().handle(url,
-                                                sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                annotation: options[UIApplicationOpenURLOptionsKey.annotation]) {
+                                             sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                             annotation: options[UIApplicationOpenURLOptionsKey.annotation]) {
             return true
         } else if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?, annotation: options[UIApplicationOpenURLOptionsKey.annotation]) {
             return true

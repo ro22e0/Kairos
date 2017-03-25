@@ -10,16 +10,13 @@ import Foundation
 import CoreData
 import SwiftyJSON
 import SwiftRecord
-import DATAStack
-import Sync
+//import Arrow
+import CoreStore
+//import MagicalRecord
+//import DATAStack
+//import Sync
 
 struct DataSync {
-    
-    static func dataStack() -> DATAStack {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        
-        return delegate.dataStack
-    }
     
     static func save() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -27,13 +24,43 @@ struct DataSync {
         delegate.saveContext()
     }
     
-    static func sync(entity entityName: String, predicate: NSPredicate?, data: [[String: Any]], all: Bool = false, completion: @escaping ((NSError?) -> Void)) {
-        let ops: Sync.OperationOptions = all ? [.All] : [.Insert, .Update]
-        if predicate != nil {
-            Sync.changes(data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops, completion: completion)
-        } else {
-            Sync.changes(data, inEntityNamed: entityName, dataStack: self.dataStack(), operations: ops, completion: completion)
-        }
+    static var newContext: NSManagedObjectContext = {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+
+        return delegate.mainContext
+    }()
+    
+    //    static func sync(inEntityNamed entityName: String, predicate: NSPredicate? = nil, data: [[String: Any]],  firstImport: Bool = false, completion: @escaping ((CustomStatus) -> Void)) {
+    //
+    //        let ops: Sync.OperationOptions = firstImport ? [.All] : [.Insert, .Update]
+    //
+    ////        let operation = Sync(changes: data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops)
+    //
+    //        Sync.changes(data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops) { (error) in
+    //            let operation = BlockOperation {
+    //                if error == nil {
+    //                    completion(.success)
+    //                } else {
+    //                    completion(.error("ResponseSerializableObjectFailed"))
+    //                }
+    //            }
+    //            RequestManager.default.serializationQueue.addOperation(operation)
+    //        }
+    //
+    ////
+    ////        Sync.changes(data, inEntityNamed: entityName, predicate: predicate, dataStack: self.dataStack(), operations: ops, completion: completion)
+    ////
+    ////
+    ////
+    ////
+    ////        operation.completionBlock = {
+    ////            if operation.isFinished && !operation.isCancelled {
+    ////            } else {
+    ////            }
+    ////        }
+    //    }
+    
+    func sync<T>(object: T.Type, data: [[String: Any]]) {
     }
     
     static func transformJson(_ json: JSON) -> [[String: Any]] {
@@ -48,43 +75,36 @@ struct DataSync {
     }
     
     static func deleteAll() {
-        Owner.deleteAll()
-        Calendar.deleteAll()
-        Event.deleteAll()
-        Project.deleteAll()
-        Task.deleteAll()
-        User.deleteAll()
-        ChatRoom.deleteAll()
-        Message.deleteAll()
-        try! NSManagedObjectContext.defaultContext.save()
-//        try! self.dataStack().drop()
+        CoreStore.beginAsynchronous { (transaction) -> Void in
+            transaction.deleteAll(From<Owner>())
+            transaction.deleteAll(From<Event>())
+            transaction.deleteAll(From<Calendar>())
+            transaction.deleteAll(From<User>())
+            transaction.deleteAll(From<Project>())
+            transaction.deleteAll(From<Task>())
+            transaction.deleteAll(From<ChatRoom>())
+            transaction.deleteAll(From<Message>())
+            transaction.commit()
+        }
+//        Owner.deleteAll()
+//        Calendar.deleteAll()
+//        Event.deleteAll()
+//        Project.deleteAll()
+//        Task.deleteAll()
+//        User.deleteAll()
+//        ChatRoom.deleteAll()
+//        Message.deleteAll()
+//        try! NSManagedObjectContext.defaultContext.save()
+        //        try! self.dataStack().drop()
     }
     
     // MARK: - Friends
     
-    fileprivate static func deleteFriends(_ friends: [JSON]) {
-        let ids = NSMutableArray()
-        
-        for f in friends {
-            ids.add(f["id"].object)
-        }
-        
-        let predicate = NSPredicate(format: "NOT (id IN %@)", ids)
-        let deletedFriends = User.query(predicate) as! [User]
-        for f in deletedFriends {
-            f.delete()
-        }
-    }
-    
     static func syncFriends(_ json: JSON, completionHandler: @escaping ()->()) {
         var data: [String: Any] = json.dictionaryObject!
-        data["id"] = UserManager.shared.current.id
+        data["id"] = UserManager.shared.current.ownerID
         print(data)
-        DataSync.sync(entity: "Owner", predicate: nil, data: [data], completion: { error in
-            try? self.dataStack().mainContext.save()
-            print(NSDate(), "done")
-            completionHandler()
-        })
+//        Owner.mr_import(from: [data])
     }
     
     static func fetchFriends(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -95,20 +115,56 @@ struct DataSync {
                 UserManager.shared.setCredentials(response.response!)
                 switch response.response!.statusCode {
                 case 200...203:
+
                     if let value = response.result.value {
                         let json = JSON(value)
+                        switch response.response!.statusCode {
+                        case 200:
+                            var data: [String: Any] = json.dictionaryObject!
+                            data["id"] = UserManager.shared.current.ownerID
+                            print(data)
 
-                        print(json)
-
-                        var data: [String: Any] = json.dictionaryObject!
-                        data["id"] = UserManager.shared.current.id
-                        print(data)
-                        DataSync.sync(entity: "Owner", predicate: nil, data: [data], all: true, completion: { error in
-                            try? self.dataStack().mainContext.save()
-                            print(NSDate(), "done")
-                            completionHandler(.success(nil))
-                        })
+                            let source = ArrowJSON(data)
+                            CoreStore.beginAsynchronous({ (transaction) in
+                                do {
+                                    try _ = transaction.importUniqueObject(
+                                        Into<Owner>(),
+                                        source: source!
+                                    )
+                                }
+                                catch {
+                                    return // Woops, don't save
+                                }
+                                transaction.commit({ (result) in
+                                    switch result {
+                                    case .success(let hasChanges):
+                                        print("success!", hasChanges)
+                                        let defautls = UserDefaults.standard
+                                        defautls.setValue(true, forKey: userLoginKey)
+                                        completionHandler(.success(nil))
+                                    case .failure(let error):
+                                        print(error)
+                                    }
+                                })
+                            })
+                            //                        MagicalRecord.saveInBackground({ (localContext) in
+                            //                            Owner.mr_import(from: data, in: localContext)
+                            ////                            Owner.mr_import(from: [data], in: localContext)
+                            //                        }, completion: {
+                            //                            print("finish")
+                            //                            let defautls = UserDefaults.standard
+                            //                            defautls.setValue(true, forKey: userLoginKey)
+                            ////                            self.current = Owner.mr_findAll()?.first as! Owner
+                            //                            completionHandler(.success(nil))
+                        //                        })
+                        default:
+                            completionHandler(.error("Fail to connect"))
+                        }
                     }
+
+                    
+                    
+                    
                 default:
                     completionHandler(.error("error"))
                 }
@@ -117,9 +173,9 @@ struct DataSync {
             }
         }
     }
-
+    
     // MARK: - Users
-
+    
     fileprivate static func deleteUsers(_ users: [JSON]) {
         let ids = NSMutableArray()
         
@@ -130,8 +186,8 @@ struct DataSync {
         let predicate = NSPredicate(format: "NOT (id IN %@)", ids)
         let deletedUsers = User.query(predicate) as! [User]
         for u in deletedUsers {
-            let friendExist = User.find("id == %@", args: u.id!) != nil ? true : false
-            let ownerExist = Owner.find("id == %@", args: u.id!) != nil ? true : false
+            let friendExist = User.find("id == %@", args: u.userID!) != nil ? true : false
+            let ownerExist = Owner.find("id == %@", args: u.userID!) != nil ? true : false
             
             if (!friendExist && !ownerExist) {
                 u.delete()
@@ -146,21 +202,21 @@ struct DataSync {
             print("User id : ", u["id"])
             print("User id : ", User.find("id == %@", args: u["id"].stringValue))
             print("Owner id : ", Owner.find("id == %@", args: u["id"].stringValue))
-            
+
             let friendExist = User.find("id == %@", args: u["id"].stringValue) != nil ? true : false
             let ownerExist = Owner.find("id == %@", args: u["id"].stringValue) != nil ? true : false
-            
+
             if (!friendExist && !ownerExist) {
                 let user = User.findOrCreate(["id": u["id"].object]) as! User
                 user.name = u["name"].stringValue
                 user.nickname = u["nickname"].stringValue
                 user.email = u["email"].stringValue
-                user.image = u["image"].rawValue as? NSData
+                user.image = u["image"].string
             }
         }
         User.save()
     }
-    
+
     static func fetchUsers(_ completionHandler: @escaping (StatusRequest) -> Void) {
         RouterWrapper.shared.request(.getUsers) { (response) in
             print(response.response) // URL response
@@ -170,12 +226,37 @@ struct DataSync {
                 switch response.response!.statusCode {
                 case 200...203:
                     if let value = response.result.value {
-                        let json = JSON(value)
-                        print(json)
-                        self.sync(entity: "User", predicate: nil, data: DataSync.transformJson(json), all: true, completion: { error in
-                            try! self.dataStack().mainContext.save()
-                            completionHandler(StatusRequest.success(nil))
+                        let json = JSON(value).array
+//                        print(json)
+
+                        let source = ArrowJSON(value)
+                        CoreStore.beginAsynchronous({ (transaction) in
+                            do {
+                                try _ = transaction.importUniqueObjects(
+                                    Into<User>(),
+                                    sourceArray: source!.collection!
+                                )
+                            }
+                            catch {
+                                return // Woops, don't save
+                            }
+                            transaction.commit({ (result) in
+                                switch result {
+                                case .success(let hasChanges):
+                                    print("success!", hasChanges)
+                                    completionHandler(.success(nil))
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            })
                         })
+
+//                        let data = self.transformJson(json)
+//                        MagicalRecord.saveInBackground({ (localContext) in
+//                            User.mr_import(from: json, in: localContext)
+//                        }, completion: {
+//                            print("finish")
+//                        })
                     }
                 default:
                     completionHandler(.error("error"))
@@ -192,7 +273,7 @@ struct DataSync {
     fileprivate static func deleteCalendars(_ calendars: [JSON]) {
         let ids = NSMutableArray()
         let id: Int?
-        
+
         for c in calendars {
             ids.add(c["id"].object)
         }
@@ -223,13 +304,11 @@ struct DataSync {
     
     static func syncCalendars(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Calendar", predicate: nil, data: [data!], completion: { error in
-            try! self.dataStack().mainContext.save()
-            let c = Calendar.all().first as! Calendar
-            print(c)
-            print(NSDate(), "done")
-            completionHandler()
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Calendar.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
     
     static func fetchCalendars(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -239,22 +318,40 @@ struct DataSync {
             case .success:
                 UserManager.shared.setCredentials(response.response!)
                 if let value = response.result.value {
-                    let json = JSON(value)
-                    
+                    let json = JSON(value).arrayValue
                     print(json)
                     
-                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
-                        return Calendar.query(predicate)
+                    let source = ArrowJSON(value)
+                    CoreStore.beginAsynchronous({ (transaction) in
+                        do {
+                            try _ = transaction.importUniqueObjects(
+                                Into<Calendar>(),
+                                sourceArray: source!.collection!
+                            )
+                        }
+                        catch {
+                            return // Woops, don't save
+                        }
+                        transaction.commit({ (result) in
+                            switch result {
+                            case .success(let hasChanges):
+                                print("success!", hasChanges)
+                                completionHandler(.success(nil))
+                            case .failure(let error):
+                                print(error)
+                            }
+                        })
                     })
-                    let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "Calendar", predicate: nil, data: data, all: true, completion: { error in
-                        //                        Calendar.save()
-                        try! self.dataStack().mainContext.save()
-                        let c = Calendar.all().first as! Calendar
-                        print(c)
-                        print(NSDate(), "done")
-                        completionHandler(.success(nil))
-                    })
+                    
+//                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+//                        return Calendar.query(predicate)
+//                    })
+//                    let data = DataSync.transformJson(json)
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Calendar.mr_import(from: json, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                 }
             case .failure(let error):
                 completionHandler(.error("error"))
@@ -296,15 +393,13 @@ struct DataSync {
     
     static func syncEvents(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Event", predicate: nil, data: [data!], completion: { error in
-            //          try! self.dataStack().mainContext.save()
-            let c = Event.all().first as! Event
-            print(c)
-            print(NSDate(), "done")
-            completionHandler()
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Event.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
-    
+
     static func fetchEvents() {
         RouterWrapper.shared.request(.getEvents) { (response) in
             print(response.response) // URL response
@@ -312,11 +407,13 @@ struct DataSync {
             case .success:
                 UserManager.shared.setCredentials(response.response!)
                 if let value = response.result.value {
-                    let json = JSON(value)
+                    let json = JSON(value).arrayValue
                     print(json)
-                    self.sync(entity: "Event", predicate: nil, data: json.object as! [[String : Any]], completion: { error in
-                        print(NSDate(), "done")
-                    })
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Event.mr_import(from: json, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                 }
             case .failure(let error):
                 print(error)
@@ -332,20 +429,39 @@ struct DataSync {
             case .success:
                 UserManager.shared.setCredentials(response.response!)
                 if let value = response.result.value {
-                    let json = JSON(value)
+                    let json = JSON(value).arrayValue
                     print(json)
-                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
-                        return Event.query(predicate)
+
+                    let source = ArrowJSON(value)
+                    CoreStore.beginAsynchronous({ (transaction) in
+                        do {
+                            try _ = transaction.importUniqueObjects(
+                                Into<Event>(),
+                                sourceArray: source!.collection!
+                            )
+                        }
+                        catch {
+                            return // Woops, don't save
+                        }
+                        transaction.commit({ (result) in
+                            switch result {
+                            case .success(let hasChanges):
+                                print("success!", hasChanges)
+                                completionHandler(.success(nil))
+                            case .failure(let error):
+                                print(error)
+                            }
+                        })
                     })
-                    let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "Event", predicate: nil, data: data, all: true, completion: { error in
-                        //                        Calendar.save()
-                        try! self.dataStack().mainContext.save()
-                        let c = Event.all().first as? Event
-                        print(c)
-                        print(NSDate(), "done")
-                        completionHandler(.success(nil))
-                    })
+//                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+//                        return Event.query(predicate)
+//                    })
+//                    let data = DataSync.transformJson(json)
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Event.mr_import(from: json, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                 }
             case .failure(let error):
                 completionHandler(.error("error"))
@@ -357,13 +473,11 @@ struct DataSync {
     // MARK: - Projects
     static func syncProjects(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Project", predicate: nil, data: [data!], completion: { error in
-            //          try! self.dataStack().mainContext.save()
-            let c = Project.all().first as! Project
-            print(c)
-            print(NSDate(), "done")
-            completionHandler()
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Project.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
     
     static func fetchProjects(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -377,18 +491,35 @@ struct DataSync {
                     
                     print(json)
                     
-                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
-                        return Project.query(predicate)
+                    
+                    let source = ArrowJSON(value)
+                    CoreStore.beginAsynchronous({ (transaction) in
+                        do {
+                            try _ = transaction.importUniqueObjects(
+                                Into<Project>(),
+                                sourceArray: source!.collection!
+                            )
+                        }
+                        catch {
+                            return // Woops, don't save
+                        }
+                        transaction.commit({ (result) in
+                            switch result {
+                            case .success(let hasChanges):
+                                print("success!", hasChanges)
+                                completionHandler(.success(nil))
+                            case .failure(let error):
+                                print(error)
+                            }
+                        })
                     })
-                    let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "Project", predicate: nil, data: data, all: true, completion: { error in
-                        //                        Calendar.save()
-                        try! self.dataStack().mainContext.save()
-                        let c = Project.all().first as? Project
-                        print(c)
-                        print(NSDate(), "done")
-                        completionHandler(.success(nil))
-                    })
+                    
+//                    let data = DataSync.transformJson(json)
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Project.mr_import(from: data, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                     
                     //                    deleteObject(json.array!, query: Calendar.query)
                     
@@ -422,13 +553,11 @@ struct DataSync {
     // MARK: - Tasks
     static func syncTasks(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Task", predicate: nil, data: [data!], completion: { error in
-            //          try! self.dataStack().mainContext.save()
-            let c = Task.all().first as? Task
-            print(c)
-            print(NSDate(), "done")
-            completionHandler()
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Task.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
     
     static func fetchTasks(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -442,18 +571,39 @@ struct DataSync {
                     
                     print(json)
                     
-                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
-                        return Task.query(predicate)
+                    
+                    let source = ArrowJSON(value)
+                    CoreStore.beginAsynchronous({ (transaction) in
+                        do {
+                            try _ = transaction.importUniqueObjects(
+                                Into<Task>(),
+                                sourceArray: source!.collection!
+                            )
+                        }
+                        catch {
+                            return // Woops, don't save
+                        }
+                        transaction.commit({ (result) in
+                            switch result {
+                            case .success(let hasChanges):
+                                print("success!", hasChanges)
+                                completionHandler(.success(nil))
+                            case .failure(let error):
+                                print(error)
+                            }
+                        })
                     })
-                    let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "Task", predicate: nil, data: data, all: true, completion: { error in
-                        //                        Calendar.save()
-                        try! self.dataStack().mainContext.save()
-                        let c = Task.all().first as? Task
-                        print(c)
-                        print(NSDate(), "done")
-                        completionHandler(.success(nil))
-                    })
+                    
+                    
+                    //                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
+                    //                        return Task.query(predicate)
+                    //                    })
+//                    let data = DataSync.transformJson(json)
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        Task.mr_import(from: data, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                     
                     //                    deleteObject(json.array!, query: Calendar.query)
                     
@@ -487,13 +637,11 @@ struct DataSync {
     // MARK: - ChatRooms
     static func syncChatRooms(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "ChatRoom", predicate: nil, data: [data!], completion: { error in
-            //          try! self.dataStack().mainContext.save()
-            let c = ChatRoom.all().first as? ChatRoom
-            print(c)
-            print(NSDate(), "done")
-            completionHandler()
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            ChatRoom.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
     
     static func fetchChatRooms(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -507,18 +655,12 @@ struct DataSync {
                     
                     print(json)
                     
-                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
-                        return ChatRoom.query(predicate)
-                    })
                     let data = DataSync.transformJson(json)
-                    DataSync.sync(entity: "ChatRoom", predicate: nil, data: data, all: true, completion: { error in
-                        //                        Calendar.save()
-                        try! self.dataStack().mainContext.save()
-                        let c = ChatRoom.all().first as? ChatRoom
-                        print(c)
-                        print(NSDate(), "done")
-                        completionHandler(.success(nil))
-                    })
+//                    MagicalRecord.saveInBackground({ (localContext) in
+//                        ChatRoom.mr_import(from: data, in: localContext)
+//                    }, completion: {
+//                        print("finish")
+//                    })
                     
                     //                    deleteObject(json.array!, query: Calendar.query)
                     
@@ -551,12 +693,10 @@ struct DataSync {
     
     static func syncMessages(_ json: JSON, completionHandler: @escaping ()->()) {
         let data = json.dictionaryObject
-        DataSync.sync(entity: "Message", predicate: nil, data: [data!], completion: { error in
-            //          try! self.dataStack().mainContext.save()
-            let c = Message.all().first as? Message
-            print(c)
-            print(NSDate(), "done")
-            completionHandler()
-        })
+//        MagicalRecord.saveInBackground({ (localContext) in
+//            Message.mr_import(from: [data], in: localContext)
+//        }, completion: {
+//            print("finish")
+//        })
     }
 }

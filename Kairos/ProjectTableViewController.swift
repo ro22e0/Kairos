@@ -21,6 +21,7 @@ class ProjectTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
         self.projects = ProjectManager.shared.projects(withStatus: .Participating)
         print(projects.count)
         self.title = "Projects"

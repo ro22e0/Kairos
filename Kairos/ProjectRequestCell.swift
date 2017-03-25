@@ -35,7 +35,7 @@ class ProjectRequestCell: UITableViewCell {
     
     @IBAction func accept(_ sender: Any) {
         let project = Project.find("id == %@", args: self.tag) as! Project
-        let parameters = ["id": project.id!]
+        let parameters = ["id": project.projectID!]
         
         ProjectManager.shared.accept(parameters) { (status) in
             switch status {
@@ -53,7 +53,7 @@ class ProjectRequestCell: UITableViewCell {
 
     @IBAction func decline(_ sender: Any) {
         let project = Project.find("id == %@", args: self.tag) as! Project
-        let parameters = ["id": project.id!]
+        let parameters = ["id": project.projectID!]
         
         ProjectManager.shared.refuse(parameters) { (status) in
             switch status {

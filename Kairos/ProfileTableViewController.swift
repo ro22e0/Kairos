@@ -110,7 +110,7 @@ class ProfileTableViewController: UITableViewController {
     
     @IBAction func signOut(_ sender: UIButton) {
         UserManager.shared.signOut() { (status) in
-            self.setRootVC(MainStoryboardID)
+            self.setRootVC(.Main)
         }
     }
     
