@@ -134,7 +134,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/UserManager.swift"
@@ -262,7 +262,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/DataSync.swift"
@@ -358,7 +358,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/DataSync.swift"
@@ -374,7 +374,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/DataSync.swift"
@@ -390,7 +390,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/DataSync.swift"
@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kairos/Calendar+CoreDataClass.swift"
-            timestampString = "512003206.021101"
+            timestampString = "512147806.593619"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "update(from:in:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -470,17 +470,97 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kairos/Calendar+CoreDataClass.swift"
-            timestampString = "512003206.021101"
+            filePath = "Kairos/DataSync.swift"
+            timestampString = "512147582.377936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "didInsert(from:in:)"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
+            landmarkName = "fetchProjects(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Kairos.DataSync.(fetchProjects ((Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "Kairos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/DataSync.swift"
+                  timestampString = "512151369.357484"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "496"
+                  endingLineNumber = "496"
+                  offsetFromSymbolStart = "2076">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Kairos.DataSync.(fetchProjects ((Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "Kairos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/DataSync.swift"
+                  timestampString = "512151369.358799"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kairos/DataSync.swift"
+            timestampString = "512147925.259465"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
+            landmarkName = "fetchEvents(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Kairos.DataSync.(fetchEvents ((Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "Kairos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/DataSync.swift"
+                  timestampString = "512151369.361303"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "436"
+                  endingLineNumber = "436"
+                  offsetFromSymbolStart = "1895">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Kairos.DataSync.(fetchEvents ((Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "Kairos"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/DataSync.swift"
+                  timestampString = "512151369.362544"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "438"
+                  endingLineNumber = "438"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -489,44 +569,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kairos/Event+CoreDataClass.swift"
-            timestampString = "512004378.783301"
+            filePath = "Kairos/DataSync.swift"
+            timestampString = "512151504.823102"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "didInsert(from:in:)"
+            startingLineNumber = "576"
+            endingLineNumber = "576"
+            landmarkName = "fetchTasks(_:)"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Kairos.Event.didInsert (from : Arrow.JSON, in : CoreStore.BaseDataTransaction) throws -&gt; ()"
+                  symbolName = "static Kairos.DataSync.(fetchTasks ((Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "Kairos"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/Event+CoreDataClass.swift"
-                  timestampString = "512004379.046638"
+                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/DataSync.swift"
+                  timestampString = "512154533.975959"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "4945">
+                  startingLineNumber = "576"
+                  endingLineNumber = "576"
+                  offsetFromSymbolStart = "2076">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Kairos.Event.didInsert (from : Arrow.JSON, in : CoreStore.BaseDataTransaction) throws -&gt; ()"
+                  symbolName = "static Kairos.DataSync.(fetchTasks ((Kairos.StatusRequest) -&gt; ()) -&gt; ()).(closure #1).(closure #1)"
                   moduleName = "Kairos"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/Event+CoreDataClass.swift"
-                  timestampString = "512004379.047825"
+                  urlString = "file:///Users/ro22e0/Documents/Kairos/Kairos/DataSync.swift"
+                  timestampString = "512154533.977193"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "5195">
+                  startingLineNumber = "578"
+                  endingLineNumber = "578"
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>

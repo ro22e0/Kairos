@@ -227,7 +227,7 @@ struct DataSync {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value).array
-                        print(json)
+//                        print(json)
 
                         let source = ArrowJSON(value)
                         CoreStore.beginAsynchronous({ (transaction) in
@@ -431,6 +431,28 @@ struct DataSync {
                 if let value = response.result.value {
                     let json = JSON(value).arrayValue
                     print(json)
+
+                    let source = ArrowJSON(value)
+                    CoreStore.beginAsynchronous({ (transaction) in
+                        do {
+                            try _ = transaction.importUniqueObjects(
+                                Into<Event>(),
+                                sourceArray: source!.collection!
+                            )
+                        }
+                        catch {
+                            return // Woops, don't save
+                        }
+                        transaction.commit({ (result) in
+                            switch result {
+                            case .success(let hasChanges):
+                                print("success!", hasChanges)
+                                completionHandler(.success(nil))
+                            case .failure(let error):
+                                print(error)
+                            }
+                        })
+                    })
 //                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
 //                        return Event.query(predicate)
 //                    })
@@ -469,7 +491,30 @@ struct DataSync {
                     
                     print(json)
                     
-                    let data = DataSync.transformJson(json)
+                    
+                    let source = ArrowJSON(value)
+                    CoreStore.beginAsynchronous({ (transaction) in
+                        do {
+                            try _ = transaction.importUniqueObjects(
+                                Into<Project>(),
+                                sourceArray: source!.collection!
+                            )
+                        }
+                        catch {
+                            return // Woops, don't save
+                        }
+                        transaction.commit({ (result) in
+                            switch result {
+                            case .success(let hasChanges):
+                                print("success!", hasChanges)
+                                completionHandler(.success(nil))
+                            case .failure(let error):
+                                print(error)
+                            }
+                        })
+                    })
+                    
+//                    let data = DataSync.transformJson(json)
 //                    MagicalRecord.saveInBackground({ (localContext) in
 //                        Project.mr_import(from: data, in: localContext)
 //                    }, completion: {
@@ -526,10 +571,34 @@ struct DataSync {
                     
                     print(json)
                     
+                    
+                    let source = ArrowJSON(value)
+                    CoreStore.beginAsynchronous({ (transaction) in
+                        do {
+                            try _ = transaction.importUniqueObjects(
+                                Into<Task>(),
+                                sourceArray: source!.collection!
+                            )
+                        }
+                        catch {
+                            return // Woops, don't save
+                        }
+                        transaction.commit({ (result) in
+                            switch result {
+                            case .success(let hasChanges):
+                                print("success!", hasChanges)
+                                completionHandler(.success(nil))
+                            case .failure(let error):
+                                print(error)
+                            }
+                        })
+                    })
+                    
+                    
                     //                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
                     //                        return Task.query(predicate)
                     //                    })
-                    let data = DataSync.transformJson(json)
+//                    let data = DataSync.transformJson(json)
 //                    MagicalRecord.saveInBackground({ (localContext) in
 //                        Task.mr_import(from: data, in: localContext)
 //                    }, completion: {

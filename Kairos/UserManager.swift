@@ -246,18 +246,17 @@ class UserManager {
             handler()
         }
         FriendManager.shared.fetch()
-        //        DataSync.fetchCalendarColors()
-                CalendarManager.shared.fetch()
-        //        EventManager.shared.fetch()
-        //        ProjectManager.shared.fetch()
-        //        TaskManager.shared.fetch()
-        //        ChatRoomManager.shared.fetch() {
-        //            let chatRooms = ChatRoomManager.shared.chatRooms()
-        //            for chatRoom in chatRooms {
-        //                ChatRoomManager.shared.listen(for: chatRoom)
-        //            }
-        //        }
-        //        RequestManager.default.serializationQueue.addOperation(handler)
+        DataSync.fetchCalendarColors()
+        CalendarManager.shared.fetch()
+        EventManager.shared.fetch()
+        ProjectManager.shared.fetch()
+        TaskManager.shared.fetch()
+        ChatRoomManager.shared.fetch() {
+            let chatRooms = ChatRoomManager.shared.chatRooms()
+            for chatRoom in chatRooms {
+                ChatRoomManager.shared.listen(for: chatRoom)
+            }
+        }
     }
     
     func getCalendars() -> [Calendar] {

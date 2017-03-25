@@ -41,7 +41,7 @@ public class Owner: NSManagedObject, ImportableUniqueObject {
     public class func uniqueID(from source: ImportSource, in transaction: BaseDataTransaction) throws -> NSNumber? {
         return source["id"]?.data as? NSNumber
     }
-    
+
     public func update(from source: ImportSource, in transaction: BaseDataTransaction) throws {
         print(source)
         if let requestedFriendsSource = source["friend_requests"]?.collection {

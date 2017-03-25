@@ -8,12 +8,40 @@
 
 import Foundation
 import CoreData
-
+import CoreStore
+import Arrow
 
 public class Message: NSManagedObject {
-
+    
     static func temporary() -> Message {
         let entity = NSEntityDescription.entity(forEntityName: "Message", in: DataSync.newContext)
         return Message(entity: entity!, insertInto: nil)
+    }
+    
+    public typealias ImportSource = ArrowJSON
+    public class var uniqueIDKeyPath: String {
+        return "messageID"
+    }
+    public var uniqueIDValue: NSNumber {
+        get { return self.messageID! }
+        set { self.messageID = newValue }
+    }
+    
+    public func didInsert(from source: ImportSource, in transaction: BaseDataTransaction) throws {
+        print(source)
+        
+        self.createdAt = Date.from(string: source["created_at"]!.data! as! String) as NSDate?
+        self.body <-- source["body"]
+        self.messageID <-- source["id"]
+        try self.user = transaction.importUniqueObject(Into<User>(), source: source["user"]!)
+        try self.chatRoom = transaction.importUniqueObject(Into<ChatRoom>(), source: source["chat_room"]!)
+    }
+    
+    public static func uniqueID(from source: ImportSource, in transaction: BaseDataTransaction) throws -> NSNumber? {
+        return source["id"]?.data as? NSNumber
+    }
+    
+    public func update(from source: ImportSource, in transaction: BaseDataTransaction) throws {
+        print(source)
     }
 }

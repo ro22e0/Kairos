@@ -42,8 +42,11 @@ public class Event: NSManagedObject, ImportableUniqueObject {
         self.notes <-- source["description"]
         self.title <-- source["title"]
         self.userStatus <-- source["user_status"]
-        //        self.calendar: Calendar?
-        
+
+        if let calendarID = source["calendar_id"], let calendarSource = ArrowJSON(["id": calendarID]) {
+            try self.calendar = transaction.importUniqueObject(Into<Calendar>(), source: calendarSource)
+        }
+
         if let ownersSource = source["owners"]?.collection {
             let importedOwners = try transaction.importUniqueObjects(Into<User>(), sourceArray: ownersSource)
             self.owners = NSSet(array: importedOwners)
@@ -80,5 +83,6 @@ public class Event: NSManagedObject, ImportableUniqueObject {
     
     public func update(from source: ImportSource, in transaction: BaseDataTransaction) throws {
         print(source)
+        //        self.calendar: Calendar?
     }
 }

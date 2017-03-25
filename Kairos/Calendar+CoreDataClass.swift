@@ -35,7 +35,6 @@ public class Calendar: NSManagedObject, ImportableUniqueObject {
         self.color <-- source["color"]
         self.userStatus <-- source["user_status"]
 
-//        self.events: NSSet?
         if let eventsSource = source["events"]?.collection {
             let importedEvents = try transaction.importUniqueObjects(Into<Event>(), sourceArray: eventsSource)
             self.events = NSSet(array: importedEvents)
