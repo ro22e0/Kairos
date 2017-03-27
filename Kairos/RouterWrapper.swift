@@ -37,7 +37,7 @@ public enum Router: URLRequestConvertible {
      */
     var needToken: Bool {
         switch self {
-        case .authenticate, .createUser:
+        case .authenticate, .createUser, .resetPass:
             return false
         default:
             return true
@@ -45,6 +45,8 @@ public enum Router: URLRequestConvertible {
     }
     
     case signOut
+    
+    case resetPass(Parameters)
     
     /// Create a new user.
     case createUser(Parameters)
@@ -139,7 +141,7 @@ public enum Router: URLRequestConvertible {
      */
     var method: HTTPMethod {
         switch self {
-        case .createUser, .authenticate, .inviteFriend, .createCalendar, .createEvent, .createProject, .createTask:
+        case .createUser, .authenticate, .inviteFriend, .createCalendar, .createEvent, .createProject, .createTask, .resetPass:
             return .POST
         case .getFriends, .getUsers, .getEvents, .getEvent, .getCalendars, .getCalendar, .getCalendarColors, .getProjects, .getProject, .getTasks, .getTask, .getChatRooms:
             return .GET
@@ -157,6 +159,8 @@ public enum Router: URLRequestConvertible {
      */
     var path: String {
         switch self {
+        case .resetPass:
+            return "/auth/password"
         case .createUser:
             return "/auth"
         case .authenticate:
@@ -284,6 +288,8 @@ public enum Router: URLRequestConvertible {
         }
 
         switch self {
+        case .resetPass(let parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case .createUser(let parameters):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case .updateUser(let parameters):
@@ -342,7 +348,6 @@ public enum Router: URLRequestConvertible {
             urlRequest = try URLEncoding.default.encode(urlRequest, with: ["project_id": parameters["project_id"]!])
         case .deleteTask(let parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: ["project_id": parameters["project_id"]!])
-
         default:
             break;
         }

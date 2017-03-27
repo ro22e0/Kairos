@@ -31,7 +31,7 @@ public class ChatRoom: NSManagedObject, ImportableUniqueObject {
         print(source)
         
         self.createdAt = Date.from(string: source["created_at"]!.data! as! String) as NSDate?
-        self.updatedAt = Date.from(string: source["updated_at"]!.data! as! String) as NSDate?
+//        self.updatedAt = Date.from(string: source["updated_at"]!.data! as! String) as NSDate?
         self.chatRoomID <-- source["id"]
         self.chatType <-- source["chat_type"]
         self.title <-- source["title"]
@@ -40,12 +40,11 @@ public class ChatRoom: NSManagedObject, ImportableUniqueObject {
         if let usersSource = source["users"]?.collection {
             let importedUsers = try transaction.importUniqueObjects(Into<User>(), sourceArray: usersSource)
             users = NSSet(array: importedUsers)
+        }        
+        if let messagesSource = source["messages"]?.collection {
+            let importedMessages = try transaction.importUniqueObjects(Into<Message>(), sourceArray: messagesSource)
+            messages = NSSet(array: importedMessages)
         }
-        
-//        if let messagesSource = source["messages"]?.collection {
-//            let importedMessages = try transaction.importUniqueObjects(Into<Message>(), sourceArray: messagesSource)
-//            messages = NSSet(array: importedMessages)
-//        }
     }
     
     public static func uniqueID(from source: ImportSource, in transaction: BaseDataTransaction) throws -> NSNumber? {

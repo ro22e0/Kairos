@@ -8,6 +8,7 @@
 
 import Foundation
 import DynamicColor
+import Former
 
 extension String {
 
@@ -134,7 +135,7 @@ extension Date {
         if seconds(from: date) > 0 { return "\(seconds(from: date))s" }
         return ""
     }
-    
+
     static func from(string: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
@@ -228,5 +229,17 @@ extension UIApplication {
         }
         
         return base
+    }
+}
+
+extension Former {
+    static func createHeader(title: String) -> ViewFormer {
+        return LabelViewFormer<FormLabelHeaderView>() {
+            $0.contentView.backgroundColor = .background()
+            }
+            .configure {
+                $0.viewHeight = 30
+                $0.text = title
+        }
     }
 }

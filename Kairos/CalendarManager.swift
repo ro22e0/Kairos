@@ -124,10 +124,10 @@ class CalendarManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncCalendars(json) {
-                            
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncCalendars(json) {
+//                            
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -147,9 +147,9 @@ class CalendarManager {
                     if let value = response.result.value {
                         let json = JSON(value)
                         print(json)
-                        DataSync.syncCalendars(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncCalendars(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -168,9 +168,9 @@ class CalendarManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncCalendars(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncCalendars(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -189,9 +189,9 @@ class CalendarManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncCalendars(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncCalendars(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -210,9 +210,9 @@ class CalendarManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncCalendars(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncCalendars(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -231,9 +231,9 @@ class CalendarManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncCalendars(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncCalendars(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))

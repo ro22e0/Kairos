@@ -14,6 +14,7 @@ class UsersTableViewController: UITableViewController {
     var searchController: UISearchController!
     var shouldShowSearchResults = false
     
+    var status: FriendStatus? = FriendStatus.None
     var users = [User]()
     var filteredUsers = [User]()
     
@@ -31,7 +32,7 @@ class UsersTableViewController: UITableViewController {
             tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
-
+    
     //    override func viewWillDisappear(_ animated: Bool) {
     //        searchController.isActive = false
     //        super.viewWillDisappear(animated)
@@ -63,7 +64,6 @@ class UsersTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "userCell")
-        tableView.allowsSelection = false
     }
     
     func configureSearchController() {
@@ -110,11 +110,10 @@ class UsersTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.0
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        
-        self.performSegue(withIdentifier: "showUserProfileSegue", sender: cell)
+        let user = shouldShowSearchResults ? filteredUsers[indexPath.row] : users[indexPath.row]
+        self.performSegue(withIdentifier: "showUserProfileSegue", sender: user)
     }
     
     
@@ -128,6 +127,21 @@ class UsersTableViewController: UITableViewController {
     
     @IBAction func done(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "showUserProfileSegue":
+                if let user = sender as? User {
+                    let destVC = segue.destination as! FriendProfileViewController
+                    destVC.user = user
+                    destVC.status = status
+                }
+            default:
+                break
+            }
+        }
     }
 }
 

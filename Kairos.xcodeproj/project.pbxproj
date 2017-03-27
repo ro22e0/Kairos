@@ -160,6 +160,7 @@
 		DAECFECD1DA0578C00D3F724 /* CustomTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAECFECB1DA0578C00D3F724 /* CustomTextFieldTableViewCell.swift */; };
 		DAECFECE1DA0578C00D3F724 /* CustomTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAECFECC1DA0578C00D3F724 /* CustomTextFieldTableViewCell.xib */; };
 		DAEE7CBB1CA49A580019C8D4 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE7CBA1CA49A580019C8D4 /* FriendsTableViewController.swift */; };
+		DAF00AC01E89A9A50087140B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF00ABF1E89A9A50087140B /* ForgotPasswordViewController.swift */; };
 		DAF66D2C1CA3EB3700B6062D /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */; };
 		DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF66D301CA4028800B6062D /* MenuTableViewController.swift */; };
 		DAFA00221DA83B040039AD4D /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFA00201DA83B040039AD4D /* CalendarTableViewCell.swift */; };
@@ -351,6 +352,7 @@
 		DAECFECB1DA0578C00D3F724 /* CustomTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		DAECFECC1DA0578C00D3F724 /* CustomTextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		DAEE7CBA1CA49A580019C8D4 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		DAF00ABF1E89A9A50087140B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		DAF66D2B1CA3EB3700B6062D /* Friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		DAF66D301CA4028800B6062D /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		DAFA00201DA83B040039AD4D /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				DAE097731C9DF0FA00D6B462 /* DefinePasswordViewController.swift */,
 				DAA6B6B61D99CAD600D68016 /* CompleteProfileViewController.swift */,
 				DA1E11FE1D78440E0068207F /* SignOutViewController.swift */,
+				DAF00ABF1E89A9A50087140B /* ForgotPasswordViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -1335,6 +1338,7 @@
 				ACFEF0CE1E28ED2F00381ECA /* Owner+CoreDataClass.swift in Sources */,
 				DA5CDDE81D8ADB0600B406A1 /* BaseCalendarTableViewCell.swift in Sources */,
 				AC2C9A471E2F81900039ADB6 /* TaskManager.swift in Sources */,
+				DAF00AC01E89A9A50087140B /* ForgotPasswordViewController.swift in Sources */,
 				DA4041701DE769450043A8F0 /* ColorSelectionViewController.swift in Sources */,
 				DA0E144B1DA8125200865C20 /* CalendarManager.swift in Sources */,
 				AC3B67941E2EB2CF00BFCB84 /* Task+CoreDataProperties.swift in Sources */,

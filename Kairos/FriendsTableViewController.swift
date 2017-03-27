@@ -28,7 +28,6 @@ class FriendsTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 65
         tableView.register(UINib(nibName: "UserTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "userCell")
-        tableView.allowsSelection = false
     }
     
     // MARK: - Methods
@@ -66,9 +65,7 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        
-        self.performSegue(withIdentifier: "showFriendProfileSegue", sender: cell)
+        self.performSegue(withIdentifier: "showFriendProfileSegue", sender: friends[indexPath.row])
     }
     
     @IBAction func moreAction(_ sender: Any) {
@@ -134,10 +131,18 @@ class FriendsTableViewController: UITableViewController {
                 let destVC = segue.destination as! UsersTableViewController
                 destVC.users = FriendManager.shared.friends(withStatus: .Requested)
                 destVC.title = "Friend Requests"
+                destVC.status = .Requested
             case "showOutgoingRequestsSegue":
                 let destVC = segue.destination as! UsersTableViewController
                 destVC.users = FriendManager.shared.friends(withStatus: .Requested)
                 destVC.title = "Outgoing Requests"
+                destVC.status = .Pending
+            case "showFriendProfileSegue":
+                if let user = sender as? User {
+                    let destVC = segue.destination as! FriendProfileViewController
+                    destVC.user = user
+                    destVC.status = .Accepted
+                }
             default:
                 break
             }

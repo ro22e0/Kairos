@@ -98,9 +98,9 @@ class TaskManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncTasks(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncTasks(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -120,9 +120,9 @@ class TaskManager {
                     if let value = response.result.value {
                         let json = JSON(value)
                         print(json)
-                        DataSync.syncTasks(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncTasks(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -141,9 +141,9 @@ class TaskManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncTasks(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncTasks(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -162,9 +162,9 @@ class TaskManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncTasks(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncTasks(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))

@@ -117,9 +117,9 @@ class EventManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncEvents(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncEvents(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -139,9 +139,9 @@ class EventManager {
                     if let value = response.result.value {
                         let json = JSON(value)
                         print(json)
-                        DataSync.syncEvents(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncEvents(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -160,9 +160,9 @@ class EventManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncEvents(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncEvents(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -181,9 +181,9 @@ class EventManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncEvents(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncEvents(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -202,9 +202,9 @@ class EventManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncEvents(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncEvents(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -223,9 +223,9 @@ class EventManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncEvents(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncEvents(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))

@@ -63,21 +63,21 @@ class WebSocketClient: WebSocketDelegate {
             let json = JSON(data: dataFromString).dictionaryValue
             if json["type"]?.string == nil {
                 if let data = json["message"]?["data"] {
-                    DataSync.syncMessages(data) {
-                        if let message = Message.find("id == %@", args: data["id"].int32Value) as? Message {
-                            if let handler = self.onSend.first {
-                                handler(message)
-                                _ = self.onSend.remove(at: 0)
-                            }
-                            if let onReceive = self.onReceive {
-                                onReceive(message)
-                            } else {
-                                DispatchQueue.main.async {
-                                    Spinner.shout(message: message)
-                                }
-                            }
-                        }
-                    }
+//                    DataSync.syncMessages(data) {
+//                        if let message = Message.find("id == %@", args: data["id"].int32Value) as? Message {
+//                            if let handler = self.onSend.first {
+//                                handler(message)
+//                                _ = self.onSend.remove(at: 0)
+//                            }
+//                            if let onReceive = self.onReceive {
+//                                onReceive(message)
+//                            } else {
+//                                DispatchQueue.main.async {
+//                                    Spinner.shout(message: message)
+//                                }
+//                            }
+//                        }
+//                    }
                 }
             }
         }

@@ -137,10 +137,10 @@ class ProjectManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncProjects(json) {
-                            
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncProjects(json) {
+//                            
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -160,9 +160,9 @@ class ProjectManager {
                     if let value = response.result.value {
                         let json = JSON(value)
                         print(json)
-                        DataSync.syncProjects(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncProjects(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -181,9 +181,9 @@ class ProjectManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncProjects(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncProjects(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -202,9 +202,9 @@ class ProjectManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncProjects(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncProjects(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -223,9 +223,9 @@ class ProjectManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncProjects(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncProjects(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))
@@ -244,9 +244,9 @@ class ProjectManager {
                 case 200...203:
                     if let value = response.result.value {
                         let json = JSON(value)
-                        DataSync.syncProjects(json) {
-                            completionHandler(.success(nil))
-                        }
+//                        DataSync.syncProjects(json) {
+//                            completionHandler(.success(nil))
+//                        }
                     }
                 default:
                     completionHandler(.error("kFail"))

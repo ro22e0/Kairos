@@ -68,7 +68,7 @@ class FriendsInviteTableViewController: UITableViewController {
         searchController.searchBar.sizeToFit()
         searchController.hidesNavigationBarDuringPresentation = false
         self.definesPresentationContext = true
-        
+
         // Place the search bar view to the tableview headerview.
         self.navigationItem.titleView = searchController.searchBar
     }
