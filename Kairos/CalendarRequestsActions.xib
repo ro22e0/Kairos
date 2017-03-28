@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Yh8-zw-hfX" customClass="CalendarRequestsActions" customModule="Kairos" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="596" height="183"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jzm-9O-46l">
+                    <rect key="frame" x="18" y="10" width="568" height="163"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="NY5-1Y-iGY">
+                            <rect key="frame" x="0.0" y="0.0" width="568" height="163"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJz-5p-kX0">
+                                    <rect key="frame" x="0.0" y="0.0" width="568" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="YXJ-gY-9Vb"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Create Event"/>
+                                    <connections>
+                                        <action selector="createEvent:" destination="Yh8-zw-hfX" eventType="touchUpInside" id="41F-yo-edu"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFE-Oe-4zD">
+                                    <rect key="frame" x="0.0" y="40" width="568" height="1"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="U9Q-B2-KxB"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBn-Ce-MPt">
+                                    <rect key="frame" x="0.0" y="41" width="568" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Create Calendar"/>
+                                    <connections>
+                                        <action selector="createCalendar:" destination="Yh8-zw-hfX" eventType="touchUpInside" id="ljE-fV-eCC"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhK-gK-0Fc">
+                                    <rect key="frame" x="0.0" y="81" width="568" height="1"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="W2a-1B-o8B"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKM-qz-ZNE">
+                                    <rect key="frame" x="0.0" y="82" width="568" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Event Requests"/>
+                                    <connections>
+                                        <action selector="eventsRequests:" destination="Yh8-zw-hfX" eventType="touchUpInside" id="VT7-EP-RHW"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zhs-m5-cmK">
+                                    <rect key="frame" x="0.0" y="122" width="568" height="1"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="dxf-Wu-5HY"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSL-HU-ajV">
+                                    <rect key="frame" x="0.0" y="123" width="568" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Calendar Requests"/>
+                                    <connections>
+                                        <action selector="calendarsRequests:" destination="Yh8-zw-hfX" eventType="touchUpInside" id="bxx-TM-Ybc"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="QJz-5p-kX0" firstAttribute="height" secondItem="RKM-qz-ZNE" secondAttribute="height" id="62y-cb-9Dg"/>
+                                <constraint firstItem="QJz-5p-kX0" firstAttribute="height" secondItem="cSL-HU-ajV" secondAttribute="height" id="LUP-aT-bZ0"/>
+                                <constraint firstItem="QJz-5p-kX0" firstAttribute="height" secondItem="rBn-Ce-MPt" secondAttribute="height" id="vVE-mm-iKn"/>
+                                <constraint firstAttribute="height" constant="163" id="xip-dS-TzS"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="NY5-1Y-iGY" secondAttribute="bottom" id="8Fw-ZD-kko"/>
+                        <constraint firstAttribute="trailing" secondItem="NY5-1Y-iGY" secondAttribute="trailing" id="Cfd-ji-hNl"/>
+                        <constraint firstItem="NY5-1Y-iGY" firstAttribute="leading" secondItem="jzm-9O-46l" secondAttribute="leading" id="xxZ-rB-a4e"/>
+                        <constraint firstItem="NY5-1Y-iGY" firstAttribute="top" secondItem="jzm-9O-46l" secondAttribute="top" id="zuw-FT-FcW"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="jzm-9O-46l" secondAttribute="bottom" constant="10" id="Biz-iY-1ou"/>
+                <constraint firstItem="jzm-9O-46l" firstAttribute="leading" secondItem="Yh8-zw-hfX" secondAttribute="leadingMargin" constant="10" id="IPu-PN-Y08"/>
+                <constraint firstAttribute="trailing" secondItem="jzm-9O-46l" secondAttribute="trailing" constant="10" id="XzB-a8-CdU"/>
+                <constraint firstItem="jzm-9O-46l" firstAttribute="top" secondItem="Yh8-zw-hfX" secondAttribute="top" constant="10" id="mn8-UF-utT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="statusBarOffset">
+                    <real key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="bounceAnimationOffset">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="backgroundView" destination="jzm-9O-46l" id="KLa-dO-5AX"/>
+            </connections>
+            <point key="canvasLocation" x="-622" y="-198"/>
+        </view>
+    </objects>
+</document>

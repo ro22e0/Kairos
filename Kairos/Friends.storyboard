@@ -126,8 +126,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zpj-rR-7Uk">
-                                <rect key="frame" x="0.0" y="291.5" width="375" height="225.5"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zpj-rR-7Uk">
+                                <rect key="frame" x="0.0" y="263" width="375" height="254"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="PAQ-wd-koh" id="f5J-20-pBn"/>
@@ -177,7 +177,7 @@
                                 </subviews>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="voY-20-h5a">
-                                <rect key="frame" x="94.5" y="84" width="187.5" height="187.5"/>
+                                <rect key="frame" x="104.5" y="84" width="167" height="167"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="voY-20-h5a" secondAttribute="height" multiplier="1:1" id="BWd-H9-UwX"/>
                                 </constraints>
@@ -186,7 +186,8 @@
                         <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Zpj-rR-7Uk" firstAttribute="leading" secondItem="BFI-bm-hBv" secondAttribute="leading" id="BMp-bx-wlZ"/>
-                            <constraint firstItem="voY-20-h5a" firstAttribute="width" secondItem="BFI-bm-hBv" secondAttribute="width" multiplier="3:6" id="DxH-Eg-dxW"/>
+                            <constraint firstItem="voY-20-h5a" firstAttribute="width" secondItem="BFI-bm-hBv" secondAttribute="width" multiplier="4:9" id="DxH-Eg-dxW"/>
+                            <constraint firstItem="Zpj-rR-7Uk" firstAttribute="top" secondItem="voY-20-h5a" secondAttribute="bottom" constant="12" id="MIo-jP-h5N"/>
                             <constraint firstAttribute="trailing" secondItem="4P9-X3-hZw" secondAttribute="trailing" id="Qcg-Bt-Kvd"/>
                             <constraint firstItem="4P9-X3-hZw" firstAttribute="top" secondItem="Zpj-rR-7Uk" secondAttribute="bottom" id="YxM-4o-t8S"/>
                             <constraint firstItem="gNo-LD-ZMt" firstAttribute="top" secondItem="4P9-X3-hZw" secondAttribute="bottom" id="aBz-Yz-8wn"/>
@@ -194,7 +195,6 @@
                             <constraint firstItem="4P9-X3-hZw" firstAttribute="leading" secondItem="BFI-bm-hBv" secondAttribute="leading" id="gSu-hC-Uly"/>
                             <constraint firstItem="voY-20-h5a" firstAttribute="centerX" secondItem="BFI-bm-hBv" secondAttribute="centerX" id="hca-hy-JFq"/>
                             <constraint firstAttribute="trailing" secondItem="Zpj-rR-7Uk" secondAttribute="trailing" id="mEZ-co-dlX"/>
-                            <constraint firstItem="Zpj-rR-7Uk" firstAttribute="top" secondItem="voY-20-h5a" secondAttribute="bottom" constant="20" id="srA-pO-ouQ"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -261,7 +261,7 @@
         <image name="More" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="J6h-04-plg"/>
         <segue reference="uxf-cg-alN"/>
-        <segue reference="Hrk-rY-EFZ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -55,6 +55,10 @@
 		DA05BED11E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA05BECE1E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib */; };
 		DA05BED51E30E0D300DF1BE5 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05BED41E30E0D300DF1BE5 /* RoomViewController.swift */; };
 		DA05BED71E30E3FE00DF1BE5 /* ChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05BED61E30E3FE00DF1BE5 /* ChatTableViewController.swift */; };
+		DA0D76E51E8B0B0D0077AF00 /* CalendarRequestsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D76E31E8B0B0D0077AF00 /* CalendarRequestsActions.swift */; };
+		DA0D76E61E8B0B0D0077AF00 /* CalendarRequestsActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA0D76E41E8B0B0D0077AF00 /* CalendarRequestsActions.xib */; };
+		DA0D76EB1E8B1BD50077AF00 /* CalendarEventActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D76E91E8B1BD50077AF00 /* CalendarEventActions.swift */; };
+		DA0D76EC1E8B1BD50077AF00 /* CalendarEventActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA0D76EA1E8B1BD50077AF00 /* CalendarEventActions.xib */; };
 		DA0E144B1DA8125200865C20 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0E144A1DA8125200865C20 /* CalendarManager.swift */; };
 		DA11A9F61D986A6700218FF3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA11A9F51D986A6700218FF3 /* RequestManager.swift */; };
 		DA11A9F81D9872D400218FF3 /* ModalSearchSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */; };
@@ -240,6 +244,10 @@
 		DA05BECE1E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendingStatusCollectionViewCell.xib; sourceTree = "<group>"; };
 		DA05BED41E30E0D300DF1BE5 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RoomViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA05BED61E30E3FE00DF1BE5 /* ChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChatTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DA0D76E31E8B0B0D0077AF00 /* CalendarRequestsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarRequestsActions.swift; sourceTree = "<group>"; };
+		DA0D76E41E8B0B0D0077AF00 /* CalendarRequestsActions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarRequestsActions.xib; sourceTree = "<group>"; };
+		DA0D76E91E8B1BD50077AF00 /* CalendarEventActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventActions.swift; sourceTree = "<group>"; };
+		DA0D76EA1E8B1BD50077AF00 /* CalendarEventActions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarEventActions.xib; sourceTree = "<group>"; };
 		DA0E144A1DA8125200865C20 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA11A9F51D986A6700218FF3 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalSearchSegue.swift; sourceTree = "<group>"; };
@@ -449,6 +457,26 @@
 			name = Chat;
 			sourceTree = "<group>";
 		};
+		DA0D76E71E8B0B180077AF00 /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+				DA7C14FF1E527DEE00EEE31B /* FriendRequestsActions.swift */,
+				DA7C15031E527FDF00EEE31B /* FriendRequestsActions.xib */,
+			);
+			name = Friend;
+			sourceTree = "<group>";
+		};
+		DA0D76E81E8B0B1E0077AF00 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				DA0D76E31E8B0B0D0077AF00 /* CalendarRequestsActions.swift */,
+				DA0D76E41E8B0B0D0077AF00 /* CalendarRequestsActions.xib */,
+				DA0D76E91E8B1BD50077AF00 /* CalendarEventActions.swift */,
+				DA0D76EA1E8B1BD50077AF00 /* CalendarEventActions.xib */,
+			);
+			name = Calendar;
+			sourceTree = "<group>";
+		};
 		DA2A5AFA1E574C7F0008F05C /* KairosUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,8 +633,8 @@
 		DA7C15051E52835500EEE31B /* ActionSheets */ = {
 			isa = PBXGroup;
 			children = (
-				DA7C14FF1E527DEE00EEE31B /* FriendRequestsActions.swift */,
-				DA7C15031E527FDF00EEE31B /* FriendRequestsActions.xib */,
+				DA0D76E71E8B0B180077AF00 /* Friend */,
+				DA0D76E81E8B0B1E0077AF00 /* Calendar */,
 			);
 			name = ActionSheets;
 			sourceTree = "<group>";
@@ -983,6 +1011,7 @@
 				DA05BED11E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib in Resources */,
 				DADD55E51CA60CE200C44D40 /* UserTableViewCell.xib in Resources */,
 				DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */,
+				DA0D76E61E8B0B0D0077AF00 /* CalendarRequestsActions.xib in Resources */,
 				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
 				DAFA00291DA852800039AD4D /* CalendarHeaderCell.xib in Resources */,
 				AC9D1E5F1E2D7B3700F1D29D /* EventHeaderCell.xib in Resources */,
@@ -1002,6 +1031,7 @@
 				DAAEE15D1C9ABE1F00D53AEC /* Main.storyboard in Resources */,
 				DA5CDDE21D8ACF5000B406A1 /* CollaboratorTableViewCell.xib in Resources */,
 				DA851C961CAE99C50025E1D4 /* Calendar.storyboard in Resources */,
+				DA0D76EC1E8B1BD50077AF00 /* CalendarEventActions.xib in Resources */,
 				DA668F391CA4A40400230912 /* FriendTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1304,6 +1334,7 @@
 				DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */,
 				DA6853481CE2707600B839F6 /* RouterWrapper.swift in Sources */,
 				AC4A94BB1E2E5D4C00BA59B5 /* UserEventActionTableViewController.swift in Sources */,
+				DA0D76E51E8B0B0D0077AF00 /* CalendarRequestsActions.swift in Sources */,
 				DA05BED51E30E0D300DF1BE5 /* RoomViewController.swift in Sources */,
 				DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */,
 				AC4A94C11E2E818E00BA59B5 /* EditProjectTableViewController.swift in Sources */,
@@ -1320,6 +1351,7 @@
 				DA2DA32A1E31709900F86C68 /* Message+CoreDataProperties.swift in Sources */,
 				DA6FDEFC1E43A63E00B516F8 /* UserModelCollectionController.swift in Sources */,
 				DA1AF0CE1E4CC93A0074CDB9 /* TaskAssigneesTableViewController.swift in Sources */,
+				DA0D76EB1E8B1BD50077AF00 /* CalendarEventActions.swift in Sources */,
 				DA18745B1CDB73AF008E7C38 /* EventStartDateTableViewCell.swift in Sources */,
 				DA2DA3261E316D8E00F86C68 /* ChatRoomManager.swift in Sources */,
 				DA2EC0271DA9009700BCA895 /* UserCalendarActionTableViewController.swift in Sources */,

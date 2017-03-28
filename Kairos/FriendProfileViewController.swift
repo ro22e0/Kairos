@@ -16,7 +16,7 @@ class FriendProfileViewController: UIViewController {
     @IBOutlet weak var inviteButton: UIButton!
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    
+
     @IBOutlet weak var tableView: UITableView!
     
     fileprivate lazy var former: Former = Former(tableView: self.tableView)
@@ -25,12 +25,12 @@ class FriendProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         setupActions()
         setupFormer()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,6 +39,7 @@ class FriendProfileViewController: UIViewController {
     
     private func setupFormer() {
         tableView.tableFooterView = UIView()
+        tableView.isScrollEnabled = false
        
         let nameSection = labelSection(title: "Fullname :", value: user?.name ?? "")
         let emailSection = labelSection(title: "Email :", value: user?.email ?? "")

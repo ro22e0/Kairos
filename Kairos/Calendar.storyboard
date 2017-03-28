@@ -82,7 +82,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wy3-Ev-pNk" id="XsI-AJ-cbV">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="63.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="EjK-yi-DNE">
@@ -217,9 +217,9 @@
                                 <action selector="setTodaySelected:" destination="C7H-Na-etI" id="Tyh-Cb-DFH"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="6TX-Lo-LE0">
+                        <barButtonItem key="rightBarButtonItem" image="More" id="6TX-Lo-LE0">
                             <connections>
-                                <segue destination="qG8-74-EaA" kind="presentation" id="8aA-O4-mk7"/>
+                                <action selector="moreActions:" destination="C7H-Na-etI" id="Zbh-LG-ssM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -230,6 +230,7 @@
                         <outlet property="calendarView" destination="HhK-T1-Cm2" id="UYX-12-qi9"/>
                         <outlet property="eventTableView" destination="NB2-Xo-SyD" id="OW2-4e-Pw8"/>
                         <segue destination="bZO-9Y-V4Z" kind="show" identifier="ShowEventDetails" id="biZ-Ui-IUl"/>
+                        <segue destination="qG8-74-EaA" kind="presentation" identifier="createEventSegue" id="ykw-ak-e5n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5N-6l-CB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -251,7 +252,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lZm-dp-eVI" id="fDZ-Nf-nzL">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="129.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="129"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Viseo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJZ-Zp-vJv">
@@ -399,11 +400,11 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F0C-ry-ZAR" id="uYP-qq-Hpk">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WaX-y2-wtE">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -453,7 +454,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qG8-74-EaA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="nfB-2R-NSO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kue-pv-xPL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Kue-pv-xPL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -471,7 +472,7 @@
             <objects>
                 <navigationController storyboardIdentifier="CalendarFilterTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="h2w-dw-DbY" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Krj-nK-c7n">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Krj-nK-c7n">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -494,14 +495,14 @@
                         <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="calendarCell" textLabel="iZV-LA-aRs" style="IBUITableViewCellStyleDefault" id="H8T-oi-g95">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H8T-oi-g95" id="h0C-LP-Xow">
-                                    <rect key="frame" x="0.0" y="0.0" width="336" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="336" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iZV-LA-aRs">
-                                            <rect key="frame" x="15" y="0.0" width="321" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="321" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -534,7 +535,7 @@
         <scene sceneID="fdu-gL-qAg">
             <objects>
                 <navigationController id="M7E-gC-E4d" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9dh-ER-4EF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9dh-ER-4EF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -722,7 +723,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cKT-8n-BsX" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Calendar" id="Arw-vT-i9I"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="g6v-ZI-LWu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="g6v-ZI-LWu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -748,7 +749,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9FP-EW-uKE" id="Q1L-RR-F3Y">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -767,7 +768,7 @@
         <scene sceneID="hC5-2X-zPf">
             <objects>
                 <navigationController storyboardIdentifier="CalendarRequestsTableViewController" id="3Se-Tu-rFS" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UTH-Cy-L5B">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="UTH-Cy-L5B">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -820,7 +821,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Pt-Rl-9wU" id="Pty-yH-gbn">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -837,6 +838,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="More" width="22" height="22"/>
         <image name="participant" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

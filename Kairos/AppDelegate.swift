@@ -42,8 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print("fails")
         }
-        DataSync.deleteAll()
 
+        DataSync.fetchCalendarColors()
+        
         UINavigationBar.appearance().tintColor = .orangeTint()
         UINavigationBar.appearance().backgroundColor = .white
         UINavigationBar.appearance().titleTextAttributes = [
@@ -59,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().setTitleTextAttributes([
             NSFontAttributeName: UIFont.systemFont(ofSize: 16, weight: UIFontWeightRegular)
             ], for: .normal)
-        
+
         //        UINavigationBar.appearance()
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(self.changeNotification), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.dataStack.mainContext)

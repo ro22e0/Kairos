@@ -11,6 +11,7 @@ import FSCalendar
 import SwiftRecord
 import DynamicColor
 import DZNEmptyDataSet
+import SwiftMessages
 
 private let SWIPE_ANIMATION_DURATION = 0.3
 
@@ -79,6 +80,21 @@ class CalendarViewController: UIViewController {
     }
 
     // MARK: - Actions
+
+    @IBAction func moreActions(_ sender: Any) {
+        let view: CalendarRequestsActions = try! SwiftMessages.viewFromNib()
+        view.configureDropShadow()
+        view.cancelAction = { SwiftMessages.hide() }
+        view.createEvent = {
+            self.performSegue(withIdentifier: "createEventSegue", sender: self)
+        }
+        var config = SwiftMessages.defaultConfig
+        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        config.duration = .forever
+        config.presentationStyle = .bottom
+        config.dimMode = .gray(interactive: true)
+        SwiftMessages.show(config: config, view: view)
+    }
 
     @IBAction func setTodaySelected(_ sender: Any) {
         calendarView.select(calendarView.today!)

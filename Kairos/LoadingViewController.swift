@@ -40,18 +40,18 @@ class LoadingViewController: UIViewController {
     // MARK: - Methods
     func checkStart() {
         var storyboard: UIStoryboard
-//        let defautls = UserDefaults.standard
-//        if let userHasLogged = defautls.bool(forKey: userLoginKey) as? Bool {
-//            storyboard = userHasLogged ? UIStoryboard(name: BoardStoryboardID, bundle: nil) : UIStoryboard(name: LoginStoryboardID, bundle: nil)
-//        } else {
-//            storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
-//        }
-        self.setRootVC(.Login)
-//        if let viewController = storyboard.instantiateInitialViewController() {
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            
-//            appDelegate.window?.rootViewController = viewController
-//        }
+        let defautls = UserDefaults.standard
+        if let userHasLogged = defautls.bool(forKey: userLoginKey) as? Bool {
+            storyboard = userHasLogged ? UIStoryboard(name: BoardStoryboardID, bundle: nil) : UIStoryboard(name: LoginStoryboardID, bundle: nil)
+        } else {
+            storyboard = UIStoryboard(name: LoginStoryboardID, bundle: nil)
+        }
+//        self.setRootVC(.Login)
+        if let viewController = storyboard.instantiateInitialViewController() {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            appDelegate.window?.rootViewController = viewController
+        }
     }
     
     /*

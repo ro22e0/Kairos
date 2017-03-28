@@ -29,13 +29,27 @@ struct DataSync {
         
         return delegate.mainContext
     }()
-    
-//    func sync<T>(type: T.Type, data: [JSON]) {
+
+    static func deleteAll() {
+        CoreStore.beginAsynchronous { (transaction) -> Void in
+            transaction.deleteAll(From<Owner>())
+            transaction.deleteAll(From<Event>())
+            transaction.deleteAll(From<Calendar>())
+            transaction.deleteAll(From<User>())
+            transaction.deleteAll(From<Project>())
+            transaction.deleteAll(From<Task>())
+            transaction.deleteAll(From<ChatRoom>())
+            transaction.deleteAll(From<Message>())
+            transaction.commit()
+        }
+    }
+
+//    func sync<T, S: Sequence>(type: T.Type, source: S) where T: NSManagedObject, T: ImportableUniqueObject, S.Iterator.Element == T.ImportSource {
 //        CoreStore.beginAsynchronous({ (transaction) in
 //            do {
-//                try _ = transaction.importUniqueObject(
+//                try _ = transaction.importUniqueObjects(
 //                    Into<T>(),
-//                    source: data
+//                    sourceArray: source
 //                )
 //            }
 //            catch {
@@ -51,26 +65,34 @@ struct DataSync {
 //            })
 //        })
 //    }
-    
-    static func deleteAll() {
-        CoreStore.beginAsynchronous { (transaction) -> Void in
-            transaction.deleteAll(From<Owner>())
-            transaction.deleteAll(From<Event>())
-            transaction.deleteAll(From<Calendar>())
-            transaction.deleteAll(From<User>())
-            transaction.deleteAll(From<Project>())
-            transaction.deleteAll(From<Task>())
-            transaction.deleteAll(From<ChatRoom>())
-            transaction.deleteAll(From<Message>())
-            transaction.commit()
-        }
-    }
-    
+
     // MARK: - Friends
     
-    static func syncFriends(_ json: JSON, completionHandler: @escaping ()->()) {
+    static func syncFriends(_ source: [JSON], completionHandler: @escaping (StatusRequest) -> Void) {
+        CoreStore.beginAsynchronous({ (transaction) in
+            do {
+                try _ = transaction.importUniqueObjects(
+                    Into<Owner>(),
+                    sourceArray: source
+                )
+            }
+            catch {
+                return // Woops, don't save
+            }
+            transaction.commit({ (result) in
+                switch result {
+                case .success(let hasChanges):
+                    print("success!", hasChanges)
+                    let defautls = UserDefaults.standard
+                    defautls.setValue(true, forKey: userLoginKey)
+                    completionHandler(.success(nil))
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        })
     }
-    
+
     static func fetchFriends(_ completionHandler: @escaping (StatusRequest) -> Void) {
         RouterWrapper.shared.request(.getFriends) { (response) in
             print(response.response) // URL response
@@ -79,7 +101,6 @@ struct DataSync {
                 UserManager.shared.setCredentials(response.response!)
                 switch response.response!.statusCode {
                 case 200...203:
-                    
                     if let value = response.result.value {
                         let json = JSON(value)
                         switch response.response!.statusCode {
@@ -87,30 +108,9 @@ struct DataSync {
                             var data = json?.data as? [String: Any]
                             data?["id"] = UserManager.shared.current.ownerID
                             print(data)
-                            
-                            let source = JSON(data)
-                            CoreStore.beginAsynchronous({ (transaction) in
-                                do {
-                                    try _ = transaction.importUniqueObject(
-                                        Into<Owner>(),
-                                        source: source!
-                                    )
-                                }
-                                catch {
-                                    return // Woops, don't save
-                                }
-                                transaction.commit({ (result) in
-                                    switch result {
-                                    case .success(let hasChanges):
-                                        print("success!", hasChanges)
-                                        let defautls = UserDefaults.standard
-                                        defautls.setValue(true, forKey: userLoginKey)
-                                        completionHandler(.success(nil))
-                                    case .failure(let error):
-                                        print(error)
-                                    }
-                                })
-                            })
+                            if let source = JSON(data) {
+                                syncFriends([source], completionHandler: completionHandler)
+                            }
                             //                        MagicalRecord.saveInBackground({ (localContext) in
                             //                            Owner.mr_import(from: data, in: localContext)
                             ////                            Owner.mr_import(from: [data], in: localContext)
@@ -125,10 +125,6 @@ struct DataSync {
                             completionHandler(.error("Fail to connect"))
                         }
                     }
-                    
-                    
-                    
-                    
                 default:
                     completionHandler(.error("error"))
                 }
@@ -159,28 +155,29 @@ struct DataSync {
         //        }
     }
     
-    fileprivate static func syncUsers(_ users: [JSON]) {
-        //        for u in users {
-        //            print("OWNER:  ", Owner.all())
-        //            print("FRIENDS:  ", User.all())
-        //            print("User id : ", u["id"])
-        //            print("User id : ", User.find("id == %@", args: u["id"].stringValue))
-        //            print("Owner id : ", Owner.find("id == %@", args: u["id"].stringValue))
-        //
-        //            let friendExist = User.find("id == %@", args: u["id"].stringValue) != nil ? true : false
-        //            let ownerExist = Owner.find("id == %@", args: u["id"].stringValue) != nil ? true : false
-        //
-        //            if (!friendExist && !ownerExist) {
-        //                let user = User.findOrCreate(["id": u["id"].object]) as! User
-        //                user.name = u["name"].stringValue
-        //                user.nickname = u["nickname"].stringValue
-        //                user.email = u["email"].stringValue
-        //                user.image = u["image"].string
-        //            }
-        //        }
-        //        User.save()
+    fileprivate static func syncUsers(_ source: [JSON], completionHandler: @escaping (StatusRequest) -> Void) {
+        CoreStore.beginAsynchronous({ (transaction) in
+            do {
+                try _ = transaction.importUniqueObjects(
+                    Into<User>(),
+                    sourceArray: source
+                )
+            }
+            catch {
+                return // Woops, don't save
+            }
+            transaction.commit({ (result) in
+                switch result {
+                case .success(let hasChanges):
+                    print("success!", hasChanges)
+                    completionHandler(.success(nil))
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        })
     }
-    
+
     static func fetchUsers(_ completionHandler: @escaping (StatusRequest) -> Void) {
         RouterWrapper.shared.request(.getUsers) { (response) in
             print(response.response) // URL response
@@ -192,28 +189,10 @@ struct DataSync {
                     if let value = response.result.value {
                         let json = JSON(value)
                         //                        print(json)
-                        
-                        let source = ArrowJSON(value)
-                        CoreStore.beginAsynchronous({ (transaction) in
-                            do {
-                                try _ = transaction.importUniqueObjects(
-                                    Into<User>(),
-                                    sourceArray: source!.collection!
-                                )
-                            }
-                            catch {
-                                return // Woops, don't save
-                            }
-                            transaction.commit({ (result) in
-                                switch result {
-                                case .success(let hasChanges):
-                                    print("success!", hasChanges)
-                                    completionHandler(.success(nil))
-                                case .failure(let error):
-                                    print(error)
-                                }
-                            })
-                        })
+
+                        if let source = ArrowJSON(value)?.collection {
+                            syncUsers(source, completionHandler: completionHandler)
+                        }
                         
                         //                        let data = self.transformJson(json)
                         //                        MagicalRecord.saveInBackground({ (localContext) in
@@ -266,13 +245,33 @@ struct DataSync {
     fileprivate static func syncUserCalendar(_ calendar: Calendar, users: [JSON]) {
     }
     
-    static func syncCalendars(_ json: JSON, completionHandler: @escaping ()->()) {
+    static func syncCalendars(_ source: [JSON], completionHandler: @escaping (StatusRequest) -> Void) {
         //        let data = json.dictionaryObject
         //        MagicalRecord.saveInBackground({ (localContext) in
         //            Calendar.mr_import(from: [data], in: localContext)
         //        }, completion: {
         //            print("finish")
         //        })
+        CoreStore.beginAsynchronous({ (transaction) in
+            do {
+                try _ = transaction.importUniqueObjects(
+                    Into<Calendar>(),
+                    sourceArray: source
+                )
+            }
+            catch {
+                return // Woops, don't save
+            }
+            transaction.commit({ (result) in
+                switch result {
+                case .success(let hasChanges):
+                    print("success!", hasChanges)
+                    completionHandler(.success(nil))
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        })
     }
     
     static func fetchCalendars(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -285,27 +284,9 @@ struct DataSync {
                     let json = JSON(value)
                     print(json)
                     
-                    let source = ArrowJSON(value)
-                    CoreStore.beginAsynchronous({ (transaction) in
-                        do {
-                            try _ = transaction.importUniqueObjects(
-                                Into<Calendar>(),
-                                sourceArray: source!.collection!
-                            )
-                        }
-                        catch {
-                            return // Woops, don't save
-                        }
-                        transaction.commit({ (result) in
-                            switch result {
-                            case .success(let hasChanges):
-                                print("success!", hasChanges)
-                                completionHandler(.success(nil))
-                            case .failure(let error):
-                                print(error)
-                            }
-                        })
-                    })
+                    if let source = ArrowJSON(value)?.collection {
+                        syncCalendars(source, completionHandler: completionHandler)
+                    }
                     
                     //                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
                     //                        return Calendar.query(predicate)
@@ -355,15 +336,35 @@ struct DataSync {
         //        }
     }
     
-    static func syncEvents(_ json: JSON, completionHandler: @escaping ()->()) {
+    static func syncEvents(_ source: [JSON], completionHandler: @escaping (StatusRequest) -> Void) {
         //        let data = json.dictionaryObject
         //        MagicalRecord.saveInBackground({ (localContext) in
         //            Event.mr_import(from: [data], in: localContext)
         //        }, completion: {
         //            print("finish")
         //        })
+        CoreStore.beginAsynchronous({ (transaction) in
+            do {
+                try _ = transaction.importUniqueObjects(
+                    Into<Event>(),
+                    sourceArray: source
+                )
+            }
+            catch {
+                return // Woops, don't save
+            }
+            transaction.commit({ (result) in
+                switch result {
+                case .success(let hasChanges):
+                    print("success!", hasChanges)
+                    completionHandler(.success(nil))
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        })
     }
-    
+
     static func fetchEvents(_ completionHandler: @escaping (StatusRequest) -> Void) {
         RouterWrapper.shared.request(.getEvents) { (response) in
             print(response.response) // URL response
@@ -374,27 +375,9 @@ struct DataSync {
                     let json = JSON(value)
                     print(json)
                     
-                    let source = ArrowJSON(value)
-                    CoreStore.beginAsynchronous({ (transaction) in
-                        do {
-                            try _ = transaction.importUniqueObjects(
-                                Into<Event>(),
-                                sourceArray: source!.collection!
-                            )
-                        }
-                        catch {
-                            return // Woops, don't save
-                        }
-                        transaction.commit({ (result) in
-                            switch result {
-                            case .success(let hasChanges):
-                                print("success!", hasChanges)
-                                completionHandler(.success(nil))
-                            case .failure(let error):
-                                print(error)
-                            }
-                        })
-                    })
+                    if let source = ArrowJSON(value)?.collection {
+                        syncEvents(source, completionHandler: completionHandler)
+                    }
                     //                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
                     //                        return Event.query(predicate)
                     //                    })
@@ -413,15 +396,35 @@ struct DataSync {
     }
     
     // MARK: - Projects
-    static func syncProjects(_ json: JSON, completionHandler: @escaping ()->()) {
+    static func syncProjects(_ source: [JSON], completionHandler: @escaping (StatusRequest) -> Void) {
         //        let data = json.dictionaryObject
         //        MagicalRecord.saveInBackground({ (localContext) in
         //            Project.mr_import(from: [data], in: localContext)
         //        }, completion: {
         //            print("finish")
         //        })
+        CoreStore.beginAsynchronous({ (transaction) in
+            do {
+                try _ = transaction.importUniqueObjects(
+                    Into<Project>(),
+                    sourceArray: source
+                )
+            }
+            catch {
+                return // Woops, don't save
+            }
+            transaction.commit({ (result) in
+                switch result {
+                case .success(let hasChanges):
+                    print("success!", hasChanges)
+                    completionHandler(.success(nil))
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        })
     }
-    
+
     static func fetchProjects(_ completionHandler: @escaping (StatusRequest) -> Void) {
         RouterWrapper.shared.request(.getProjects) { (response) in
             print(response.response) // URL response
@@ -432,30 +435,10 @@ struct DataSync {
                     let json = JSON(value)
                     
                     print(json)
-                    
-                    
-                    let source = ArrowJSON(value)
-                    CoreStore.beginAsynchronous({ (transaction) in
-                        do {
-                            try _ = transaction.importUniqueObjects(
-                                Into<Project>(),
-                                sourceArray: source!.collection!
-                            )
-                        }
-                        catch {
-                            return // Woops, don't save
-                        }
-                        transaction.commit({ (result) in
-                            switch result {
-                            case .success(let hasChanges):
-                                print("success!", hasChanges)
-                                completionHandler(.success(nil))
-                            case .failure(let error):
-                                print(error)
-                            }
-                        })
-                    })
-                    
+
+                    if let source = ArrowJSON(value)?.collection {
+                        syncProjects(source, completionHandler: completionHandler)
+                    }
                     //                    let data = DataSync.transformJson(json)
                     //                    MagicalRecord.saveInBackground({ (localContext) in
                     //                        Project.mr_import(from: data, in: localContext)
@@ -493,13 +476,33 @@ struct DataSync {
     }
     
     // MARK: - Tasks
-    static func syncTasks(_ json: JSON, completionHandler: @escaping ()->()) {
+    static func syncTasks(_ source: [JSON], completionHandler: @escaping (StatusRequest) -> Void) {
         //        let data = json.dictionaryObject
         //        MagicalRecord.saveInBackground({ (localContext) in
         //            Task.mr_import(from: [data], in: localContext)
         //        }, completion: {
         //            print("finish")
         //        })
+        CoreStore.beginAsynchronous({ (transaction) in
+            do {
+                try _ = transaction.importUniqueObjects(
+                    Into<Task>(),
+                    sourceArray: source
+                )
+            }
+            catch {
+                return // Woops, don't save
+            }
+            transaction.commit({ (result) in
+                switch result {
+                case .success(let hasChanges):
+                    print("success!", hasChanges)
+                    completionHandler(.success(nil))
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        })
     }
     
     static func fetchTasks(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -513,30 +516,10 @@ struct DataSync {
                     
                     print(json)
                     
-                    
-                    let source = ArrowJSON(value)
-                    CoreStore.beginAsynchronous({ (transaction) in
-                        do {
-                            try _ = transaction.importUniqueObjects(
-                                Into<Task>(),
-                                sourceArray: source!.collection!
-                            )
-                        }
-                        catch {
-                            return // Woops, don't save
-                        }
-                        transaction.commit({ (result) in
-                            switch result {
-                            case .success(let hasChanges):
-                                print("success!", hasChanges)
-                                completionHandler(.success(nil))
-                            case .failure(let error):
-                                print(error)
-                            }
-                        })
-                    })
-                    
-                    
+                    if let source = ArrowJSON(value)?.collection {
+                        syncTasks(source, completionHandler: completionHandler)
+                    }
+
                     //                    deleteObject(json.arrayValue, query: { (predicate) -> [NSManagedObject] in
                     //                        return Task.query(predicate)
                     //                    })
@@ -577,13 +560,33 @@ struct DataSync {
     }
     
     // MARK: - ChatRooms
-    static func syncChatRooms(_ json: JSON, completionHandler: @escaping ()->()) {
+    static func syncChatRooms(_ source: [JSON], completionHandler: @escaping (StatusRequest) -> Void) {
         //        let data = json.dictionaryObject
         //        MagicalRecord.saveInBackground({ (localContext) in
         //            ChatRoom.mr_import(from: [data], in: localContext)
         //        }, completion: {
         //            print("finish")
         //        })
+        CoreStore.beginAsynchronous({ (transaction) in
+            do {
+                try _ = transaction.importUniqueObjects(
+                    Into<ChatRoom>(),
+                    sourceArray: source
+                )
+            }
+            catch {
+                return // Woops, don't save
+            }
+            transaction.commit({ (result) in
+                switch result {
+                case .success(let hasChanges):
+                    print("success!", hasChanges)
+                    completionHandler(.success(nil))
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        })
     }
     
     static func fetchChatRooms(_ completionHandler: @escaping (StatusRequest) -> Void) {
@@ -598,28 +601,10 @@ struct DataSync {
                     print(json)
                     
                     //                    let data = DataSync.transformJson(json)
-                    let source = ArrowJSON(value)
-                    CoreStore.beginAsynchronous({ (transaction) in
-                        do {
-                            try _ = transaction.importUniqueObjects(
-                                Into<ChatRoom>(),
-                                sourceArray: source!.collection!
-                            )
-                        }
-                        catch {
-                            return // Woops, don't save
-                        }
-                        transaction.commit({ (result) in
-                            switch result {
-                            case .success(let hasChanges):
-                                print("success!", hasChanges)
-                                completionHandler(.success(nil))
-                            case .failure(let error):
-                                print(error)
-                            }
-                        })
-                    })
-                    //                    MagicalRecord.saveInBackground({ (localContext) in
+                    if let source = ArrowJSON(value)?.collection {
+                       syncChatRooms(source, completionHandler: completionHandler)
+                    }
+                                        //                    MagicalRecord.saveInBackground({ (localContext) in
                     //                        ChatRoom.mr_import(from: data, in: localContext)
                     //                    }, completion: {
                     //                        print("finish")
@@ -654,12 +639,33 @@ struct DataSync {
         }
     }
     
-    static func syncMessages(_ json: JSON, completionHandler: @escaping ()->()) {
+    static func syncMessages(_ source: [JSON], completionHandler: @escaping (StatusRequest) -> Void) {
         //        let data = json.dictionaryObject
         //        MagicalRecord.saveInBackground({ (localContext) in
         //            Message.mr_import(from: [data], in: localContext)
         //        }, completion: {
         //            print("finish")
         //        })
+        CoreStore.beginAsynchronous({ (transaction) in
+            do {
+                try _ = transaction.importUniqueObjects(
+                    Into<Message>(),
+                    sourceArray: source
+                )
+            }
+            catch {
+                return // Woops, don't save
+            }
+            transaction.commit({ (result) in
+                switch result {
+                case .success(let hasChanges):
+                    print("success!", hasChanges)
+                    completionHandler(.success(nil))
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        })
+
     }
 }
