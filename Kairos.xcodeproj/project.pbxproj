@@ -55,6 +55,12 @@
 		DA05BED11E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA05BECE1E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib */; };
 		DA05BED51E30E0D300DF1BE5 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05BED41E30E0D300DF1BE5 /* RoomViewController.swift */; };
 		DA05BED71E30E3FE00DF1BE5 /* ChatTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA05BED61E30E3FE00DF1BE5 /* ChatTableViewController.swift */; };
+		DA0D62091E96BCFF005450F3 /* ProjectRequestsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D62071E96BCFF005450F3 /* ProjectRequestsActions.swift */; };
+		DA0D620A1E96BCFF005450F3 /* ProjectRequestsActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA0D62081E96BCFF005450F3 /* ProjectRequestsActions.xib */; };
+		DA0D620E1E96BD43005450F3 /* ProjectActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D620C1E96BD43005450F3 /* ProjectActions.swift */; };
+		DA0D620F1E96BD43005450F3 /* ProjectActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA0D620D1E96BD43005450F3 /* ProjectActions.xib */; };
+		DA0D62141E96BD6D005450F3 /* TaskActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D62121E96BD6D005450F3 /* TaskActions.swift */; };
+		DA0D62151E96BD6D005450F3 /* TaskActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA0D62131E96BD6D005450F3 /* TaskActions.xib */; };
 		DA0D76E51E8B0B0D0077AF00 /* CalendarRequestsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D76E31E8B0B0D0077AF00 /* CalendarRequestsActions.swift */; };
 		DA0D76E61E8B0B0D0077AF00 /* CalendarRequestsActions.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA0D76E41E8B0B0D0077AF00 /* CalendarRequestsActions.xib */; };
 		DA0D76EB1E8B1BD50077AF00 /* CalendarEventActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0D76E91E8B1BD50077AF00 /* CalendarEventActions.swift */; };
@@ -62,6 +68,8 @@
 		DA0E144B1DA8125200865C20 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0E144A1DA8125200865C20 /* CalendarManager.swift */; };
 		DA11A9F61D986A6700218FF3 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA11A9F51D986A6700218FF3 /* RequestManager.swift */; };
 		DA11A9F81D9872D400218FF3 /* ModalSearchSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */; };
+		DA14258E1E95703E0074D5BB /* CalendarRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA14258D1E95703E0074D5BB /* CalendarRootViewController.swift */; };
+		DA1425901E9570DF0074D5BB /* CalendarModelPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA14258F1E9570DF0074D5BB /* CalendarModelPageController.swift */; };
 		DA1874571CDB7375008E7C38 /* EventTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1874561CDB7375008E7C38 /* EventTitleTableViewCell.swift */; };
 		DA1874591CDB738B008E7C38 /* EventLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1874581CDB738B008E7C38 /* EventLocationTableViewCell.swift */; };
 		DA18745B1CDB73AF008E7C38 /* EventStartDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA18745A1CDB73AF008E7C38 /* EventStartDateTableViewCell.swift */; };
@@ -142,6 +150,9 @@
 		DA8358C71CAB18A400CC9B29 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */; };
 		DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA847C291D14077300ED2750 /* Project.storyboard */; };
 		DA851C961CAE99C50025E1D4 /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA851C951CAE99C50025E1D4 /* Calendar.storyboard */; };
+		DA86A6E31E9C19B100FC8D37 /* ActionButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA86A6E11E9C19B100FC8D37 /* ActionButtonCell.swift */; };
+		DA86A6E41E9C19B100FC8D37 /* ActionButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA86A6E21E9C19B100FC8D37 /* ActionButtonCell.xib */; };
+		DA9CF1EF1E8DA5BD00607842 /* EventRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9CF1EE1E8DA5BD00607842 /* EventRequestsTableViewController.swift */; };
 		DAA2D4791DA3079700D5E6A7 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA2D4781DA3079700D5E6A7 /* UsersTableViewController.swift */; };
 		DAA6B6B71D99CAD600D68016 /* CompleteProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA6B6B61D99CAD600D68016 /* CompleteProfileViewController.swift */; };
 		DAAEE1581C9ABE1F00D53AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEE1571C9ABE1F00D53AEC /* AppDelegate.swift */; };
@@ -244,6 +255,12 @@
 		DA05BECE1E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendingStatusCollectionViewCell.xib; sourceTree = "<group>"; };
 		DA05BED41E30E0D300DF1BE5 /* RoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RoomViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA05BED61E30E3FE00DF1BE5 /* ChatTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChatTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		DA0D62071E96BCFF005450F3 /* ProjectRequestsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRequestsActions.swift; sourceTree = "<group>"; };
+		DA0D62081E96BCFF005450F3 /* ProjectRequestsActions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectRequestsActions.xib; sourceTree = "<group>"; };
+		DA0D620C1E96BD43005450F3 /* ProjectActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectActions.swift; sourceTree = "<group>"; };
+		DA0D620D1E96BD43005450F3 /* ProjectActions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectActions.xib; sourceTree = "<group>"; };
+		DA0D62121E96BD6D005450F3 /* TaskActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskActions.swift; sourceTree = "<group>"; };
+		DA0D62131E96BD6D005450F3 /* TaskActions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskActions.xib; sourceTree = "<group>"; };
 		DA0D76E31E8B0B0D0077AF00 /* CalendarRequestsActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarRequestsActions.swift; sourceTree = "<group>"; };
 		DA0D76E41E8B0B0D0077AF00 /* CalendarRequestsActions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarRequestsActions.xib; sourceTree = "<group>"; };
 		DA0D76E91E8B1BD50077AF00 /* CalendarEventActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventActions.swift; sourceTree = "<group>"; };
@@ -251,6 +268,8 @@
 		DA0E144A1DA8125200865C20 /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA11A9F51D986A6700218FF3 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		DA11A9F71D9872D400218FF3 /* ModalSearchSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalSearchSegue.swift; sourceTree = "<group>"; };
+		DA14258D1E95703E0074D5BB /* CalendarRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarRootViewController.swift; sourceTree = "<group>"; };
+		DA14258F1E9570DF0074D5BB /* CalendarModelPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarModelPageController.swift; sourceTree = "<group>"; };
 		DA1874561CDB7375008E7C38 /* EventTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTitleTableViewCell.swift; sourceTree = "<group>"; };
 		DA1874581CDB738B008E7C38 /* EventLocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLocationTableViewCell.swift; sourceTree = "<group>"; };
 		DA18745A1CDB73AF008E7C38 /* EventStartDateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventStartDateTableViewCell.swift; sourceTree = "<group>"; };
@@ -333,6 +352,9 @@
 		DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DA847C291D14077300ED2750 /* Project.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Project.storyboard; sourceTree = "<group>"; };
 		DA851C951CAE99C50025E1D4 /* Calendar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
+		DA86A6E11E9C19B100FC8D37 /* ActionButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButtonCell.swift; sourceTree = "<group>"; };
+		DA86A6E21E9C19B100FC8D37 /* ActionButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionButtonCell.xib; sourceTree = "<group>"; };
+		DA9CF1EE1E8DA5BD00607842 /* EventRequestsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRequestsTableViewController.swift; sourceTree = "<group>"; };
 		DAA2D4781DA3079700D5E6A7 /* UsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UsersTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DAA6B6B61D99CAD600D68016 /* CompleteProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CompleteProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DAA816621C9C218900EF1560 /* Kairos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kairos-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -455,6 +477,19 @@
 				DA05BED41E30E0D300DF1BE5 /* RoomViewController.swift */,
 			);
 			name = Chat;
+			sourceTree = "<group>";
+		};
+		DA0D620B1E96BD0B005450F3 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				DA0D62071E96BCFF005450F3 /* ProjectRequestsActions.swift */,
+				DA0D62081E96BCFF005450F3 /* ProjectRequestsActions.xib */,
+				DA0D620C1E96BD43005450F3 /* ProjectActions.swift */,
+				DA0D620D1E96BD43005450F3 /* ProjectActions.xib */,
+				DA0D62121E96BD6D005450F3 /* TaskActions.swift */,
+				DA0D62131E96BD6D005450F3 /* TaskActions.xib */,
+			);
+			name = Project;
 			sourceTree = "<group>";
 		};
 		DA0D76E71E8B0B180077AF00 /* Friend */ = {
@@ -635,6 +670,7 @@
 			children = (
 				DA0D76E71E8B0B180077AF00 /* Friend */,
 				DA0D76E81E8B0B1E0077AF00 /* Calendar */,
+				DA0D620B1E96BD0B005450F3 /* Project */,
 			);
 			name = ActionSheets;
 			sourceTree = "<group>";
@@ -679,6 +715,8 @@
 				DAECFECC1DA0578C00D3F724 /* CustomTextFieldTableViewCell.xib */,
 				DA40416B1DE75DA60043A8F0 /* LabelColorCell.swift */,
 				DA40416C1DE75DA60043A8F0 /* LabelColorCell.xib */,
+				DA86A6E11E9C19B100FC8D37 /* ActionButtonCell.swift */,
+				DA86A6E21E9C19B100FC8D37 /* ActionButtonCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -725,11 +763,14 @@
 		DA851C941CAE998C0025E1D4 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				DA14258F1E9570DF0074D5BB /* CalendarModelPageController.swift */,
+				DA14258D1E95703E0074D5BB /* CalendarRootViewController.swift */,
 				DA8358C61CAB18A400CC9B29 /* CalendarViewController.swift */,
 				DA3603C61CC26DA000A89B5A /* EventDetailsTableViewController.swift */,
 				DA52AAE21CD7EC5900464096 /* EventTableViewController.swift */,
 				DA23E6E61D76EBCE00B9D403 /* EventCalendarTableViewController.swift */,
 				AC4A94B81E2E587600BA59B5 /* EventParticipantTableViewController.swift */,
+				DA9CF1EE1E8DA5BD00607842 /* EventRequestsTableViewController.swift */,
 				AC4A94BA1E2E5D4C00BA59B5 /* UserEventActionTableViewController.swift */,
 				DA1D4BE01D84111C00B11AD1 /* CalendarFilterTableViewController.swift */,
 				DA31B7731D9514D9004D5E81 /* CalendarEditTableViewController.swift */,
@@ -996,8 +1037,10 @@
 				DA40416E1DE75DA60043A8F0 /* LabelColorCell.xib in Resources */,
 				DA2EC02D1DA9102E00BCA895 /* FriendInviteTableViewCell.xib in Resources */,
 				DAECFECE1DA0578C00D3F724 /* CustomTextFieldTableViewCell.xib in Resources */,
+				DA0D62151E96BD6D005450F3 /* TaskActions.xib in Resources */,
 				DA05BEC41E30DA2D00DF1BE5 /* Chat.storyboard in Resources */,
 				DA668F3F1CA4AEA000230912 /* InvitationTableViewCell.xib in Resources */,
+				DA0D620F1E96BD43005450F3 /* ProjectActions.xib in Resources */,
 				DA05BEC61E30DA3500DF1BE5 /* File.storyboard in Resources */,
 				DA1AF0D21E4D5B3A0074CDB9 /* GoogleService-Info.plist in Resources */,
 				DA628D321E311E2200331C9C /* Assets.xcassets in Resources */,
@@ -1006,6 +1049,7 @@
 				DAFA00231DA83B040039AD4D /* CalendarTableViewCell.xib in Resources */,
 				DA68533D1CE25E5E00B839F6 /* User-Info.plist in Resources */,
 				DAC801851CA3334D0092A717 /* Menu.storyboard in Resources */,
+				DA0D620A1E96BCFF005450F3 /* ProjectRequestsActions.xib in Resources */,
 				DA1AF0CC1E4C93960074CDB9 /* UserListCell.xib in Resources */,
 				DA7913041CEFCF6E00661753 /* UserActionTableViewCell.xib in Resources */,
 				DA05BED11E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.xib in Resources */,
@@ -1013,6 +1057,7 @@
 				DA847C2A1D14077300ED2750 /* Project.storyboard in Resources */,
 				DA0D76E61E8B0B0D0077AF00 /* CalendarRequestsActions.xib in Resources */,
 				DAC8018C1CA353AF0092A717 /* Board.storyboard in Resources */,
+				DA86A6E41E9C19B100FC8D37 /* ActionButtonCell.xib in Resources */,
 				DAFA00291DA852800039AD4D /* CalendarHeaderCell.xib in Resources */,
 				AC9D1E5F1E2D7B3700F1D29D /* EventHeaderCell.xib in Resources */,
 				DA7C15041E527FDF00EEE31B /* FriendRequestsActions.xib in Resources */,
@@ -1278,11 +1323,13 @@
 				DA6853461CE260C200B839F6 /* Kairos.xcdatamodeld in Sources */,
 				DA7912F91CEFCBF800661753 /* FriendActionPopoverTableViewController.swift in Sources */,
 				AC6BF41D1E30567000EC353C /* TaskTableViewCell.swift in Sources */,
+				DA0D620E1E96BD43005450F3 /* ProjectActions.swift in Sources */,
 				DA11A9F61D986A6700218FF3 /* RequestManager.swift in Sources */,
 				DAFA00251DA84E6A0039AD4D /* CalendarDetailsTableViewController.swift in Sources */,
 				DADC45DC1D9FB69E003CC4D1 /* AccountSecurityTableViewController.swift in Sources */,
 				AC4A94B91E2E587600BA59B5 /* EventParticipantTableViewController.swift in Sources */,
 				DA18745F1CDB78A9008E7C38 /* EventNotesTableViewCell.swift in Sources */,
+				DA9CF1EF1E8DA5BD00607842 /* EventRequestsTableViewController.swift in Sources */,
 				DA2DA3241E31690F00F86C68 /* ChatRoom+CoreDataProperties.swift in Sources */,
 				DAF66D311CA4028800B6062D /* MenuTableViewController.swift in Sources */,
 				AC6BF41A1E30429600EC353C /* UserTaskActionTableViewController.swift in Sources */,
@@ -1293,6 +1340,7 @@
 				DA668F3B1CA4AD7800230912 /* FriendsRequestsTableViewController.swift in Sources */,
 				DA1874611CDB8029008E7C38 /* BaseEventTableViewCell.swift in Sources */,
 				DA05BED01E30DEE600DF1BE5 /* SendingStatusCollectionViewCell.swift in Sources */,
+				DA0D62141E96BD6D005450F3 /* TaskActions.swift in Sources */,
 				DA8326301CE3CCFF00C09F31 /* DataSync.swift in Sources */,
 				DA8358C71CAB18A400CC9B29 /* CalendarViewController.swift in Sources */,
 				DA3603C31CC26C4700A89B5A /* EventCalendarTableViewCell.swift in Sources */,
@@ -1327,13 +1375,16 @@
 				DA05BECA1E30DBC600DF1BE5 /* ChatTableViewCell.swift in Sources */,
 				DAE380CE1CB2F5B3002DB874 /* EventTableViewCell.swift in Sources */,
 				DA3F685D1E7F41D300CDF93B /* Type+Arrow.swift in Sources */,
+				DA86A6E31E9C19B100FC8D37 /* ActionButtonCell.swift in Sources */,
 				DA799DF71D9D0FF0003C27CE /* ProfileImagePickerTableViewCell.swift in Sources */,
 				DA3F3ACB1C9AEA5200E82FC6 /* LoadingViewController.swift in Sources */,
+				DA1425901E9570DF0074D5BB /* CalendarModelPageController.swift in Sources */,
 				DA3F3AD51C9B037600E82FC6 /* GetStartedViewController.swift in Sources */,
 				DAECFECD1DA0578C00D3F724 /* CustomTextFieldTableViewCell.swift in Sources */,
 				DA3F3AD11C9B022400E82FC6 /* SignUpViewController.swift in Sources */,
 				DA6853481CE2707600B839F6 /* RouterWrapper.swift in Sources */,
 				AC4A94BB1E2E5D4C00BA59B5 /* UserEventActionTableViewController.swift in Sources */,
+				DA14258E1E95703E0074D5BB /* CalendarRootViewController.swift in Sources */,
 				DA0D76E51E8B0B0D0077AF00 /* CalendarRequestsActions.swift in Sources */,
 				DA05BED51E30E0D300DF1BE5 /* RoomViewController.swift in Sources */,
 				DAC801821CA1F0330092A717 /* SpinnerManager.swift in Sources */,
@@ -1362,6 +1413,7 @@
 				DAA6B6B71D99CAD600D68016 /* CompleteProfileViewController.swift in Sources */,
 				DA4D52FB1E41340900ED7F55 /* TaskHeaderCell.swift in Sources */,
 				DA23E6E71D76EBCE00B9D403 /* EventCalendarTableViewController.swift in Sources */,
+				DA0D62091E96BCFF005450F3 /* ProjectRequestsActions.swift in Sources */,
 				DA2DA32C1E31995300F86C68 /* WebSocketClient.swift in Sources */,
 				DA0019061D9FEDEC00CA11F5 /* FriendManager.swift in Sources */,
 				AC4A94BD1E2E704600BA59B5 /* ProjectTableViewController.swift in Sources */,

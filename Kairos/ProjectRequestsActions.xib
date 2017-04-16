@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="LHl-C4-0Ec" customClass="ProjectRequestsActions" customModule="Kairos" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="596" height="101"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7I-qi-gMr">
+                    <rect key="frame" x="18" y="10" width="568" height="81"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="YiW-O0-Fwt">
+                            <rect key="frame" x="0.0" y="0.0" width="568" height="81"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hOu-X5-8nC">
+                                    <rect key="frame" x="0.0" y="0.0" width="568" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="Yf3-xk-igo"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Create Project"/>
+                                    <connections>
+                                        <action selector="createProject:" destination="LHl-C4-0Ec" eventType="touchUpInside" id="dGR-9m-3vT"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pW-dN-RO8">
+                                    <rect key="frame" x="0.0" y="40" width="568" height="1"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="hhB-aa-bBj"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIO-wd-biM">
+                                    <rect key="frame" x="0.0" y="41" width="568" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Project Requests"/>
+                                    <connections>
+                                        <action selector="projectsRequests:" destination="LHl-C4-0Ec" eventType="touchUpInside" id="Fa3-Jr-XHl"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="81" id="0Ez-0k-Wuc"/>
+                                <constraint firstItem="hOu-X5-8nC" firstAttribute="height" secondItem="cIO-wd-biM" secondAttribute="height" id="NhM-sN-Xp0"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="YiW-O0-Fwt" secondAttribute="bottom" id="5Of-fU-3FM"/>
+                        <constraint firstItem="YiW-O0-Fwt" firstAttribute="leading" secondItem="s7I-qi-gMr" secondAttribute="leading" id="HbB-m6-L2w"/>
+                        <constraint firstItem="YiW-O0-Fwt" firstAttribute="top" secondItem="s7I-qi-gMr" secondAttribute="top" id="IBg-KD-U1O"/>
+                        <constraint firstAttribute="trailing" secondItem="YiW-O0-Fwt" secondAttribute="trailing" id="OIP-bh-xNg"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="s7I-qi-gMr" firstAttribute="leading" secondItem="LHl-C4-0Ec" secondAttribute="leadingMargin" constant="10" id="afR-V0-FBh"/>
+                <constraint firstItem="s7I-qi-gMr" firstAttribute="top" secondItem="LHl-C4-0Ec" secondAttribute="top" constant="10" id="g3F-38-uXK"/>
+                <constraint firstAttribute="bottom" secondItem="s7I-qi-gMr" secondAttribute="bottom" constant="10" id="oQ6-BP-cHO"/>
+                <constraint firstAttribute="trailing" secondItem="s7I-qi-gMr" secondAttribute="trailing" constant="10" id="qxf-oq-RKH"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="statusBarOffset">
+                    <real key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="bounceAnimationOffset">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="backgroundView" destination="s7I-qi-gMr" id="4bh-Fm-x9I"/>
+            </connections>
+            <point key="canvasLocation" x="-622" y="-198"/>
+        </view>
+    </objects>
+</document>

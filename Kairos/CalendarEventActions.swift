@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwiftMessages
 
-class CalendarEventActions: UITableViewCell {
+class CalendarEventActions: MessageView {
 
     var cancelAction: (() -> Void)?
     var updateStatus: (() -> Void)?

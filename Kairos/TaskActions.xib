@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="fwx-Rm-ZBZ" customClass="TaskActions" customModule="Kairos" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="596" height="143"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVF-T1-bBb">
+                    <rect key="frame" x="18" y="10" width="568" height="123"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="vpi-m4-cLT">
+                            <rect key="frame" x="0.0" y="0.0" width="568" height="123"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="feu-lJ-SSq">
+                                    <rect key="frame" x="0.0" y="0.0" width="568" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Edit Participants"/>
+                                    <connections>
+                                        <action selector="editParticipants:" destination="fwx-Rm-ZBZ" eventType="touchUpInside" id="CN7-Vk-tnp"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7h-RV-2tW">
+                                    <rect key="frame" x="0.0" y="39" width="568" height="1"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="tif-hN-ar1"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldU-QX-cxo">
+                                    <rect key="frame" x="0.0" y="44.5" width="568" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Add Participant"/>
+                                    <connections>
+                                        <action selector="addParticipant:" destination="fwx-Rm-ZBZ" eventType="touchUpInside" id="RAc-fD-hxH"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Btb-gn-B7u">
+                                    <rect key="frame" x="0.0" y="83.5" width="568" height="1"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="Mdj-jn-VNg"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVf-bZ-pVJ">
+                                    <rect key="frame" x="0.0" y="89" width="568" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="Delete">
+                                        <color key="titleColor" red="0.70980392160000005" green="0.1333333333" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="deleteMod:" destination="fwx-Rm-ZBZ" eventType="touchUpInside" id="sUk-AJ-66X"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="123" id="rQX-XZ-atG"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="vpi-m4-cLT" firstAttribute="top" secondItem="mVF-T1-bBb" secondAttribute="top" id="1WH-kY-hR8"/>
+                        <constraint firstAttribute="bottom" secondItem="vpi-m4-cLT" secondAttribute="bottom" id="DYv-Se-8c0"/>
+                        <constraint firstAttribute="trailing" secondItem="vpi-m4-cLT" secondAttribute="trailing" id="O7e-gG-84m"/>
+                        <constraint firstItem="vpi-m4-cLT" firstAttribute="leading" secondItem="mVF-T1-bBb" secondAttribute="leading" id="eoj-RP-ady"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="mVF-T1-bBb" firstAttribute="top" secondItem="fwx-Rm-ZBZ" secondAttribute="top" constant="10" id="Aww-7R-kcU"/>
+                <constraint firstAttribute="trailing" secondItem="mVF-T1-bBb" secondAttribute="trailing" constant="10" id="BQj-Ed-fb1"/>
+                <constraint firstAttribute="bottom" secondItem="mVF-T1-bBb" secondAttribute="bottom" constant="10" id="Vlu-N9-zq4"/>
+                <constraint firstItem="mVF-T1-bBb" firstAttribute="leading" secondItem="fwx-Rm-ZBZ" secondAttribute="leadingMargin" constant="10" id="c7n-yu-T23"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="statusBarOffset">
+                    <real key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="bounceAnimationOffset">
+                    <real key="value" value="0.0"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="backgroundView" destination="mVF-T1-bBb" id="G1D-W7-4Ij"/>
+            </connections>
+            <point key="canvasLocation" x="-622" y="-198"/>
+        </view>
+    </objects>
+</document>

@@ -8,6 +8,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import SwiftMessages
 
 class ProjectTableViewController: UITableViewController {
 
@@ -83,6 +84,24 @@ class ProjectTableViewController: UITableViewController {
         return 65
     }
 
+    @IBAction func moreActions(_ sender: Any) {
+        let view: ProjectRequestsActions = try! SwiftMessages.viewFromNib()
+        view.configureDropShadow()
+        view.cancelAction = { SwiftMessages.hide() }
+        view.createProject = {
+            self.performSegue(withIdentifier: "createProjectSegue", sender: self)
+        }
+        view.projectsRequests = {
+            self.performSegue(withIdentifier: "showProjectRequestsSegue", sender: self)
+        }
+        var config = SwiftMessages.defaultConfig
+        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        config.duration = .forever
+        config.presentationStyle = .bottom
+        config.dimMode = .gray(interactive: true)
+        SwiftMessages.show(config: config, view: view)
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

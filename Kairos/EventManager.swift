@@ -90,6 +90,27 @@ class EventManager {
         return users
     }
     
+    func usersStatus(forEvent event: Event) -> [User: UserStatus] {
+        var addedUsers = [User: UserStatus]()
+        let owners = users(withStatus: .Owner, forEvent: event)
+        let friends = users(withStatus: .Participating, forEvent: event)
+        let requested = users(withStatus: .Invited, forEvent: event)
+        let refused = users(withStatus: .Refused, forEvent: event)
+        for u in owners {
+            addedUsers[u] = .Owner
+        }
+        for u in friends {
+            addedUsers[u] = .Participating
+        }
+        for u in requested {
+            addedUsers[u] = .Invited
+        }
+        for u in refused {
+            addedUsers[u] = .Refused
+        }
+        return addedUsers
+    }
+
     func delete(user: User, fromEvent event: Calendar) {
         var users = event.invitedUsers?.allObjects as! [User]
         if users.contains(user) {

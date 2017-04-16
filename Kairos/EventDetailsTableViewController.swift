@@ -9,6 +9,7 @@
 import UIKit
 import Former
 import DynamicColor
+import SwiftMessages
 
 class EventDetailsTableViewController: UITableViewController {
     
@@ -21,13 +22,13 @@ class EventDetailsTableViewController: UITableViewController {
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.EventDidChange.rawValue), object: nil)
         configure()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData(_:)), name: NSNotification.Name(rawValue: Notifications.EventDidChange.rawValue), object: nil)
     }
@@ -69,7 +70,7 @@ class EventDetailsTableViewController: UITableViewController {
         
         self.title = "Event Details"
         self.tableView.tableFooterView = UIView()
-
+        
         //        self.tableView.rowHeight = UITableViewAutomaticDimension
         //        self.tableView.estimatedRowHeight = 44
         
@@ -90,6 +91,39 @@ class EventDetailsTableViewController: UITableViewController {
                 $0.text = event?.title
                 $0.rowHeight = 80
         }
+        
+        let calendarRow = LabelRowFormer<LabelColorCell>(instantiateType: .Nib(nibName: "LabelColorCell")) {
+            $0.selectionStyle = .none
+            if let color = self.event?.calendar?.color {
+                $0.colorImageView.backgroundColor = DynamicColor(hexString: CalendarManager.shared.colors[color]!)
+                $0.colorImageView.round()
+            }
+            }.configure {
+                $0.text = self.event?.calendar?.name
+                $0.rowHeight = 40
+            }.onUpdate { cell in
+                cell.cell.isUserInteractionEnabled = false
+        }
+        calendarRow.update()
+        let titleRow = LabelRowFormer<FormLabelCell>() {
+            $0.selectionStyle = .none
+            }.configure {
+                $0.text = self.event?.title
+                $0.rowHeight = 40
+            }.onUpdate { cell in
+                cell.cell.isUserInteractionEnabled = false
+        }
+        titleRow.update()
+        
+        let editAction = LabelRowFormer<ActionButtonCell>(instantiateType: .Nib(nibName: "ActionButtonCell")) {
+            $0.selectionStyle = .none
+            }.configure {
+                $0.text = "Edit Event"
+                $0.rowHeight = 40
+            }.onSelected { [weak self] cell in
+                self?.performSegue(withIdentifier: "showEditEventSegue", sender: cell)
+        }
+        
         let datesRow = LabelRowFormer<EventDateDetailsCell>(instantiateType: .Nib(nibName: "EventDateDetailsCell")) {
             $0.selectionStyle = .none
             }.configure {
@@ -97,21 +131,21 @@ class EventDetailsTableViewController: UITableViewController {
                 $0.subText = String.mediumDateShortTime(event!.dateEnd! as Date)
                 $0.rowHeight = 65
         }
-
+        
         let noteRow = TextViewRowFormer<FormTextViewCell>() {
             $0.selectionStyle = .none
             }.configure {
                 $0.text = event?.notes
-                $0.rowHeight = 30
-        }.onUpdate { cell in
-            cell.cell.isUserInteractionEnabled = false
+                $0.rowHeight = 40
+            }.onUpdate { cell in
+                cell.cell.isUserInteractionEnabled = false
         }
         noteRow.update()
         let locationRow = TextViewRowFormer<FormTextViewCell>() {
             $0.selectionStyle = .none
             }.configure {
                 $0.text = event?.location
-                $0.rowHeight = 30
+                $0.rowHeight = 40
             }.onUpdate { cell in
                 cell.cell.isUserInteractionEnabled = false
         }
@@ -143,11 +177,11 @@ class EventDetailsTableViewController: UITableViewController {
         
         let createHeader: ((String) -> ViewFormer) = { text in
             return LabelViewFormer<FormLabelHeaderView>() {
-                $0.contentView.backgroundColor = .white
+                $0.contentView.backgroundColor = .background()
                 $0.titleLabel?.textColor = .formerColor()
                 $0.titleLabel?.font = .boldSystemFont(ofSize: 15)
                 }.configure {
-                    $0.viewHeight = 35
+                    $0.viewHeight = 20
                     $0.text = text
             }
         }
@@ -155,18 +189,19 @@ class EventDetailsTableViewController: UITableViewController {
             return CustomViewFormer<UITableViewHeaderFooterView>() {
                 $0.backgroundView = UIView()
                 }.configure {
-                    $0.viewHeight = 2
+                    $0.viewHeight = 15
             }
         }()
         
-        let sectionHeader = SectionFormer(rowFormer: eventHeader).set(headerViewFormer: nil)
-        let sectionDates = SectionFormer(rowFormer: datesRow).set(headerViewFormer: createEmptyHeader)
+        let sectionTitle = SectionFormer(rowFormer: titleRow).set(headerViewFormer: createHeader("Title"))
+        let sectionDates = SectionFormer(rowFormer: datesRow).set(headerViewFormer: createHeader("Period"))
         let sectionDesc = SectionFormer(rowFormer: noteRow).set(headerViewFormer: createHeader("Description"))
         let sectionLocation = SectionFormer(rowFormer: locationRow).set(headerViewFormer: createHeader("Location"))
+        let sectionActions = SectionFormer(rowFormer: editAction).set(headerViewFormer: createHeader(""))
+        let sectionCalendar = SectionFormer(rowFormer: calendarRow).set(headerViewFormer: createHeader("Calendar"))
+        //        let sectionParticipants = SectionFormer(rowFormers: rows).set(headerViewFormer: createHeader("Shared with"))
         
-        let sectionParticipants = SectionFormer(rowFormers: rows).set(headerViewFormer: createHeader("Shared with"))
-        
-        self.former.append(sectionFormer: sectionHeader, sectionDates, sectionDesc, sectionLocation, sectionParticipants)
+        self.former.append(sectionFormer: sectionTitle, sectionDesc, sectionLocation, sectionCalendar, sectionDates, sectionActions)
     }
     
     func set(participants: [User], rows: inout [RowFormer], status: UserStatus) {
@@ -216,16 +251,45 @@ class EventDetailsTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func moreActions(_ sender: Any) {
+        let view: CalendarEventActions = try! SwiftMessages.viewFromNib()
+        view.configureDropShadow()
+        view.cancelAction = { SwiftMessages.hide() }
+        view.editParticipants = {
+            self.performSegue(withIdentifier: "showEventParticipants", sender: nil)
+        }
+        var config = SwiftMessages.defaultConfig
+        config.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        config.duration = .forever
+        config.presentationStyle = .bottom
+        config.dimMode = .gray(interactive: true)
+        SwiftMessages.show(config: config, view: view)
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.identifier == "ShowEditEventSegue" {
+
+        switch segue.identifier! {
+        case "showEditEventSegue":
             let destVC = segue.destination as! EventTableViewController
             destVC.event = event
+        case "showEventParticipants":
+            var addedUsers = EventManager.shared.usersStatus(forEvent: event!)
+
+            let destVC = segue.destination as! EventParticipantTableViewController
+            destVC.addedUsers = addedUsers
+            destVC.update = { set in
+                set(&addedUsers)
+//                self.peoplesRow?.update()
+            }
+        default:
+            break
         }
+
     }
     
 }
